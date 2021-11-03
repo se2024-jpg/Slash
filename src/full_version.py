@@ -71,6 +71,16 @@ class full_version:
 		if os.path.exists(self.user_list):
 			old_data=pd.read_csv(self.user_list)
 			print(old_data)
+			choice=int(input("Enter 1 to delete item from list\nEnter any other value to continue\n"))
+			if choice==1:
+				indx=int(input("Enter row number to be removed: "))
+				old_data=old_data.drop(index=indx)
+				if old_data.shape[0]==0:
+					os.remove(self.user_list)
+					return
+				old_data.to_csv(self.user_list, index=False,header=old_data.columns)
+
+
 		else:
 			print("No saved data found.")
 		pass
