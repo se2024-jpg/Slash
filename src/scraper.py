@@ -79,7 +79,12 @@ def searchEtsy(query, df_flag, currency):
     response = requests.get(url, headers=headers)
     soup = BeautifulSoup(response.content, 'lxml')
     for item in soup.select('.wt-grid__item-xs-6'):
-        titles, prices, links = (item.select("h3")), (item.select(".currency-value")), (item.select('.width-full'))
+        str = (item.select("a"))
+        if str == []:
+            continue
+        else:
+            links = str
+        titles, prices = (item.select("h3")), (item.select(".currency-value"))
         ratings = item.select('span.screen-reader-only')
         product = formatter.formatResult("Etsy", titles, prices, links, ratings, df_flag, currency)
         products.append(product)
