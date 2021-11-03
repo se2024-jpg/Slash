@@ -17,6 +17,10 @@ from bs4 import BeautifulSoup
 import re
 import csv_writer
 import csv
+import pandas as pd
+import os
+from datetime import datetime
+
 
 
 def httpsGet(URL):
@@ -90,9 +94,16 @@ def driver(product, num=None, df_flag=0,csv=False,cd=None):
     products_2 = searchWalmart(product,df_flag)
     products_3 = searchEtsy(product,df_flag)
     results=products_1+products_2+products_3
+    result_condensed=products_1[:num]+products_2[:num]+products_3[:num]
+    result_condensed=pd.DataFrame.from_dict(result_condensed,orient='columns')
+    results =pd.DataFrame.from_dict(results, orient='columns')
+    if currency=="" or currency==None:
+        results=results.drop(columns='converted price')
+        result_condensed=result_condensed.drop(columns='converted price')
     if csv==True:
-
+        file_name=os.path.join(cd,(product+datetime.now().strftime("%y%m%d_%H%M")+".csv"))
         print("CSV Saved at: ",cd)
-        print("File Name:", csv_writer.write_csv(results, product, cd))
-    return products_1[:num]+products_2[:num]+products_3[:num]
+        print("File Name:", file_name)
+        results.to_csv(file_name, index=False,header=results.columns)
+    return result_condensed
 
