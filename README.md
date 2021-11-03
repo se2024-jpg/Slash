@@ -2,7 +2,7 @@
 
 ![GitHub](https://img.shields.io/github/license/SEProjGrp5/slash)
 ![github workflow](https://github.com/secheaper/cheaper/actions/workflows/python-app.yml/badge.svg) 
-[![DOI](https://zenodo.org/badge/407550383.svg)](https://zenodo.org/badge/latestdoi/407550383)
+[![DOI](https://zenodo.org/badge/423285546.svg)](https://zenodo.org/badge/latestdoi/423285546)
 ![Github](https://img.shields.io/badge/language-python-red.svg)
 ![GitHub issues](https://img.shields.io/github/issues-raw/SEProjGrp5/slash)
 ![Github closes issues](https://img.shields.io/github/issues-closed-raw/SEProjGrp5/slash)
