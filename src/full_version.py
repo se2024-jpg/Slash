@@ -2,6 +2,7 @@ import json
 import os
 import pandas as pd
 import scraper
+import webbrowser
 
 class full_version:
 	def __init__(self):
@@ -52,7 +53,7 @@ class full_version:
 	def search_fn(self):
 		prod=input("Enter name of product to Search: ")
 		self.scrape(prod)
-		ch=int(input("\n\nEnter 1 to save product to list \nelse enter any other key to continue"))
+		ch=int(input("\n\nEnter 1 to save product to list \n2 to open link in browser\nelse enter any other key to continue\n"))
 		if ch==1:
 			indx=int(input("Enter row number of product to save: "))
 			if indx<len(self.df):
@@ -64,6 +65,9 @@ class full_version:
 					old_data=pd.concat([old_data,self.df.iloc[[indx]]])
 					print(self.df.iloc[[indx]])
 				old_data.to_csv(self.user_list, index=False,header=self.df.columns)
+		if ch==2:
+			indx=int(input("Enter row number of product to open: "))
+			webbrowser.open_new(self.df.link[indx])
 
 		pass
 
@@ -71,14 +75,21 @@ class full_version:
 		if os.path.exists(self.user_list):
 			old_data=pd.read_csv(self.user_list)
 			print(old_data)
-			choice=int(input("Enter 1 to delete item from list\nEnter any other value to continue\n"))
+			choice=int(input("Select from the following:\n1. Delete item from list\n2. Open link in Chrome\n3. Continue\n"))
 			if choice==1:
 				indx=int(input("Enter row number to be removed: "))
 				old_data=old_data.drop(index=indx)
 				if old_data.shape[0]==0:
 					os.remove(self.user_list)
 					return
+				
 				old_data.to_csv(self.user_list, index=False,header=old_data.columns)
+			if choice==2:
+
+				indx=int(input("Enter row number to open in chrome: "))
+				url=old_data.link[indx]
+				
+				webbrowser.open_new(url)
 
 
 		else:
