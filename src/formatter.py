@@ -90,6 +90,9 @@ def getNumbers(st):
     return ans
 
 def getCurrency(currency, price):
+    """
+    The getCurrency function converts the prices listed in USD to user specified currency. Currently it supports INR and EURO
+    """
 
     converted_cur = 0.0
     if len(price)>1 :
