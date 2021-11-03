@@ -23,6 +23,7 @@ class full_version:
 			"user_list.csv"
 			)
 		self.df=pd.DataFrame()
+		self.currency=""
 		pd.set_option('display.max_rows', None)
 		pd.set_option('display.max_columns', None)
 		pd.set_option('display.width', None)
@@ -75,10 +76,7 @@ class full_version:
 		pass
 
 	def scrape(self,prod):
-		products_1 = scraper.searchAmazon(prod,1)
-		products_2 = scraper.searchWalmart(prod,1)
-		products_3 = scraper.searchEtsy(prod,1)
-		results=scraper.driver(prod,df_flag=1)
+		results=scraper.driver(prod,df_flag=1,currency=self.currency)
 		#esults = formatter.sortList(results, "ra" , True)
 		self.df=pd.DataFrame.from_dict(results, orient='columns')
 		print(self.df)
@@ -91,13 +89,15 @@ class full_version:
 		print("Welcome ",self.name)
 		while flag_loop==1:
 			print("Select from following:")
-			print("1. Search new product\n2. See exiting list\n3. Exit")
+			print("1. Search new product\n2. See exiting list\n3. See Currency Conversion\n4. Exit")
 			choice=int(input())
 			if choice==1:
 				self.search_fn()
 			elif choice==2:
 				self.extract_list()
 			elif choice==3:
+				self.currency=lower(input("Enter INR/EUR\n"))
+			elif choice ==4:
 				print("Thank You for Using Slash")
 				flag_loop = 0
 			else:

@@ -29,8 +29,8 @@ def formatResult(website, titles, prices, links,ratings,df_flag, currency):
         price='$'+price
     if links: link = links[0]['href']
     if ratings: rating = ratings[0].get_text().strip().split()[0]
-    if df_flag==0: title=formatTitle(title)
-    if df_flag==0: link=formatTitle(link)
+    #if df_flag==0: title=formatTitle(title)
+    #if df_flag==0: link=formatTitle(link)
     if currency: converted_cur = getCurrency(currency, price)
     product = {
         'timestamp': datetime.now().strftime("%d/%m/%Y %H:%M:%S"),

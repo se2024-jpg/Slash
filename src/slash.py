@@ -14,11 +14,17 @@ from tabulate import tabulate
 import os
 import csv
 import full_version
+import pandas as pd
+
 
 
 
 
 def main():
+    pd.set_option('display.max_rows', None)
+    pd.set_option('display.max_columns', None)
+    pd.set_option('display.width', None)
+    pd.set_option('display.max_colwidth', 40)
     parser = argparse.ArgumentParser(description="Slash")
     parser.add_argument('--full', type=str, help='T for full version of app; F for mini version of app' ,default='F')
     parser.add_argument('--search', type=str, help='Product search query')
@@ -43,9 +49,9 @@ def main():
         results = formatter.sortList(results, sortBy , args.des)
 
 
-    
+    print(args.currency)
     print()
-    print(tabulate(results, headers="keys", tablefmt="github"))
+    print(results)
     print()
     print()
 
