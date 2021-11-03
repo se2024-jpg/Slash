@@ -26,14 +26,9 @@ def formatResult(website, titles, prices, links,ratings,df_flag):
     if prices: price = prices[0].get_text().strip()
     if links: link = links[0]['href']
     if ratings: rating = ratings[0].get_text().strip().split()[0]
-<<<<<<< Updated upstream
-    if df_flag==0: title=formatTitle(title)
-    if df_flag==0: link=formatTitle(link)
-=======
     #if df_flag==0: title=formatTitle(title)
     #if df_flag==0: link=formatTitle(link)
     if currency: converted_cur = getCurrency(currency, price)
->>>>>>> Stashed changes
     product = {
         'timestamp': datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
         "title": title,
