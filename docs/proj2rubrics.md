@@ -19,12 +19,12 @@ Sr. No| Notes|Self-assement|Evidence|
 14|	Use of code formatters. |0.5|Pylint Implementation to check code format : Evidence|
 15| Use of style checkers |0.5|Pylint Implementation to check code style : Evidence|
 16|	Docs: short video, animated, hosted on your repo. That convinces people why they want to work on your code. | 0.5 | Evidence in [readme.md]()|
-17| test cases exist |||
+17| test cases exist |0.5| Evidence in [test](https://github.com/SEProjGrp5/slash/tree/main/tests) folder|
 18| Use of code coverage|||
-19| other automated analysis tools|||
+19| other automated analysis tools|0.5| Used automation such as travis, Pylint, code coverage etc |
 20| test cases:.a large proportion of the issues related to handling failing cases.|||
 21| test cases are routinely executed|||
-22| 	Documentation describing how this version improves on the older version|| |
-23| This version is a little(1), some(2), much(3) improved on the last version.|||
+22| Documentation describing how this version improves on the older version|1| Evidence in [readme.md](https://github.com/SEProjGrp5/slash#rocket-whats-new-in-phase-2) |
+23| This version is a little(1), some(2), much(3) improved on the last version.| Tutors Assessment ||
 Total|
 
