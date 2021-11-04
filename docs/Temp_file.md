@@ -1,14 +1,42 @@
-#Currency
+#### 1. Sort by Rating
+```--sort``` accepts the argument "ra" that determine how the tool sorts and filters the requested products
+after scraping on the basis of ratings of the product . 
+Example:
+```
+For Mac
+python3 slash.py --search "philips hue" --sort ra
 
-PS C:\Users\jains\Desktop\NCSU 1st sem\SE\slash-main (1)\slash-main\src> python slash.py --search "socks" --currency "inr"
+For Windows
+python slash.py --search "philips hue" --sort ra
+
+```
+
+```
+
+           timestamp                                       title    price   website      rating 
+ 0  03/11/2021 21:42:53  Hanes Women's Cool Comfort Ankle Socks, ...  $10.97   walmart         4.2 
+ 1  03/11/2021 21:42:53  Hanes Women's Cool Comfort Crew Socks, 1...  $10.97   walmart         4.2 
+ 2  03/11/2021 21:42:53  Hanes Mens FreshIQ Ankle Cushion Socks, ...  $13.46   walmart         4.2 
+ 3  03/11/2021 21:42:51  10 Pairs Ankle Socks No Show Sock Low-Cu...  $11.95   amazon          4.3 
+ 4  03/11/2021 21:42:50  Mens Cushioned Work Socks 10 Pairs           $12.10   amazon          4.5 
+ 5  03/11/2021 21:42:50  Women's 6-Pack Performance Cotton Cushio...  $17.70   amazon          4.5 
+ 6  03/11/2021 21:42:54  PDF Crikey Crocodile Socks Knit Animal S...  7.50     Etsy            4.5 
+ 7  03/11/2021 21:42:54  5socks /set -  Cotton Women's Socks          16.00    Etsy            5   
+ 8  03/11/2021 21:42:54  Follkee Women's Alpaca Wool Socks Perfec...  18.49    Etsy            5   
 
 
-             timestamp                                    title   price                                     link  website  rating converted price
-0  03/11/2021 21:00:13  Yoga Socks with Grips Sticky Nonskid...   $8.99  www.amazon.com/gp/slredirect/picasso...   amazon     5.0         INR 600
-2  03/11/2021 21:00:13  Men's 656s Cotton Crew Athletic Sock...  $20.00  www.amazon.com/gp/slredirect/picasso...   amazon     4.7        INR 1500     
-3  03/11/2021 21:00:16  Hanes Women's Cool Comfort Ankle Soc...  $10.97  www.walmart.com/ip/Hanes-Women-s-Coo...  walmart     4.2         INR 750     
-4  03/11/2021 21:00:16  Hanes Women's Cool Comfort Crew Sock...  $10.97  www.walmart.com/ip/Hanes-Women-s-Coo...  walmart     4.2         INR 750     
-5  03/11/2021 21:00:16  AND1 Men's Cushion No Show Socks, 12...  $11.47  www.walmart.comhttps://wrd.walmart.c...  walmart     4.6         INR 825     
-6  03/11/2021 21:00:17      5socks /set -  Cotton Women's Socks  $16.00  www.Etsy.comhttps://www.etsy.com/lis...     Etsy     5.0        INR 1200     
-7  03/11/2021 21:00:17  Follkee Women's Alpaca Wool Socks Pe...  $18.49  www.Etsy.comhttps://www.etsy.com/lis...     Etsy     5.0        INR 1350     
-8  03/11/2021 21:00:17                  Great White Shark Socks  $11.95  www.Etsy.comhttps://www.etsy.com/lis...     Etsy     5.0         INR 825  
+```
+
+#### 2.Currency
+```--currency``` accepts one or more arguments that helps the user choose their desired currency for the product price.
+Example:
+```
+For Mac
+python3 slash.py --search "socks" --currency "inr"
+
+For Windows
+python slash.py --search "socks" --currency "inr"
+
+```
+
+![image](https://user-images.githubusercontent.com/48826459/140242430-0d7d2707-095a-4a2d-86a7-c5e91b88d725.png)
