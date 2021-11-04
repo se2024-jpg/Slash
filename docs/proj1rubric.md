@@ -97,8 +97,8 @@ Sr. No| Notes|Self-assement|Evidence|
 91| The website and documentation clearly state the licence of your software | 3 | https://github.com/SEProjGrp5/slash/blob/main/LICENSE |
 92| Software released under an open source licence | 3 | https://github.com/SEProjGrp5/slash/blob/main/LICENSE |
 93| Software released under an OSI-approved open-source licence | 3 | https://github.com/SEProjGrp5/slash/blob/main/LICENSE |
-94| Source code files include a licence header | 3 | MIT License(https://github.com/secheaper/slash/blob/main/LICENSE) |
+94| Source code files include a licence header | 3 | MIT License(https://github.com/SEProjGrp5/slash/blob/main/LICENSE) |
 95| Recommended citation for your software | 2||
-96| Documentation includes a project roadmap (a list of project and development milestones for the next 3, 6 months) | 3|https://github.com/secheaper/slash/projects/1|
+96| Documentation includes a project roadmap (a list of project and development milestones for the next 3, 6 months) | 3|https://github.com/SEProjGrp5/slash/projects/1|
 97| Documentation describe how the project is funded, and the period over which funding is guaranteed? |1| NA|
 98| Do you make timely announcements of the deprecation of components, APIs, etc. |1| NA|
