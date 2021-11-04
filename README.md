@@ -20,6 +20,8 @@ Slash is a command line tool that scrapes the most popular e-commerce websites t
   ::
   <a href="#golf-flags-and-command-line-arguments">Flags & Args</a>
   ::
+  <a href="#rocket-What's-new-in-Phase-2?"> Whats new in Phase 2? </a>
+  ::
   <a href="#card_index_dividers-some-examples">Examples</a>
   ::
   <a href="#thought_balloon-use-case">Use Case</a>
