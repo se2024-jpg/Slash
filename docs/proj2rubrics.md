@@ -20,8 +20,8 @@ Sr. No| Notes|Self-assement|Evidence|
 15| Use of style checkers |0.5|Style checker implementation to check code style : Evidence in [Style checker yml file](https://github.com/SEProjGrp5/slash/blob/main/.github/workflows/style_checker.yml) and style checker badge in readme|
 16|	Docs: short video, animated, hosted on your repo. That convinces people why they want to work on your code. | 0.5 | Evidence in [readme.md](https://github.com/SEProjGrp5/slash/blob/main/assets/demo.gif)|
 17| test cases exist |0.5| Evidence in [test](https://github.com/SEProjGrp5/slash/tree/main/tests) folder|
-18| Use of code coverage|||
-19| other automated analysis tools|0.5| Used automation such as travis, Pylint, code coverage etc |
+18| Use of code coverage|0.5|Evidence in [code coverage yml file](https://github.com/SEProjGrp5/slash/blob/main/.github/workflows/workflow.yml)|
+19| other automated analysis tools|0.5| Used automation such as travis, Pylint, code coverage, style checker etc |
 20| test cases:.a large proportion of the issues related to handling failing cases.|||
 21| test cases are routinely executed|||
 22| Documentation describing how this version improves on the older version|1| Evidence in [readme.md](https://github.com/SEProjGrp5/slash#rocket-whats-new-in-phase-2) |
