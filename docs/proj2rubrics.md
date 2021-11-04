@@ -14,7 +14,7 @@ Sr. No| Notes|Self-assement|Evidence|
 9|Number of commits: by different people |0.5| Evidence in [Pulse](https://github.com/SEProjGrp5/slash/pulse) and [Commit History](https://github.com/SEProjGrp5/slash/commits/main)|
 10|issues are being closed|1|Evidence in [issue history](https://github.com/SEProjGrp5/slash/projects/1)|
 11| issues are discussed before they are closed |0.5| Every issue was discussed before they are closed on our chat channel. Discussion summary is also provided. Evidence in [issue history](https://github.com/SEProjGrp5/slash/projects/1)|
-12|Use of syntax checkers.|0.5| Pylint Implementation to check syntax : Evidence in [pylint](https://github.com/SEProjGrp5/slash/blob/main/.github/workflows/pylint.yml) Pylint badge in readme| 
+12|Use of syntax checkers.|0.5| Pylint Implementation to check syntax : Evidence in [pylint](https://github.com/SEProjGrp5/slash/blob/main/.github/workflows/pylint.yml) and Pylint badge in readme| 
 13| Issues reports: there are many|1| Evidence in [issue history](https://github.com/SEProjGrp5/slash/projects/1)|
 14|	Use of code formatters. |0.5|Pylint Implementation to check code format : Evidence in [pylint](https://github.com/SEProjGrp5/slash/blob/main/.github/workflows/pylint.yml) and Pylint badge in readme |
 15| Use of style checkers |0.5|Pylint Implementation to check code style : Evidence in [pylint](https://github.com/SEProjGrp5/slash/blob/main/.github/workflows/pylint.yml) Pylint badge in readme|
