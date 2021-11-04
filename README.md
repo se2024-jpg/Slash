@@ -180,6 +180,10 @@ Example:
 | 30/09/2021 12:02:34 | Philips Hue White and Color Ambiance Sma... | $29.99  | walmart   |
 
 
+:muscle: What's next for Phase 3?
+---
+
+
 :thought_balloon: Use Case
 ---
 * ***Students***: Students coming to university are generally on a budget and time constraint and generally spend hours wasting time to search for products on Websites. Slash is the perfect tool for these students that slashes all the unnecessary details on a website and helps them get prices for a product across multiple websites.Make the most of this tool in the upcoming Black Friday Sale.
