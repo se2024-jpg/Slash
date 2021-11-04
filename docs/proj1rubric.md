@@ -57,21 +57,21 @@ Sr. No| Notes|Self-assement|Evidence|
 51| Project have a ticketing system to manage bug reports and feature requests | 3 | We constantly create issues and have an ticketing  system  on github projects where we assign each member an issue based on priority. (https://github.com/secheaper/SEProjGrp5projects/1) |
 52| Project's ticketing system publicly visible to your users, so they can view bug reports and feature requests | 3 | It's an open link on our public repo (https://github.com/SEProjGrp5/slash/projects/1) |
 53| Software’s architecture and design is modular | 3 ||
-54| Software uses an accepted coding standard or convention | 3 | https://github.com/secheaper/slash/blob/main/CODE-OF-CONDUCT.md, https://github.com/secheaper/slash/blob/main/CONTRIBUTING.md |
+54| Software uses an accepted coding standard or convention | 3 | https://github.com/SEProjGrp5/slash/blob/main/CODE-OF-CONDUCT.md, https://github.com/SEProjGrp5/slash/blob/main/CONTRIBUTING.md |
 55| Software allows data to be imported and exported using open data formats | 1 | To be added in future |
 56| Software allows communications using open communications protocols |3||
 57| Software cross-platform compatible | 3 | The only thing needed is python. It will work on all operating systems that have python. |
 58| Software adhere to appropriate accessibility conventions or standards |3||
 59| Documentation adheres to appropriate accessibility conventions or standards | 2 ||
 60| Each source code releases a snapshot of the repository |2 ||
-61| Releases are tagged in the repository | 3 | https://github.com/secheaper/slash/releases/tag/v1.0.0 |
+61| Releases are tagged in the repository | 3 | https://github.com/SEProjGrp5/slash/releases/tag/v1.0.0 |
 62| There is a branch of the repository that is always stable | 3 | the main branch is always stable |
 63| Back-up your repository | 3| dev is created for backup|
-64| Provide publicly available instructions for building the software from the source code | 3| https://github.com/secheaper/slash/blob/main/README.md|
+64| Provide publicly available instructions for building the software from the source code | 3| https://github.com/SEProjGrp5/slash/blob/main/README.md|
 65| Build, or package, the software using an automated tool | 3||
 66| Provide publicly-available instructions for deploying the software | 2||
-67| Documentation list all third-party dependencies | 3|https://github.com/secheaper/slash/blob/main/requirements.txt|
-68| Documentation lists the version number for all third-party dependencies | 3|https://github.com/secheaper/slash/blob/main/requirements.txt|
+67| Documentation list all third-party dependencies | 3|https://github.com/SEProjGrp5/slash/blob/main/requirements.txt|
+68| Documentation lists the version number for all third-party dependencies | 3|https://github.com/SEProjGrp5/slash/blob/main/requirements.txt|
 69| Software list the web address, and licences for all third-party dependencies and say whether the dependencies are mandatory or optional |2| Dependencies in requirements.txt|
 70| Download dependencies using a dependency management tool or package manager | 3| Requirements can be downloaded by pip|
 71| Tests that can be run after your software has been built or deployed to show whether the build or deployment has been successful |3 |https://github.com/secheaper/slash/tree/main/tests|
