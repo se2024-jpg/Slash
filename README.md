@@ -20,7 +20,7 @@ Slash is a command line tool that scrapes the most popular e-commerce websites t
   ::
   <a href="#golf-flags-and-command-line-arguments">Flags & Args</a>
   ::
-  <a href="#rocket-whats-new-in-phase-2"> Whats new in Phase 2? </a>
+  <a href="#dizzy-whats-new-in-phase-2"> Whats new in Phase 2? </a>
   ::
   <a href="#card_index_dividers-some-examples">Examples</a>
   ::
@@ -164,7 +164,7 @@ python slash.py --search "philips hue" --num 5
 | 30/09/2021 12:07:42 | Philips Hue White and Color Ambiance A19... | $199.99 | walmart   |
 ```
 
-:rocket: What's new in Phase 2?
+:dizzy: What's new in Phase 2?
 ---
 
 #### 1. New ratings Column!
