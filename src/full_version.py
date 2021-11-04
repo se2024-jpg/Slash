@@ -32,6 +32,8 @@ class full_version:
 
 
 	def login(self):
+		''' Used for User Login
+		    Returns the username and email'''
 		if not os.path.exists(self.user_data):
 			print("Welcome to Slash!")
 			print("Please enter the following information: ")
@@ -97,6 +99,7 @@ class full_version:
 		pass
 
 	def scrape(self,prod):
+		''' calls the scraper function from scraper.py'''
 		results=scraper.driver(prod,df_flag=1,currency=self.currency)
 		#esults = formatter.sortList(results, "ra" , True)
 		self.df=pd.DataFrame.from_dict(results, orient='columns')
@@ -123,4 +126,3 @@ class full_version:
 				flag_loop = 0
 			else:
 				print("Incorrect Option")
-
