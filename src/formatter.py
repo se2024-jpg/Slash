@@ -90,7 +90,8 @@ def getNumbers(st):
 
 def getCurrency(currency, price):
     """
-    The getCurrency function converts the prices listed in USD to user specified currency. Currently it supports INR and EURO
+    The getCurrency function converts the prices listed in USD to user specified currency. 
+    Currently it supports INR, EURO, AUD, YUAN, YEN, POUND
     """
 
     converted_cur = 0.0
@@ -99,5 +100,13 @@ def getCurrency(currency, price):
             converted_cur = 75 * int(price[(price.index("$")+1):price.index(".")].replace(",",""))
         elif currency == "euro":
             converted_cur = 1.16 * int(price[(price.index("$")+1):price.index(".")].replace(",",""))
+        elif currency == "aud":
+            converted_cur = 1.34 * int(price[(price.index("$")+1):price.index(".")].replace(",",""))
+        elif currency == "yuan":
+            converted_cur = 6.40 * int(price[(price.index("$")+1):price.index(".")].replace(",",""))
+        elif currency == "yen":
+            converted_cur = 114.21 * int(price[(price.index("$")+1):price.index(".")].replace(",",""))
+        elif currency == "pound":
+            converted_cur = 0.74 * int(price[(price.index("$")+1):price.index(".")].replace(",",""))
         converted_cur=currency.upper()+' '+str(converted_cur)
     return converted_cur
