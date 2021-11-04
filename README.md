@@ -1,4 +1,5 @@
 <p align="center"><img width="500" src="./assets/slash.png"></p>
+
 [![codecov](https://codecov.io/gh/SEProjGrp5/slash/branch/main/graph/badge.svg?token=RGZPJ87U0T)](https://codecov.io/gh/SEProjGrp5/slash)
 ![GitHub](https://img.shields.io/github/license/SEProjGrp5/slash)
 [![DOI](https://zenodo.org/badge/423285546.svg)](https://zenodo.org/badge/latestdoi/423285546)
