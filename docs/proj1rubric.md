@@ -49,13 +49,13 @@ Sr. No| Notes|Self-assement|Evidence|
 43| Troubleshooting information that describes the symptoms and step-by-step solutions for problems and error messages| 0 | NA |
 44| If your software can be used as a library, package or service by other software, do you provide comprehensive API documentation| 1 |Kept as future scope|
 45| Documentation stored under revision control with source code| 3 | https://github.com/SEProjGrp5/slash/blame/main/README.md |
-46| Publishing the release history e.g. release data, version numbers, key features of each release etc. in your documentation | 3 | https://github.com/secheaper/slash/releases/tag/v1.0.0 |
-47| Software describes how a user can get help with using your software | 3 | https://github.com/secheaper/slash#readme |
-48| Our documentation describes what support we provide to users and developers | 3 | https://github.com/secheaper/slash#readme |
+46| Publishing the release history e.g. release data, version numbers, key features of each release etc. in your documentation | 3 | https://github.com/SEProjGrp5/slash/releases/tag/v1.0.0 |
+47| Software describes how a user can get help with using your software | 3 | https://github.com/SEProjGrp5/slash#readme |
+48| Our documentation describes what support we provide to users and developers | 3 | https://github.com/SEProjGrp5/slash#readme |
 49| Project has an e-mail address or forum that is solely for supporting users | 3 | secheaper@gmail.com |
 50| E-mails to our support e-mail address are received by more than one person | 3 | we all have the access credentials to the support email | 
-51| Project have a ticketing system to manage bug reports and feature requests | 3 | We constantly create issues and have an ticketing  system  on github projects where we assign each member an issue based on priority. (https://github.com/secheaper/slash/projects/1) |
-52| Project's ticketing system publicly visible to your users, so they can view bug reports and feature requests | 3 | It's an open link on our public repo (https://github.com/secheaper/slash/projects/1) |
+51| Project have a ticketing system to manage bug reports and feature requests | 3 | We constantly create issues and have an ticketing  system  on github projects where we assign each member an issue based on priority. (https://github.com/secheaper/SEProjGrp5projects/1) |
+52| Project's ticketing system publicly visible to your users, so they can view bug reports and feature requests | 3 | It's an open link on our public repo (https://github.com/SEProjGrp5/slash/projects/1) |
 53| Software’s architecture and design is modular | 3 ||
 54| Software uses an accepted coding standard or convention | 3 | https://github.com/secheaper/slash/blob/main/CODE-OF-CONDUCT.md, https://github.com/secheaper/slash/blob/main/CONTRIBUTING.md |
 55| Software allows data to be imported and exported using open data formats | 1 | To be added in future |
