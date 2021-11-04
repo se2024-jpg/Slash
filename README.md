@@ -162,6 +162,30 @@ python slash.py --search "philips hue" --num 5
 | 30/09/2021 12:07:42 | Philips Hue White and Color Ambiance A19... | $199.99 | walmart   |
 ```
 
+❓: Whats new in Phase 2?
+
+#### 1. New ratings Column!
+<<description>>
+  Example:
+```
+For Mac
+python3 slash.py --search "philips hue" --sort pr
+
+For Windows
+python slash.py --search "philips hue" --sort pr
+```
+```
+<<change example below>>
+| timestamp           | title                                       | price   | website   |
+|---------------------|---------------------------------------------|---------|-----------|
+| 30/09/2021 12:02:34 | Philips Hue White A19 60W Smart Dimmable... | $14.88  | walmart   |
+| 30/09/2021 12:02:33 | T POWER 24V Ac Dc Adapter Charger Compat... | $16.99  | amazon    |
+| 30/09/2021 12:02:33 | Philips Hue 1748930VN 8ft Cable Connecto... | $19.99  | amazon    |
+| 30/09/2021 12:02:32 | PARMIDA LED 5/6 inch Smart Recessed Ligh... | $20.99  | amazon    |
+| 30/09/2021 12:02:34 | Philips Hue White Ambiance A19 Smart Lig... | $24.99  | walmart   |
+| 30/09/2021 12:02:34 | Philips Hue White and Color Ambiance Sma... | $29.99  | walmart   |
+
+
 :thought_balloon: Use Case
 ---
 * ***Students***: Students coming to university are generally on a budget and time constraint and generally spend hours wasting time to search for products on Websites. Slash is the perfect tool for these students that slashes all the unnecessary details on a website and helps them get prices for a product across multiple websites.Make the most of this tool in the upcoming Black Friday Sale.
