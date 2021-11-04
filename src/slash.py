@@ -14,17 +14,12 @@ from tabulate import tabulate
 import os
 import csv
 import full_version
-import pandas as pd
-
 
 
 
 
 def main():
-    pd.set_option('display.max_rows', None)
-    pd.set_option('display.max_columns', None)
-    pd.set_option('display.width', None)
-    pd.set_option('display.max_colwidth', 40)
+    '''Provides help for every argument'''
     parser = argparse.ArgumentParser(description="Slash")
     parser.add_argument('--full', type=str, help='T for full version of app; F for mini version of app' ,default='F')
     parser.add_argument('--search', type=str, help='Product search query')
@@ -34,7 +29,7 @@ def main():
     parser.add_argument('--des', action='store_true', help="Sort in descending (non-increasing) order")
     parser.add_argument('--cd', type=str,  help="Change directory to save CSV file with search results", default=os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),"csvs"))
     parser.add_argument('--csv', action='store_true',  help="Save results as CSV",)
-    parser.add_argument('--currency', type=str, help="Display the amount in specified currency")
+    parser.add_argument('--currency', type=str, help="Display the amount in specified currency(inr, euro, aud, yuan, yen, pound)")
     args = parser.parse_args()
 
     if args.full=='T':
@@ -49,9 +44,9 @@ def main():
         results = formatter.sortList(results, sortBy , args.des)
 
 
-    print(args.currency)
+    
     print()
-    print(results)
+    print(tabulate(results, headers="keys", tablefmt="github"))
     print()
     print()
 
