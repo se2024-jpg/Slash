@@ -4,7 +4,6 @@ You may use, distribute and modify this code under the
 terms of the MIT license.
 You should have received a copy of the MIT license with
 this file. If not, please write to: secheaper@gmail.com
-
 """
 
 """
@@ -40,6 +39,8 @@ def httpsGet(URL):
 def searchAmazon(query, df_flag, currency):
     """
     The searchAmazon function scrapes amazon.com
+    Parameters: query- search query for the product, df_flag- flag variable, currency- currency type entered by the user
+    Returns a list of items available on Amazon.com that match the product entered by the user.
     """
     query = formatter.formatSearchQuery(query)
     URL = f'https://www.amazon.com/s?k={query}'
@@ -56,6 +57,8 @@ def searchAmazon(query, df_flag, currency):
 def searchWalmart(query, df_flag, currency):
     """
     The searchWalmart function scrapes walmart.com
+    Parameters: query- search query for the product, df_flag- flag variable, currency- currency type entered by the user
+    Returns a list of items available on walmart.com that match the product entered by the user
     """
     query = formatter.formatSearchQuery(query)
     URL = f'https://www.walmart.com/search?q={query}'
@@ -74,6 +77,8 @@ def searchWalmart(query, df_flag, currency):
 def searchEtsy(query, df_flag, currency):
     """
     The searchEtsy function scrapes Etsy.com
+    Parameters: query- search query for the product, df_flag- flag variable, currency- currency type entered by the user
+    Returns a list of items available on Etsy.com that match the product entered by the user
     """
     query = formatter.formatSearchQuery(query)
     url = f'https://www.etsy.com/search?q={query}'
@@ -95,6 +100,9 @@ def searchEtsy(query, df_flag, currency):
     return products
 
 def driver(product, currency, num=None, df_flag=0,csv=False,cd=None):
+    ''' Returns csv is the user enters the --csv arg, 
+    else will display the result table in the terminal based on the args entered by the user '''
+    
     products_1 = searchAmazon(product,df_flag, currency)
     products_2 = searchWalmart(product,df_flag, currency)
     products_3 = searchEtsy(product,df_flag, currency)
@@ -111,4 +119,3 @@ def driver(product, currency, num=None, df_flag=0,csv=False,cd=None):
         print("File Name:", file_name)
         results.to_csv(file_name, index=False,header=results.columns)
     return result_condensed
-
