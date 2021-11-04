@@ -4,7 +4,6 @@ You may use, distribute and modify this code under the
 terms of the MIT license.
 You should have received a copy of the MIT license with
 this file. If not, please write to: secheaper@gmail.com
-
 """
 
 """
@@ -20,6 +19,10 @@ def formatResult(website, titles, prices, links,ratings,df_flag, currency):
     The formatResult function takes the scraped HTML as input, and extracts the 
     necessary values from the HTML code. Ex. extracting a price '$19.99' from
     a paragraph tag.
+    Parameters: titles- scraped titles of the products, prices- scraped prices of the products, 
+    links- scraped links of the products on the respective e-commerce sites, 
+    ratings-scraped ratings of the product
+    Returns: A dictionary of all the parameters stated above for the product
     """
 
     title, price, link, rating, converted_cur = '', '', '', '', ''
@@ -46,9 +49,9 @@ def formatResult(website, titles, prices, links,ratings,df_flag, currency):
 
 
 def sortList(arr, sortBy, reverse):
-    """
-    The sortList function is used to sort the products list based on the
-    flags provided as args. Currently, it supports sorting by price.
+    """ It sorts the products list based on the flags provided as arguements. Currently, it supports sorting by price.
+        Parameters- SortBy- "pr": sorts by price, SortBy- "ra": sorts by rating
+        Returns- Sorted list of the products based on the parameter requested by the user
     """
     if sortBy == "pr":
         return sorted(arr, key=lambda x: getNumbers(x["price"]), reverse=reverse)
@@ -59,15 +62,12 @@ def sortList(arr, sortBy, reverse):
     return arr
 
 def formatSearchQuery(query):
-    """
-    The formatSearchQuery function formats the search string into a string that 
-    can be sent as a url paramenter.
+    """ It formats the search string into a string that can be sent as a url paramenter.
     """
     return query.replace(" ", "+")
 
 def formatTitle(title):
-    """
-    The formatTitle function formats titles extracted from the scraped HTML code.
+    """ It formats titles extracted from the scraped HTML code.
     """
     if(len(title) > 40):
         return title[:40] + "..."
@@ -75,8 +75,7 @@ def formatTitle(title):
 
 
 def getNumbers(st):
-    """
-    The getNumbers function extracts float values (price) from a string.
+    """ It extracts float values for the price from a string.
     Ex. it extracts 10.99 from '$10.99' or 'starting at $10.99'
     """
     ans = ''
