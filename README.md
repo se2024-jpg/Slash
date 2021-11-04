@@ -166,17 +166,8 @@ python slash.py --search "philips hue" --num 5
 ---
 
 #### 1. New ratings Column!
-<<description>>
-  Example:
-```
-For Mac
-python3 slash.py --search "philips hue" --sort pr
-
-For Windows
-python slash.py --search "philips hue" --sort pr
-```
-```
-<<change example below>>
+description
+Example:
 | timestamp           | title                                       | price   | website   |
 |---------------------|---------------------------------------------|---------|-----------|
 | 30/09/2021 12:02:34 | Philips Hue White A19 60W Smart Dimmable... | $14.88  | walmart   |
