@@ -19,18 +19,18 @@ Sr. No| Notes|Self-assement|Evidence|
 13| Use of version control tools|3|Git is used thoroughly through the project|
 14| Use of  style checkers |2||
 15| Use of code  formatters. |2||
-16| Use of syntax checkers. | 3 |https://github.com/secheaper/slash/blob/main/.github/workflows/python-app.yml|
-17| Use of code coverage |3|https://github.com/secheaper/slash/blob/main/.github/workflows/workflow.yml|
+16| Use of syntax checkers. | 3 |https://github.com/SEProjGrp5slash/blob/main/.github/workflows/python-app.yml|
+17| Use of code coverage |3|https://github.com/SEProjGrp5/slash/blob/main/.github/workflows/workflow.yml|
 18| other automated analysis tools|1||
-19| test cases exist|3|https://github.com/secheaper/slash/blob/main/tests/test_app.py|
-20| test cases are routinely executed|3|https://github.com/secheaper/slash/actions/workflows/python-app.yml|
-21| the files CONTRIBUTING.md lists coding standards and lots of tips on how to extend the system without screwing things up|2|https://github.com/secheaper/slash/blob/main/CONTRIBUTING.md|
+19| test cases exist|3|https://github.com/SEProjGrp5/slash/blob/main/tests/test_app.py|
+20| test cases are routinely executed|3|https://github.com/SEProjGrp5/slash/actions/workflows/python-app.yml|
+21| the files CONTRIBUTING.md lists coding standards and lots of tips on how to extend the system without screwing things up|2|https://github.com/SEProjGrp5/slash/blob/main/CONTRIBUTING.md|
 22| issues are discussed before they are closed|1| There is a discussion channel on our discord server |
 23| Chat channel: exists|3|https://discord.gg/K4khCZGR|
 24| test cases:.a large proportion of the issues related to handling failing cases.| 3 |if a test case fails, open an issue and fix it|
-25| evidence that the whole team is using the same tools: everyone can get to all tools and files | 3 | We can clearly see that entire codebase has been written in Python(https://github.com/secheaper/slash/search?l=python). Everyone has the same access to the repository and also have equal access to comitting directly to the main branch. |
+25| evidence that the whole team is using the same tools: everyone can get to all tools and files | 3 | We can clearly see that entire codebase has been written in Python(https://github.com/SEProjGrp5/slash/search?l=python). Everyone has the same access to the repository and also have equal access to comitting directly to the main branch. |
 26| evidence that the whole team is using the same tools (e.g. config files in the repo, updated by lots of different people)| 3 ||
-27| evidence that the whole team is using the same tools (e.g. tutor can ask anyone to share screen, they demonstrate the system running on their computer)| 3 | https://github.com/secheaper/slash/graphs/contributors |
+27| evidence that the whole team is using the same tools (e.g. tutor can ask anyone to share screen, they demonstrate the system running on their computer)| 3 | https://github.com/SEProjGrp5/slash/graphs/contributors |
 28| Evidence that the members of the team are working across multiple places in the code base | 3 | https://github.com/secheaper/slash/graphs/contributors |
 29| short release cycles | 3 |(hard to see in short projects) project members are committing often enough so that everyone can get your work|
 30| Documentation provides clear overview of software and uses | 3 | https://github.com/secheaper/slash#readme |
