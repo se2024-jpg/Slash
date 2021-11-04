@@ -17,7 +17,7 @@ Sr. No| Notes|Self-assement|Evidence|
 12|Use of syntax checkers.|0.5| Pylint Implementation to check syntax : Evidence in [pylint](https://github.com/SEProjGrp5/slash/blob/main/.github/workflows/pylint.yml) and Pylint badge in readme| 
 13| Issues reports: there are many|1| Evidence in [issue history](https://github.com/SEProjGrp5/slash/projects/1)|
 14|	Use of code formatters. |0.5|Pylint Implementation to check code format : Evidence in [pylint](https://github.com/SEProjGrp5/slash/blob/main/.github/workflows/pylint.yml) and Pylint badge in readme |
-15| Use of style checkers |0.5|Pylint Implementation to check code style : Evidence in [pylint](https://github.com/SEProjGrp5/slash/blob/main/.github/workflows/pylint.yml) Pylint badge in readme|
+15| Use of style checkers |0.5|Style checker implementation to check code style : Evidence in [Style checker yml file](https://github.com/SEProjGrp5/slash/blob/main/.github/workflows/style_checker.yml) style checker badge in readme|
 16|	Docs: short video, animated, hosted on your repo. That convinces people why they want to work on your code. | 0.5 | Evidence in [readme.md](https://github.com/SEProjGrp5/slash/blob/main/assets/demo.gif)|
 17| test cases exist |0.5| Evidence in [test](https://github.com/SEProjGrp5/slash/tree/main/tests) folder|
 18| Use of code coverage|||
