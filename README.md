@@ -198,6 +198,9 @@ Example:
 #### 2. Currency Conversion
 Provide basic currency conversion for different currencies like INR, EURO, AUD, YUAN, YEN, POUND.
 
+#### 3. Store the results in a CSV
+The search results can be now stored on the local device in a CSV format for further use.
+
 :muscle: What's next for Phase 3?
 ---
 - Creating ordering and payment functionality for customers to directly order from command line
