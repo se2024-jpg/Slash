@@ -9,6 +9,7 @@
 ![Github closed pull requests](https://img.shields.io/github/issues-pr-closed/SEProjGrp5/slash)
 [![codecov](https://codecov.io/gh/secheaper/slash/branch/main/graph/badge.svg?token=I2J7ICDDI9)](https://codecov.io/gh/SEProjGrp5/slash)
 [![Pylint](https://github.com/SEProjGrp5/slash/actions/workflows/pylint.yml/badge.svg?branch=main)](https://github.com/SEProjGrp5/slash/actions/workflows/pylint.yml)
+[![Python Style Checker](https://github.com/SEProjGrp5/slash/actions/workflows/style_checker.yml/badge.svg)](https://github.com/SEProjGrp5/slash/actions/workflows/style_checker.yml)
 
 Slash is a command line tool that scrapes the most popular e-commerce websites to get the best deals on the searched items across these websites. 
 - **Fast**: With slash, you can save over 50% of your time by comparing deals across websites within seconds
