@@ -184,7 +184,11 @@ Example:
 
 :muscle: What's next for Phase 3?
 ---
-
+- Creating ordering and payment functionality for customers to directly order from command line
+- Scrape more e-commerce websites for wider range of options 
+- Add more parameters such as delivery days to get more information about the product 
+- Add functionality to store multiple wishlists from the output generated using the search query and add functionality to edit, delete, rename wishlists 
+- Add interactive user interface 
 
 :thought_balloon: Use Case
 ---
