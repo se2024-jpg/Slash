@@ -22,6 +22,8 @@ Slash is a command line tool that scrapes the most popular e-commerce websites t
   ::
   <a href="#dizzy-whats-new-in-phase-2"> Whats new in Phase 2? </a>
   ::
+  <a href="#muscle-whats-next-for-phase-3"> What's next for Phase 3? </a>
+  ::
   <a href="#card_index_dividers-some-examples">Examples</a>
   ::
   <a href="#thought_balloon-use-case">Use Case</a>
