@@ -181,6 +181,8 @@ Example:
 | 30/09/2021 12:02:34 | Philips Hue White Ambiance A19 Smart Lig... | $24.99  | walmart   |
 | 30/09/2021 12:02:34 | Philips Hue White and Color Ambiance Sma... | $29.99  | walmart   |
 
+#### 2. Currency Conversion
+Provide basic currency conversion for different currencies like INR, EURO, AUD, YUAN, YEN, POUND.
 
 :muscle: What's next for Phase 3?
 ---
@@ -190,6 +192,7 @@ Example:
 - Add functionality to store multiple wishlists from the output generated using the search query 
 - Add functionality to edit, delete, rename wishlists 
 - Add interactive user interface 
+- Add real time dynamic currency converters for different currencies all around the world
 
 :thought_balloon: Use Case
 ---
