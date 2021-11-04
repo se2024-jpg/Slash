@@ -162,7 +162,8 @@ python slash.py --search "philips hue" --num 5
 | 30/09/2021 12:07:42 | Philips Hue White and Color Ambiance A19... | $199.99 | walmart   |
 ```
 
-❓: Whats new in Phase 2?
+:rocket: What's new in Phase 2?
+---
 
 #### 1. New ratings Column!
 <<description>>
