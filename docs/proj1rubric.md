@@ -4,10 +4,10 @@
 
 Sr. No| Notes|Self-assement|Evidence|
 |----|--------|------|-------|
-1| workload is spread over the whole team (one team member is often Xtimes more productive than the others... | 3 | All contributors have made significant commits in the codebase. (https://github.com/secheaper/slash/graphs/contributors) |
-2| but nevertheless, here is a track record that everyone is contributing a lot)|3|https://github.com/secheaper/slash/pulse|
-3| Number of commits|3|https://github.com/secheaper/slash/pulse|
-4| Number of commits: by different people|3|https://github.com/secheaper/slash/pulse|
+1| workload is spread over the whole team (one team member is often Xtimes more productive than the others... | 3 | All contributors have made significant commits in the codebase. (https://github.com/SEProjGrp5/slash/graphs/contributors) |
+2| but nevertheless, here is a track record that everyone is contributing a lot)|3|https://github.com/SEProjGrp5/slash/pulse|
+3| Number of commits|3|https://github.com/SEProjGrp5/slash/pulse|
+4| Number of commits: by different people|3|https://github.com/SEProjGrp5/slash/graphs/commit-activity|
 5| Issues reports: there are **many**|3|[Issues](https://github.com/secheaper/slash/issues)|
 6|  issues are being  closed|3|[Closed Issues](https://github.com/secheaper/slash/issues?q=is%3Aissue+is%3Aclosed+)|
 7| DOI badge: exists |3|Present in [README](https://github.com/secheaper/slash/blob/main/README.md)|
