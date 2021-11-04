@@ -1,7 +1,7 @@
 # This workflow will install Python dependencies, run tests and create a Code Coverage Report
 
 name: Code Coverage
- CODECOV_TOKEN='14b08c83-6881-4129-af89-4bfd95b9ab48'
+
 on:
   push:
     branches: [ main ]
