@@ -18,7 +18,7 @@ Sr. No| Notes|Self-assement|Evidence|
 13| Issues reports: there are many|1| Evidence in [issue history](https://github.com/SEProjGrp5/slash/projects/1)|
 14|	Use of code formatters. |0.5|Pylint Implementation to check code format : Evidence|
 15| Use of style checkers |0.5|Pylint Implementation to check code style : Evidence|
-16|	Docs: short video, animated, hosted on your repo. That convinces people why they want to work on your code. | 0.5 | Evidence in [readme.md]()|
+16|	Docs: short video, animated, hosted on your repo. That convinces people why they want to work on your code. | 0.5 | Evidence in [readme.md](https://github.com/SEProjGrp5/slash/blob/main/assets/demo.gif)|
 17| test cases exist |0.5| Evidence in [test](https://github.com/SEProjGrp5/slash/tree/main/tests) folder|
 18| Use of code coverage|||
 19| other automated analysis tools|0.5| Used automation such as travis, Pylint, code coverage etc |
