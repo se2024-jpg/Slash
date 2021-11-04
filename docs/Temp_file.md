@@ -40,3 +40,51 @@ python slash.py --search "socks" --currency "inr"
 ```
 
 ![image](https://user-images.githubusercontent.com/48826459/140242430-0d7d2707-095a-4a2d-86a7-c5e91b88d725.png)
+
+
+#### 3. Added new e-commerce site - ETSY
+A new e-commerce site 'Etsy' has been added in this project. Information such as the product type, product name, price, ratings, etc. has been scraped from the website.
+
+Example:
+
+![image](https://user-images.githubusercontent.com/48826459/140245385-00359c50-4e89-46ff-866d-26a5879d43d4.png)
+
+
+
+#### 4. Main Menu 
+```--currency``` 
+Example:
+```
+For Mac
+python3 slash.py --search "socks" --currency "inr"
+
+For Windows
+python slash.py --search "socks" --currency "inr"
+
+```
+
+
+#### 5. Save products in csv
+```--currency``` accepts one or more arguments that helps the user choose their desired currency for the product price.
+Example:
+```
+For Mac
+python3 slash.py --search "socks" --currency "inr"
+
+For Windows
+python slash.py --search "socks" --currency "inr"
+
+```
+
+
+#### 6. View Excel sheet in cmd line
+```--currency``` accepts one or more arguments that helps the user choose their desired currency for the product price.
+Example:
+```
+For Mac
+python3 slash.py --search "socks" --currency "inr"
+
+For Windows
+python slash.py --search "socks" --currency "inr"
+
+```
