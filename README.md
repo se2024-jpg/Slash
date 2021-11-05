@@ -213,7 +213,8 @@ python slash.py --search "philips hue" --sort ra
 ```
 
 #### 2.Currency
-```--currency``` accepts one or more arguments that helps the user choose their desired currency for the product price.
+```--currency``` provides nasic currency conversion for different currencies like INR, EURO, AUD, YUAN, YEN and POUND.
+
 Example:
 ```
 For Mac
@@ -388,7 +389,8 @@ Thank You for Using Slash
 ```
 
 #### 5. Save products in csv
-```--csv```  
+```--csv``` command is used to save the complete list of the searched product in a csv format.
+```--cd``` command here is used to change the directory for the csv file.
 Example:
 ```
 For Mac
@@ -404,10 +406,6 @@ File Name: C:\Anant\NCSU\slash_test_csv\socks211104_1223.csv
 ```
 
 ![image](https://user-images.githubusercontent.com/48826459/140409684-a352f30a-9b01-4369-a044-f166eab42630.png)
-
-
-
-
 
 
 
