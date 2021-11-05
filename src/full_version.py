@@ -54,6 +54,8 @@ class full_version:
 		return self.name, self.email
 
 	def search_fn(self):
+		''' Functino searches for a given product and returns full list of products scraped. 
+		It then gives the user and option to save an item or open an item in browser'''
 		prod=input("Enter name of product to Search: ")
 		self.scrape(prod)
 		ch=int(input("\n\nEnter 1 to save product to list \n2 to open link in browser\nelse enter any other key to continue\n"))
@@ -75,6 +77,7 @@ class full_version:
 		pass
 
 	def extract_list(self):
+		'''This function helps user extract saved products and modify list or open product in browser'''
 		if os.path.exists(self.user_list):
 			old_data=pd.read_csv(self.user_list)
 			print(old_data)
