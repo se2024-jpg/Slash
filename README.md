@@ -1,7 +1,7 @@
 <p align="center"><img width="500" src="./assets/slash.png"></p>
 
 ![GitHub](https://img.shields.io/github/license/SEProjGrp5/slash)
-![DOI](https://zenodo.org/badge/423285546.svg)](https://zenodo.org/badge/latestdoi/423285546)
+[![DOI](https://zenodo.org/badge/423285546.svg)](https://zenodo.org/badge/latestdoi/423285546)
 ![Github](https://img.shields.io/badge/language-python-red.svg)
 ![GitHub issues](https://img.shields.io/github/issues-raw/SEProjGrp5/slash)
 ![Github closes issues](https://img.shields.io/github/issues-closed-raw/SEProjGrp5/slash)
