@@ -23,7 +23,7 @@ Sr. No| Notes|Self-assement|Evidence|
 18| Use of code coverage|0.5|Evidence in [code coverage yml file](https://github.com/SEProjGrp5/slash/blob/main/.github/workflows/workflow.yml)|
 19| other automated analysis tools|0.5| Used automation such as travis, Pylint, code coverage, style checker etc |
 20| test cases:.a large proportion of the issues related to handling failing cases.|0.5|Evidence in [test](https://github.com/SEProjGrp5/slash/tree/main/tests) folder|
-21| test cases are routinely executed|0.5 | [Travis.yml implementation](https://github.com/SEProjGrp5/slash#dizzy-whats-new-in-phase-2)|
+21| test cases are routinely executed|0.5 | [Travis.yml implementation](https://github.com/SEProjGrp5/slash/blob/main/.travis.yml)|
 22| Documentation describing how this version improves on the older version|1| Evidence in [readme.md](https://github.com/SEProjGrp5/slash#dizzy-whats-new-in-phase-2) |
 23| This version is a little(1), some(2), much(3) improved on the last version.| Tutors Assessment ||
 Total| |  |
