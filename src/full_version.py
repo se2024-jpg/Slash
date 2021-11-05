@@ -3,6 +3,7 @@ import os
 import pandas as pd
 import scraper
 import webbrowser
+import numpy as np
 
 class full_version:
 	def __init__(self):
@@ -103,7 +104,7 @@ class full_version:
 		results=scraper.driver(prod,df_flag=1,currency=self.currency)
 		#esults = formatter.sortList(results, "ra" , True)
 		self.df=pd.DataFrame.from_dict(results, orient='columns')
-		print(self.df)
+		print(self.df.replace("",np.nan).dropna())
 
 
 
