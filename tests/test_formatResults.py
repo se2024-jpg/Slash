@@ -28,7 +28,7 @@ def test_formatResults():
     prices = [BeautifulSoup('<div class="someclass">$0.99  </div>', "html.parser")]
     links = []
 
-    product = formatter.formatResult("example", titles, prices, links)
+    product = formatter.formatResult("example", titles, prices, links,"",0,"")
     ans = {"title":"title", "price":"$0.99", "website":"example"}
     print(product["website"], ans["website"])
 
