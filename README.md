@@ -7,7 +7,7 @@
 ![Github closes issues](https://img.shields.io/github/issues-closed-raw/SEProjGrp5/slash)
 ![Github pull requests](https://img.shields.io/github/issues-pr/SEProjGrp5/slash)
 ![Github closed pull requests](https://img.shields.io/github/issues-pr-closed/SEProjGrp5/slash)
-[![codecov](https://codecov.io/gh/SEProjGrp5/slash/branch/main/graph/badge.svg?token=I2J7ICDDI9)](https://codecov.io/gh/SEProjGrp5/slash)
+[![codecov](https://codecov.io/gh/sskarra1234/slash/branch/main/graph/badge.svg?token=JMI26I4YVU)](https://codecov.io/gh/sskarra1234/slash)
 [![Pylint](https://github.com/SEProjGrp5/slash/actions/workflows/pylint.yml/badge.svg?branch=main)](https://github.com/SEProjGrp5/slash/actions/workflows/pylint.yml)
 [![Python Style Checker](https://github.com/SEProjGrp5/slash/actions/workflows/style_checker.yml/badge.svg?branch=main)](https://github.com/SEProjGrp5/slash/actions/workflows/style_checker.yml)
 
