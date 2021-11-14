@@ -48,27 +48,24 @@ class full_version:
         return self.name, self.email
 
     def search_fn(self):
-        """Functino searches for a given product and returns full list of products scraped.
+        """Function searches for a given product and returns full list of products scraped.
         It then gives the user and option to save an item or open an item in browser"""
         prod = input("Enter name of product to Search: ")
         self.scrape(prod)
         ch = int(
             input(
-                "\n\nEnter 1 to save product to wishlist \n2 to open link in browser\nelse enter any other key to continue\n"
+                "\nEnter 1 to save product to wishlist \nEnter 2 to open link in browser\nElse enter any other key to continue\n"
             )
         )
+        """By selecting 1, the User can store a searched product into a wishlist. Multiple wishlist are available and it has to be pre-selected 
+        to store an item into it."""
         if ch == 1:
-            wish_lists = []
-            print("----------Wishlists---------")
-            for index, wishlist in enumerate(os.listdir(self.user_list_dir)):
-                wish_lists.append(wishlist)
-                wishlist = wishlist.replace(".csv", "")
-                print(index, "\t", wishlist)
-            wishlist_index = int(input("Enter your wishlist index: "))
+            wish_lists = self.wishlist_maker()
+            wishlist_index = int(input("\nEnter your wishlist index: "))
             selected_wishlist = wish_lists[wishlist_index]
             wishlist_path = self.user_list_dir / selected_wishlist
-            # Check if wishlist is in csvs folder otherwise indicate wishlist doesn't exist
-            indx = int(input("Enter row number of product to save: "))
+            """Select the row number of the product to save into the selected wishlist."""
+            indx = int(input("\nEnter row number of product to save: "))
             if indx < len(self.df):
                 new_data = self.df.iloc[[indx]]
                 if os.path.exists(wishlist_path):
@@ -77,40 +74,69 @@ class full_version:
                     old_data = pd.DataFrame()
                 if self.df.title[indx] not in old_data:
                     final_data = pd.concat([old_data, new_data])
+                    print("Item added successfully")
                 final_data.to_csv(wishlist_path, index=False, header=self.df.columns)
+        """Selecting 2 allows the user to open the searched item in a broswer"""
         if ch == 2:
-            indx = int(input("Enter row number of product to open: "))
+            indx = int(input("\nEnter row number of product to open: "))
             webbrowser.open_new(self.df.link[indx])
 
     def extract_list(self):
-        # TODO Add section of which wishlist first
-        """This function helps user extract saved products and modify list or open product in browser"""
-        if os.path.exists(self.user_list):
-            old_data = pd.read_csv(self.user_list)
-            print(old_data)
-            choice = int(
-                input(
-                    "Select from the following:\n1. Delete item from list\n2. Open link in Chrome\n3. Continue\n"
-                )
+        """This function helps user extract saved products, create new lists, modify list or open product in browser"""
+        wish_lists = self.wishlist_maker()
+        wishlist_options = int(
+            input(
+                "\nSelect from the following: \n1. Open Wishlist \n2. Create new Wishlist \n3. Delete Wishlist \n4. Return to Main\n"
             )
-            if choice == 1:
-                indx = int(input("Enter row number to be removed: "))
-                old_data = old_data.drop(index=indx)
-                if old_data.shape[0] == 0:
-                    os.remove(self.user_list)
-                    return
+        )
 
-                old_data.to_csv(self.user_list, index=False, header=old_data.columns)
-            if choice == 2:
+        if wishlist_options == 1:
+            wishlist_index = int(input("\nEnter the wishlist index: "))
+            selected_wishlist = wish_lists[wishlist_index]
+            wishlist_path = self.user_list_dir / selected_wishlist
+            if os.path.exists(wishlist_path):
+                old_data = pd.read_csv(wishlist_path)
+                print(old_data)
+                choice = int(
+                    input(
+                        "\nSelect from the following:\n1. Delete item from list\n2. Open link in Chrome\n3. Return to Main\n"
+                    )
+                )
+                if choice == 1:
+                    indx = int(input("\nEnter row number to be removed: "))
+                    old_data = old_data.drop(index=indx)
+                    if old_data.shape[0] == 0:
+                        os.remove(wishlist_path)
+                        return
+                    old_data.to_csv(wishlist_path, index=False, header=old_data.columns)
+                if choice == 2:
+                    indx = int(input("\nEnter row number to open in chrome: "))
+                    url = old_data.link[indx]
+                    webbrowser.open_new(url)
 
-                indx = int(input("Enter row number to open in chrome: "))
-                url = old_data.link[indx]
+        elif wishlist_options == 2:
+            # TODO Create new wishlist
+            pass
 
-                webbrowser.open_new(url)
+        elif wishlist_options == 3:
+            # TODO Delete wishlist
+            wishlist_index = int(input("Enter the wishlist index: "))
+            selected_wishlist = wish_lists[wishlist_index]
+            wishlist_path = self.user_list_dir / selected_wishlist
+            pass
 
         else:
             print("No saved data found.")
         pass
+
+    def wishlist_maker(self):
+        wish_lists = []
+        print("----------Wishlists---------")
+        for index, wishlist in enumerate(os.listdir(self.user_list_dir)):
+            wish_lists.append(wishlist)
+            wishlist = wishlist.replace(".csv", "")
+            print(index, "\t", wishlist, "\n")
+            return wish_lists
 
     def scrape(self, prod):
         """calls the scraper function from scraper.py"""
