@@ -18,7 +18,7 @@ class full_version:
         self.user_data = self.user_data_dir / "user_data.json"
         self.user_list_dir = Path(__file__).parent.parent / "csvs"
         self.user_list_dir.mkdir(parents=True, exist_ok=True)
-        self.user_list = self.user_list_dir / "Default.csv"
+        self.user_list = self.user_list_dir / "default.csv"
         self.df = pd.DataFrame()
         self.currency = ""
         pd.set_option("display.max_rows", None)
@@ -40,6 +40,8 @@ class full_version:
                 json.dump(self.data, outfile)
             self.name = name
             self.email = email
+            open(self.user_list, "a").close()
+
         else:
             with open(self.user_data) as json_file:
                 data = json.load(json_file)
@@ -68,7 +70,9 @@ class full_version:
             indx = int(input("\nEnter row number of product to save: "))
             if indx < len(self.df):
                 new_data = self.df.iloc[[indx]]
-                if os.path.exists(wishlist_path):
+                if os.path.exists(wishlist_path) and (
+                    os.path.getsize(wishlist_path) > 0
+                ):
                     old_data = pd.read_csv(wishlist_path)
                 else:
                     old_data = pd.DataFrame()
@@ -95,8 +99,12 @@ class full_version:
             selected_wishlist = wish_lists[wishlist_index]
             wishlist_path = self.user_list_dir / selected_wishlist
             if os.path.exists(wishlist_path):
-                old_data = pd.read_csv(wishlist_path)
-                print(old_data)
+                try:
+                    old_data = pd.read_csv(wishlist_path)
+                    print(old_data)
+                except Exception:
+                    old_data = pd.DataFrame()
+                    print("Empty Wishlist")
                 choice = int(
                     input(
                         "\nSelect from the following:\n1. Delete item from list\n2. Open link in Chrome\n3. Return to Main\n"
@@ -105,9 +113,6 @@ class full_version:
                 if choice == 1:
                     indx = int(input("\nEnter row number to be removed: "))
                     old_data = old_data.drop(index=indx)
-                    if old_data.shape[0] == 0:
-                        os.remove(wishlist_path)
-                        return
                     old_data.to_csv(wishlist_path, index=False, header=old_data.columns)
                 if choice == 2:
                     indx = int(input("\nEnter row number to open in chrome: "))
@@ -115,19 +120,17 @@ class full_version:
                     webbrowser.open_new(url)
 
         elif wishlist_options == 2:
-            # TODO Create new wishlist
-            pass
+            wishlist_name = str(input("\nName your wishlist: "))
+            new_wishlist = self.user_list_dir / (wishlist_name + ".csv")
+            open(new_wishlist, "a").close()
 
         elif wishlist_options == 3:
-            # TODO Delete wishlist
-            wishlist_index = int(input("Enter the wishlist index: "))
+            wishlist_index = int(input("Enter the wishlist index to delete: "))
             selected_wishlist = wish_lists[wishlist_index]
             wishlist_path = self.user_list_dir / selected_wishlist
-            pass
-
+            wishlist_path.unlink()
         else:
             print("No saved data found.")
-        pass
 
     def wishlist_maker(self):
         wish_lists = []
@@ -135,8 +138,8 @@ class full_version:
         for index, wishlist in enumerate(os.listdir(self.user_list_dir)):
             wish_lists.append(wishlist)
             wishlist = wishlist.replace(".csv", "")
-            print(index, "\t", wishlist, "\n")
-            return wish_lists
+            print(index, "\t", wishlist)
+        return wish_lists
 
     def scrape(self, prod):
         """calls the scraper function from scraper.py"""
@@ -160,7 +163,7 @@ class full_version:
             elif choice == 2:
                 self.extract_list()
             elif choice == 3:
-                self.currency = lower(input("Enter INR/EUR\n"))
+                self.currency = str.lower(input("Enter INR/EUR\n"))
             elif choice == 4:
                 print("Thank You for Using Slash")
                 flag_loop = 0
