@@ -74,6 +74,26 @@ def searchWalmart(query, df_flag, currency):
         products.append(product)
     return products
 
+def searchGoogleShopping(query, df_flag, currency):
+    """
+    The searchGoogleShopping function scrapes https://shopping.google.com/
+    Parameters: query- search query for the product, df_flag- flag variable, currency- currency type entered by the user
+    Returns a list of items available on walmart.com that match the product entered by the user
+    """
+    query = formatter.formatSearchQuery(query)
+    URL = f'https://www.google.com/search?tbm=shop&q={query}'
+    page = httpsGet(URL)
+    results = page.findAll("div", {"class": "sh-dgr__grid-result"})
+    products = []
+    pattern = re.compile(r'out of 5 Stars')
+    for res in results:
+        titles, prices, links = res.select("h4"), res.select("span.a8Pemb"), res.select("a")
+        ratings = res.findAll("span", {"class":"Rsc7Yb"})
+        product = formatter.formatResult("google", titles, prices, links,ratings, df_flag, currency)
+        products.append(product)
+        print(product)
+    return products
+
 def searchEtsy(query, df_flag, currency):
     """
     The searchEtsy function scrapes Etsy.com
