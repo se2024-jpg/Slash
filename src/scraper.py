@@ -54,6 +54,7 @@ def searchAmazon(query, df_flag, currency):
         products.append(product)
     return products
 
+
 def searchWalmart(query, df_flag, currency):
     """
     The searchWalmart function scrapes walmart.com
@@ -74,25 +75,6 @@ def searchWalmart(query, df_flag, currency):
         products.append(product)
     return products
 
-def searchGoogleShopping(query, df_flag, currency):
-    """
-    The searchGoogleShopping function scrapes https://shopping.google.com/
-    Parameters: query- search query for the product, df_flag- flag variable, currency- currency type entered by the user
-    Returns a list of items available on walmart.com that match the product entered by the user
-    """
-    query = formatter.formatSearchQuery(query)
-    URL = f'https://www.google.com/search?tbm=shop&q={query}'
-    page = httpsGet(URL)
-    results = page.findAll("div", {"class": "sh-dgr__grid-result"})
-    products = []
-    pattern = re.compile(r'out of 5 Stars')
-    for res in results:
-        titles, prices, links = res.select("h4"), res.select("span.a8Pemb"), res.select("a")
-        ratings = res.findAll("span", {"class":"Rsc7Yb"})
-        product = formatter.formatResult("google", titles, prices, links,ratings, df_flag, currency)
-        products.append(product)
-        print(product)
-    return products
 
 def searchEtsy(query, df_flag, currency):
     """
@@ -119,6 +101,47 @@ def searchEtsy(query, df_flag, currency):
         products.append(product)
     return products
 
+
+def searchGoogleShopping(query, df_flag, currency):
+    """
+    The searchGoogleShopping function scrapes https://shopping.google.com/
+    Parameters: query- search query for the product, df_flag- flag variable, currency- currency type entered by the user
+    Returns a list of items available on walmart.com that match the product entered by the user
+    """
+    query = formatter.formatSearchQuery(query)
+    URL = f'https://www.google.com/search?tbm=shop&q={query}'
+    page = httpsGet(URL)
+    results = page.findAll("div", {"class": "sh-dgr__grid-result"})
+    products = []
+    for res in results:
+        titles, prices, links = res.select("h4"), res.select("span.a8Pemb"), res.select("a")
+        ratings = res.findAll("span", {"class":"Rsc7Yb"})
+        product = formatter.formatResult("google", titles, prices, links,ratings, df_flag, currency)
+        products.append(product)
+    return products
+
+
+def searchBJs(query, df_flag, currency):
+    """
+    The searchBJs function scrapes https://www.bjs.com/
+    Parameters: query- search query for the product, df_flag- flag variable, currency- currency type entered by the user
+    Returns a list of items available on walmart.com that match the product entered by the user
+    """
+    query = formatter.formatSearchQuery(query)
+    URL = f'https://www.bjs.com/search/{query}'
+    page = httpsGet(URL)
+    results = page.findAll("div", {"class": "product"})
+    #print(results)
+    products = []
+    for res in results:
+        titles, prices, links = res.select("h2"), res.select("span.price"), res.select("a")
+        ratings = res.findAll("span", {"class": "on"})
+        product = formatter.formatResult("bjs", titles, prices, links, "", df_flag, currency)
+        if len(ratings) != 0:
+            product["rating"] = len(ratings)
+        products.append(product)
+    return products
+
 def driver(product, currency, num=None, df_flag=0,csv=False,cd=None):
     ''' Returns csv is the user enters the --csv arg, 
     else will display the result table in the terminal based on the args entered by the user '''
@@ -126,8 +149,10 @@ def driver(product, currency, num=None, df_flag=0,csv=False,cd=None):
     products_1 = searchAmazon(product,df_flag, currency)
     products_2 = searchWalmart(product,df_flag, currency)
     products_3 = searchEtsy(product,df_flag, currency)
-    results=products_1+products_2+products_3
-    result_condensed=products_1[:num]+products_2[:num]+products_3[:num]
+    products_4 = searchGoogleShopping(product,df_flag, currency)
+    products_5 = searchBJs(product,df_flag, currency)
+    results=products_1+products_2+products_3+products_4+products_5
+    result_condensed=products_1[:num]+products_2[:num]+products_3[:num]+products_4[:num]+products_5[:num]
     result_condensed=pd.DataFrame.from_dict(result_condensed,orient='columns')
     results =pd.DataFrame.from_dict(results, orient='columns')
     if currency=="" or currency==None:
