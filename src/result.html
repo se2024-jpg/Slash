@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Slash Mini-Version</title>
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+	<link rel="stylesheet" href="/static/style.css">
+	<link rel="stylesheet" href="style.css"><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" >
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" ></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" ></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"  ></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+      
+    <style>
+        .movie-list {
+         text-align:center;
+         width: 100%;
+         margin-top: 20px;
+         padding: 5px 5px 5px 5px;
+         }
+         .td,th {
+         border: 1px solid;
+         padding: 7px;
+         text-align:center;
+         }
+         .movie-list tr:nth-child(even){background-color: #f2f2f2;}
+
+         .col-sm
+         {
+            padding-top: 25px;
+
+         }
+         .button {
+          border: none;
+          color: white;
+         text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      transition-duration: 0.4s;
+      cursor: pointer;
+}
+
+.button1 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #4CAF50;
+}
+
+.button1:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+
+    </style>
+    
+   </head>
+   <body>   
+
+    <div class="container">
+        <div class="row">
+          <div class="col-sm">
+            <div class="form-group">
+               <label class="control-label col-sm-offset-2 col-sm-2" for="company">Company</label>
+                <div class="col-sm-6 col-md-4">
+                  <select id="company" class="form-control">
+                    <option>small</option>
+                    <option>medium</option>
+                    <option>large</option>
+                  </select> 
+                
+                </div>
+              </div>
+           
+          </div>
+          <div class="col-sm">
+            <div class="form-group">
+               <label class="control-label col-sm-offset-2 col-sm-2" for="company">Company</label>
+                <div class="col-sm-6 col-md-4">
+                  <select id="company" class="form-control">
+                    <option>small</option>
+                    <option>medium</option>
+                    <option>large</option>
+                  </select>  
+                </div>
+              </div>
+          </div>
+          <div class="col-sm">
+    
+            <div class="form-group">
+               <label class="control-label col-sm-offset-2 col-sm-2" for="company">Company</label>
+                <div class="col-sm-6 col-md-4">
+                  <select id="company" class="form-control">
+                    <option>small</option>
+                    <option>medium</option>
+                    <option>large</option>
+                  </select> 
+                
+                </div>
+              </div>
+
+          </div>
+          <div class="col-sm">
+    
+            <button class="button button1">Convert into CSV</button>
+
+          </div>
+        </div>
+      </div>
+    
+
+      <div class="container">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+           <table border='1' class="movie-list">
+              <thead>
+                 <tr>
+                    <th>Recommended Movies</th>
+                 </tr>
+              </thead>
+              <tbody>
+                
+                 <tr>
+                    <td>{{row}}</td>
+                 </tr>
+                 <tr>
+                    <td>{{row}}</td>
+                 </tr>
+                 <tr>
+                    <td>{{row}}</td>
+                 </tr>
+                
+              </tbody>
+           </table>
+        </div>
+        <div class="col-md-4"></div>
+     </div>
+
+</body>
+</html>
