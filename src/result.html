@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
       
     <style>
-        .movie-list {
+        .item-list {
          text-align:center;
          width: 100%;
          margin-top: 20px;
@@ -26,115 +26,144 @@
          padding: 7px;
          text-align:center;
          }
-         .movie-list tr:nth-child(even){background-color: #f2f2f2;}
+         .item-list tr:nth-child(even){background-color: rgb(232, 255, 235);}
 
          .col-sm
          {
             padding-top: 25px;
+            
 
          }
-         .button {
-          border: none;
-          color: white;
-         text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 16px;
-      margin: 4px 2px;
-      transition-duration: 0.4s;
-      cursor: pointer;
-}
+         .results
+         {
+
+         padding-left: 60px;   
+         width: 3800px;  
+
+         }
+
+
+         .button 
+         {
+            border: none;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+         }
 
 .button1 {
   background-color: white; 
   color: black; 
   border: 2px solid #4CAF50;
+ 
 }
+#choice1
+{
+   width: 200px;
 
+}
 .button1:hover {
-  background-color: #4CAF50;
+  background-color: rgb(63, 155, 112);
   color: white;
 }
-
 
     </style>
     
    </head>
    <body>   
-
-    <div class="container">
+   
+    <div class="container" id="abc">
         <div class="row">
           <div class="col-sm">
             <div class="form-group">
-               <label class="control-label col-sm-offset-2 col-sm-2" for="company">Company</label>
+               <label class="control-label col-sm-offset-2 col-sm-2" for="company"></label>
                 <div class="col-sm-6 col-md-4">
-                  <select id="company" class="form-control">
-                    <option>small</option>
-                    <option>medium</option>
-                    <option>large</option>
+                  <form action = "" method = "post" id="filter1">
+                  <select id="choice1"  class="form-control" onchange="this.form.submit()">
+                    <option value="default" >Sort by</option>
+                    <option value="ra" >Rating</option>
+                    <option value="re">Relevance</option>
+                    <option value="asc">Price Low to High</option>
+                    <option value="des">Price High to Low</option>
+                    <br>
                   </select> 
-                
+                  </form>
                 </div>
               </div>
            
           </div>
           <div class="col-sm">
             <div class="form-group">
-               <label class="control-label col-sm-offset-2 col-sm-2" for="company">Company</label>
+               <label class="control-label col-sm-offset-2 col-sm-2" for="company"></label>
                 <div class="col-sm-6 col-md-4">
-                  <select id="company" class="form-control">
-                    <option>small</option>
-                    <option>medium</option>
-                    <option>large</option>
+                  <form action = "" method = "post" id="filter2">
+                  <select id="choice1" class="form-control" onchange="this.form.submit()">
+                    <option value="default" >Currency</option>
+                    <option value="usd" >USD</option>
+                    <option value="inr">INR</option>
+                    <option value="euro">EURO</option>
+                    <option value="yuan">YUAN</option>
+                    <option value="aud">AUD</option>
+                    <option value="pound">POUND</option>
+                    <br>
                   </select>  
+                  </form>
                 </div>
               </div>
           </div>
           <div class="col-sm">
     
             <div class="form-group">
-               <label class="control-label col-sm-offset-2 col-sm-2" for="company">Company</label>
+               <label class="control-label col-sm-offset-2 col-sm-2" for="company"></label>
                 <div class="col-sm-6 col-md-4">
-                  <select id="company" class="form-control">
-                    <option>small</option>
-                    <option>medium</option>
-                    <option>large</option>
+                  <form action = "" method = "post" id="filter3">
+                  <select id="choice1" class="form-control" onchange="this.form.submit()">
+                    <option>Result Length</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
                   </select> 
-                
+                  </form> 
                 </div>
               </div>
 
           </div>
           <div class="col-sm">
-    
-            <button class="button button1">Convert into CSV</button>
-
-          </div>
+            <form action = "" method = "post" id="csv">
+            <br>
+            <input type = "submit" class="button button1" value = "Convert into CSV" /> <!---When user clicks button the result should be converted into csv file -->
+         </form>  
+         </div>
         </div>
       </div>
+   </form>
+   <hr>
     
-
-      <div class="container">
+   <br>
+      <div class="results">
         <div class="col-md-4"></div>
         <div class="col-md-4">
-           <table border='1' class="movie-list">
+           <table border='1' class="item-list">
               <thead>
                  <tr>
-                    <th>Recommended Movies</th>
+                    <th>Products</th>
                  </tr>
               </thead>
               <tbody>
                 
-                 <tr>
-                    <td>{{row}}</td>
-                 </tr>
-                 <tr>
-                    <td>{{row}}</td>
-                 </tr>
-                 <tr>
-                    <td>{{row}}</td>
-                 </tr>
-                
+               {% for row in products %}
+               <tr>
+                  <td>{{row}}</td>
+               </tr>
+
+               {% endfor %}
+
               </tbody>
            </table>
         </div>
