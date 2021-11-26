@@ -142,7 +142,16 @@ def searchBJs(query, df_flag, currency):
         products.append(product)
     return products
 
-def driver(product, currency, num=None, df_flag=0,csv=False,cd=None):
+
+def condense_helper(result_condensed, list, num):
+    ''' This is a helper function to limit number of entries in the result '''
+    for p in list:
+        if num != None and len(result_condensed) >= int(num):
+            break
+        else:
+            result_condensed.append(p)
+
+def driver(product, currency, num=None, df_flag=0,csv=False,cd=None,ui=False,sort=None):
     ''' Returns csv is the user enters the --csv arg, 
     else will display the result table in the terminal based on the args entered by the user '''
     
@@ -151,16 +160,42 @@ def driver(product, currency, num=None, df_flag=0,csv=False,cd=None):
     products_3 = searchEtsy(product,df_flag, currency)
     products_4 = searchGoogleShopping(product,df_flag, currency)
     products_5 = searchBJs(product,df_flag, currency)
-    results=products_1+products_2+products_3+products_4+products_5
-    result_condensed=products_1[:num]+products_2[:num]+products_3[:num]+products_4[:num]+products_5[:num]
-    result_condensed=pd.DataFrame.from_dict(result_condensed,orient='columns')
-    results =pd.DataFrame.from_dict(results, orient='columns')
-    if currency=="" or currency==None:
-        results=results.drop(columns='converted price')
-        result_condensed=result_condensed.drop(columns='converted price')
-    if csv==True:
-        file_name=os.path.join(cd,(product+datetime.now().strftime("%y%m%d_%H%M")+".csv"))
-        print("CSV Saved at: ",cd)
-        print("File Name:", file_name)
-        results.to_csv(file_name, index=False,header=results.columns)
+    result_condensed = ''
+    if not ui:
+        results=products_1+products_2+products_3+products_4+products_5
+        result_condensed=products_1[:num]+products_2[:num]+products_3[:num]+products_4[:num]+products_5[:num]
+        result_condensed=pd.DataFrame.from_dict(result_condensed,orient='columns')
+        results =pd.DataFrame.from_dict(results, orient='columns')
+        if currency=="" or currency==None:
+            results=results.drop(columns='converted price')
+            result_condensed=result_condensed.drop(columns='converted price')
+        if csv==True:
+            file_name=os.path.join(cd,(product+datetime.now().strftime("%y%m%d_%H%M")+".csv"))
+            print("CSV Saved at: ",cd)
+            print("File Name:", file_name)
+            results.to_csv(file_name, index=False,header=results.columns)
+    else:
+        result_condensed = []
+        condense_helper(result_condensed, products_1, num)
+        condense_helper(result_condensed, products_2, num)
+        condense_helper(result_condensed, products_3, num)
+        condense_helper(result_condensed, products_4, num)
+        condense_helper(result_condensed, products_5, num)
+
+        if currency != None:
+            for p in result_condensed:
+                p["price"] = formatter.getCurrency(currency, p["price"])
+
+        if sort != None:
+            if sort == "rades":
+                result_condensed = formatter.sortList(result_condensed, "ra", False)
+            elif sort == "raasc":
+                result_condensed = formatter.sortList(result_condensed, "ra", True)
+            elif sort == "pasc":
+                result_condensed = formatter.sortList(result_condensed, "pr", False)
+            else:
+                result_condensed = formatter.sortList(result_condensed, "pr", True)
+        
+
+
     return result_condensed

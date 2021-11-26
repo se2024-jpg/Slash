@@ -55,9 +55,9 @@ def sortList(arr, sortBy, reverse):
     """
     if sortBy == "pr":
         return sorted(arr, key=lambda x: getNumbers(x["price"]), reverse=reverse)
-    # To-do: sort by rating
+    # Fix Rating sort
     elif sortBy == "ra":
-        return sorted(arr, key=lambda x: getNumbers(x["rating"]), reverse=reverse)
+        return sorted(arr, key = lambda x:float(x["rating"]), reverse=reverse)
         pass
     return arr
 
