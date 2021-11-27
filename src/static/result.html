@@ -24,7 +24,6 @@
          .td,th {
          border: 1px solid;
          padding: 7px;
-         text-align:center;
          }
          .item-list tr:nth-child(even){background-color: rgb(232, 255, 235);}
 
@@ -82,7 +81,7 @@
             <div class="form-group">
                <label class="control-label col-sm-offset-2 col-sm-2" for="company"></label>
                 <div class="col-sm-6 col-md-4">
-                  <form action = "/filter" method = "post" id="filter1">
+                  <form action = "/filter?product_name={{prod}}" method = "post" id="filter1">
                   <select id="choice1" name="sort" class="form-control">
                     <option value="default" >Sort by</option>
                     <option value="rades" >Rating High to Low</option>
@@ -99,7 +98,7 @@
             <div class="form-group">
                <label class="control-label col-sm-offset-2 col-sm-2" for="company"></label>
                 <div class="col-sm-6 col-md-4">
-                  <select id="choice2" name="currency" class="form-control">
+                  <select id="choice1" name="currency" class="form-control">
                     <option value="usd" >USD</option>
                     <option value="inr">INR</option>
                     <option value="euro">EURO</option>
@@ -116,12 +115,12 @@
             <div class="form-group">
                <label class="control-label col-sm-offset-2 col-sm-2" for="company"></label>
                 <div class="col-sm-6 col-md-4">
-                  <select id="choice3" name="num" class="form-control">
-                    <option>Result Length</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
+                  <select id="choice1" name="num" class="form-control">
+                    <option value="default">Result Length</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
                   </select>
                 </div>
               </div>
@@ -133,7 +132,7 @@
          </form>  
          </div>
           <!-- <div class="col-sm">
-            <form action = "" method = "post" id="csv">
+            <form action = "/csv" method = "post" id="csv">
             <br>
             <input type = "submit" class="button button1" value = "Convert into CSV" />
          </form>  
@@ -150,13 +149,12 @@
            <table border='1' class="item-list" >
               <thead>
                  <tr>
-                    <th colspan="6">Products</th>
+                    <th colspan="5">Products</th>
                  </tr>
                  <tr>
                     <td>Timestamp</td>
                     <td>Title</td>
                     <td>Price</td>
-                    <td>Link</td>
                     <td>Website</td>
                     <td>Rating</td>
                </tr>
@@ -166,9 +164,8 @@
                {% for product in data %}
                <tr>
                   <td>{{product.timestamp}}</td>
-                  <td>{{product.title}}</td>
+                  <td><a href={{product.link}} target="_blank">{{product.title}}</a></td>
                   <td>{{product.price}}</td>
-                  <td>{{product.link}}</td>
                   <td>{{product.website}}</td>
                   <td>{{product.rating}}</td>
                </tr>

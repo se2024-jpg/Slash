@@ -16,21 +16,20 @@ def product_search(new_product='', sort=None, currency=None, num=None):
 
     data = scraper.driver(product, currency, num, 0, False, None, True, sort)
 
-    return render_template('./static/result.html', data=data)
+    return render_template('./static/result.html', data=data, prod=product)
 
 @app.route('/filter', methods=['POST', 'GET'])
 def product_search_filtered():
 
-    ref = request.referrer.split("=")
-    product = ref[1]
+    product = request.args.get('product_name')
     sort = request.form['sort']
     currency = request.form['currency']
     num = request.form['num']
 
     if sort == 'default':
         sort = None
-    if currency == 'default':
+    if currency == 'usd':
         currency = None 
     if num == 'default':
         num = None
-    return product_search(ref[1], sort, currency, num)
+    return product_search(product, sort, currency, num)

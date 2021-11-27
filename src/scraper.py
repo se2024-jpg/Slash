@@ -149,7 +149,8 @@ def condense_helper(result_condensed, list, num):
         if num != None and len(result_condensed) >= int(num):
             break
         else:
-            result_condensed.append(p)
+            if p["title"] != None and p["title"] != "":
+                result_condensed.append(p)
 
 def driver(product, currency, num=None, df_flag=0,csv=False,cd=None,ui=False,sort=None):
     ''' Returns csv is the user enters the --csv arg, 
@@ -185,6 +186,17 @@ def driver(product, currency, num=None, df_flag=0,csv=False,cd=None,ui=False,sor
         if currency != None:
             for p in result_condensed:
                 p["price"] = formatter.getCurrency(currency, p["price"])
+        
+        # Fix URLs so that they contain http before www
+        # TODO Fix issue with Etsy links -> For some reason they have www.Etsy.com prepended to the begining of the link
+        for p in result_condensed:
+            link = p["link"]
+            if p["website"] == "Etsy":
+                link = link[12:]
+                p["link"] = link
+            elif "http" not in link:
+                link = "http://" + link
+                p["link"] = link
 
         if sort != None:
             if sort == "rades":
@@ -196,6 +208,8 @@ def driver(product, currency, num=None, df_flag=0,csv=False,cd=None,ui=False,sor
             else:
                 result_condensed = formatter.sortList(result_condensed, "pr", True)
         
-
-
+        if csv:
+            file_name = product + "_" + datetime.now() + ".csv"
+            result_condensed = result_condensed.to_csv(file_name, index=False,header=results.columns)
+            print(result_condensed)
     return result_condensed
