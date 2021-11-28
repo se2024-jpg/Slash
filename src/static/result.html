@@ -6,7 +6,7 @@
 	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 
 	<link rel="stylesheet" href="/static/style.css">
-	<link rel="stylesheet" href="style.css"><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" >
+	<link rel="stylesheet" href="/static/style.css"><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" >
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" ></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
@@ -24,7 +24,6 @@
          .td,th {
          border: 1px solid;
          padding: 7px;
-         text-align:center;
          }
          .item-list tr:nth-child(even){background-color: rgb(232, 255, 235);}
 
@@ -41,7 +40,6 @@
          width: 3800px;  
 
          }
-
 
          .button 
          {
@@ -83,16 +81,15 @@
             <div class="form-group">
                <label class="control-label col-sm-offset-2 col-sm-2" for="company"></label>
                 <div class="col-sm-6 col-md-4">
-                  <form action = "" method = "post" id="filter1">
-                  <select id="choice1"  class="form-control" onchange="this.form.submit()">
+                  <form action = "/filter?product_name={{prod}}" method = "post" id="filter1">
+                  <select id="choice1" name="sort" class="form-control">
                     <option value="default" >Sort by</option>
-                    <option value="ra" >Rating</option>
-                    <option value="re">Relevance</option>
-                    <option value="asc">Price Low to High</option>
-                    <option value="des">Price High to Low</option>
+                    <option value="rades" >Rating High to Low</option>
+                    <option value="raasc" >Rating Low to High</option>
+                    <option value="pasc">Price Low to High</option>
+                    <option value="pdes">Price High to Low</option>
                     <br>
-                  </select> 
-                  </form>
+                  </select>
                 </div>
               </div>
            
@@ -101,9 +98,7 @@
             <div class="form-group">
                <label class="control-label col-sm-offset-2 col-sm-2" for="company"></label>
                 <div class="col-sm-6 col-md-4">
-                  <form action = "" method = "post" id="filter2">
-                  <select id="choice1" class="form-control" onchange="this.form.submit()">
-                    <option value="default" >Currency</option>
+                  <select id="choice1" name="currency" class="form-control">
                     <option value="usd" >USD</option>
                     <option value="inr">INR</option>
                     <option value="euro">EURO</option>
@@ -111,8 +106,7 @@
                     <option value="aud">AUD</option>
                     <option value="pound">POUND</option>
                     <br>
-                  </select>  
-                  </form>
+                  </select>
                 </div>
               </div>
           </div>
@@ -121,25 +115,28 @@
             <div class="form-group">
                <label class="control-label col-sm-offset-2 col-sm-2" for="company"></label>
                 <div class="col-sm-6 col-md-4">
-                  <form action = "" method = "post" id="filter3">
-                  <select id="choice1" class="form-control" onchange="this.form.submit()">
-                    <option>Result Length</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                  </select> 
-                  </form> 
+                  <select id="choice1" name="num" class="form-control">
+                    <option value="default">Result Length</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                  </select>
                 </div>
               </div>
 
           </div>
           <div class="col-sm">
-            <form action = "" method = "post" id="csv">
             <br>
-            <input type = "submit" class="button button1" value = "Convert into CSV" /> <!---When user clicks button the result should be converted into csv file -->
+            <input type = "submit" class="button button1" value = "Filter Search" />
          </form>  
          </div>
+          <!-- <div class="col-sm">
+            <form action = "/csv?product_name={{prod}}" method = "post" id="csv">
+            <br>
+            <input type = "submit" class="button button1" value = "Convert into CSV" />
+         </form>  
+         </div> -->
         </div>
       </div>
    </form>
@@ -149,17 +146,28 @@
       <div class="results">
         <div class="col-md-4"></div>
         <div class="col-md-4">
-           <table border='1' class="item-list">
+           <table border='1' class="item-list" >
               <thead>
                  <tr>
-                    <th>Products</th>
+                    <th colspan="5">Products</th>
                  </tr>
+                 <tr>
+                    <td>Timestamp</td>
+                    <td>Title</td>
+                    <td>Price</td>
+                    <td>Website</td>
+                    <td>Rating</td>
+               </tr>
               </thead>
               <tbody>
                 
-               {% for row in products %}
+               {% for product in data %}
                <tr>
-                  <td>{{row}}</td>
+                  <td>{{product.timestamp}}</td>
+                  <td><a href={{product.link}} target="_blank">{{product.title}}</a></td>
+                  <td>{{product.price}}</td>
+                  <td>{{product.website}}</td>
+                  <td>{{product.rating}}</td>
                </tr>
 
                {% endfor %}

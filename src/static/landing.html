@@ -6,7 +6,7 @@
 	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 
 	<link rel="stylesheet" href="/static/style.css">
-	<link rel="stylesheet" href="style.css"><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" >
+	<link rel="stylesheet" href="/static/style.css"><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" >
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" ></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
@@ -82,7 +82,7 @@
    </head>
    <body>   
     <h1 id="header"> Welcome to Mini Version of SLASH! </h1>
-    <img src="slash.png" alt="slash" style="width:40%;">
+    <img src="/static/images/slash.png" alt="slash" style="width:40%;">
     <br>
     <br>
     <hr>
@@ -97,7 +97,7 @@
   </div>
 
   <div class="sb-example-1">
-    <form action = "" method = "get">
+    <form action = "/search" method = "get">
       <div class="search">
          <input type="text" name="product_name" class="searchTerm" placeholder="Type here">
          <button type="submit" class="searchButton">

@@ -55,9 +55,9 @@ def sortList(arr, sortBy, reverse):
     """
     if sortBy == "pr":
         return sorted(arr, key=lambda x: getNumbers(x["price"]), reverse=reverse)
-    # To-do: sort by rating
+    # Fix Rating sort
     elif sortBy == "ra":
-        return sorted(arr, key=lambda x: getNumbers(x["rating"]), reverse=reverse)
+        return sorted(arr, key = lambda x:float(x["rating"]), reverse=reverse)
         pass
     return arr
 
@@ -78,6 +78,7 @@ def getNumbers(st):
     """ It extracts float values for the price from a string.
     Ex. it extracts 10.99 from '$10.99' or 'starting at $10.99'
     """
+    st = str(st)
     ans = ''
     for ch in st:
         if (ch >= '0' and ch <= '9') or ch == '.':
