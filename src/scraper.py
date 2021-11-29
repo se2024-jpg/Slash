@@ -51,7 +51,12 @@ def searchAmazon(query, df_flag, currency):
         titles, prices, links = res.select("h2 a span"), res.select("span.a-price span"), res.select("h2 a.a-link-normal")
         ratings = res.select("span.a-icon-alt")
         num_ratings = res.select("span.a-size-base")
-        product = formatter.formatResult("amazon",  titles, prices, links,ratings, num_ratings, df_flag, currency)
+        trending = res.select("span.a-badge-text")
+        if len(trending) > 0:
+            trending = trending[0]
+        else:
+            trending = None
+        product = formatter.formatResult("amazon",  titles, prices, links,ratings, num_ratings, trending, df_flag, currency)
         products.append(product)
     return products
 
@@ -73,7 +78,12 @@ def searchWalmart(query, df_flag, currency):
         titles, prices, links = res.select("span.lh-title"), res.select("div.lh-copy"), res.select("a")
         ratings = res.findAll("span",{"class":"w_DE"},text=pattern)
         num_ratings = res.findAll("span",{"class":"sans-serif gray f7"})
-        product = formatter.formatResult("walmart", titles, prices, links, ratings, num_ratings, df_flag, currency)
+        trending = res.select("span.w_Cs")
+        if len(trending) > 0:
+            trending = trending[0]
+        else:
+            trending = None
+        product = formatter.formatResult("walmart", titles, prices, links, ratings, num_ratings, trending, df_flag, currency)
         products.append(product)
     return products
 
@@ -100,7 +110,12 @@ def searchEtsy(query, df_flag, currency):
         titles, prices = (item.select("h3")), (item.select(".currency-value"))
         ratings = item.select('span.screen-reader-only')
         num_ratings = item.select('span.wt-text-body-01')
-        product = formatter.formatResult("Etsy", titles, prices, links, ratings, num_ratings, df_flag, currency)
+        trending = item.select('span.wt-badge')
+        if len(trending) > 0:
+            trending = trending[0]
+        else:
+            trending = None
+        product = formatter.formatResult("Etsy", titles, prices, links, ratings, num_ratings, trending, df_flag, currency)
         products.append(product)
     return products
 
@@ -124,7 +139,12 @@ def searchGoogleShopping(query, df_flag, currency):
             num_ratings = pattern.findall(str(res.findAll("span")[1]))[0].replace("product reviews", "")
         except:
             num_ratings = 0
-        product = formatter.formatResult("google", titles, prices, links,ratings, int(num_ratings), df_flag, currency)
+        trending = res.select('span.Ib8pOd')
+        if len(trending) > 0:
+            trending = trending[0]
+        else:
+            trending = None        
+        product = formatter.formatResult("google", titles, prices, links,ratings, int(num_ratings), trending, df_flag, currency)
         products.append(product)
     return products
 
@@ -145,7 +165,12 @@ def searchBJs(query, df_flag, currency):
         titles, prices, links = res.select("h2"), res.select("span.price"), res.select("a")
         ratings = res.findAll("span", {"class": "on"})
         num_ratings = 0
-        product = formatter.formatResult("bjs", titles, prices, links, "", num_ratings, df_flag, currency)
+        trending = res.select("p.instantSavings")
+        if len(trending) > 0:
+            trending = trending[0]
+        else:
+            trending = None
+        product = formatter.formatResult("bjs", titles, prices, links, "", num_ratings, trending, df_flag, currency)
         if len(ratings) != 0:
             product["rating"] = len(ratings)
         products.append(product)

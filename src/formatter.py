@@ -19,7 +19,7 @@ from ast import literal_eval
 CURRENCY_URL = "https://api.exchangerate-api.com/v4/latest/usd"
 EXCHANGES = literal_eval(requests.get(CURRENCY_URL).text)
 
-def formatResult(website, titles, prices, links,ratings, num_ratings, df_flag, currency):
+def formatResult(website, titles, prices, links,ratings, num_ratings, trending, df_flag, currency):
     """
     The formatResult function takes the scraped HTML as input, and extracts the 
     necessary values from the HTML code. Ex. extracting a price '$19.99' from
@@ -30,13 +30,14 @@ def formatResult(website, titles, prices, links,ratings, num_ratings, df_flag, c
     Returns: A dictionary of all the parameters stated above for the product
     """
 
-    title, price, link, rating, num_rating, converted_cur = '', '', '', '', '', ''
+    title, price, link, rating, num_rating, converted_cur, trending_stmt = '', '', '', '', '', '', ''
     if titles: title = titles[0].get_text().strip()
     if prices: price = prices[0].get_text().strip()
     if '$' not in price:
         price='$'+price
     if links: link = links[0]['href']
     if ratings: rating = float(ratings[0].get_text().strip().split()[0])
+    if trending: trending_stmt = trending.get_text().strip()
     if num_ratings: 
         if isinstance(num_ratings, int):
             num_rating = num_ratings
@@ -54,6 +55,7 @@ def formatResult(website, titles, prices, links,ratings, num_ratings, df_flag, c
         "website": website,
         "rating" : rating,
         "no of ratings": num_rating,
+        "trending": trending_stmt,
         "converted price": converted_cur
     }
     
