@@ -67,6 +67,8 @@ python slash.py --search socks
 
 💻 Running the UI
 ---
+<p align="center"><img width="700" src="./assets/ui_landing_page.png"></p>
+
 1. Make sure you follow the Installation instructions.
 2. Once Python and project dependencies are installed, ```cd``` into the ```src``` folder. Once in the ```src``` folder, use the ```flask run``` command.
 ```
@@ -75,7 +77,6 @@ cd src
 flask run
 ```
 3. Once flask is running, open your internet browser and type ```http://127.0.0.1:5000/``` into the search bar.
-<p align="center"><img width="700" src="./assets/ui_landing_page.png"></p>
 
 
 :golf: Flags and Command Line Arguments
