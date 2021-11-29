@@ -70,7 +70,7 @@ def searchWalmart(query, df_flag, currency):
     pattern = re.compile(r'out of 5 Stars')
     for res in results:
         titles, prices, links = res.select("span.lh-title"), res.select("div.lh-copy"), res.select("a")
-        ratings = res.findAll("span",{"class":"w_DJ"},text=pattern)
+        ratings = res.findAll("span",{"class":"w_DE"},text=pattern)
         product = formatter.formatResult("walmart", titles, prices, links,ratings, df_flag, currency)
         products.append(product)
     return products
