@@ -199,6 +199,7 @@ def driver(product, currency, num=None, df_flag=0,csv=False,cd=None,ui=False,sor
                 p["link"] = link
 
         if sort != None:
+            result_condensed = pd.DataFrame(result_condensed)
             if sort == "rades":
                 result_condensed = formatter.sortList(result_condensed, "ra", False)
             elif sort == "raasc":
@@ -207,6 +208,7 @@ def driver(product, currency, num=None, df_flag=0,csv=False,cd=None,ui=False,sor
                 result_condensed = formatter.sortList(result_condensed, "pr", False)
             else:
                 result_condensed = formatter.sortList(result_condensed, "pr", True)
+            result_condensed = result_condensed.to_dict(orient='records')
         
         if csv:
             file_name = product + "_" + datetime.now() + ".csv"
