@@ -13,6 +13,11 @@ the required format.
 
 from datetime import datetime
 import math
+import requests
+from ast import literal_eval
+
+CURRENCY_URL = "https://api.exchangerate-api.com/v4/latest/usd"
+EXCHANGES = literal_eval(requests.get(CURRENCY_URL).text)
 
 def formatResult(website, titles, prices, links,ratings,df_flag, currency):
     """
@@ -98,16 +103,16 @@ def getCurrency(currency, price):
     converted_cur = 0.0
     if len(price)>1 :
         if currency == "inr":
-            converted_cur = 75 * int(price[(price.index("$")+1):price.index(".")].replace(",",""))
+            converted_cur = EXCHANGES["rates"]["INR"] * int(price[(price.index("$")+1):price.index(".")].replace(",",""))
         elif currency == "euro":
-            converted_cur = 1.16 * int(price[(price.index("$")+1):price.index(".")].replace(",",""))
+            converted_cur = EXCHANGES["rates"]["EUR"] * int(price[(price.index("$")+1):price.index(".")].replace(",",""))
         elif currency == "aud":
-            converted_cur = 1.34 * int(price[(price.index("$")+1):price.index(".")].replace(",",""))
+            converted_cur = EXCHANGES["rates"]["AUD"] * int(price[(price.index("$")+1):price.index(".")].replace(",",""))
         elif currency == "yuan":
-            converted_cur = 6.40 * int(price[(price.index("$")+1):price.index(".")].replace(",",""))
+            converted_cur = EXCHANGES["rates"]["CNY"] * int(price[(price.index("$")+1):price.index(".")].replace(",",""))
         elif currency == "yen":
-            converted_cur = 114.21 * int(price[(price.index("$")+1):price.index(".")].replace(",",""))
+            converted_cur = EXCHANGES["rates"]["JPY"] * int(price[(price.index("$")+1):price.index(".")].replace(",",""))
         elif currency == "pound":
-            converted_cur = 0.74 * int(price[(price.index("$")+1):price.index(".")].replace(",",""))
-        converted_cur=currency.upper()+' '+str(converted_cur)
+            converted_cur = EXCHANGES["rates"]["GBP"] * int(price[(price.index("$")+1):price.index(".")].replace(",",""))
+        converted_cur=currency.upper()+' '+str(round(converted_cur, 2))
     return converted_cur
