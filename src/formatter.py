@@ -54,11 +54,11 @@ def sortList(arr, sortBy, reverse):
         Returns- Sorted list of the products based on the parameter requested by the user
     """
     if sortBy == "pr":
-        return sorted(arr, key=lambda x: getNumbers(x["price"]), reverse=reverse)
+        return arr.sort_values(key=lambda x: x.apply(lambda y: getNumbers(y)), by=["price"], ascending=False)
     # Fix Rating sort
     elif sortBy == "ra":
-        return sorted(arr, key = lambda x:float(x["rating"]), reverse=reverse)
-        pass
+        arr["rating"] = arr["rating"].apply(lambda x: None if x == '' else float(x))
+        return arr.sort_values(by=["rating"], ascending=False)
     return arr
 
 def formatSearchQuery(query):
@@ -86,7 +86,7 @@ def getNumbers(st):
     try:
         ans = float(ans)
     except:
-        ans = math.inf
+        ans = 0
     return ans
 
 def getCurrency(currency, price):
