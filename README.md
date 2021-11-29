@@ -1,12 +1,12 @@
 <p align="center"><img width="500" src="./assets/slash.png"></p>
 
 ![GitHub](https://img.shields.io/github/license/SEProjGrp5/slash)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5717428.svg)](https://doi.org/10.5281/zenodo.5717428)
+[![DOI](https://zenodo.org/badge/423285546.svg)](https://zenodo.org/badge/latestdoi/423285546)
 ![Github](https://img.shields.io/badge/language-python-red.svg)
-![GitHub issues](https://github.com/TommasU/slash/issues)
-![Github closes issues](https://github.com/TommasU/slash/issues?q=is%3Aissue+is%3Aclosed)
-![Github pull requests](https://github.com/TommasU/slash/pulls)
-![Github closed pull requests](https://github.com/TommasU/slash/pulls?q=is%3Apr+is%3Aclosed)
+![GitHub issues](https://img.shields.io/github/issues-raw/SEProjGrp5/slash)
+![Github closes issues](https://img.shields.io/github/issues-closed-raw/SEProjGrp5/slash)
+![Github pull requests](https://img.shields.io/github/issues-pr/SEProjGrp5/slash)
+![Github closed pull requests](https://img.shields.io/github/issues-pr-closed/SEProjGrp5/slash)
 [![codecov](https://codecov.io/gh/sskarra1234/slash/branch/main/graph/badge.svg?token=JMI26I4YVU)](https://codecov.io/gh/sskarra1234/slash)
 [![Pylint](https://github.com/SEProjGrp5/slash/actions/workflows/pylint.yml/badge.svg?branch=main)](https://github.com/SEProjGrp5/slash/actions/workflows/pylint.yml)
 [![Python Style Checker](https://github.com/SEProjGrp5/slash/actions/workflows/style_checker.yml/badge.svg?branch=main)](https://github.com/SEProjGrp5/slash/actions/workflows/style_checker.yml)
@@ -47,7 +47,7 @@ Slash is a command line tool that scrapes the most popular e-commerce websites t
 ---
 1. Clone the Github repository to a desired location on your computer. You will need [git](https://git-scm.com/) to be preinstalled on your machine. Once the repository is cloned, you will then ```cd``` into the local repository.
 ```
-git clone https://github.com/TommasU/slash.git
+git clone https://github.com/secheaper/slash.git
 cd slash
 ```
 2. This project uses Python 3, so make sure that [Python](https://www.python.org/downloads/) and [Pip](https://pip.pypa.io/en/stable/installation/) are preinstalled. All requirements of the project are listed in the ```requirements.txt``` file. Use pip to install all of those.
@@ -64,6 +64,20 @@ python3 slash.py --search socks
 For Windows
 python slash.py --search socks
 ```
+
+💻 Running the UI
+---
+1. Make sure you follow the Installation instructions.
+2. Once Python and project dependencies are installed, ```cd``` into the ```src``` folder. Once in the ```src``` folder, use the ```flask run``` command.
+```
+cd src
+
+flask run
+```
+3. Once flask is running, open your internet browser and type ```http://127.0.0.1:5000/``` into the search bar.
+<p align="center"><img width="700" src="./assets/ui_landing_page.png"></p>
+
+
 :golf: Flags and Command Line Arguments
 ---
 Currently the tool supports the following flags and command line arguments. These flags and arguments can be used to quickly filter and guide the search to get you the best results very quickly.
@@ -184,24 +198,35 @@ python slash.py --search "socks" --num 5
 14  04/11/2021 13:13:37  Customized Dog Socks - Put Your Cute...   $8.99  www.Etsy.comhttps://www.etsy.com/lis...     Etsy      5
 ```
 
-:dizzy: What's new in Phase 3?
+:dizzy: What's new in Phase 2?
 ---
-#### 1. Multiple Wishlist
-Multiple wishlists are now avaiable per user account featuring ``` 2. Manage Wishlists```
-Feature includes:
+#### 1. Sort by Rating
+```--sort``` accepts the argument "ra" that determine how the tool sorts and filters the requested products
+after scraping on the basis of ratings of the product . 
+Example:
+```
+For Mac
+python3 slash.py --search "philips hue" --sort ra
 
-Display of current wishlists
-```
-----------Wishlists---------
-0        boxes
-1        socks
+For Windows
+python slash.py --search "philips hue" --sort ra
+
 ```
 
-Multiple operations for wishlist handling
 ```
-1. Open Wishlist
-2. Create new Wishlist
-3. Delete Wishlist
+
+           timestamp                                       title    price   website      rating 
+ 0  03/11/2021 21:42:53  Hanes Women's Cool Comfort Ankle Socks, ...  $10.97   walmart         4.2 
+ 1  03/11/2021 21:42:53  Hanes Women's Cool Comfort Crew Socks, 1...  $10.97   walmart         4.2 
+ 2  03/11/2021 21:42:53  Hanes Mens FreshIQ Ankle Cushion Socks, ...  $13.46   walmart         4.2 
+ 3  03/11/2021 21:42:51  10 Pairs Ankle Socks No Show Sock Low-Cu...  $11.95   amazon          4.3 
+ 4  03/11/2021 21:42:50  Mens Cushioned Work Socks 10 Pairs           $12.10   amazon          4.5 
+ 5  03/11/2021 21:42:50  Women's 6-Pack Performance Cotton Cushio...  $17.70   amazon          4.5 
+ 6  03/11/2021 21:42:54  PDF Crikey Crocodile Socks Knit Animal S...  7.50     Etsy            4.5 
+ 7  03/11/2021 21:42:54  5socks /set -  Cotton Women's Socks          16.00    Etsy            5   
+ 8  03/11/2021 21:42:54  Follkee Women's Alpaca Wool Socks Perfec...  18.49    Etsy            5   
+
+
 ```
 
 #### 2.Currency
@@ -402,7 +427,7 @@ File Name: C:\Anant\NCSU\slash_test_csv\socks211104_1223.csv
 
 
 
-:muscle: What's next for Phase 4?
+:muscle: What's next for Phase 3?
 ---
 - Creating ordering and payment functionality for customers to directly order from command line
 - Scrape more e-commerce websites for wider range of options 
@@ -429,13 +454,19 @@ File Name: C:\Anant\NCSU\slash_test_csv\socks211104_1223.csv
 
 
 :sparkles: Contributors
-- [Jessica Vargas(jrvargas)](jrvargas@ncsu.edu) <br> 
-- [Parth Parikh(pmparikh)](pmparikh@ncsu.edu) <br>
-- [Radhika Toravi(rtoravi)](rtoravi@ncsu.edu) <br>
-- [Rushikesh Deodhar(rdeodha)](rdeodha@ncsu.edu) <br>
-- [Saurabh Nanda(snanda)](snanda2@ncsu.edu) <br>
+---
+
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/antgad"><img src="https://avatars.githubusercontent.com/u/37169203?v=4" width="75px;" alt=""/><br /><sub><b>Anant Gadodia</b></sub></a></td>
+    <td align="center"><a href="https://github.com/AnmolikaGoyal"><img src="https://avatars.githubusercontent.com/u/68813421?v=4" width="75px;" alt=""/><br /><sub><b>Anmolika Goyal</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/shubhangij12"><img src="https://avatars.githubusercontent.com/u/48826459?v=4" width="75px;" alt=""/><br /><sub><b>Shubhangi Jain</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/shreyakarra"><img src="https://avatars0.githubusercontent.com/u/89954066?v=4" width="75px;" alt=""/><br /><sub><b>Shreya Karra</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/srujanarao"><img src="https://avatars.githubusercontent.com/u/6882921?v=4" width="75px;" alt=""/><br /><sub><b>Srujana Rao</b></sub></a><br /></td>
+  </tr>
+</table>
 
 :email: Support
-fall2021se@gmail.com.
+---
 
 For any queries and help, please reach out to us at: secheaper@gmail.com
