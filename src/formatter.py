@@ -13,8 +13,13 @@ the required format.
 
 from datetime import datetime
 import math
+import requests
+from ast import literal_eval
 
-def formatResult(website, titles, prices, links,ratings,df_flag, currency):
+CURRENCY_URL = "https://api.exchangerate-api.com/v4/latest/usd"
+EXCHANGES = literal_eval(requests.get(CURRENCY_URL).text)
+
+def formatResult(website, titles, prices, links,ratings, num_ratings, trending, df_flag, currency):
     """
     The formatResult function takes the scraped HTML as input, and extracts the 
     necessary values from the HTML code. Ex. extracting a price '$19.99' from
@@ -25,13 +30,20 @@ def formatResult(website, titles, prices, links,ratings,df_flag, currency):
     Returns: A dictionary of all the parameters stated above for the product
     """
 
-    title, price, link, rating, converted_cur = '', '', '', '', ''
+    title, price, link, rating, num_rating, converted_cur, trending_stmt = '', '', '', '', '', '', ''
     if titles: title = titles[0].get_text().strip()
     if prices: price = prices[0].get_text().strip()
     if '$' not in price:
         price='$'+price
     if links: link = links[0]['href']
     if ratings: rating = float(ratings[0].get_text().strip().split()[0])
+    if trending: trending_stmt = trending.get_text().strip()
+    if num_ratings: 
+        if isinstance(num_ratings, int):
+            num_rating = num_ratings
+        else:
+            num_ratings = num_ratings[0].get_text().replace(")", "").replace("(", "").replace(",", "")
+            num_rating = int(num_ratings.strip())
     #if df_flag==0: title=formatTitle(title)
     #if df_flag==0: link=formatTitle(link)
     if currency: converted_cur = getCurrency(currency, price)
@@ -42,6 +54,8 @@ def formatResult(website, titles, prices, links,ratings,df_flag, currency):
         "link":f'www.{website}.com{link}', 
         "website": website,
         "rating" : rating,
+        "no of ratings": num_rating,
+        "trending": trending_stmt,
         "converted price": converted_cur
     }
     
@@ -54,11 +68,11 @@ def sortList(arr, sortBy, reverse):
         Returns- Sorted list of the products based on the parameter requested by the user
     """
     if sortBy == "pr":
-        return sorted(arr, key=lambda x: getNumbers(x["price"]), reverse=reverse)
-    # To-do: sort by rating
+        return arr.sort_values(key=lambda x: x.apply(lambda y: getNumbers(y)), by=["price"], ascending=False)
+    # Fix Rating sort
     elif sortBy == "ra":
-        return sorted(arr, key=lambda x: getNumbers(x["rating"]), reverse=reverse)
-        pass
+        arr["rating"] = arr["rating"].apply(lambda x: None if x == '' else float(x))
+        return arr.sort_values(by=["rating"], ascending=False)
     return arr
 
 def formatSearchQuery(query):
@@ -78,6 +92,7 @@ def getNumbers(st):
     """ It extracts float values for the price from a string.
     Ex. it extracts 10.99 from '$10.99' or 'starting at $10.99'
     """
+    st = str(st)
     ans = ''
     for ch in st:
         if (ch >= '0' and ch <= '9') or ch == '.':
@@ -85,7 +100,7 @@ def getNumbers(st):
     try:
         ans = float(ans)
     except:
-        ans = math.inf
+        ans = 0
     return ans
 
 def getCurrency(currency, price):
@@ -97,16 +112,16 @@ def getCurrency(currency, price):
     converted_cur = 0.0
     if len(price)>1 :
         if currency == "inr":
-            converted_cur = 75 * int(price[(price.index("$")+1):price.index(".")].replace(",",""))
+            converted_cur = EXCHANGES["rates"]["INR"] * int(price[(price.index("$")+1):price.index(".")].replace(",",""))
         elif currency == "euro":
-            converted_cur = 1.16 * int(price[(price.index("$")+1):price.index(".")].replace(",",""))
+            converted_cur = EXCHANGES["rates"]["EUR"] * int(price[(price.index("$")+1):price.index(".")].replace(",",""))
         elif currency == "aud":
-            converted_cur = 1.34 * int(price[(price.index("$")+1):price.index(".")].replace(",",""))
+            converted_cur = EXCHANGES["rates"]["AUD"] * int(price[(price.index("$")+1):price.index(".")].replace(",",""))
         elif currency == "yuan":
-            converted_cur = 6.40 * int(price[(price.index("$")+1):price.index(".")].replace(",",""))
+            converted_cur = EXCHANGES["rates"]["CNY"] * int(price[(price.index("$")+1):price.index(".")].replace(",",""))
         elif currency == "yen":
-            converted_cur = 114.21 * int(price[(price.index("$")+1):price.index(".")].replace(",",""))
+            converted_cur = EXCHANGES["rates"]["JPY"] * int(price[(price.index("$")+1):price.index(".")].replace(",",""))
         elif currency == "pound":
-            converted_cur = 0.74 * int(price[(price.index("$")+1):price.index(".")].replace(",",""))
-        converted_cur=currency.upper()+' '+str(converted_cur)
+            converted_cur = EXCHANGES["rates"]["GBP"] * int(price[(price.index("$")+1):price.index(".")].replace(",",""))
+        converted_cur=currency.upper()+' '+str(round(converted_cur, 2))
     return converted_cur

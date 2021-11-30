@@ -50,9 +50,16 @@ def searchAmazon(query, df_flag, currency):
     for res in results:
         titles, prices, links = res.select("h2 a span"), res.select("span.a-price span"), res.select("h2 a.a-link-normal")
         ratings = res.select("span.a-icon-alt")
-        product = formatter.formatResult("amazon",  titles, prices, links,ratings, df_flag, currency)
+        num_ratings = res.select("span.a-size-base")
+        trending = res.select("span.a-badge-text")
+        if len(trending) > 0:
+            trending = trending[0]
+        else:
+            trending = None
+        product = formatter.formatResult("amazon",  titles, prices, links,ratings, num_ratings, trending, df_flag, currency)
         products.append(product)
     return products
+
 
 def searchWalmart(query, df_flag, currency):
     """
@@ -69,10 +76,17 @@ def searchWalmart(query, df_flag, currency):
     pattern = re.compile(r'out of 5 Stars')
     for res in results:
         titles, prices, links = res.select("span.lh-title"), res.select("div.lh-copy"), res.select("a")
-        ratings = res.findAll("span",{"class":"w_DJ"},text=pattern)
-        product = formatter.formatResult("walmart", titles, prices, links,ratings, df_flag, currency)
+        ratings = res.findAll("span",{"class":"w_DE"},text=pattern)
+        num_ratings = res.findAll("span",{"class":"sans-serif gray f7"})
+        trending = res.select("span.w_Cs")
+        if len(trending) > 0:
+            trending = trending[0]
+        else:
+            trending = None
+        product = formatter.formatResult("walmart", titles, prices, links, ratings, num_ratings, trending, df_flag, currency)
         products.append(product)
     return products
+
 
 def searchEtsy(query, df_flag, currency):
     """
@@ -95,27 +109,143 @@ def searchEtsy(query, df_flag, currency):
             links = str
         titles, prices = (item.select("h3")), (item.select(".currency-value"))
         ratings = item.select('span.screen-reader-only')
-        product = formatter.formatResult("Etsy", titles, prices, links, ratings, df_flag, currency)
+        num_ratings = item.select('span.wt-text-body-01')
+        trending = item.select('span.wt-badge')
+        if len(trending) > 0:
+            trending = trending[0]
+        else:
+            trending = None
+        product = formatter.formatResult("Etsy", titles, prices, links, ratings, num_ratings, trending, df_flag, currency)
         products.append(product)
     return products
 
-def driver(product, currency, num=None, df_flag=0,csv=False,cd=None):
+
+def searchGoogleShopping(query, df_flag, currency):
+    """
+    The searchGoogleShopping function scrapes https://shopping.google.com/
+    Parameters: query- search query for the product, df_flag- flag variable, currency- currency type entered by the user
+    Returns a list of items available on walmart.com that match the product entered by the user
+    """
+    query = formatter.formatSearchQuery(query)
+    URL = f'https://www.google.com/search?tbm=shop&q={query}'
+    page = httpsGet(URL)
+    results = page.findAll("div", {"class": "sh-dgr__grid-result"})
+    products = []
+    pattern = re.compile(r'[0-9]+ product reviews')
+    for res in results:
+        titles, prices, links = res.select("h4"), res.select("span.a8Pemb"), res.select("a")
+        ratings = res.findAll("span", {"class":"Rsc7Yb"})
+        try:
+            num_ratings = pattern.findall(str(res.findAll("span")[1]))[0].replace("product reviews", "")
+        except:
+            num_ratings = 0
+        trending = res.select('span.Ib8pOd')
+        if len(trending) > 0:
+            trending = trending[0]
+        else:
+            trending = None        
+        product = formatter.formatResult("google", titles, prices, links,ratings, int(num_ratings), trending, df_flag, currency)
+        products.append(product)
+    return products
+
+
+def searchBJs(query, df_flag, currency):
+    """
+    The searchBJs function scrapes https://www.bjs.com/
+    Parameters: query- search query for the product, df_flag- flag variable, currency- currency type entered by the user
+    Returns a list of items available on walmart.com that match the product entered by the user
+    """
+    query = formatter.formatSearchQuery(query)
+    URL = f'https://www.bjs.com/search/{query}'
+    page = httpsGet(URL)
+    results = page.findAll("div", {"class": "product"})
+    #print(results)
+    products = []
+    for res in results:
+        titles, prices, links = res.select("h2"), res.select("span.price"), res.select("a")
+        ratings = res.findAll("span", {"class": "on"})
+        num_ratings = 0
+        trending = res.select("p.instantSavings")
+        if len(trending) > 0:
+            trending = trending[0]
+        else:
+            trending = None
+        product = formatter.formatResult("bjs", titles, prices, links, "", num_ratings, trending, df_flag, currency)
+        if len(ratings) != 0:
+            product["rating"] = len(ratings)
+        products.append(product)
+    return products
+
+
+def condense_helper(result_condensed, list, num):
+    ''' This is a helper function to limit number of entries in the result '''
+    for p in list:
+        if num != None and len(result_condensed) >= int(num):
+            break
+        else:
+            if p["title"] != None and p["title"] != "":
+                result_condensed.append(p)
+
+def driver(product, currency, num=None, df_flag=0,csv=False,cd=None,ui=False,sort=None):
     ''' Returns csv is the user enters the --csv arg, 
     else will display the result table in the terminal based on the args entered by the user '''
     
     products_1 = searchAmazon(product,df_flag, currency)
     products_2 = searchWalmart(product,df_flag, currency)
     products_3 = searchEtsy(product,df_flag, currency)
-    results=products_1+products_2+products_3
-    result_condensed=products_1[:num]+products_2[:num]+products_3[:num]
-    result_condensed=pd.DataFrame.from_dict(result_condensed,orient='columns')
-    results =pd.DataFrame.from_dict(results, orient='columns')
-    if currency=="" or currency==None:
-        results=results.drop(columns='converted price')
-        result_condensed=result_condensed.drop(columns='converted price')
-    if csv==True:
-        file_name=os.path.join(cd,(product+datetime.now().strftime("%y%m%d_%H%M")+".csv"))
-        print("CSV Saved at: ",cd)
-        print("File Name:", file_name)
-        results.to_csv(file_name, index=False,header=results.columns)
+    products_4 = searchGoogleShopping(product,df_flag, currency)
+    products_5 = searchBJs(product,df_flag, currency)
+    result_condensed = ''
+    if not ui:
+        results=products_1+products_2+products_3+products_4+products_5
+        result_condensed=products_1[:num]+products_2[:num]+products_3[:num]+products_4[:num]+products_5[:num]
+        result_condensed=pd.DataFrame.from_dict(result_condensed,orient='columns')
+        results =pd.DataFrame.from_dict(results, orient='columns')
+        if currency=="" or currency==None:
+            results=results.drop(columns='converted price')
+            result_condensed=result_condensed.drop(columns='converted price')
+        if csv==True:
+            file_name=os.path.join(cd,(product+datetime.now().strftime("%y%m%d_%H%M")+".csv"))
+            print("CSV Saved at: ",cd)
+            print("File Name:", file_name)
+            results.to_csv(file_name, index=False,header=results.columns)
+    else:
+        result_condensed = []
+        condense_helper(result_condensed, products_1, num)
+        condense_helper(result_condensed, products_2, num)
+        condense_helper(result_condensed, products_3, num)
+        condense_helper(result_condensed, products_4, num)
+        condense_helper(result_condensed, products_5, num)
+
+        if currency != None:
+            for p in result_condensed:
+                p["price"] = formatter.getCurrency(currency, p["price"])
+        
+        # Fix URLs so that they contain http before www
+        # TODO Fix issue with Etsy links -> For some reason they have www.Etsy.com prepended to the begining of the link
+        for p in result_condensed:
+            link = p["link"]
+            if p["website"] == "Etsy":
+                link = link[12:]
+                p["link"] = link
+            elif "http" not in link:
+                link = "http://" + link
+                p["link"] = link
+
+        if sort != None:
+            result_condensed = pd.DataFrame(result_condensed)
+            if sort == "rades":
+                result_condensed = formatter.sortList(result_condensed, "ra", False)
+            elif sort == "raasc":
+                result_condensed = formatter.sortList(result_condensed, "ra", True)
+            elif sort == "pasc":
+                result_condensed = formatter.sortList(result_condensed, "pr", False)
+            else:
+                result_condensed = formatter.sortList(result_condensed, "pr", True)
+            result_condensed = result_condensed.to_dict(orient='records')
+        
+        if csv:
+            file_name = product + "_" + datetime.now() + ".csv"
+            result_condensed = result_condensed.to_csv(file_name, index=False,header=results.columns)
+            print(result_condensed)
     return result_condensed
