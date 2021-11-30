@@ -10,19 +10,21 @@
 [![Pylint](https://github.com/SEProjGrp5/slash/actions/workflows/pylint.yml/badge.svg?branch=main)](https://github.com/TommasU/slash/actions/workflows/pylint.yml)
 [![Python Style Checker](https://github.com/SEProjGrp5/slash/actions/workflows/style_checker.yml/badge.svg?branch=main)](https://github.com/TommasU/slash/actions/workflows/style_checker.yml)
 
-Slash is a command line tool that scrapes the most popular e-commerce websites to get the best deals on the searched items across these websites. 
+Slash is a tool that scrapes the most popular e-commerce websites to get the best deals on searched items across these websites. 
 - **Fast**: With slash, you can save over 50% of your time by comparing deals across websites within seconds
 - **Easy**: Slash uses very easy commands to filter, sort and search your items
 - **Powerful**: Quickly alter the commands to get desired results
+<p align="center">
+Checkout our newest Features! Mini Version and Full version now showcasing new sets of improvements and additions.
 
 <p align="center">
   <a href="#rocket-installation">Installation</a>
   ::
   <a href="#golf-flags-and-command-line-arguments">Flags & Args</a>
   ::
-  <a href="#dizzy-whats-new-in-phase-2"> Whats new in Phase 2? </a>
+  <a href="#dizzy-whats-new-in-phase-2"> Whats new in Phase 3? </a>
   ::
-  <a href="#muscle-whats-next-for-phase-3"> What's next for Phase 3? </a>
+  <a href="#muscle-whats-next-for-phase-3"> The future of Slash </a>
   ::
   <a href="#card_index_dividers-some-examples">Examples</a>
   ::
@@ -36,27 +38,32 @@ Slash is a command line tool that scrapes the most popular e-commerce websites t
   
 </p>
 
----
-
-<p align="center"><img width="700" src="./assets/demo.gif"></p>
-
----
 
 :rocket: Installation
 ---
-1. Clone the Github repository to a desired location on your computer. You will need [git](https://git-scm.com/) to be preinstalled on your machine. Once the repository is cloned, you will then ```cd``` into the local repository.
+1. Access the Github repository from your computer. 
+ - First, pre-install [git](https://git-scm.com/) on  your machine. 
+ - Then, clone the following repo:
+ ```
+ https://github.com/TommasU/slash.git
+ ```
+ * Finally, ```cd``` into the local repository.
 ```
-git clone https://github.com/secheaper/slash.git
 cd slash
 ```
-2. This project uses Python 3, so make sure that [Python](https://www.python.org/downloads/) and [Pip](https://pip.pypa.io/en/stable/installation/) are preinstalled. All requirements of the project are listed in the ```requirements.txt``` file. Use pip to install all of those.
+2. Install the ```requirements.txt```. 
+- This project uses Python 3, so make sure that [Python](https://www.python.org/downloads/) and [Pip](https://pip.pypa.io/en/stable/installation/) are preinstalled.
+- Install the ```requirements.txt``` file using pip.
 ```
 pip3 install -r requirements.txt
 ```
-4. Once all the requirements are installed, you will have to ```cd``` into the ```src``` folder. Once in the ```src``` folder, use the python command to run the ```slash.py``` file.
+3. Running the program
+- ```cd``` into the ```src``` folder. 
+``` 
+cd src 
 ```
-cd src
-
+- Use the python command to run the ```slash.py``` file.
+```
 For Mac
 python3 slash.py --search socks
 
@@ -64,22 +71,29 @@ For Windows
 python slash.py --search socks
 ```
 
-💻 Running the UI
----
-<p align="center"><img width="700" src="./assets/ui_landing_page.png"></p>
+<p>
+💻 Running the UI 
 
-1. Make sure you follow the Installation instructions.
-2. Once Python and project dependencies are installed, ```cd``` into the ```src``` folder. Once in the ```src``` folder, use the ```flask run``` command.
+---
+<p align="center"><img width="700" src="./assets/slash.gif"></p>
+
+1. After completing the <a href="#rocket-installation">Installation</a> and all project dependencies are installed. 
+
+2. Make sure you ```cd``` into the ```src``` folder. 
+3. Use the ```flask run``` command.
 ```
 cd src
 
 flask run
 ```
-3. Once flask is running, open your internet browser and type ```http://127.0.0.1:5000/``` into the search bar.
+4. Once flask is running, open your internet browser and type ```http://127.0.0.1:5000/``` into the search bar.
+
 
 
 :golf: Flags and Command Line Arguments
 ---
+Full Version Featuers:
+
 Currently the tool supports the following flags and command line arguments. These flags and arguments can be used to quickly filter and guide the search to get you the best results very quickly.
 
 | Arguments | Type | Default | Description                                                                                  |
@@ -198,7 +212,7 @@ python slash.py --search "socks" --num 5
 14  04/11/2021 13:13:37  Customized Dog Socks - Put Your Cute...   $8.99  www.Etsy.comhttps://www.etsy.com/lis...     Etsy      5
 ```
 
-:dizzy: What's new in Phase 2?
+:dizzy: What's new in Phase 3?
 ---
 #### 1. Sort by Rating
 ```--sort``` accepts the argument "ra" that determine how the tool sorts and filters the requested products
@@ -427,15 +441,11 @@ File Name: C:\Anant\NCSU\slash_test_csv\socks211104_1223.csv
 
 
 
-:muscle: What's next for Phase 3?
+:muscle: What's next for future development?
 ---
 - Creating ordering and payment functionality for customers to directly order from command line
-- Scrape more e-commerce websites for wider range of options 
-- Add more parameters such as delivery days to get more information about the product 
-- Add functionality to store multiple wishlists from the output generated using the search query 
-- Add functionality to edit, delete, rename wishlists 
-- Add interactive user interface 
-- Add real time dynamic currency converters for different currencies all around the world
+- Create an advanced user interface for full version of the program.
+
 
 :thought_balloon: Use Case
 ---
