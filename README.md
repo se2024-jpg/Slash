@@ -15,7 +15,7 @@ Slash is a tool that scrapes the most popular e-commerce websites to get the bes
 - **Easy**: Slash uses very easy commands to filter, sort and search your items
 - **Powerful**: Quickly alter the commands to get desired results
 <p align="center">
-Checkout our newest Features! Mini Version and Full version now showcasing new sets of improvements and additions.
+Checkout our newest Features! Mini Version and Full version now showcasing new sets of improvements.
 
 <p align="center">
   <a href="#rocket-installation">Installation</a>
@@ -39,8 +39,8 @@ Checkout our newest Features! Mini Version and Full version now showcasing new s
 </p>
 
 
-:rocket: Installation
----
+# :rocket: Installation
+
 1. Access the Github repository from your computer. 
  - First, pre-install [git](https://git-scm.com/) on  your machine. 
  - Then, clone the following repo:
@@ -70,12 +70,29 @@ python3 slash.py --search socks
 For Windows
 python slash.py --search socks
 ```
-
 <p>
-💻 Running the UI 
 
----
+
+# :dizzy: What's new in Phase 3?
+
+
+## :computer: User Friendly UI
+
+
+Now featuring a friendly user interface for the Mini Version of SLASH including the best of a search bar and easy to read results. Interface provides options to 
+- Sort results
+- Change currency displayed
+- Filter number of items displayed
+- Prices
+- Product link
+- Timestamps for up to date results
+- Ratings
 <p align="center"><img width="700" src="./assets/slash.gif"></p>
+
+
+### :key: Accesing Mini Version UI
+
+
 
 1. After completing the <a href="#rocket-installation">Installation</a> and all project dependencies are installed. 
 
@@ -89,12 +106,51 @@ flask run
 4. Once flask is running, open your internet browser and type ```http://127.0.0.1:5000/``` into the search bar.
 
 
+### :money_with_wings: UI Features
 
-:golf: Flags and Command Line Arguments
+
+1. SORTING: Based on rating or price.
+2. CURRENCY: View prices in the currency of your choice.
+3. RESULTS: Narrow your search based on Result Length.
+
+<p align="center"><img width="150.1" src="./assets/sorting.PNG"><img width="130" src="./assets/currency.PNG"><img width="150.2" src="./assets/results.PNG"></p>
+
+<p align="center">
+Easy to view and access results
+<p align="center"><img width="800" src="./assets/list.PNG"></p>
+
+## :computer: Advanced Wishlists
+
+
+Now featuring advanced wishlists in the Full Version of SLASH. For the best shopping experience now you can add, edit and delete wishlists with simple commands and flexiblity. Wishlist features include
+- Adding new lists with custom names
+- Display all available wishlists
+- Add items to different wishlist during a search session
+
+### :key: Accesing the Full Version SLASH
+
+1. After completing the <a href="#rocket-installation">Installation</a> and all project dependencies are installed. 
+
+2. Make sure you ```cd``` into the ```src``` folder. 
+3. Use the ```slash.py --full T``` command.
+```
+python slash.py --full T
+```
+
+### :money_with_wings: Wishlist Features
+
+<p align="center"><img width="220" src="./assets/full_intro.PNG"><img width="200" src="./assets/wishlist.PNG"></p>
+
+
+## :computer: More websites, More results, More shopping
+
+Now featuring results from Amazon, Walmart, Etsy, Google.
+
+# :golf: The Basics, Flags  & Arguments 
 ---
-Full Version Featuers:
+Full Version Features:
 
-Currently the tool supports the following flags and command line arguments. These flags and arguments can be used to quickly filter and guide the search to get you the best results very quickly.
+The tool supports the following flags and command line arguments. These flags and arguments can be used to quickly filter and guide the search to get you the best results very quickly.
 
 | Arguments | Type | Default | Description                                                                                  |
 |-----------|------|---------|----------------------------------------------------------------------------------------------|
@@ -122,16 +178,11 @@ For Windows
 python slash.py --search "socks"
 ```
 ```
-             timestamp                                    title   price                                     link  website rating
-0  04/11/2021 13:09:36  CelerSport Ankle Athletic Running So...  $12.70  www.amazon.com/gp/slredirect/picasso...   amazon    4.8
-1  04/11/2021 13:09:36  CelerSport 6 Pack Men's Ankle Socks ...  $15.95  www.amazon.com/gp/slredirect/picasso...   amazon    4.7
-2  04/11/2021 13:09:36  Men's Athletic Ankle Socks 8 Pairs T...  $22.99  www.amazon.com/gp/slredirect/picasso...   amazon    4.6
-3  04/11/2021 13:09:39  Hanes Women's Cool Comfort Ankle Soc...  $10.97  www.walmart.com/ip/Hanes-Women-s-Coo...  walmart    4.2
-4  04/11/2021 13:09:39  Hanes Women's Cool Comfort Crew Sock...  $10.97  www.walmart.com/ip/Hanes-Women-s-Coo...  walmart    4.2
-5  04/11/2021 13:09:39  AND1 Men's Cushion No Show Socks, 12...  $11.47  www.walmart.comhttps://wrd.walmart.c...  walmart    4.6
-6  04/11/2021 13:09:40  Follkee Women's Alpaca Wool Socks Pe...  $18.49  www.Etsy.comhttps://www.etsy.com/lis...     Etsy      5
-7  04/11/2021 13:09:40  Alpaca Socks | GoWith 2 Pairs Cozy W...  $19.99  www.Etsy.comhttps://www.etsy.com/lis...     Etsy      5
-8  04/11/2021 13:09:40                  Great White Shark Socks  $11.95  www.Etsy.comhttps://www.etsy.com/lis...     Etsy      5
+            timestamp                                    title        price                                     link  website  rating  no of ratings            trending
+0    30/11/2021 15:20:42  Bedsure Sherpa Fleece Throw Blanket ...       $21.24  www.amazon.com/gp/slredirect/picasso...   amazon     4.7        55165.0         Best Seller  
+2    30/11/2021 15:20:42  Quility Weighted Blanket with Soft C...       $79.99  www.amazon.com/gp/slredirect/picasso...   amazon     4.7        39501.0         Best Seller  
+4    30/11/2021 15:20:42  Eddie Bauer Home Plush Sherpa Fleece...       $21.59  www.amazon.com/Eddie-Bauer-Cabin-Fla...   amazon     4.7         6985.0  Holiday Gift Guide  
+
 ```
 
 #### 2. Sorting
@@ -153,10 +204,6 @@ python slash.py --search "socks" --sort ra
  3  03/11/2021 21:42:51  10 Pairs Ankle Socks No Show Sock Low-Cu...  $11.95   amazon          4.3 
  4  03/11/2021 21:42:50  Mens Cushioned Work Socks 10 Pairs           $12.10   amazon          4.5 
  5  03/11/2021 21:42:50  Women's 6-Pack Performance Cotton Cushio...  $17.70   amazon          4.5 
- 6  03/11/2021 21:42:54  PDF Crikey Crocodile Socks Knit Animal S...  7.50     Etsy            4.5 
- 7  03/11/2021 21:42:54  5socks /set -  Cotton Women's Socks          16.00    Etsy            5   
- 8  03/11/2021 21:42:54  Follkee Women's Alpaca Wool Socks Perfec...  18.49    Etsy            5   
-
 ```
 #### 3. Sort Order
 The ```--des``` flag can be set to sort the requested products in a non-increasing order. This flag will be 
@@ -201,20 +248,11 @@ python slash.py --search "socks" --num 5
 3   04/11/2021 13:13:33  CelerSport 6 Pack Men's Athletic Cre...  $18.95  www.amazon.com/gp/slredirect/picasso...   amazon    4.6
 4   04/11/2021 13:13:33    Women's 10-Pair Value Pack Crew Socks   $8.79  www.amazon.com/Hanes-Womens-Crew-Whi...   amazon    4.7
 5   04/11/2021 13:13:36  Hanes Women's Cool Comfort Ankle Soc...  $10.97  www.walmart.com/ip/Hanes-Women-s-Coo...  walmart    4.2
-6   04/11/2021 13:13:36  Hanes Women's Cool Comfort Crew Sock...  $10.97  www.walmart.com/ip/Hanes-Women-s-Coo...  walmart    4.2
-7   04/11/2021 13:13:36  AND1 Men's Cushion No Show Socks, 12...  $11.47  www.walmart.comhttps://wrd.walmart.c...  walmart    4.6
-8   04/11/2021 13:13:36  Gildan Adult Men's Performance Cotto...  $10.00  www.walmart.comhttps://wrd.walmart.c...  walmart    4.3
-9   04/11/2021 13:13:36  Hanes Women's Cool Comfort No Show S...  $10.97  www.walmart.com/ip/Hanes-Women-s-Coo...  walmart    4.4
-10  04/11/2021 13:13:37  Follkee Women's Alpaca Wool Socks Pe...  $18.49  www.Etsy.comhttps://www.etsy.com/lis...     Etsy      5
-11  04/11/2021 13:13:37  Alpaca Socks | GoWith 2 Pairs Cozy W...  $19.99  www.Etsy.comhttps://www.etsy.com/lis...     Etsy      5
-12  04/11/2021 13:13:37                  Great White Shark Socks  $11.95  www.Etsy.comhttps://www.etsy.com/lis...     Etsy      5
-13  04/11/2021 13:13:37  Miss June’s| 1 Pair Cashmere Wool bl...  $15.00  www.Etsy.comhttps://www.etsy.com/lis...     Etsy      5
-14  04/11/2021 13:13:37  Customized Dog Socks - Put Your Cute...   $8.99  www.Etsy.comhttps://www.etsy.com/lis...     Etsy      5
+
 ```
 
-:dizzy: What's new in Phase 3?
----
-#### 1. Sort by Rating
+
+#### 5. Sort by Rating
 ```--sort``` accepts the argument "ra" that determine how the tool sorts and filters the requested products
 after scraping on the basis of ratings of the product . 
 Example:
@@ -236,14 +274,12 @@ python slash.py --search "philips hue" --sort ra
  3  03/11/2021 21:42:51  10 Pairs Ankle Socks No Show Sock Low-Cu...  $11.95   amazon          4.3 
  4  03/11/2021 21:42:50  Mens Cushioned Work Socks 10 Pairs           $12.10   amazon          4.5 
  5  03/11/2021 21:42:50  Women's 6-Pack Performance Cotton Cushio...  $17.70   amazon          4.5 
- 6  03/11/2021 21:42:54  PDF Crikey Crocodile Socks Knit Animal S...  7.50     Etsy            4.5 
- 7  03/11/2021 21:42:54  5socks /set -  Cotton Women's Socks          16.00    Etsy            5   
- 8  03/11/2021 21:42:54  Follkee Women's Alpaca Wool Socks Perfec...  18.49    Etsy            5   
+
 
 
 ```
 
-#### 2.Currency
+#### 6.Currency
 ```--currency``` provides nasic currency conversion for different currencies like INR, EURO, AUD, YUAN, YEN and POUND.
 
 Example:
@@ -259,21 +295,15 @@ python slash.py --search "socks" --currency "inr"
 ![image](https://user-images.githubusercontent.com/48826459/140242430-0d7d2707-095a-4a2d-86a7-c5e91b88d725.png)
 
 
-#### 3. Added new e-commerce site - ETSY
-A new e-commerce site 'Etsy' has been added in this project. Information such as the product type, product name, price, ratings, etc. has been scraped from the website.
-
-Example:
-
-![image](https://user-images.githubusercontent.com/48826459/140245385-00359c50-4e89-46ff-866d-26a5879d43d4.png)
 
 
 
-#### 4. Main Menu 
+#### 7. Main Menu 
 ```--full``` command is used to display the complete menu for the project. If the argument passed is "T", the Full version of the app will be displayed. If the argument passed is "F", the mini version of the app is displayed.
 
 Example:
 
-##### 1) When argument "F" is passed : 
+##### 7.1) When argument "F" is passed : 
 ```
 For Mac
 python3 slash.py --search "socks" --full "F"
@@ -289,13 +319,10 @@ python slash.py --search "socks" --full "F"
 2  04/11/2021 16:10:02  CelerSport 6 Pack Women's Ankle Runn...  $15.99  www.amazon.com/gp/slredirect/picasso...   amazon    4.8
 3  04/11/2021 16:10:05  Hanes Women's Cool Comfort Ankle Soc...  $10.97  www.walmart.com/ip/Hanes-Women-s-Coo...  walmart    4.2
 4  04/11/2021 16:10:05  Hanes Women's Cool Comfort Crew Sock...  $10.97  www.walmart.com/ip/Hanes-Women-s-Coo...  walmart    4.2
-5  04/11/2021 16:10:05  AND1 Men's Cushion No Show Socks, 12...  $11.47  www.walmart.comhttps://wrd.walmart.c...  walmart    4.6
-6  04/11/2021 16:10:06  Follkee Women's Alpaca Wool Socks Pe...  $18.49  www.Etsy.comhttps://www.etsy.com/lis...     Etsy      5
-7  04/11/2021 16:10:06  Alpaca Socks | GoWith 2 Pairs Cozy W...  $19.99  www.Etsy.comhttps://www.etsy.com/lis...     Etsy      5
-8  04/11/2021 16:10:06                  Great White Shark Socks  $11.95  www.Etsy.comhttps://www.etsy.com/lis...     Etsy      5
+
 ```
 
-##### 2) When argument "T" is passed :
+##### 7.2) When argument "T" is passed :
 ```
 For Mac
 python3 slash.py --search "socks" --full "T"
@@ -320,7 +347,7 @@ Select from following:
 3. See Currency Conversion
 4. Exit
 ```
-##### 2.b) If the user inputs 1 i.e. Search new product, the command ```--search``` will be used. The product which the user wishes to search for needs to be entered. 
+##### 7.3) If the user inputs 1 i.e. Search new product, the command ```--search``` will be used. The product which the user wishes to search for needs to be entered. 
 
 
 ```
@@ -334,34 +361,7 @@ Enter name of product to Search: socks
 2    04/11/2021 12:24:24  Men's 6 Pack Everyday Kit Cushioned ...      $12.99  www.amazon.com/gp/slredirect/picasso...   amazon    4.6
 3    04/11/2021 12:24:24  Compression Athletic Crew Socks (6 P...      $19.99  www.amazon.com/gp/slredirect/picasso...   amazon    4.4
 4    04/11/2021 12:24:24    Women's 10-Pair Value Pack Crew Socks       $8.79  www.amazon.com/Hanes-Womens-Crew-Whi...   amazon    4.7
-5    04/11/2021 12:24:24  Men's Dri-tech Moisture Control Crew...      $14.99  www.amazon.com/Dickies-Multi-Pack-Dr...   amazon    4.7
-6    04/11/2021 12:24:24  Women's Performance Heel Tab Athleti...      $14.99  www.amazon.com/Saucony-Womens-Perfor...   amazon    4.8
-7    04/11/2021 12:24:24       Mens Cushioned Work Socks 10 Pairs      $12.10  www.amazon.com/Fruit-Loom-Everyday-S...   amazon    4.5
-8    04/11/2021 12:24:24  CelerSport Ankle Athletic Running So...      $12.70  www.amazon.com/CelerSport-Ankle-Athl...   amazon    4.8
-9    04/11/2021 12:24:24  mens Dual Defense Cushioned Socks - ...      $11.97  www.amazon.com/Fruit-Loom-Cushion-De...   amazon    4.7
-10   04/11/2021 12:24:24  mens Athletic Cushioned Crew Socks (...      $18.99  www.amazon.com/adidas-Mens-Athletic-...   amazon    4.7
-11   04/11/2021 12:24:25  Hanes Women's Cool Comfort Ankle Soc...      $10.97  www.walmart.com/ip/Hanes-Women-s-Coo...  walmart    4.2
-12   04/11/2021 12:24:25  Hanes Women's Cool Comfort Crew Sock...      $10.97  www.walmart.com/ip/Hanes-Women-s-Coo...  walmart    4.2
-13   04/11/2021 12:24:25  AND1 Men's Cushion No Show Socks, 12...      $11.47  www.walmart.comhttps://wrd.walmart.c...  walmart    4.6
-14   04/11/2021 12:24:25  Gildan Adult Men's Performance Cotto...      $10.00  www.walmart.comhttps://wrd.walmart.c...  walmart    4.3
-15   04/11/2021 12:24:25  Hanes Women's Cool Comfort No Show S...      $10.97  www.walmart.com/ip/Hanes-Women-s-Coo...  walmart    4.4
-16   04/11/2021 12:24:25  Avia Women's Performance Flatknit Lo...       $9.97  www.walmart.com/ip/Avia-Women-s-Perf...  walmart      5
-17   04/11/2021 12:24:25  Athletic Works Men's Ankle Socks 12 ...       $9.97  www.walmart.com/ip/Athletic-Works-Me...  walmart    4.4
-18   04/11/2021 12:24:25  Athletic Works Men's Crew Socks 12 Pack       $9.97  www.walmart.com/ip/Athletic-Works-Me...  walmart    4.5
-19   04/11/2021 12:24:25  Hanes Women's Cool Comfort Sport Ank...  From $8.97  www.walmart.com/ip/Hanes-Women-s-Com...  walmart    4.5
-20   04/11/2021 12:24:25  Hanes Women's Cool Comfort No Show S...  From $5.99  www.walmart.com/ip/Hanes-Women-s-Com...  walmart    4.5
-21   04/11/2021 12:24:26  Follkee Women's Alpaca Wool Socks Pe...      $18.49  www.Etsy.comhttps://www.etsy.com/lis...     Etsy      5
-22   04/11/2021 12:24:26  Alpaca Socks | GoWith 2 Pairs Cozy W...      $19.99  www.Etsy.comhttps://www.etsy.com/lis...     Etsy      5
-23   04/11/2021 12:24:26                  Great White Shark Socks      $11.95  www.Etsy.comhttps://www.etsy.com/lis...     Etsy      5
-24   04/11/2021 12:24:26  Miss June’s| 1 Pair Cashmere Wool bl...      $15.00  www.Etsy.comhttps://www.etsy.com/lis...     Etsy      5
-25   04/11/2021 12:24:26  Custom Face Socks w Text, Personaliz...       $7.99  www.Etsy.comhttps://www.etsy.com/lis...     Etsy      5
-26   04/11/2021 12:24:26  Customized Dog Socks - Put Your Cute...       $8.99  www.Etsy.comhttps://www.etsy.com/lis...     Etsy      5
-27   04/11/2021 12:24:26  Follkee Women's Alpaca Wool Socks Pe...      $18.49  www.Etsy.comhttps://www.etsy.com/lis...     Etsy      5
-28   04/11/2021 12:24:26  Custom Pet Socks - Dog Socks For Men...       $9.88  www.Etsy.comhttps://www.etsy.com/lis...     Etsy      5
-29   04/11/2021 12:24:26  PDF Knitting Pattern Crikey Crocodil...       $7.50  www.Etsy.comhttps://www.etsy.com/lis...     Etsy    4.5
-30   04/11/2021 12:24:26  5 PAIRS of Cashmere Wool Blend Socks...      $34.36  www.Etsy.comhttps://www.etsy.com/lis...     Etsy      5
-31   04/11/2021 12:24:26  Custom Pet Socks, Dog Socks, Pup Soc...       $7.99  www.Etsy.comhttps://www.etsy.com/lis...     Etsy      5
-32   04/11/2021 12:24:26  Warm & Cozy Cupcake Socks, Sleeping,...       $4.99  www.Etsy.comhttps://www.etsy.com/lis...     Etsy      5
+
 ```
 
 
@@ -385,41 +385,13 @@ Here, as the user entered 1, the product is saved in the list.
 ```
 Select from following:
 1. Search new product
-2. See exiting list
+2. Manage Wishlists
 3. See Currency Conversion
 4. Exit
-2
-```
-##### 2.c) Now that we know that there is an element in the list, we can select the "See existing List" option. 
-```   
-   timestamp                                  title  price                                     link website  rating
-0  04/11/2021 12:24:24  Women's 10-Pair Value Pack Crew Socks  $8.79  www.amazon.com/Hanes-Womens-Crew-Whi...  amazon     4.7
 ```
 
-With the list output, the user is also giventhe option to choose whether to delete the item from the list or to open the link for the product.
 
-```
-Select from the following:
-1. Delete item from list
-2. Open link in Chrome
-3. Continue
-2
-
-Enter row number to open in chrome: 0
-
-![image](https://user-images.githubusercontent.com/48826459/140417153-365d93d4-df64-4658-a016-eadcabeebf89.png)
-```
-```
-Select from following:
-1. Search new product
-2. See exiting list
-3. See Currency Conversion
-4. Exit
-4
-Thank You for Using Slash
-```
-
-#### 5. Save products in csv
+#### 8. Save products in csv
 ```--csv``` command is used to save the complete list of the searched product in a csv format.
 ```--cd``` command here is used to change the directory for the csv file.
 Example:
@@ -441,8 +413,8 @@ File Name: C:\Anant\NCSU\slash_test_csv\socks211104_1223.csv
 
 
 
-:muscle: What's next for future development?
----
+# :muscle: What's next for future development?
+
 - Creating ordering and payment functionality for customers to directly order from command line
 - Create an advanced user interface for full version of the program.
 
@@ -463,20 +435,15 @@ File Name: C:\Anant\NCSU\slash_test_csv\socks211104_1223.csv
 - Future updates aim to encompass a wide variety of users irrespective of their computer knowledge and background.
 
 
-:sparkles: Contributors
----
+# :sparkles: Contributors
 
-<table>
-  <tr>
-    <td align="center"><a href="https://github.com/antgad"><img src="https://avatars.githubusercontent.com/u/37169203?v=4" width="75px;" alt=""/><br /><sub><b>Anant Gadodia</b></sub></a></td>
-    <td align="center"><a href="https://github.com/AnmolikaGoyal"><img src="https://avatars.githubusercontent.com/u/68813421?v=4" width="75px;" alt=""/><br /><sub><b>Anmolika Goyal</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/shubhangij12"><img src="https://avatars.githubusercontent.com/u/48826459?v=4" width="75px;" alt=""/><br /><sub><b>Shubhangi Jain</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/shreyakarra"><img src="https://avatars0.githubusercontent.com/u/89954066?v=4" width="75px;" alt=""/><br /><sub><b>Shreya Karra</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/srujanarao"><img src="https://avatars.githubusercontent.com/u/6882921?v=4" width="75px;" alt=""/><br /><sub><b>Srujana Rao</b></sub></a><br /></td>
-  </tr>
-</table>
+- Jessica Vargas(jrvargas)
+- Parth Parikh(pmparikh)
+- Radhika Toravi(rtoravi)
+- Rushikesh Deodhar(rdeodha)
+- Saurabh Nanda(snanda)
 
-:email: Support
----
+## :email: Support
 
-For any queries and help, please reach out to us at: secheaper@gmail.com
+
+For any queries and help, please reach out to us at: fall2021se@gmail.com
