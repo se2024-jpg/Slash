@@ -6,7 +6,7 @@ import scraper
 import webbrowser
 import numpy as np
 from pathlib import Path
-
+from shutil import get_terminal_size
 
 class full_version:
     def __init__(self):
@@ -23,7 +23,7 @@ class full_version:
         self.currency = ""
         pd.set_option("display.max_rows", None)
         pd.set_option("display.max_columns", None)
-        pd.set_option("display.width", None)
+        pd.set_option("display.width", get_terminal_size()[0])
         pd.set_option("display.max_colwidth", 40)
 
     def login(self):

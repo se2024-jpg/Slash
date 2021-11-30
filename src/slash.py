@@ -15,13 +15,13 @@ import os
 import csv
 import full_version
 import pandas as pd
-
+from shutil import get_terminal_size
 
 def main():
     """Provides help for every argument"""
     pd.set_option("display.max_rows", None)
     pd.set_option("display.max_columns", None)
-    pd.set_option("display.width", None)
+    pd.set_option("display.width", get_terminal_size()[0])
     pd.set_option("display.max_colwidth", 40)
     parser = argparse.ArgumentParser(description="Slash")
     parser.add_argument(
