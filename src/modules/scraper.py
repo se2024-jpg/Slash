@@ -11,10 +11,9 @@ The scraper module holds functions that actually scrape the e-commerce websites
 """
 
 import requests
-from src import formatter
+from src.modules.formatter import formatSearchQuery, formatResult, getCurrency, sortList
 from bs4 import BeautifulSoup
 import re
-from src import csv_writer
 import csv
 import pandas as pd
 import os
@@ -45,7 +44,7 @@ def searchAmazon(query, df_flag, currency):
     Parameters: query- search query for the product, df_flag- flag variable, currency- currency type entered by the user
     Returns a list of items available on Amazon.com that match the product entered by the user.
     """
-    query = formatter.formatSearchQuery(query)
+    query = formatSearchQuery(query)
     URL = f"https://www.amazon.com/s?k={query}"
     page = httpsGet(URL)
     results = page.findAll("div", {"data-component-type": "s-search-result"})
@@ -63,7 +62,7 @@ def searchAmazon(query, df_flag, currency):
             trending = trending[0]
         else:
             trending = None
-        product = formatter.formatResult(
+        product = formatResult(
             "amazon",
             titles,
             prices,
@@ -84,7 +83,7 @@ def searchWalmart(query, df_flag, currency):
     Parameters: query- search query for the product, df_flag- flag variable, currency- currency type entered by the user
     Returns a list of items available on walmart.com that match the product entered by the user
     """
-    query = formatter.formatSearchQuery(query)
+    query = formatSearchQuery(query)
     URL = f"https://www.walmart.com/search?q={query}"
     page = httpsGet(URL)
     results = page.findAll("div", {"data-item-id": True})
@@ -104,7 +103,7 @@ def searchWalmart(query, df_flag, currency):
             trending = trending[0]
         else:
             trending = None
-        product = formatter.formatResult(
+        product = formatResult(
             "walmart",
             titles,
             prices,
@@ -125,7 +124,7 @@ def searchEtsy(query, df_flag, currency):
     Parameters: query- search query for the product, df_flag- flag variable, currency- currency type entered by the user
     Returns a list of items available on Etsy.com that match the product entered by the user
     """
-    query = formatter.formatSearchQuery(query)
+    query = formatSearchQuery(query)
     url = f"https://www.etsy.com/search?q={query}"
     products = []
     headers = {
@@ -147,7 +146,7 @@ def searchEtsy(query, df_flag, currency):
             trending = trending[0]
         else:
             trending = None
-        product = formatter.formatResult(
+        product = formatResult(
             "Etsy",
             titles,
             prices,
@@ -168,7 +167,7 @@ def searchGoogleShopping(query, df_flag, currency):
     Parameters: query- search query for the product, df_flag- flag variable, currency- currency type entered by the user
     Returns a list of items available on walmart.com that match the product entered by the user
     """
-    query = formatter.formatSearchQuery(query)
+    query = formatSearchQuery(query)
     URL = f"https://www.google.com/search?tbm=shop&q={query}"
     page = httpsGet(URL)
     results = page.findAll("div", {"class": "sh-dgr__grid-result"})
@@ -192,7 +191,7 @@ def searchGoogleShopping(query, df_flag, currency):
             trending = trending[0]
         else:
             trending = None
-        product = formatter.formatResult(
+        product = formatResult(
             "google",
             titles,
             prices,
@@ -213,7 +212,7 @@ def searchBJs(query, df_flag, currency):
     Parameters: query- search query for the product, df_flag- flag variable, currency- currency type entered by the user
     Returns a list of items available on walmart.com that match the product entered by the user
     """
-    query = formatter.formatSearchQuery(query)
+    query = formatSearchQuery(query)
     URL = f"https://www.bjs.com/search/{query}"
     page = httpsGet(URL)
     results = page.findAll("div", {"class": "product"})
@@ -232,7 +231,7 @@ def searchBJs(query, df_flag, currency):
             trending = trending[0]
         else:
             trending = None
-        product = formatter.formatResult(
+        product = formatResult(
             "bjs", titles, prices, links, "", num_ratings, trending, df_flag, currency
         )
         if len(ratings) != 0:
@@ -294,7 +293,7 @@ def driver(
 
         if currency != None:
             for p in result_condensed:
-                p["price"] = formatter.getCurrency(currency, p["price"])
+                p["price"] = getCurrency(currency, p["price"])
 
         # Fix URLs so that they contain http before www
         # TODO Fix issue with Etsy links -> For some reason they have www.Etsy.com prepended to the begining of the link
@@ -310,13 +309,13 @@ def driver(
         if sort != None:
             result_condensed = pd.DataFrame(result_condensed)
             if sort == "rades":
-                result_condensed = formatter.sortList(result_condensed, "ra", False)
+                result_condensed = sortList(result_condensed, "ra", False)
             elif sort == "raasc":
-                result_condensed = formatter.sortList(result_condensed, "ra", True)
+                result_condensed = sortList(result_condensed, "ra", True)
             elif sort == "pasc":
-                result_condensed = formatter.sortList(result_condensed, "pr", False)
+                result_condensed = sortList(result_condensed, "pr", False)
             else:
-                result_condensed = formatter.sortList(result_condensed, "pr", True)
+                result_condensed = sortList(result_condensed, "pr", True)
             result_condensed = result_condensed.to_dict(orient="records")
 
         if csv:

@@ -6,7 +6,7 @@ You should have received a copy of the MIT license with
 this file. If not, please write to: secheaper@gmail.com
 
 """
-from src import formatter
+from src.modules import formatter
 import math
 
 

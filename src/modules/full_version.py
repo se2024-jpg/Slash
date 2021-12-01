@@ -2,7 +2,7 @@ from genericpath import exists
 import json
 import os
 import pandas as pd
-import scraper
+from src.modules.scraper import driver
 import webbrowser
 import numpy as np
 from pathlib import Path
@@ -144,7 +144,7 @@ class full_version:
 
     def scrape(self, prod):
         """calls the scraper function from scraper.py"""
-        results = scraper.driver(prod, df_flag=1, currency=self.currency)
+        results = driver(prod, df_flag=1, currency=self.currency)
         # esults = formatter.sortList(results, "ra" , True)
         self.df = pd.DataFrame.from_dict(results, orient="columns")
         print(self.df.replace("", np.nan).dropna())

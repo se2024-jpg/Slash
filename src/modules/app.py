@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template
-from src import scraper
+from src.modules.scraper import driver
 import json
 
 app = Flask(__name__, template_folder=".")
@@ -16,7 +16,7 @@ def product_search(new_product="", sort=None, currency=None, num=None):
     if product == None:
         product = new_product
 
-    data = scraper.driver(product, currency, num, 0, False, None, True, sort)
+    data = driver(product, currency, num, 0, False, None, True, sort)
 
     return render_template("./static/result.html", data=data, prod=product)
 
