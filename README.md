@@ -354,6 +354,7 @@ File Name: C:\Anant\NCSU\slash_test_csv\socks211104_1223.csv
 - Creating ordering and payment functionality for customers to directly order from command line
 - Create an advanced user interface for full version of the program.
 - Provide parameters like in-store availability
+- Increase the number of filters. Filter by price range and rating range. 
 
 
 :thought_balloon: Use Case
