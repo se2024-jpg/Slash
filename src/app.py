@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template
-import scraper
+from src import scraper
 import json
 
 app = Flask(__name__, template_folder=".")
