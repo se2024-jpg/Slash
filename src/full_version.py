@@ -8,6 +8,7 @@ import numpy as np
 from pathlib import Path
 from shutil import get_terminal_size
 
+
 class full_version:
     def __init__(self):
         self.data = {}
@@ -54,10 +55,8 @@ class full_version:
         It then gives the user and option to save an item or open an item in browser"""
         prod = input("Enter name of product to Search: ")
         self.scrape(prod)
-        ch = int(
-            input(
-                "\nEnter 1 to save product to wishlist \nEnter 2 to open link in browser\nElse enter any other key to continue\n"
-            )
+        ch = input(
+            "\nEnter 1 to save product to wishlist \nEnter 2 to open link in browser\nElse enter any other key to continue\n"
         )
         """By selecting 1, the User can store a searched product into a wishlist. Multiple wishlist are available and it has to be pre-selected 
         to store an item into it."""
@@ -84,6 +83,8 @@ class full_version:
         if ch == 2:
             indx = int(input("\nEnter row number of product to open: "))
             webbrowser.open_new(self.df.link[indx])
+
+        return
 
     def extract_list(self):
         """This function helps user extract saved products, create new lists, modify list or open product in browser"""

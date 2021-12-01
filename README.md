@@ -6,7 +6,7 @@
 [![GitHub issues](https://img.shields.io/github/issues/TommasU/slash)](https://github.com/TommasU/slash/issues)
 [![Github closes issues](https://img.shields.io/github/issues-closed-raw/TommasU/slash)](https://github.com/TommasU/slash/issues?q=is%3Aissue+is%3Aclosed)
 [![Github closed pull requests](https://img.shields.io/github/issues-pr-closed/SEProjGrp5/slash)](https://github.com/TommasU/slash/pulls?q=is%3Apr+is%3Aclosed)
-[![codecov](https://codecov.io/gh/TommasU/slash/branch/main/graph/badge.svg?token=JMI26I4YVU)](https://app.codecov.io/gh/TommasU/slash)
+[![codecov](https://codecov.io/gh/TommasU/slash/branch/main/graph/badge.svg?token=MGTU44PI4F)](https://codecov.io/gh/TommasU/slash)
 [![Pylint](https://github.com/SEProjGrp5/slash/actions/workflows/pylint.yml/badge.svg?branch=main)](https://github.com/TommasU/slash/actions/workflows/pylint.yml)
 [![Python Style Checker](https://github.com/SEProjGrp5/slash/actions/workflows/style_checker.yml/badge.svg?branch=main)](https://github.com/TommasU/slash/actions/workflows/style_checker.yml)
 
@@ -16,27 +16,6 @@ Slash is a tool that scrapes the most popular e-commerce websites to get the bes
 - **Powerful**: Quickly alter the commands to get desired results
 <p align="center">
 Checkout our newest Features! Mini Version and Full version now showcasing new sets of improvements.
-
-<p align="center">
-  <a href="#rocket-installation">Installation</a>
-  ::
-  <a href="#golf-flags-and-command-line-arguments">Flags & Args</a>
-  ::
-  <a href="#dizzy-whats-new-in-phase-2"> Whats new in Phase 3? </a>
-  ::
-  <a href="#muscle-whats-next-for-phase-3"> The future of Slash </a>
-  ::
-  <a href="#card_index_dividers-some-examples">Examples</a>
-  ::
-  <a href="#thought_balloon-use-case">Use Case</a>
-  ::
-  <a href="#page_facing_up-why">Why</a>
-  ::
-  <a href="#sparkles-contributors">Contributors</a>
-    ::
-  <a href="#email-support">Support</a>
-  
-</p>
 
 
 # :rocket: Installation
@@ -73,7 +52,7 @@ python slash.py --search socks
 <p>
 
 
-# :dizzy: What's new in Phase 3?
+# :dizzy: What's New in Phase 3
 
 
 ## :computer: User Friendly UI
@@ -144,12 +123,97 @@ python slash.py --full T
 
 ## :computer: More websites, More results, More shopping
 
-Now featuring results from Amazon, Walmart, Etsy, Google.
+Now featuring results from Amazon, Walmart, Etsy, Google, and Bjs Wholesale.
 
-# :golf: The Basics, Flags  & Arguments 
----
-Full Version Features:
+# :golf: The Basics, Flags and Args 
 
+
+## Full Version Main Menu 
+```--full``` command is used to display the complete menu for the project. If the argument passed is "T", the Full version of the app will be displayed. If the argument passed is "F", the mini version of the app is displayed.
+
+Example:
+
+### When argument "F" is passed : 
+```
+For Mac
+python3 slash.py --search "socks" --full "F"
+
+For Windows
+python slash.py --search "socks" --full "F"
+
+```
+```
+              timestamp                                    title       price                                     link  website rating no of ratings       trending
+0   30/11/2021 20:56:48  Amazon Brand - Core 10 Women's 6-Pac...      $16.80  www.amazon.com/gp/slredirect/picasso...   amazon    4.6           436
+1   30/11/2021 20:56:48  Warm Socks, Taotique 5 Pairs Women W...      $15.99  www.amazon.com/gp/slredirect/picasso...   amazon    4.5            99
+2   30/11/2021 20:56:48  CelerSport Ankle Athletic Running So...      $14.95  www.amazon.com/gp/slredirect/picasso...   amazon    4.8         28562
+3   30/11/2021 20:56:50  Hanes Women's Cool Comfort No Show S...       $7.00  www.walmart.com/ip/Hanes-Women-s-Coo...  walmart    4.4           314  Reduced price
+4   30/11/2021 20:56:50  MUK LUKS Women's Thermal Slipper Soc...      $10.00  www.walmart.com/ip/MUK-LUKS-Women-s-...  walmart    5.0             1  Reduced price
+
+```
+
+### When argument "T" is passed :
+```
+For Mac
+python3 slash.py --search "socks" --full "T"
+
+For Windows
+python slash.py --search "socks" --full "T"
+
+```
+- The output window asks for user information in order to store the data in the database. 
+- The user can select to search for product 
+- Check the wishlists
+- See the currency conversion.
+
+```
+Welcome to Slash!
+Please enter the following information:
+Name: UserName
+Email: person@email.com
+Welcome  user1
+Select from following:    
+1. Search new product     
+2. Manage Wishlists       
+3. See Currency Conversion
+4. Exit
+```
+If the user inputs 1 the command ```--search``` will be used. The product which the user wishes to search for needs to be entered. 
+
+
+```
+1
+Enter name of product to Search: socks
+```
+
+```
+               timestamp                                    title        price                                     link  website  rating  no of ratings           trending
+5    30/11/2021 20:59:23  Men's Dri-tech Moisture Control Crew...       $12.99  www.amazon.com/Dickies-Multi-Pack-Dr...   amazon     4.7       136896.0        Best Seller
+7    30/11/2021 20:59:23  Women's Performance Heel Tab Athleti...       $12.29  www.amazon.com/Saucony-Womens-Perfor...   amazon     4.8        67199.0        Best Seller
+8    30/11/2021 20:59:23  Men's Multi-pack Mesh Ventilating Co...        $9.04  www.amazon.com/Saucony-Multi-Pack-Ve...   amazon     4.6          635.0  Limited time deal
+9    30/11/2021 20:59:23  10 Pairs Ankle Socks No Show Sock Lo...       $11.95  www.amazon.com/Pairs-Ankle-Low-Cut-A...   amazon     4.3         4935.0            Save 8%
+11   30/11/2021 20:59:23  Men's Essential Lite No Show Socks, ...       $20.00  www.amazon.com/Under-Armour-Essentia...   amazon     4.7         6268.0        Best Seller
+15   30/11/2021 20:59:23  Men's Dri-tech Moisture Control Quar...        $9.98  www.amazon.com/Dickies-Multi-Pack-Dr...   amazon     4.7        46825.0  Limited time deal
+```
+
+
+Once the product list is displayed, the user is given the option to choose whether to save in the product or if he or she wished to open the browser and check the link.
+
+
+```
+Enter 1 to save product to wishlist
+Enter 2 to open link in browser
+Else enter any other key to continue
+```
+
+Here, as the user entered 1, the product is saved in the list.
+
+```
+             timestamp                                  title  price                                     link website rating
+4  04/11/2021 12:24:24  Women's 10-Pair Value Pack Crew Socks  $8.79  www.amazon.com/Hanes-Womens-Crew-Whi...  amazon    4.7
+```
+
+## Flags and Args
 The tool supports the following flags and command line arguments. These flags and arguments can be used to quickly filter and guide the search to get you the best results very quickly.
 
 | Arguments | Type | Default | Description                                                                                  |
@@ -162,11 +226,8 @@ The tool supports the following flags and command line arguments. These flags an
 | --full    | str  | F       | T for full version of app; F for mini version of app                                         |
 | --link    |      |         | Show links in the table                                                                      |
 |--currency | str  |         | Display the amount in specified currency(inr, euro, aud, yuan, yen, pound)                   |
- 
-:card_index_dividers: Some Examples
----
 
-#### 1. Searching
+## 1. Searching
 ```--search```  accepts one argument string which it uses to search and scrape the requested products on 
 the e-commerce websites. So, to use this, run the python script followed by the --search argument and the 
 search string. The search string should be in double quotes if it have two or more words. Example:
@@ -185,10 +246,15 @@ python slash.py --search "socks"
 
 ```
 
-#### 2. Sorting
+## 2. Sorting
 ```--sort``` accepts one or more arguments that determine how the tool sorts and filters the requested products
 after scraping. The first value is used to initially sort and filter the results of the scraping. The arguments
-following the first one are not required but will be used to further sort the filtered results. Example:
+following the first one are not required but will be used to further sort the filtered results. 
+
+### Sorting by Rating 
+```--sort``` accepts the argument "ra" that determine how the tool sorts and filters the requested products
+after scraping on the basis of ratings of the product . 
+Example:
 ```
 For Mac
 python3 slash.py --search "socks" --sort ra
@@ -197,15 +263,13 @@ For Windows
 python slash.py --search "socks" --sort ra
 ```
 ```
-           timestamp                                       title    price   website      rating 
- 0  03/11/2021 21:42:53  Hanes Women's Cool Comfort Ankle Socks, ...  $10.97   walmart         4.2 
- 1  03/11/2021 21:42:53  Hanes Women's Cool Comfort Crew Socks, 1...  $10.97   walmart         4.2 
- 2  03/11/2021 21:42:53  Hanes Mens FreshIQ Ankle Cushion Socks, ...  $13.46   walmart         4.2 
- 3  03/11/2021 21:42:51  10 Pairs Ankle Socks No Show Sock Low-Cu...  $11.95   amazon          4.3 
- 4  03/11/2021 21:42:50  Mens Cushioned Work Socks 10 Pairs           $12.10   amazon          4.5 
- 5  03/11/2021 21:42:50  Women's 6-Pack Performance Cotton Cushio...  $17.70   amazon          4.5 
+              timestamp                                    title       price                                     link  website  rating no of ratings       trending
+4   30/11/2021 20:29:06  MUK LUKS Women's Thermal Slipper Soc...      $10.00  www.walmart.com/ip/MUK-LUKS-Women-s-...  walmart     5.0             1  Reduced price
+6   30/11/2021 20:29:07  Follkee Women's Alpaca Wool Socks Pe...      $18.49  www.Etsy.comhttps://www.etsy.com/lis...     Etsy     5.0           740  FREE shipping
+7   30/11/2021 20:29:07  Alpaca Socks | GoWith 2 Pairs Cozy W...      $19.99  www.Etsy.comhttps://www.etsy.com/lis...     Etsy     5.0           420  FREE shipping
+8   30/11/2021 20:29:07  Daisy Socks | Colourful Cute Floral ...      $21.29  www.Etsy.comhttps://www.etsy.com/lis...     Etsy     5.0           101  FREE shipping
 ```
-#### 3. Sort Order
+### Sorting by Order
 The ```--des``` flag can be set to sort the requested products in a non-increasing order. This flag will be 
 actually used when coupled with ```--sort```. Example:
 ```
@@ -216,20 +280,15 @@ For Windows
 python slash.py --search "socks" --sort pr --des
 ```
 ```
-           timestamp                                   title        price    website  rating   
-
- 0  04/11/2021 13:18:30                                                        Etsy                
- 1  04/11/2021 13:18:30                                                        Etsy                
- 2  04/11/2021 13:18:30                                                        Etsy                
- 3  04/11/2021 13:18:27  6-pk. Performance Cotton Crew Socks Size...  $34.38   amazon     4.7      
- 4  04/11/2021 13:18:27  Men's 10 Pairs Cotton Moisture Control H...  $25.49   amazon     4.7      
- 5  04/11/2021 13:18:27  Men's Dri-Tech Comfort Crew Sock             $25.45   amazon     4.8      
- 6  04/11/2021 13:18:29  AND1 Men's Cushion No Show Socks, 12 Pac...  $11.47   walmart    4.6      
- 7  04/11/2021 13:18:29  Hanes Women's Cool Comfort Ankle Socks, ...  $10.97   walmart    4.2      
- 8  04/11/2021 13:18:29  Hanes Women's Cool Comfort Crew Socks, 1...  $10.97   walmart    4.2      
+              timestamp                                    title       price                                     link  website rating no of ratings       trending
+11  30/11/2021 20:31:49            Nike Trail Running Crew Socks      $30.00  www.google.com/shopping/product/9126...   google    5.0
+13  30/11/2021 20:31:50     Dr. Seuss's Beginner Book Collection      $29.99  www.bjs.com/product/dr-seusss-beginn...      bjs
+12  30/11/2021 20:31:50           Toy Time Plush Dog Hand Puppet      $21.99  www.bjs.com/product/toy-time-plush-d...      bjs
+8   30/11/2021 20:31:46  Alpaca Socks | GoWith 2 Pairs Cozy W...      $19.99  www.Etsy.comhttps://www.etsy.com/lis...     Etsy    5.0           420  FREE shipping
+6   30/11/2021 20:31:46  Follkee Women's Alpaca Wool Socks Pe...      $18.49  www.Etsy.comhttps://www.etsy.com/lis...     Etsy    5.0           740  FREE shipping 
 ```
 
-#### 4. Result length
+## 3. Filtering Result Length
 The maximum number of results that are scraped from each website can be set using the ```--num``` argument. It accepts
 an integer value ```n``` and then returns ```n``` results from each website. Note that tool returns a maximum of 
 the value of ```n``` and the number of results on the webiste. By default this value is set to 3. Example:
@@ -241,45 +300,16 @@ For Windows
 python slash.py --search "socks" --num 5
 ```
 ```
-              timestamp                                    title   price                                     link  website rating
-0   04/11/2021 13:13:33  CelerSport 6 Pack Men's Ankle Socks ...  $15.95  www.amazon.com/gp/slredirect/picasso...   amazon    4.7
-1   04/11/2021 13:13:33  CelerSport Ankle Athletic Running So...  $12.70  www.amazon.com/gp/slredirect/picasso...   amazon    4.8
-2   04/11/2021 13:13:33  Men's Athletic Ankle Socks 8 Pairs T...  $22.99  www.amazon.com/gp/slredirect/picasso...   amazon    4.6
-3   04/11/2021 13:13:33  CelerSport 6 Pack Men's Athletic Cre...  $18.95  www.amazon.com/gp/slredirect/picasso...   amazon    4.6
-4   04/11/2021 13:13:33    Women's 10-Pair Value Pack Crew Socks   $8.79  www.amazon.com/Hanes-Womens-Crew-Whi...   amazon    4.7
-5   04/11/2021 13:13:36  Hanes Women's Cool Comfort Ankle Soc...  $10.97  www.walmart.com/ip/Hanes-Women-s-Coo...  walmart    4.2
+              timestamp                                    title       price                                     link  website rating no of ratings       trending
+0   30/11/2021 20:32:40  Amazon Brand - Core 10 Women's 6-Pac...      $16.80  www.amazon.com/gp/slredirect/picasso...   amazon    4.6           436
+1   30/11/2021 20:32:41  Warm Socks, Taotique 5 Pairs Women W...      $15.99  www.amazon.com/gp/slredirect/picasso...   amazon    4.5            99
+2   30/11/2021 20:32:41  CelerSport Ankle Athletic Running So...      $14.95  www.amazon.com/gp/slredirect/picasso...   amazon    4.8         28562
+3   30/11/2021 20:32:41  Custom Face Socks Personalized Funny...      $11.49  www.amazon.com/gp/slredirect/picasso...   amazon
+4   30/11/2021 20:32:41  mens Athletic Cushioned Crew Socks (...      $15.00  www.amazon.com/adidas-Athletic-Cushi...   amazon    4.7         16811
 
 ```
 
-
-#### 5. Sort by Rating
-```--sort``` accepts the argument "ra" that determine how the tool sorts and filters the requested products
-after scraping on the basis of ratings of the product . 
-Example:
-```
-For Mac
-python3 slash.py --search "philips hue" --sort ra
-
-For Windows
-python slash.py --search "philips hue" --sort ra
-
-```
-
-```
-
-           timestamp                                       title    price   website      rating 
- 0  03/11/2021 21:42:53  Hanes Women's Cool Comfort Ankle Socks, ...  $10.97   walmart         4.2 
- 1  03/11/2021 21:42:53  Hanes Women's Cool Comfort Crew Socks, 1...  $10.97   walmart         4.2 
- 2  03/11/2021 21:42:53  Hanes Mens FreshIQ Ankle Cushion Socks, ...  $13.46   walmart         4.2 
- 3  03/11/2021 21:42:51  10 Pairs Ankle Socks No Show Sock Low-Cu...  $11.95   amazon          4.3 
- 4  03/11/2021 21:42:50  Mens Cushioned Work Socks 10 Pairs           $12.10   amazon          4.5 
- 5  03/11/2021 21:42:50  Women's 6-Pack Performance Cotton Cushio...  $17.70   amazon          4.5 
-
-
-
-```
-
-#### 6.Currency
+## 4. Currency Conversion
 ```--currency``` provides nasic currency conversion for different currencies like INR, EURO, AUD, YUAN, YEN and POUND.
 
 Example:
@@ -297,101 +327,7 @@ python slash.py --search "socks" --currency "inr"
 
 
 
-
-#### 7. Main Menu 
-```--full``` command is used to display the complete menu for the project. If the argument passed is "T", the Full version of the app will be displayed. If the argument passed is "F", the mini version of the app is displayed.
-
-Example:
-
-##### 7.1) When argument "F" is passed : 
-```
-For Mac
-python3 slash.py --search "socks" --full "F"
-
-For Windows
-python slash.py --search "socks" --full "F"
-
-```
-```
-             timestamp                                    title   price                                     link  website rating
-0  04/11/2021 16:10:02  Men's 6 Pack Everyday Kit Cushioned ...  $12.99  www.amazon.com/gp/slredirect/picasso...   amazon    4.6
-1  04/11/2021 16:10:02  Compression Athletic Crew Socks (6 P...  $19.99  www.amazon.com/gp/slredirect/picasso...   amazon    4.4
-2  04/11/2021 16:10:02  CelerSport 6 Pack Women's Ankle Runn...  $15.99  www.amazon.com/gp/slredirect/picasso...   amazon    4.8
-3  04/11/2021 16:10:05  Hanes Women's Cool Comfort Ankle Soc...  $10.97  www.walmart.com/ip/Hanes-Women-s-Coo...  walmart    4.2
-4  04/11/2021 16:10:05  Hanes Women's Cool Comfort Crew Sock...  $10.97  www.walmart.com/ip/Hanes-Women-s-Coo...  walmart    4.2
-
-```
-
-##### 7.2) When argument "T" is passed :
-```
-For Mac
-python3 slash.py --search "socks" --full "T"
-
-For Windows
-python slash.py --search "socks" --full "T"
-
-```
-
-###### 2.a) The output window asks for user information in order to store the data in the database. It also displays the menu for the user. The user can select the product which             he/she wishes to search, check the existing list and see the currency conversion.
-
-```
-C:\Anant\NCSU\GITHUB\slash\src>python slash.py --full T
-Welcome to Slash!
-Please enter the following information:
-Name: Anant
-Email: agadodi@ncsu.edu
-Welcome  Anant
-Select from following:
-1. Search new product
-2. See exiting list
-3. See Currency Conversion
-4. Exit
-```
-##### 7.3) If the user inputs 1 i.e. Search new product, the command ```--search``` will be used. The product which the user wishes to search for needs to be entered. 
-
-
-```
-1
-Enter name of product to Search: socks
-```
-```
-               timestamp                                    title       price                                     link  website rating
-0    04/11/2021 12:24:24  CelerSport Ankle Athletic Running So...      $12.70  www.amazon.com/gp/slredirect/picasso...   amazon    4.8
-1    04/11/2021 12:24:24  CelerSport 6 Pack Men's Ankle Socks ...      $15.95  www.amazon.com/gp/slredirect/picasso...   amazon    4.7
-2    04/11/2021 12:24:24  Men's 6 Pack Everyday Kit Cushioned ...      $12.99  www.amazon.com/gp/slredirect/picasso...   amazon    4.6
-3    04/11/2021 12:24:24  Compression Athletic Crew Socks (6 P...      $19.99  www.amazon.com/gp/slredirect/picasso...   amazon    4.4
-4    04/11/2021 12:24:24    Women's 10-Pair Value Pack Crew Socks       $8.79  www.amazon.com/Hanes-Womens-Crew-Whi...   amazon    4.7
-
-```
-
-
-Once the product list is displayed, the user is given the option to choose whether to save in the product or if he or she wished to open the browser and check the link.
-
-
-```
-Enter 1 to save product to list
-2 to open link in browser
-else enter any other key to continue
-1
-Enter row number of product to save: 4
-```
-
-Here, as the user entered 1, the product is saved in the list.
-
-```
-             timestamp                                  title  price                                     link website rating
-4  04/11/2021 12:24:24  Women's 10-Pair Value Pack Crew Socks  $8.79  www.amazon.com/Hanes-Womens-Crew-Whi...  amazon    4.7
-```
-```
-Select from following:
-1. Search new product
-2. Manage Wishlists
-3. See Currency Conversion
-4. Exit
-```
-
-
-#### 8. Save products in csv
+## 5. Save products in csv
 ```--csv``` command is used to save the complete list of the searched product in a csv format.
 ```--cd``` command here is used to change the directory for the csv file.
 Example:
@@ -417,6 +353,7 @@ File Name: C:\Anant\NCSU\slash_test_csv\socks211104_1223.csv
 
 - Creating ordering and payment functionality for customers to directly order from command line
 - Create an advanced user interface for full version of the program.
+- Provide parameters like in-store availability
 
 
 :thought_balloon: Use Case
