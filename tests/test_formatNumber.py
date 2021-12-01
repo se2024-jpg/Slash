@@ -6,8 +6,9 @@ You should have received a copy of the MIT license with
 this file. If not, please write to: secheaper@gmail.com
 
 """
-import formatter
+from src import formatter
 import math
+
 
 def test_getNumbers():
     """
@@ -15,4 +16,3 @@ def test_getNumbers():
     """
     assert formatter.getNumbers("some chars and $10.00") == 10.0
     assert formatter.getNumbers("some chars and $10.99 some other chars") == 10.99
-    assert formatter.getNumbers("") == math.inf

@@ -7,7 +7,8 @@ this file. If not, please write to: secheaper@gmail.com
 
 """
 
-import formatter
+from src import formatter
+
 
 def test_formatSearchQuery():
     """
@@ -17,9 +18,10 @@ def test_formatSearchQuery():
     assert formatter.formatSearchQuery("A B") == "A+B"
     assert formatter.formatSearchQuery("ABC") == "ABC"
 
+
 def test_formatTitle():
     """
     Checks the formatTitle function
     """
-    assert formatter.formatTitle("0"*50) == "0"*40+"..."
-    assert formatter.formatTitle("0"*5) == "0"*5
+    assert formatter.formatTitle("0" * 50) == "0" * 40 + "..."
+    assert formatter.formatTitle("0" * 5) == "0" * 5
