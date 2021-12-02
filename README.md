@@ -37,17 +37,10 @@ cd slash
 pip3 install -r requirements.txt
 ```
 3. Running the program
-- ```cd``` into the ```src``` folder. 
-``` 
-cd src 
-```
+
 - Use the python command to run the ```slash.py``` file.
 ```
-For Mac
-python3 slash.py --search socks
-
-For Windows
-python slash.py --search socks
+python3 -m src.slash --search socks
 ```
 <p>
 
@@ -75,11 +68,15 @@ Now featuring a friendly user interface for the Mini Version of SLASH including 
 
 1. After completing the <a href="#rocket-installation">Installation</a> and all project dependencies are installed. 
 
-2. Make sure you ```cd``` into the ```src``` folder. 
+2. Make sure you are in the base directory. 
 3. Use the ```flask run``` command.
 ```
-cd src
+MAC
+export FLASK_APP=./src/modules/app
+flask run
 
+Windows
+set FLASK_APP=.\src\modules\app 
 flask run
 ```
 4. Once flask is running, open your internet browser and type ```http://127.0.0.1:5000/``` into the search bar.
@@ -113,7 +110,7 @@ Now featuring advanced wishlists in the Full Version of SLASH. For the best shop
 2. Make sure you ```cd``` into the ```src``` folder. 
 3. Use the ```slash.py --full T``` command.
 ```
-python slash.py --full T
+python3 -m src.slash --full T
 ```
 
 ### :money_with_wings: Wishlist Features
@@ -135,12 +132,7 @@ Example:
 
 ### When argument "F" is passed : 
 ```
-For Mac
-python3 slash.py --search "socks" --full "F"
-
-For Windows
-python slash.py --search "socks" --full "F"
-
+python3 -m src.slash --search "socks" --full "F"
 ```
 ```
               timestamp                                    title       price                                     link  website rating no of ratings       trending
@@ -154,12 +146,7 @@ python slash.py --search "socks" --full "F"
 
 ### When argument "T" is passed :
 ```
-For Mac
-python3 slash.py --search "socks" --full "T"
-
-For Windows
-python slash.py --search "socks" --full "T"
-
+python3 -m src.slash --search "socks" --full "T"
 ```
 - The output window asks for user information in order to store the data in the database. 
 - The user can select to search for product 
@@ -232,11 +219,7 @@ The tool supports the following flags and command line arguments. These flags an
 the e-commerce websites. So, to use this, run the python script followed by the --search argument and the 
 search string. The search string should be in double quotes if it have two or more words. Example:
 ```
-For Mac
-python3 slash.py --search "socks"
-
-For Windows
-python slash.py --search "socks"
+python3 -m src.slash --search "socks"
 ```
 ```
             timestamp                                    title        price                                     link  website  rating  no of ratings            trending
@@ -256,11 +239,7 @@ following the first one are not required but will be used to further sort the fi
 after scraping on the basis of ratings of the product . 
 Example:
 ```
-For Mac
-python3 slash.py --search "socks" --sort ra
-
-For Windows
-python slash.py --search "socks" --sort ra
+python3 -m src.slash.py --search "socks" --sort ra
 ```
 ```
               timestamp                                    title       price                                     link  website  rating no of ratings       trending
@@ -273,11 +252,7 @@ python slash.py --search "socks" --sort ra
 The ```--des``` flag can be set to sort the requested products in a non-increasing order. This flag will be 
 actually used when coupled with ```--sort```. Example:
 ```
-For Mac
-python3 slash.py --search "socks" --sort pr --des
-
-For Windows
-python slash.py --search "socks" --sort pr --des
+python3 -m src.slash --search "socks" --sort pr --des
 ```
 ```
               timestamp                                    title       price                                     link  website rating no of ratings       trending
@@ -294,10 +269,7 @@ an integer value ```n``` and then returns ```n``` results from each website. Not
 the value of ```n``` and the number of results on the webiste. By default this value is set to 3. Example:
 ```
 For Mac
-python3 slash.py --search "socks" --num 5
-
-For Windows
-python slash.py --search "socks" --num 5
+python3 -m src.slash --search "socks" --num 5
 ```
 ```
               timestamp                                    title       price                                     link  website rating no of ratings       trending
@@ -314,12 +286,7 @@ python slash.py --search "socks" --num 5
 
 Example:
 ```
-For Mac
-python3 slash.py --search "socks" --currency "inr"
-
-For Windows
-python slash.py --search "socks" --currency "inr"
-
+python3 -m src.slash --search "socks" --currency "inr"
 ```
 
 ![image](https://user-images.githubusercontent.com/48826459/140242430-0d7d2707-095a-4a2d-86a7-c5e91b88d725.png)
@@ -332,12 +299,7 @@ python slash.py --search "socks" --currency "inr"
 ```--cd``` command here is used to change the directory for the csv file.
 Example:
 ```
-For Mac
-python3 slash.py --search "socks" --csv --cd C:\Anant\NCSU\slash_test_csv
-
-For Windows
-python slash.py --search "socks" --csv --cd C:\Anant\NCSU\slash_test_csv
-
+python3 -m src.slash--search "socks" --csv --cd C:\Anant\NCSU\slash_test_csv
 ```
 ```
 CSV Saved at:  C:\Anant\NCSU\slash_test_csv
