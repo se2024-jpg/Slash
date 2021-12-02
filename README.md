@@ -95,6 +95,15 @@ flask run
 Easy to view and access results
 <p align="center"><img width="800" src="./assets/list.PNG"></p>
 
+## :gift: 2 New Attributes!
+
+We have expanded the command line attributes to include:
+- `no of ratings`: Having just the ratings does not provide a buyer the complete picture, but with number of ratings, users can obtain a holistic view
+- `trending`: This mentions any special tags associated with the item such as "FREE shipping" and "Bestseller".
+
+## :robot: Increased Code Coverage
+We have increased the code coverage from `11%` to `70%`!
+
 ## :computer: Advanced Wishlists
 
 
