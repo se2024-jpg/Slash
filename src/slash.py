@@ -8,12 +8,12 @@ this file. If not, please write to: secheaper@gmail.com
 """
 
 import argparse
-import scraper
-import formatter
+from src.modules.scraper import driver
+from src.modules.formatter import sortList
 from tabulate import tabulate
 import os
 import csv
-import full_version
+from src.modules.full_version import full_version
 import pandas as pd
 from shutil import get_terminal_size
 
@@ -65,10 +65,10 @@ def main():
 
     if args.full == "T":
 
-        full_version.full_version().driver()
+        full_version().driver()
         return
 
-    results = scraper.driver(
+    results = driver(
         args.search,
         args.currency,
         args.num,
@@ -77,7 +77,7 @@ def main():
     )
 
     for sortBy in args.sort:
-        results = formatter.sortList(results, sortBy, args.des)
+        results = sortList(results, sortBy, args.des)
 
     print()
     print()

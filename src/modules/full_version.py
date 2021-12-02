@@ -2,7 +2,7 @@ from genericpath import exists
 import json
 import os
 import pandas as pd
-import scraper
+from src.modules.scraper import driver
 import webbrowser
 import numpy as np
 from pathlib import Path
@@ -58,6 +58,10 @@ class full_version:
         ch = input(
             "\nEnter 1 to save product to wishlist \nEnter 2 to open link in browser\nElse enter any other key to continue\n"
         )
+        try:
+            ch = int(ch)
+        except Exception:
+            pass
         """By selecting 1, the User can store a searched product into a wishlist. Multiple wishlist are available and it has to be pre-selected 
         to store an item into it."""
         if ch == 1:
@@ -144,7 +148,7 @@ class full_version:
 
     def scrape(self, prod):
         """calls the scraper function from scraper.py"""
-        results = scraper.driver(prod, df_flag=1, currency=self.currency)
+        results = driver(prod, df_flag=1, currency=self.currency)
         # esults = formatter.sortList(results, "ra" , True)
         self.df = pd.DataFrame.from_dict(results, orient="columns")
         print(self.df.replace("", np.nan).dropna())
