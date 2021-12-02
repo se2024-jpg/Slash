@@ -1,4 +1,5 @@
 from src.modules import full_version
+from src.modules import csv_writer
 import random
 import string
 import os
@@ -57,3 +58,7 @@ def test_extract_list(monkeypatch, capfd):
         answers = iter([1, 33, 3])
         monkeypatch.setattr('builtins.input', lambda name: next(answers))
         fv.extract_list()
+
+def test_csv_writer():
+    x = csv_writer.write_csv([{"name": "parth", "surname": "parikh", "age": 10}], "Names", ".")
+    assert x[:5] == "Names"
