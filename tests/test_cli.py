@@ -54,6 +54,6 @@ def test_extract_list(monkeypatch, capfd):
     fv.extract_list()
 
     with pytest.raises(IndexError):
-        answers = iter([1, wishlist_index, 3])
+        answers = iter([1, 33, 3])
         monkeypatch.setattr('builtins.input', lambda name: next(answers))
         fv.extract_list()
