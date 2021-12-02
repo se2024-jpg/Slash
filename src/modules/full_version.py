@@ -58,6 +58,10 @@ class full_version:
         ch = input(
             "\nEnter 1 to save product to wishlist \nEnter 2 to open link in browser\nElse enter any other key to continue\n"
         )
+        try:
+            ch = int(ch)
+        except Exception:
+            pass
         """By selecting 1, the User can store a searched product into a wishlist. Multiple wishlist are available and it has to be pre-selected 
         to store an item into it."""
         if ch == 1:
