@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template
-from src.modules.scraper import driver
+from .scraper import driver
 import json
 
 app = Flask(__name__, template_folder=".")
