@@ -1,13 +1,32 @@
-from flask import Flask, request, render_template
+from flask import Flask, session, render_template, request, redirect, url_for
 from .scraper import driver
 import json
 
 app = Flask(__name__, template_folder=".")
 
+app.secret_key = 'asdsdfsdfs13sdf_df%&'
 
-@app.route("/")
+
+@app.route('/')
 def landingpage():
-    return render_template("./static/landing.html")
+    login = False
+    if 'username' in session:
+        login = True
+    return render_template("./static/landing.html", login=login)
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        session['username'] = request.form['username']
+        return redirect(url_for('login'))
+    return render_template('./static/login.html')
+
+
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+    return render_template('./static/landing.html')
 
 
 @app.route("/search", methods=["POST", "GET"])
