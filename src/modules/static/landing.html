@@ -1,113 +1,79 @@
 <!DOCTYPE html>
-<html lang="en">
-   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Slash Mini-Version</title>
-	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+<html>
 
-	<link rel="stylesheet" href="/static/style.css">
-	<link rel="stylesheet" href="/static/style.css"><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" >
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" ></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" ></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"  ></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-      
-    <style>
-
-#header{
-  font-family:Trebuchet MS, sa ns-serif;
-  font-size:32px;
-  color:#333;
-  font-style:italic;
-  font-weight:bold;
-  text-align:center;
-  padding-right:10px;
-  padding-top:35px;
-  padding-left:10px;
-  }
-
-  .container1
-  {
-      height: 270px;
-      width: 100%;
-  }
-  
-  .sb-example-1 .search {
-      width: 75%;
-      position: relative;
-      display: flex;
-      padding-top:15px;
-      padding-left:380px;
-    
-    }
-  
-    .sb-example-1 .searchTerm {
-      width: 100%;
-      border: 3px solid rgb(63, 155, 112);
-      border-right: none;
-      padding: 5px;
-      border-radius: 5px 0 0 5px;
-      outline: none;
-      color:  rgb(63, 155, 112);
-    }
-    .sb-example-1 .searchTerm:focus{
-      color: green;
+<head>
+  <title>Slash</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: "Raleway", sans-serif
     }
 
-    .sb-example-1 .searchButton {
-      width: 40px;
-      height: 50px;
-      border: 1px solid rgb(63, 155, 112);
-      background: rgb(145, 228, 189);
-      text-align: center;
-      color: #fff;
-      border-radius: 0 5px 5px 0;
-      cursor: pointer;
-      font-size: 20px;
-    }
-    .sb-example-1 .searchButton i{
-      color: green;
+    body,
+    html {
+      height: 100%;
+      line-height: 1.8;
     }
 
-    img {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        padding-top: 30px;
-    }
-   
-    </style>
-   </head>
-   <body>   
-    <h1 id="header"> Welcome to Mini Version of SLASH! </h1>
-    <img src="/static/images/slash.png" alt="slash" style="width:40%;">
-    <br>
-    <br>
-    <hr>
-    <br>
-    
-  <!--------------Search----------------------------------------------------------------------->
- 
-  <div class="container1" style="background-color:  rgb(232, 255, 235);"> 
-    <div class="w-100 p-3" id="header" style="background-color: rgb(232, 255, 235);">
-      <h3>What are you</h3>
-      <h3>looking for?</h3>   
-  </div>
+    .bgimg-1 {
 
-  <div class="sb-example-1">
-    <form action = "/search" method = "get">
-      <div class="search">
-         <input type="text" name="product_name" class="searchTerm" placeholder="Type here">
-         <button type="submit" class="searchButton">
-           <i class="fa fa-search"></i>
-        </button>
+      background-size: cover;
+      background-image: url("https://shots.codepen.io/username/pen/NLLXrv-800.jpg?version=1537117490");
+      min-height: 135%;
+    }
+
+    .w3-bar .w3-button {
+      padding: 16px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="bgimg-1 w3-display-container w3-grayscale-min" id="home">
+    <div class="w3-display-left w3-text-white" style="padding:48px">
+      <span class="w3-jumbo w3-hide-small">SLASH</span><br>
+      <span class="w3-xxlarge w3-hide-large w3-hide-medium">Start something that matters</span><br>
+      <span class="w3-large">"Elevating Your Shopping Experience, All you need is One Comparison."</span>
+      <p><a onclick="document.getElementById('id01').style.display='block'"
+          class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">
+          Enter
+          Your Name</a></p>
+    </div>
+
+  </header>
+
+  <div id="id01" class="w3-modal">
+    <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+
+      <div class="w3-center"><br>
+        <span document.getElementById('id01').style.display='none'"
+                    class=" w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span>
+        <img
+          src="https://www.pngitem.com/pimgs/m/137-1370168_professional-clipart-female-avatar-circle-hd-png-download.png"
+          alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
       </div>
-    </form>
-   </div>
+
+      <form class="w3-container" method="POST" action="/login">
+        <div class="w3-section">
+          <label><b>Username</b></label>
+          <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Username" name="username"
+            required>
+          <button class="w3-button w3-block w3-black w3-section w3-padding" type="submit">Login</button>
+        </div>
+    </div>
   </div>
-   <br> 
-  <hr>
+  </div>
 </body>
+
 </html>
