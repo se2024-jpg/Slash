@@ -1,6 +1,7 @@
 from flask import Flask, session, render_template, request, redirect, url_for
 from .scraper import driver
 import json
+from .features import create_user
 
 app = Flask(__name__, template_folder=".")
 
@@ -19,6 +20,7 @@ def landingpage():
 def login():
     if request.method == 'POST':
         session['username'] = request.form['username']
+        create_user(request.form['username'])
         return redirect(url_for('login'))
     return render_template('./static/login.html')
 
