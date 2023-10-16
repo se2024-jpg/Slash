@@ -8,18 +8,20 @@ import numpy as np
 from pathlib import Path
 from shutil import get_terminal_size
 
+from src.modules.features import users_main_dir, create_user, list_users, create_wishlist, delete_wishlist, list_wishlists, read_wishlist, wishlist_add_item, wishlist_remove_list
 
 class full_version:
     def __init__(self):
         self.data = {}
         self.name = ""
         self.email = ""
-        self.user_data_dir = Path(__file__).parent.parent / "json"
-        self.user_data_dir.mkdir(parents=True, exist_ok=True)
-        self.user_data = self.user_data_dir / "user_data.json"
-        self.user_list_dir = Path(__file__).parent.parent / "csvs"
-        self.user_list_dir.mkdir(parents=True, exist_ok=True)
-        self.user_list = self.user_list_dir / "default.csv"
+        #self.user_data_dir = Path(__file__).parent.parent / "json"
+        #self.user_data_dir.mkdir(parents=True, exist_ok=True)
+        #self.user_data = self.user_data_dir / "user_data.json"
+        #self.user_list_dir = Path(__file__).parent.parent / "csvs"
+        #self.user_list_dir.mkdir(parents=True, exist_ok=True)
+        #self.user_list = self.user_list_dir / "default.csv"
+        self.default_user_file = users_main_dir / "default_user.json"
         self.df = pd.DataFrame()
         self.currency = ""
         pd.set_option("display.max_rows", None)
@@ -30,25 +32,27 @@ class full_version:
     def login(self):
         """Used for User Login
         Returns the username and email"""
-        if not os.path.exists(self.user_data):
+        if not os.path.exists(self.default_user_file):
             print("Welcome to Slash!")
             print("Please enter the following information: ")
             name = input("Name: ")
-            email = input("Email: ")
+            #email = input("Email: ")
             self.data["name"] = name
-            self.data["email"] = email
-            with open(self.user_data, "w") as outfile:
+            #self.data["email"] = email
+            with open(self.default_user_file, "w") as outfile:
                 json.dump(self.data, outfile)
             self.name = name
-            self.email = email
-            open(self.user_list, "a").close()
+            #self.email = email
+            #open(self.user_list, "a").close()
+            create_user(self.name)
 
         else:
-            with open(self.user_data) as json_file:
+            with open(self.default_user_file) as json_file:
                 data = json.load(json_file)
                 self.name = data["name"]
-                self.email = data["email"]
-        return self.name, self.email
+                #self.email = data["email"]
+                print(list_users())
+        return self.name #, self.email
 
     def search_fn(self):
         """Function searches for a given product and returns full list of products scraped.
@@ -68,11 +72,13 @@ class full_version:
             wish_lists = self.wishlist_maker()
             wishlist_index = int(input("\nEnter your wishlist index: "))
             selected_wishlist = wish_lists[wishlist_index]
-            wishlist_path = self.user_list_dir / selected_wishlist
+            #wishlist_path = self.user_list_dir / selected_wishlist
             """Select the row number of the product to save into the selected wishlist."""
             indx = int(input("\nEnter row number of product to save: "))
             if indx < len(self.df):
                 new_data = self.df.iloc[[indx]]
+                wishlist_add_item(self.name, selected_wishlist, new_data, self.df.columns)
+                """
                 if os.path.exists(wishlist_path) and (
                     os.path.getsize(wishlist_path) > 0
                 ):
@@ -83,6 +89,7 @@ class full_version:
                     final_data = pd.concat([old_data, new_data])
                     print("Item added successfully")
                 final_data.to_csv(wishlist_path, index=False, header=self.df.columns)
+                """
         """Selecting 2 allows the user to open the searched item in a broswer"""
         if ch == 2:
             indx = int(input("\nEnter row number of product to open: "))
@@ -102,6 +109,13 @@ class full_version:
         if wishlist_options == 1:
             wishlist_index = int(input("\nEnter the wishlist index: "))
             selected_wishlist = wish_lists[wishlist_index]
+            items_data = read_wishlist(self.name, selected_wishlist)
+            if items_data is not None:
+                if(len(items_data)):
+                    print(items_data)
+                else:
+                    print("Empty Wishlist")
+                """
             wishlist_path = self.user_list_dir / selected_wishlist
             if os.path.exists(wishlist_path):
                 try:
@@ -110,6 +124,7 @@ class full_version:
                 except Exception:
                     old_data = pd.DataFrame()
                     print("Empty Wishlist")
+                """
                 choice = int(
                     input(
                         "\nSelect from the following:\n1. Delete item from list\n2. Open link in Chrome\n3. Return to Main\n"
@@ -117,32 +132,37 @@ class full_version:
                 )
                 if choice == 1:
                     indx = int(input("\nEnter row number to be removed: "))
-                    old_data = old_data.drop(index=indx)
-                    old_data.to_csv(wishlist_path, index=False, header=old_data.columns)
+                    wishlist_remove_list(self.name, selected_wishlist, indx)
+                    #old_data = old_data.drop(index=indx)
+                    #old_data.to_csv(wishlist_path, index=False, header=old_data.columns)
                 if choice == 2:
                     indx = int(input("\nEnter row number to open in chrome: "))
                     url = old_data.link[indx]
                     webbrowser.open_new(url)
+            else:
+                print("Wishlist doesnot exist")
 
         elif wishlist_options == 2:
             wishlist_name = str(input("\nName your wishlist: "))
-            new_wishlist = self.user_list_dir / (wishlist_name + ".csv")
-            open(new_wishlist, "a").close()
+            create_wishlist(self.name, wishlist_name)
+            #new_wishlist = self.user_list_dir / (wishlist_name + ".csv")
+            #open(new_wishlist, "a").close()
 
         elif wishlist_options == 3:
             wishlist_index = int(input("Enter the wishlist index to delete: "))
             selected_wishlist = wish_lists[wishlist_index]
-            wishlist_path = self.user_list_dir / selected_wishlist
-            wishlist_path.unlink()
+            delete_wishlist(self.name, selected_wishlist)
+            #wishlist_path = self.user_list_dir / selected_wishlist
+            #wishlist_path.unlink()
         else:
             print("No saved data found.")
 
     def wishlist_maker(self):
         wish_lists = []
         print("----------Wishlists---------")
-        for index, wishlist in enumerate(os.listdir(self.user_list_dir)):
+        for index, wishlist in enumerate(list_wishlists(self.name)):
             wish_lists.append(wishlist)
-            wishlist = wishlist.replace(".csv", "")
+            # wishlist = wishlist.replace(".csv", "")
             print(index, "\t", wishlist)
         return wish_lists
 
