@@ -358,6 +358,46 @@
 
 
 
+  <br>
+  <div class="results">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <table border='1' class="item-list">
+        <thead>
+          <tr>
+            <th colspan="6">Products</th>
+          </tr>
+          <tr>
+            <td>Timestamp</td>
+            <td>Title</td>
+            <td>Price</td>
+            <td>Website</td>
+            <td>Rating</td>
+            <td>Wishlist</td>
+          </tr>
+        </thead>
+        <tbody>
+
+          {% for product in data %}
+          <tr>
+            <td>{{product.timestamp}}</td>
+            <td><a href={{product.link}} target="_blank">{{product.title}}</a></td>
+            <td>{{product.price}}</td>
+            <td>{{product.website}}</td>
+            <td>{{product.rating}}</td>
+            <td> <input type="checkbox"></td>
+          </tr>
+
+          {% endfor %}
+
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+
+  </header>
+
 
 
 
