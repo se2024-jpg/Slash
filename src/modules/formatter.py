@@ -51,12 +51,25 @@ def formatResult(
     if links:
         link = links[0]["href"]
     if ratings:
-        rating = float(ratings[0].get_text().strip().split()[0])
+        #print(float(ratings[0].get_text().strip().split()[0]))
+        if(type(ratings)!=str):
+            rating = float(ratings[0].get_text().strip().split()[0])
+        else:
+            rating=float(ratings)
+        
     if trending:
         trending_stmt = trending.get_text().strip()
     if num_ratings:
         if isinstance(num_ratings, int):
             num_rating = num_ratings
+        elif isinstance(num_ratings, str):
+            num_ratings = (
+                    num_ratings
+                    .replace(")", "")
+                    .replace("(", "")
+                    .replace(",", "")
+                )
+            num_rating = num_ratings.strip()
         else:
             num_ratings = (
                 num_ratings[0]
@@ -66,6 +79,7 @@ def formatResult(
                 .replace(",", "")
             )
             num_rating = num_ratings.strip()
+    #print(num_rating)
     # if df_flag==0: title=formatTitle(title)
     # if df_flag==0: link=formatTitle(link)
     if currency:
@@ -81,7 +95,7 @@ def formatResult(
         "trending": trending_stmt,
         "converted price": converted_cur,
     }
-
+    #print(product," Printed")
     return product
 
 
