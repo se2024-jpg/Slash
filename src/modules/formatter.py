@@ -14,6 +14,7 @@ the required format.
 from datetime import datetime
 import math
 import requests
+import re
 from ast import literal_eval
 
 CURRENCY_URL = "https://api.exchangerate-api.com/v4/latest/usd"
@@ -46,8 +47,14 @@ def formatResult(
         title = titles[0].get_text().strip()
     if prices:
         price = prices[0].get_text().strip()
-    if "$" not in price:
+        price = re.sub('\s', '', price) # remove all spaces
+        price = re.sub(',', '', price) # remove all , in numbers
+        price = re.search("[0-9\.]+", price).group() # search and match the price value (numbers)
         price = "$" + price
+        if(website == 'walmart'):
+            price = price[:-2] + "." + price[-2:]
+    #if "$" not in price:
+    #    price = "$" + price
     if links:
         link = links[0]["href"]
     if ratings:

@@ -26,8 +26,8 @@ def list_users():
     return list_of_users
 
 def create_wishlist(username, wishlist_name):
-    wishlist_filename = usr_dir(username) / (wishlist_name + ".csv")
-    open(wishlist_filename, "a").close()
+    wishlist_path = usr_dir(username) / (wishlist_name + ".csv")
+    open(wishlist_path, "a").close()
 
 def list_wishlists(username):
     user_dir = usr_dir(username)
@@ -35,5 +35,33 @@ def list_wishlists(username):
     return wishlists
 
 def delete_wishlist(username, wishlist_name):
-    wishlist_filename = usr_dir(username) / wishlist_name
-    wishlist_filename.unlink(missing_ok=True)
+    wishlist_path = usr_dir(username) / (wishlist_name + ".csv")
+    wishlist_path.unlink(missing_ok=True)
+
+def wishlist_add_item(username, wishlist_name, item_data, columns):
+    wishlist_path = usr_dir(username) / (wishlist_name + ".csv")
+    if os.path.exists(wishlist_path) and (os.path.getsize(wishlist_path) > 0 ):
+        old_data = pd.read_csv(wishlist_path)
+    else:
+        old_data = pd.DataFrame()
+    #if self.df.title[indx] not in old_data:
+    final_data = pd.concat([old_data, item_data])
+    final_data.to_csv(wishlist_path, index=False, header=columns)
+
+def read_wishlist(username, wishlist_name):
+    wishlist_path = usr_dir(username) / (wishlist_name + ".csv")
+    if os.path.exists(wishlist_path):
+        try:
+            return pd.read_csv(wishlist_path)
+            print(old_data)
+        except Exception:
+            return pd.DataFrame()
+            print("Empty Wishlist")
+    else:
+        return None # wishlist not found
+
+def wishlist_remove_list(username, wishlist_name, indx):
+    wishlist_path = usr_dir(username) / (wishlist_name + ".csv")
+    old_data = read_wishlist(username, wishlist_name)
+    old_data = old_data.drop(index=indx)
+    old_data.to_csv(wishlist_path, index=False, header=old_data.columns)
