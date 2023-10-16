@@ -12,15 +12,7 @@ from src.modules.features import users_main_dir, create_user, list_users, create
 
 class full_version:
     def __init__(self):
-        self.data = {}
         self.name = ""
-        self.email = ""
-        #self.user_data_dir = Path(__file__).parent.parent / "json"
-        #self.user_data_dir.mkdir(parents=True, exist_ok=True)
-        #self.user_data = self.user_data_dir / "user_data.json"
-        #self.user_list_dir = Path(__file__).parent.parent / "csvs"
-        #self.user_list_dir.mkdir(parents=True, exist_ok=True)
-        #self.user_list = self.user_list_dir / "default.csv"
         self.default_user_file = users_main_dir / "default_user.json"
         self.df = pd.DataFrame()
         self.currency = ""
@@ -36,24 +28,17 @@ class full_version:
             print("Welcome to Slash!")
             print("Please enter the following information: ")
             name = input("Name: ")
-            #email = input("Email: ")
-            self.data["name"] = name
-            #self.data["email"] = email
+            user_data = {"name": name}
             with open(self.default_user_file, "w") as outfile:
-                json.dump(self.data, outfile)
+                json.dump(user_data, outfile)
             self.name = name
-            #self.email = email
-            #open(self.user_list, "a").close()
             create_user(self.name)
 
         else:
             with open(self.default_user_file) as json_file:
                 data = json.load(json_file)
                 self.name = data["name"]
-                #self.email = data["email"]
-                print(list_users())
-        return self.name #, self.email
-
+        return self.name
     def search_fn(self):
         """Function searches for a given product and returns full list of products scraped.
         It then gives the user and option to save an item or open an item in browser"""
@@ -72,7 +57,6 @@ class full_version:
             wish_lists = self.wishlist_maker()
             wishlist_index = int(input("\nEnter your wishlist index: "))
             selected_wishlist = wish_lists[wishlist_index]
-            #wishlist_path = self.user_list_dir / selected_wishlist
             """Select the row number of the product to save into the selected wishlist."""
             indx = int(input("\nEnter row number of product to save: "))
             if indx < len(self.df):
@@ -133,8 +117,6 @@ class full_version:
                 if choice == 1:
                     indx = int(input("\nEnter row number to be removed: "))
                     wishlist_remove_list(self.name, selected_wishlist, indx)
-                    #old_data = old_data.drop(index=indx)
-                    #old_data.to_csv(wishlist_path, index=False, header=old_data.columns)
                 if choice == 2:
                     indx = int(input("\nEnter row number to open in chrome: "))
                     url = old_data.link[indx]
@@ -145,15 +127,11 @@ class full_version:
         elif wishlist_options == 2:
             wishlist_name = str(input("\nName your wishlist: "))
             create_wishlist(self.name, wishlist_name)
-            #new_wishlist = self.user_list_dir / (wishlist_name + ".csv")
-            #open(new_wishlist, "a").close()
 
         elif wishlist_options == 3:
             wishlist_index = int(input("Enter the wishlist index to delete: "))
             selected_wishlist = wish_lists[wishlist_index]
             delete_wishlist(self.name, selected_wishlist)
-            #wishlist_path = self.user_list_dir / selected_wishlist
-            #wishlist_path.unlink()
         else:
             print("No saved data found.")
 
@@ -162,14 +140,31 @@ class full_version:
         print("----------Wishlists---------")
         for index, wishlist in enumerate(list_wishlists(self.name)):
             wish_lists.append(wishlist)
-            # wishlist = wishlist.replace(".csv", "")
             print(index, "\t", wishlist)
         return wish_lists
+
+    def view_users(self):
+        users_list = []
+        print("----------Users---------")
+        for user in list_users():
+            users_list.append(user)
+            print("\t", user)
+        return users_list
+
+    def change_user(self):
+        self.view_users()
+        username = input("Enter username (username will be created if not exist):")
+        create_user(username)
+        self.name = username
+        user_data = {"name": username}
+        with open(self.default_user_file, "w") as outfile:
+            json.dump(user_data, outfile)
+        print("Welcome ", self.name)
 
     def scrape(self, prod):
         """calls the scraper function from scraper.py"""
         results = driver(prod, df_flag=1, currency=self.currency)
-        # esults = formatter.sortList(results, "ra" , True)
+        # results = formatter.sortList(results, "ra" , True)
         self.df = pd.DataFrame.from_dict(results, orient="columns")
         print(self.df.replace("", np.nan).dropna())
 
@@ -180,7 +175,7 @@ class full_version:
         while flag_loop == 1:
             print("Select from following:")
             print(
-                "1. Search new product\n2. Manage Wishlists\n3. See Currency Conversion\n4. Exit"
+                "1. Search new product\n2. Manage Wishlists\n3. See Currency Conversion\n4. Change user\n0. Exit"
             )
             choice = int(input())
             if choice == 1:
@@ -190,6 +185,8 @@ class full_version:
             elif choice == 3:
                 self.currency = str.lower(input("Enter INR/EUR\n"))
             elif choice == 4:
+                self.change_user()
+            elif choice == 0:
                 print("Thank You for Using Slash")
                 flag_loop = 0
             else:
