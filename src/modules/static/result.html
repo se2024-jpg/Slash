@@ -473,7 +473,7 @@
 
           {% for product in data %}
           <tr>
-            <td>{{product.timestamp}}</td>
+            <td>{{ loop.index }}</td>
             <td><a href={{product.link}} target="_blank">{{product.title}}</a></td>
             <td>{{product.price}}</td>
             <td>{{product.website}}</td>
