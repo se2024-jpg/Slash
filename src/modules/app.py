@@ -57,3 +57,7 @@ def product_search_filtered():
     if num == "default":
         num = None
     return product_search(product, sort, currency, num)
+
+
+if __name__ == '__main__':
+    app.run(debug=True)

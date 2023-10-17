@@ -317,6 +317,20 @@
       background-color: rgb(14, 14, 14);
       color: rgb(243, 236, 236);
     }
+
+    .heart-icon::before {
+      content: "\2665";
+      font-size: 24px;
+      color: white;
+    }
+
+    .clicked-heart .heart-icon::before {
+      color: red;
+    }
+
+    .heart-link {
+      text-decoration: none;
+    }
   </style>
   <title>Searching</title>
 </head>
@@ -379,12 +393,12 @@
           <label class="control-label col-sm-offset-2 col-sm-2" for="company"></label>
           <div class="col-sm-6 col-md-4">
             <form action="/filter?product_name={{prod}}" method="post" id="filter1">
-               <select id="choice1" name="rating" class="form-control">
-              <option value="default">Rating range</option>
-              <option value="rades">Rating High to Low</option>
-              <option value="raasc">Rating Low to High</option>
-              <br>
-            </select>
+              <select id="choice1" name="rating" class="form-control">
+                <option value="default">Rating range</option>
+                <option value="rades">Rating High to Low</option>
+                <option value="raasc">Rating Low to High</option>
+                <br>
+              </select>
           </div>
         </div>
       </div>
@@ -406,7 +420,7 @@
         </div>
       </div>
 
-         <div class="col-sm">
+      <div class="col-sm">
         <div class="form-group">
           <label class="control-label col-sm-offset-2 col-sm-2" for="company"></label>
           <div class="col-sm-6 col-md-4">
@@ -472,7 +486,7 @@
             <th colspan="6">Products</th>
           </tr>
           <tr>
-            <td>Timestamp</td>
+            <td>S.No</td>
             <td>Title</td>
             <td>Price</td>
             <td>Website</td>
@@ -489,7 +503,9 @@
             <td>{{product.price}}</td>
             <td>{{product.website}}</td>
             <td>{{product.rating}}</td>
-            <td> <input type="checkbox"></td>
+            <td> <a href="#" id="heart-link" class="heart-link" onclick="addToCart(this)"><span
+                  class="heart-icon"></span></a>
+            </td>
           </tr>
 
           {% endfor %}
@@ -541,6 +557,15 @@
         logo.classList.remove("logo");
       }
     };
+  </script>
+  <script>
+    function addToCart(heartLink) {
+      if (!heartLink.classList.contains("clicked-heart")) {
+        heartLink.classList.add("clicked-heart");
+      } else {
+        heartLink.classList.remove("clicked-heart");
+      }
+    }
   </script>
 </body>
 
