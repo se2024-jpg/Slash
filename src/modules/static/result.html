@@ -331,6 +331,20 @@
     .heart-link {
       text-decoration: none;
     }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group label {
+      margin-bottom: auto;
+    }
+
+    .form-group input,
+    .form-group select {
+      margin-top: auto;
+    }
   </style>
   <title>Searching</title>
 </head>
@@ -384,9 +398,9 @@
         <br>
       </section>
     </div>
-    <br><br><br>
-
-    <div class="container" id="abc">
+    <br><br><br><br> <br><br><br><br>
+  </div>
+  <div class="container" id="abc">
     <div class="row gx-3 align-items-end">
       <div class="col-sm">
         <form action="/filter?product_name={{prod}}" method="post" id="filter1" class="d-flex justify-content-between">
@@ -437,8 +451,7 @@
       </div>
     </div>
     <hr>
-  </div>  
-  
+  </div>
   <br>
   <div class="results">
     <div class="col-md-4"></div>
@@ -460,7 +473,9 @@
         <tbody>
 
           {% for product in data %}
-          <tr data-price="{{product.price}}" data-website="{{product.website}}" data-title="{{product.title}}" data-link="{{product.link}}" data-rating="{{product.rating}}" data-timestamp="{{product.timestamp}}" data-no_of_ratings="{{product.no_of_ratings}}">
+          <tr data-price="{{product.price}}" data-website="{{product.website}}" data-title="{{product.title}}"
+            data-link="{{product.link}}" data-rating="{{product.rating}}" data-timestamp="{{product.timestamp}}"
+            data-no_of_ratings="{{product.no_of_ratings}}">
             <td>{{ loop.index }}</td>
             <td><a href={{product.link}} target="_blank">{{product.title}}</a></td>
             <td>{{product.price}}</td>
@@ -527,11 +542,11 @@
         heartLink.classList.add("clicked-heart");
         product_data = heartLink.parentNode.parentNode.dataset;
         let post_data = new URLSearchParams();
-        for(k in product_data)
+        for (k in product_data)
           post_data.append(k, product_data[k])
         fetch("/add-wishlist-item", {
-            method: 'post',
-            body: post_data,
+          method: 'post',
+          body: post_data,
         }).then(result => console.log(result)).catch(error => console.error(error))
       } else {
         heartLink.classList.remove("clicked-heart");
