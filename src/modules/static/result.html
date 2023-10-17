@@ -497,7 +497,7 @@
         <tbody>
 
           {% for product in data %}
-          <tr>
+          <tr data-price="{{product.price}}" data-website="{{product.website}}" data-title="{{product.title}}" data-link="{{product.link}}" data-rating="{{product.rating}}" data-timestamp="{{product.timestamp}}" data-no_of_ratings="{{product.no_of_ratings}}">
             <td>{{ loop.index }}</td>
             <td><a href={{product.link}} target="_blank">{{product.title}}</a></td>
             <td>{{product.price}}</td>
@@ -562,6 +562,15 @@
     function addToCart(heartLink) {
       if (!heartLink.classList.contains("clicked-heart")) {
         heartLink.classList.add("clicked-heart");
+        product_data = heartLink.parentNode.parentNode.dataset;
+        let post_data = new URLSearchParams();
+        for(k in product_data)
+          post_data.append(k, product_data[k])
+        console.debug(post_data)
+        fetch("/add-wishlist-item", {
+            method: 'post',
+            body: post_data,
+        }).then(result => console.log(result)).catch(error => console.error(error))
       } else {
         heartLink.classList.remove("clicked-heart");
       }

@@ -1,7 +1,8 @@
 from flask import Flask, session, render_template, request, redirect, url_for
 from .scraper import driver, filter
+from .formatter import formatResult
 import json
-from .features import create_user
+from .features import create_user, wishlist_add_item
 
 app = Flask(__name__, template_folder=".")
 
@@ -79,6 +80,13 @@ def product_search_filtered():
         num = None
     return product_search(product, rating_sort, currency, num, min_price, max_price)
 
+@app.route("/add-wishlist-item", methods=["POST"])
+def add_wishlist_item():
+    username = session['username']
+    item_data = request.form.to_dict()
+    wishlist_name = 'default'
+    wishlist_add_item(username, wishlist_name, item_data)
+    return ""
 
 if __name__ == '__main__':
     app.run(debug=True)

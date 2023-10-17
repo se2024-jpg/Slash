@@ -84,9 +84,9 @@ def formatResult(
         "link": f"www.{website}.com{link}",
         "website": website,
         "rating": rating,
-        "no of ratings": num_rating,
+        "no_of_ratings": num_rating,
         "trending": trending_stmt,
-        "converted price": converted_cur,
+        "converted_price": converted_cur,
     }
 
     return product
