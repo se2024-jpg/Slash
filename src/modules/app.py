@@ -2,7 +2,7 @@ from flask import Flask, session, render_template, request, redirect, url_for
 from .scraper import driver, filter
 from .formatter import formatResult
 import json
-from .features import create_user, wishlist_add_item
+from .features import create_user, wishlist_add_item, read_wishlist, wishlist_remove_list
 
 app = Flask(__name__, template_folder=".")
 
@@ -28,7 +28,10 @@ def login():
 
 @app.route('/wishlist')
 def wishlist():
-    return render_template('./static/wishlist.html')
+    username = session['username']
+    wishlist_name = "default"
+    items = read_wishlist(username, wishlist_name).to_dict('records')
+    return render_template('./static/wishlist.html', data=items)
 
 
 @app.route('/logout')
@@ -87,6 +90,14 @@ def add_wishlist_item():
     wishlist_name = 'default'
     wishlist_add_item(username, wishlist_name, item_data)
     return ""
+
+@app.route("/delete-wishlist-item", methods=["POST"])
+def remove_wishlist_item():
+    username = session['username']
+    index = int(request.form["index"]) 
+    wishlist_name = 'default'
+    wishlist_remove_list(username, wishlist_name, index)
+    return redirect(url_for('wishlist'))
 
 if __name__ == '__main__':
     app.run(debug=True)

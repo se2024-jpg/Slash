@@ -397,7 +397,7 @@
                         <td>{{product.price}}</td>
                         <td>{{product.website}}</td>
                         <td>{{product.rating}}</td>
-                        <td> <span class="delete-icon" onclick="deleteRow(this)">&#x1F5D1;</span>
+                        <td> <span class="delete-icon" data-index="{{ loop.index }}" onclick="deleteItem(this)">&#x1F5D1;</span>
                         </td>
                     </tr>
 
@@ -405,6 +405,9 @@
 
                 </tbody>
             </table>
+            <form id="rm-wishlist-item" action="/delete-wishlist-item" method="post" hidden>
+                <input name="index" id="rm-wishlist-item-index">
+            </form>
         </div>
         <div class="col-md-4"></div>
     </div>
@@ -453,9 +456,13 @@
     </script>
     <script>
         function deleteItem(deleteIcon) {
+            let index = deleteIcon.dataset["index"]
+            rm_form = document.forms["rm-wishlist-item"]
+            rm_form["index"].value = index - 1 // -1 as index in list starts at 0
+            rm_form.submit()
             // Find the parent <li> element and remove it
-            var tableRow = deleteIcon.closest('tr');
-            tableRow.parentElement.removeChild(tableRow);
+            //var tableRow = deleteIcon.closest('tr');
+            //tableRow.parentElement.removeChild(tableRow);
         }
     </script>
 </body>

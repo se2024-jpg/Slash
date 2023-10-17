@@ -566,7 +566,6 @@
         let post_data = new URLSearchParams();
         for(k in product_data)
           post_data.append(k, product_data[k])
-        console.debug(post_data)
         fetch("/add-wishlist-item", {
             method: 'post',
             body: post_data,
