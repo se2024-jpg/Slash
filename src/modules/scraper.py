@@ -11,7 +11,7 @@ The scraper module holds functions that actually scrape the e-commerce websites
 """
 
 import requests
-from .formatter import formatSearchQuery, formatResult, getCurrency, sortList
+from .formatter import formatSearchQuery,formatResult,getCurrency,sortList
 from bs4 import BeautifulSoup
 import re
 import csv
@@ -74,7 +74,10 @@ def searchAmazon(query, df_flag, currency):
             currency,
         )
         products.append(product)
+    # print("Amazon")
+    # print(products)
     return products
+
 
 
 def searchWalmart(query, df_flag, currency):
@@ -96,7 +99,7 @@ def searchWalmart(query, df_flag, currency):
             res.select("div.lh-copy"),
             res.select("a"),
         )
-        ratings = res.findAll("span", {"class": "w_DE"}, text=pattern)
+        ratings = res.findAll("span", {"class": "w_iUH7"}, text=pattern)
         num_ratings = res.findAll("span", {"class": "sans-serif gray f7"})
         trending = res.select("span.w_Cs")
         if len(trending) > 0:
@@ -115,6 +118,8 @@ def searchWalmart(query, df_flag, currency):
             currency,
         )
         products.append(product)
+    # print("wallmart")
+    # print(products)
     return products
 
 
@@ -138,9 +143,24 @@ def searchEtsy(query, df_flag, currency):
             continue
         else:
             links = str
+
+        ratings=None
+        num_ratings=None
+       
         titles, prices = (item.select("h3")), (item.select(".currency-value"))
-        ratings = item.select("span.screen-reader-only")
-        num_ratings = item.select("span.wt-text-body-01")
+        ratings_text = item.find("div",class_='wt-align-items-center wt-max-height-full wt-display-flex-xs flex-direction-row-xs wt-text-title-small wt-no-wrap')
+        if ratings_text:
+            ratings = ratings_text.get_text().split()[0]
+            num_ratings = ratings_text.get_text().split()[1]
+        # Check if any elements were found
+
+        # ratings = item.select("span.wt-screen-reader-only")
+        # num_ratings = item.select("h2.wt-mr-xs-2
+        #                         wt-text-heading-small)
+        # Find all h2 elements with the specified class attribute
+    
+
+        
         trending = item.select("span.wt-badge")
         if len(trending) > 0:
             trending = trending[0]
@@ -158,6 +178,7 @@ def searchEtsy(query, df_flag, currency):
             currency,
         )
         products.append(product)
+    
     return products
 
 
@@ -175,17 +196,17 @@ def searchGoogleShopping(query, df_flag, currency):
     pattern = re.compile(r"[0-9]+ product reviews")
     for res in results:
         titles, prices, links = (
-            res.select("h4"),
+            res.select("h3"),
             res.select("span.a8Pemb"),
             res.select("a"),
         )
         ratings = res.findAll("span", {"class": "Rsc7Yb"})
-        try:
-            num_ratings = pattern.findall(str(res.findAll("span")[1]))[0].replace(
-                "product reviews", ""
-            )
-        except:
-            num_ratings = 0
+        num_ratings=None
+        ratings_number = res.find("span", {"class": "QIrs8"}).get_text()
+        if ratings_number:
+            match = re.search(r'(\d+,\d+)', ratings_number)
+            if match:
+                num_ratings = match.group(1)
         trending = res.select("span.Ib8pOd")
         if len(trending) > 0:
             trending = trending[0]
@@ -197,12 +218,14 @@ def searchGoogleShopping(query, df_flag, currency):
             prices,
             links,
             ratings,
-            int(num_ratings),
+            num_ratings,
             trending,
             df_flag,
             currency,
         )
         products.append(product)
+    # print("Google")
+    # print(products)
     return products
 
 
@@ -225,7 +248,8 @@ def searchBJs(query, df_flag, currency):
             res.select("a"),
         )
         ratings = res.findAll("span", {"class": "on"})
-        num_ratings = 0
+        num_ratings = res.select("span.prod-comments-count")
+        print(num_ratings)
         trending = res.select("p.instantSavings")
         if len(trending) > 0:
             trending = trending[0]
@@ -237,6 +261,8 @@ def searchBJs(query, df_flag, currency):
         if len(ratings) != 0:
             product["rating"] = len(ratings)
         products.append(product)
+    # print("BJS")
+    # print(products)
     return products
 
 
