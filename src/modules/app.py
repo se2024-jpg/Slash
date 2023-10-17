@@ -25,6 +25,11 @@ def login():
     return render_template('./static/login.html')
 
 
+@app.route('/wishlist')
+def wishlist():
+    return render_template('./static/wishlist.html')
+
+
 @app.route('/logout')
 def logout():
     session.pop('username', None)
