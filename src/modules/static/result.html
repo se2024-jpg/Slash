@@ -393,7 +393,7 @@
           <label class="control-label col-sm-offset-2 col-sm-2" for="company"></label>
           <div class="col-sm-6 col-md-4">
             <form action="/filter?product_name={{prod}}" method="post" id="filter1">
-              <select id="choice1" name="rating" class="form-control">
+              <select id="choice1" name="rating_sort" class="form-control">
                 <option value="default">Rating range</option>
                 <option value="rades">Rating High to Low</option>
                 <option value="raasc">Rating Low to High</option>
@@ -424,7 +424,7 @@
         <div class="form-group">
           <label class="control-label col-sm-offset-2 col-sm-2" for="company"></label>
           <div class="col-sm-6 col-md-4">
-            <input type="text" id="amount_min" name="Min Price" placeholder="     Min Price" size="13"
+            <input type="number" step="0.01" min="0" id="amount_min" name="min_price" placeholder="     Min Price" size="13"
               style="border-radius: 7px; height: 44px; ">
             <br>
             </select>
@@ -436,7 +436,7 @@
         <div class="form-group">
           <label class="control-label col-sm-offset-2 col-sm-2" for="company"></label>
           <div class="col-sm-6 col-md-4">
-            <input type="text" id="amount_max" name="Max Price" placeholder="     Max Price" size="13"
+            <input type="number" step="0.01" min="0" id="amount_max" name="max_price" placeholder="     Max Price" size="13"
               style="border-radius: 7px; height: 44px; ">
             <br>
             </select>

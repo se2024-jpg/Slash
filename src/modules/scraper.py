@@ -249,6 +249,27 @@ def condense_helper(result_condensed, list, num):
             if p["title"] != None and p["title"] != "":
                 result_condensed.append(p)
 
+def filter(data, price_min = None, price_max = None, rating_min = None):
+    filtered_result = []
+    for row in data:
+        try:
+            price = float(row['price'][1:])
+        except:
+            price = None
+        try:
+            rating = float(row['rating'])
+        except:
+            rating = None
+        
+        if price_min is not None and (price is None or price < price_min):
+            continue
+        elif price_max is not None and (price is None or price > price_max):
+            continue
+        elif rating_min is not None and (rating is None or rating < rating_min):
+            continue
+        else:
+            filtered_result.append(row)
+    return filtered_result
 
 def driver(
     product, currency, num=None, df_flag=0, csv=False, cd=None, ui=False, sort=None

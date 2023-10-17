@@ -1,5 +1,5 @@
 from flask import Flask, session, render_template, request, redirect, url_for
-from .scraper import driver
+from .scraper import driver, filter
 import json
 from .features import create_user
 
@@ -37,31 +37,47 @@ def logout():
 
 
 @app.route("/search", methods=["POST", "GET"])
-def product_search(new_product="", sort=None, currency=None, num=None):
+def product_search(new_product="", sort=None, currency=None, num=None, min_price = None, max_price = None):
     product = request.args.get("product_name")
     if product == None:
         product = new_product
 
     data = driver(product, currency, num, 0, False, None, True, sort)
 
+    if min_price is not None or max_price is not None:
+        data = filter(data, min_price, max_price)
+
     return render_template("./static/result.html", data=data, prod=product)
 
 
 @app.route("/filter", methods=["POST", "GET"])
 def product_search_filtered():
-
+    
     product = request.args.get("product_name")
-    sort = request.form["sort"]
+    rating_sort = request.form["rating_sort"]
     currency = request.form["currency"]
     num = request.form["num"]
+    
+    min_price = request.form["min_price"]
+    max_price = request.form["max_price"]
 
-    if sort == "default":
-        sort = None
+    try:
+        min_price = float(min_price)
+    except:
+        min_price = None
+
+    try:
+        max_price = float(max_price)
+    except:
+        max_price = None
+
+    if rating_sort == "default":
+        rating_sort = None
     if currency == "usd":
         currency = None
     if num == "default":
         num = None
-    return product_search(product, sort, currency, num)
+    return product_search(product, rating_sort, currency, num, min_price, max_price)
 
 
 if __name__ == '__main__':
