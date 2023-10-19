@@ -12,7 +12,7 @@ from src.modules.features import users_main_dir, create_user, list_users, create
 
 class full_version:
     def __init__(self):
-        self.name = ""
+        self.name = "default"
         self.default_user_file = users_main_dir / "default_user.json"
         self.df = pd.DataFrame()
         self.currency = ""
@@ -119,7 +119,7 @@ class full_version:
                     wishlist_remove_list(self.name, selected_wishlist, indx)
                 if choice == 2:
                     indx = int(input("\nEnter row number to open in chrome: "))
-                    url = old_data.link[indx]
+                    url = items_data.link[indx]
                     webbrowser.open_new(url)
             else:
                 print("Wishlist doesnot exist")
