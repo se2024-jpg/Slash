@@ -63,27 +63,34 @@ flask run
 
 ### Login
 <p> User can have their own account. They can store their data and can access the data whenever required. </p>
+<p align="center"><img width="700" src="./assets/login.gif"></p>
 
 ### SORTING
 <p> Based on rating or price </p>
-
+<p align="center"><img width="700" src="./assets/sorting.gif"></p>
 ### CURRENCY
 <p> View prices in the currency of your choice. </p>
+<p align="center"><img width="700" src="./assets/currency.gif"></p>
 
 ### FILTERING
 <p> Based on Min Price and Max Price</p>
+<p align="center"><img width="700" src="./assets/price.gif"></p>
 
 ### FILTERING
 <p> Based on Min Rating</p>
+<p align="center"><img width="700" src="./assets/rating.gif"></p>
 
 ### WISHLIST
 <p> Adding Product to your wishlist.</p>
+<p align="center"><img width="700" src="./assets/wishlist.gif"></p>
 
 ### DELETE
 <p>Remove selected product from your wishlist.</p>
+<p align="center"><img width="700" src="./assets/wishlistdelete.gif"></p>
 
 ### Product LINK
 <p> Product Link which directs to the product page.</p>
+<p align="center"><img width="700" src="./assets/link.gif"></p>
 
 
 # :muscle: What's next for future development?
