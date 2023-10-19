@@ -51,7 +51,7 @@ def formatResult(
         price = re.sub(',', '', price) # remove all , in numbers
         price = re.search("[0-9\.]+", price).group() # search and match the price value (numbers)
         price = "$" + price
-        if(website == 'walmart'):
+        if(website == 'walmart' and '.' not in price):
             price = price[:-2] + "." + price[-2:]
     #if "$" not in price:
     #    price = "$" + price
