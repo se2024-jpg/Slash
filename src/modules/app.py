@@ -41,15 +41,15 @@ def logout():
 
 
 @app.route("/search", methods=["POST", "GET"])
-def product_search(new_product="", sort=None, currency=None, num=None, min_price = None, max_price = None):
+def product_search(new_product="", sort=None, currency=None, num=None, min_price = None, max_price = None, min_rating = None):
     product = request.args.get("product_name")
     if product == None:
         product = new_product
 
     data = driver(product, currency, num, 0, False, None, True, sort)
 
-    if min_price is not None or max_price is not None:
-        data = filter(data, min_price, max_price)
+    if min_price is not None or max_price is not None or min_rating is not None:
+        data = filter(data, min_price, max_price, min_rating)
 
     return render_template("./static/result.html", data=data, prod=product)
 
@@ -58,12 +58,13 @@ def product_search(new_product="", sort=None, currency=None, num=None, min_price
 def product_search_filtered():
     
     product = request.args.get("product_name")
-    rating_sort = request.form["rating_sort"]
+    sort = request.form["sort"]
     currency = request.form["currency"]
     num = request.form["num"]
     
     min_price = request.form["min_price"]
     max_price = request.form["max_price"]
+    min_rating = request.form["min_rating"]
 
     try:
         min_price = float(min_price)
@@ -75,13 +76,18 @@ def product_search_filtered():
     except:
         max_price = None
 
-    if rating_sort == "default":
-        rating_sort = None
+    try:
+        min_rating = float(min_rating)
+    except:
+        min_rating = None
+
+    if sort == "default":
+        sort = None
     if currency == "usd":
         currency = None
     if num == "default":
         num = None
-    return product_search(product, rating_sort, currency, num, min_price, max_price)
+    return product_search(product, sort, currency, num, min_price, max_price, min_rating)
 
 @app.route("/add-wishlist-item", methods=["POST"])
 def add_wishlist_item():
