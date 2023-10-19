@@ -166,7 +166,8 @@ class full_version:
         results = driver(prod, df_flag=1, currency=self.currency)
         # results = formatter.sortList(results, "ra" , True)
         self.df = pd.DataFrame.from_dict(results, orient="columns")
-        print(self.df.replace("", np.nan).dropna())
+        print(self.df)
+        #print(self.df.replace("", np.nan).dropna())
 
     def driver(self):
         self.login()
