@@ -86,6 +86,35 @@ file_path: path where the csv needs to be stored\
 **Returns**-\
 file_name: CSV file
 
+## full_version.py
+
+### *def usr_dir(username)*:
+Returns path for user profiles 
+
+### *def create_user(username)*:
+Creates a new user if username does not exist
+
+### *def list_users()*:
+Returns lists of users
+
+### *def create_wishlist(username, wishlist_name)*:
+Creates a wishlist
+
+### *def list_wishlists(username)*:
+Listing all the wishlists for a user
+
+### *def delete_wishlist(username, wishlist_name)*:
+Deletes the mentioned wishlist
+
+### *def wishlist_add_item(username, wishlist_name, item_data)*:
+Adds the item to the wishlist
+
+### *def read_wishlist(username, wishlist_name)*:
+Returns the wishlist with all items in it
+
+### *def wishlist_remove_list(username, wishlist_name, indx)*:
+Deletes the item from the wishlist
+
 
 
 
