@@ -321,8 +321,8 @@ def driver(
         result_condensed = pd.DataFrame.from_dict(result_condensed, orient="columns")
         results = pd.DataFrame.from_dict(results, orient="columns")
         if currency == "" or currency == None:
-            results = results.drop(columns="converted price")
-            result_condensed = result_condensed.drop(columns="converted price")
+            results = results.drop(columns="converted_price")
+            result_condensed = result_condensed.drop(columns="converted_price")
         if csv == True:
             file_name = os.path.join(
                 cd, (product + datetime.now().strftime("%y%m%d_%H%M") + ".csv")
