@@ -58,30 +58,29 @@ flask run
  
 # :dizzy: What's New ?
 
-### User Interface
+### User Interface: Login 
+<p> You can have your own account. You can store their data and can access the data whenever required. </p>
 <p> In previous version most of the feautures are in command line which we changed every feauture to User Interface. </p>
-
-### Login
-<p> User can have their own account. They can store their data and can access the data whenever required. </p>
 <p align="center"><img width="700" src="./assets/login.gif"></p>
 
 ### SORTING
-<p> Based on rating or price </p>
+<p> You can sort the products based on rating or price.  </p>
 <p align="center"><img width="700" src="./assets/sorting.gif"></p>
+
 ### CURRENCY
 <p> View prices in the currency of your choice. </p>
 <p align="center"><img width="700" src="./assets/currency.gif"></p>
 
 ### FILTERING
-<p> Based on Min Price and Max Price</p>
+<p> Based on Min Price and Max Price you can filter your data.</p>
 <p align="center"><img width="700" src="./assets/price.gif"></p>
 
 ### FILTERING
-<p> Based on Min Rating</p>
+<p> Filter the data using Minimum Rating.</p>
 <p align="center"><img width="700" src="./assets/rating.gif"></p>
 
 ### WISHLIST
-<p> Adding Product to your wishlist.</p>
+<p> You can add Your favorite product to Wishlist.</p>
 <p align="center"><img width="700" src="./assets/wishlist.gif"></p>
 
 ### DELETE
@@ -107,7 +106,7 @@ flask run
 * ***Data Analysts***: Finding data for any project is one of the most tedious job for a data analyst, and the datasets found might not be the most recent one. Using slash, they can create their own dataset in real time and format it as per their needs so that they can focus on what is actually inportant.
   
 # Additional Information
-<p> For Additional Information direct to this page </p>
+ For Additional Information direct to this [page](https://github.com/csc510fall23g45/slash/tree/main/docs/)  and check all the markdown files 
 
 # Chat Channel
 
