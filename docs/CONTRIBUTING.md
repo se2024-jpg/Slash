@@ -12,12 +12,12 @@ The following is a set of guidelines for contributing to "Slash" and its package
 [References](https://github.com/TommasU/slash/blob/main/CONTRIBUTING.md#references)
 
 ## Code of Conduct
-This project and everyone participating in it is governed by the [Code of Conduct](https://github.com/TommasU/slash/blob/main/CODE-OF-CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to fall2021se@gmail.com.
+This project and everyone participating in it is governed by the [Code of Conduct](https://github.com/TommasU/slash/blob/main/CODE-OF-CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to sefall2023project45@gmail.com.
 
 ## How can I Contribute
 ### Reporting Bugs 
 This section gives detailed information on how to report bugs. Reporting a bug will help the community and maintainers of the repository. <br>
-Before reporting any bug, make sure it is correct and you have all the details with you. Fot creating any bug report, please fill out [the required template](https://github.com/atom/.github/blob/master/.github/ISSUE_TEMPLATE/bug_report.md). This template will give us necessary information to help solve a bug faster.
+Before reporting any bug, make sure it is correct and you have all the details with you. For creating any bug report, please fill out [the required template](https://github.com/atom/.github/blob/master/.github/ISSUE_TEMPLATE/bug_report.md). This template will give us necessary information to help solve a bug faster.
 
 #### Before Submitting A Bug Report
 The following is a list of items you need to check before submitting a bug report. <br>
