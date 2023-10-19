@@ -4,7 +4,7 @@ Slash Your Spending, Not Your Style - Unleash the Best Deals!!
 <p align="center"><img width="500" src="./assets/Shop.gif"></p>
 
 [![GitHub license](https://img.shields.io/github/license/csc510fall23g45/slash)](https://github.com/csc510fall23g45/slash/blob/main/LICENSE)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5739350.svg)](https://doi.org/10.5281/zenodo.5739350)
+[![DOI](https://zenodo.org/badge/701493501.svg)](https://zenodo.org/doi/10.5281/zenodo.10020460)
 ![Github](https://img.shields.io/badge/language-python-red.svg)
 [![GitHub issues](https://img.shields.io/github/issues/csc510fall23g45/slash)](https://github.com/csc510fall23g45/slash/issues)
 [![Github closes issues](https://img.shields.io/github/issues-closed-raw/csc510fall23g45/slash)](https://github.com/csc510fall23g45/slash/issues?q=is%3Aissue+is%3Aclosed)
