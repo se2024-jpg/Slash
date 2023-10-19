@@ -60,7 +60,6 @@ def product_search_filtered():
     product = request.args.get("product_name")
     sort = request.form["sort"]
     currency = request.form["currency"]
-    num = request.form["num"]
     
     min_price = request.form["min_price"]
     max_price = request.form["max_price"]
@@ -85,9 +84,8 @@ def product_search_filtered():
         sort = None
     if currency == "usd":
         currency = None
-    if num == "default":
-        num = None
-    return product_search(product, sort, currency, num, min_price, max_price, min_rating)
+
+    return product_search(product, sort, currency, None, min_price, max_price, min_rating)
 
 @app.route("/add-wishlist-item", methods=["POST"])
 def add_wishlist_item():

@@ -1,23 +1,22 @@
 # HELLO!! WELCOME TO CONTRIBUTING TO Slash :)
 ## Thanks for being here and taking your time to contribute.  <br>
-The following is a set of guidelines for contributing to "Slash" and its packages, which are hosted in the [Slash](https://github.com/TommasU/slash) on GitHub. These are mostly guidelines, not rules. Use your best judgment, and feel free to propose changes to this document in a pull request. <br>
+The following is a set of guidelines for contributing to "Slash" and its packages, which are hosted in the [Slash](https://github.com/csc510fall23g45/slash) on GitHub. These are mostly guidelines, not rules. Use your best judgment, and feel free to propose changes to this document in a pull request. <br>
 
-[This `CONTRIBUTING.md` is based on our work during Scrivener](https://github.com/TommasU/scrivener/blob/main/CONTRIBUTING.md) which was licensed under MIT License.
 
 ## Table of Contents
-[Code of Conduct](https://github.com/TommasU/slash/blob/main/CODE-OF-CONDUCT.md) <br>
-[How can I Contribute](https://github.com/TommasU/slash/blob/main/CONTRIBUTING.md#how-can-i-contribute) <br>
-[Suggesting Enhancements](https://github.com/TommasU/slash/blob/main/CONTRIBUTING.md#suggesting-enhancements) <br>
-[Style Guide](https://github.com/TommasU/slash/blob/main/CONTRIBUTING.md#styleguides) <br>
-[References](https://github.com/TommasU/slash/blob/main/CONTRIBUTING.md#references)
+[Code of Conduct](https://github.com/csc510fall23g45/slash/blob/main/docs/CODE-OF-CONDUCT.md) <br>
+[How can I Contribute](https://github.com/csc510fall23g45/slash/blob/main/docs/CONTRIBUTING.md#how-can-i-contribute) <br>
+[Suggesting Enhancements](https://github.com/csc510fall23g45/slash/blob/main/docs/CONTRIBUTING.md#suggesting-enhancements) <br>
+[Style Guide](https://github.com/csc510fall23g45/slash/blob/main/docs/CONTRIBUTING.md#styleguides) <br>
+[References](https://github.com/csc510fall23g45/slash/blob/main/docs/CONTRIBUTING.md#references)
 
 ## Code of Conduct
-This project and everyone participating in it is governed by the [Code of Conduct](https://github.com/TommasU/slash/blob/main/CODE-OF-CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to sefall2023project45@gmail.com.
+This project and everyone participating in it is governed by the [Code of Conduct](https://github.com/csc510fall23g45/slash/blob/main/docs/CODE-OF-CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to sefall2023project45@gmail.com.
 
 ## How can I Contribute
 ### Reporting Bugs 
 This section gives detailed information on how to report bugs. Reporting a bug will help the community and maintainers of the repository. <br>
-Before reporting any bug, make sure it is correct and you have all the details with you. For creating any bug report, please fill out [the required template](https://github.com/atom/.github/blob/master/.github/ISSUE_TEMPLATE/bug_report.md). This template will give us necessary information to help solve a bug faster.
+Before reporting any bug, make sure it is correct and you have all the details with you. For creating any bug report, please fill out [the required template](https://github.com/csc510fall23g45/slash/blob/main/docs/bug_report.md). This template will give us necessary information to help solve a bug faster.
 
 #### Before Submitting A Bug Report
 The following is a list of items you need to check before submitting a bug report. <br>
@@ -26,7 +25,7 @@ The following is a list of items you need to check before submitting a bug repor
 [cursory search](https://github.com/search?q=+is%3Aissue+user%3Aatom) A cursory search is necessary to check if the reported bug is already mentioned before or not. You can add to the existing bug report if the issue is still open.
 
 #### To Submit A Good Bug Report
-[GitHub issues](https://guides.github.com/features/issues/) You can track the bugs from this. For the repository that has bug, create an issue and fill out [the template](https://github.com/atom/.github/blob/master/.github/ISSUE_TEMPLATE/bug_report.md) to give details of the bug.
+[GitHub issues](https://guides.github.com/features/issues/) You can track the bugs from this. For the repository that has bug, create an issue and fill out [the template](https://github.com/csc510fall23g45/slash/blob/main/docs/bug_report.md) to give details of the bug.
 
 
 * To identify the problem, give the issue a clear and informative term. <br>
@@ -47,7 +46,7 @@ Provide more context by answering these questions: <br>
 ## Suggesting Enhancements
 
 Any suggesting enhancements like adding new features or imporving existing functionalities, etc can done by following the below guidelines. They help maintainers understand your improvement. <br>
-[the template](https://github.com/atom/.github/blob/master/.github/ISSUE_TEMPLATE/feature_request.md)- this template is to be filled to add suggestions. These can include the steps that you imagine you would take if the feature you're requesting existed.
+[the template](https://github.com/csc510fall23g45/slash/blob/main/docs/feature_report.md)- this template is to be filled to add suggestions. These can include the steps that you imagine you would take if the feature you're requesting existed.
 
 ##### Before Submitting An Enhancement Suggestion
 
@@ -56,7 +55,7 @@ Any suggesting enhancements like adding new features or imporving existing funct
 
 #### To Submit A Good Enhancement Suggestion
 
-[GitHub issues](https://guides.github.com/features/issues/) You can track the bugs from this. For the repository that has bug, create an issue and fill out [the template](https://github.com/atom/.github/blob/master/.github/ISSUE_TEMPLATE/bug_report.md) to give details of the bug.
+[GitHub issues](https://guides.github.com/features/issues/) You can track the bugs from this. For the repository that has bug, create an issue and fill out [the template](https://github.com/csc510fall23g45/slash/blob/main/docs/bug_report.md) to give details of the bug.
 
 * To identify the problem, give the issue a clear and informative term. <br>
 * Describe in as much detail as possible to duplicate the problem. Explain the problem and explain about the exact command sused in the terminal which caus ethe bug to occur.
