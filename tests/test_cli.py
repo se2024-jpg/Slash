@@ -25,6 +25,16 @@ def test_set_player_name(monkeypatch):
             # email = data["email"]
         assert fv.login() == name
 
+def test_change_user(monkeypatch, capfd):
+    fv = full_version.full_version()
+    features.create_user('test')
+    fv.name = 'test'
+    answers = iter(["user1"])
+    monkeypatch.setattr('builtins.input', lambda name: next(answers))
+    fv.change_user()
+    out, err = capfd.readouterr()
+    assert "Welcome" in out
+
 def test_extract_list(monkeypatch, capfd):
     fv = full_version.full_version()
     features.create_user('test')
