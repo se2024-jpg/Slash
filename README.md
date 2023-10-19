@@ -59,7 +59,10 @@ flask run
  
 # :dizzy: What's New ?
 
-### LOGIN
+### User Interface
+<p> In previous version most of the feautures are in command line which we changed every feauture to User Interface. </p>
+
+### Login
 <p> User can have their own account. They can store their data and can access the data whenever required. </p>
 
 ### SORTING
@@ -97,8 +100,12 @@ flask run
 * ***Students***: Students coming to university are generally on a budget and time constraint and generally spend hours wasting time to search for products on Websites. Slash is the perfect tool for these students that slashes all the unnecessary details on a website and helps them get prices for a product across multiple websites.Make the most of this tool in the upcoming Black Friday Sale.
 * ***Data Analysts***: Finding data for any project is one of the most tedious job for a data analyst, and the datasets found might not be the most recent one. Using slash, they can create their own dataset in real time and format it as per their needs so that they can focus on what is actually inportant.
   
-# ADDITIONAL INFORMATION
+# Additional Information
 <p> For Additional Information direct to this page </p>
+
+# Chat Channel
+
+<code><a href="https://discord.gg/Ns8zxEUu" target="_blank"><img height="100" width="250" src="https://user-images.githubusercontent.com/42767118/135394825-26dee6db-7a64-4e3f-902a-1e35abd4cf0c.png"></a></code>
 
 # :sparkles: Contributors
 
@@ -108,4 +115,4 @@ flask run
 - Nitya Naga Sai Atluri(NityaNagaSai)
 
 ## :email: Support
-For any queries and help, please reach out to us at: sefall2023project45@gmail.com
+To Subscribe and for any help, please reach out to us at: sefall2023project45@gmail.com
