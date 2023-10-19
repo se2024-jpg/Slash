@@ -1,5 +1,6 @@
 from src.modules import full_version
 from src.modules import csv_writer
+from src.modules import features
 import random
 import string
 import os
@@ -8,7 +9,7 @@ import pytest
 
 def test_set_player_name(monkeypatch):
     fv = full_version.full_version()
-    if not os.path.exists(fv.user_data):
+    if not os.path.exists(fv.default_user_file):
         name = "".join(random.choices(string.ascii_lowercase, k=5))
         #email = "".join(random.choices(string.ascii_lowercase, k=3)) + "@mail.com"
         
@@ -18,7 +19,7 @@ def test_set_player_name(monkeypatch):
 
         assert fv.login() == name
     else:
-        with open(fv.user_data) as json_file:
+        with open(fv.default_user_file) as json_file:
             data = json.load(json_file)
             name = data["name"]
             # email = data["email"]
@@ -26,6 +27,8 @@ def test_set_player_name(monkeypatch):
 
 def test_extract_list(monkeypatch, capfd):
     fv = full_version.full_version()
+    features.create_user('test')
+    fv.name = 'test'
     wishlist_index = 0
     # Create a new wishlist
     answers = iter([2, wishlist_index, 3])
