@@ -62,6 +62,7 @@ class full_version:
             if indx < len(self.df):
                 new_data = self.df.iloc[[indx]]
                 wishlist_add_item(self.name, selected_wishlist, new_data)
+                print("Item added successfully")
                 """
                 if os.path.exists(wishlist_path) and (
                     os.path.getsize(wishlist_path) > 0
