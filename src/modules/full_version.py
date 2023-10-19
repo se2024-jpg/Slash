@@ -61,7 +61,7 @@ class full_version:
             indx = int(input("\nEnter row number of product to save: "))
             if indx < len(self.df):
                 new_data = self.df.iloc[[indx]]
-                wishlist_add_item(self.name, selected_wishlist, new_data, self.df.columns)
+                wishlist_add_item(self.name, selected_wishlist, new_data)
                 """
                 if os.path.exists(wishlist_path) and (
                     os.path.getsize(wishlist_path) > 0
