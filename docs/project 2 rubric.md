@@ -1,21 +1,21 @@
-# Project 2 Rubric
+# Project 2 Rubric 
 
 
-Notes|Self-assement|Evidence|
+Notes|Self-assement (Total-90/90) |Evidence|
 --------|------|-------|
 Video |3| (Link to be added) |
-Workload is spread over the whole team (One team member is often X-times more productive than the others...) |3 | Sai Raj Thirumalai(sairajzero)-  Mahathi Kolishetty(mahathii)-  Anish Rao Toorpu(anish7-anish)-  Nitya Naga Sai Atluri(NityaNagaSai)-  Workload is spread equally |
-"but nevertheless, here is a track record that everyone is contributing a lot) "|3| (Link to be added) - Everyone is contributing a lot
-Number of commits |3|https://github.com/csc510fall23g45/slash/graphs/contributors  - (No.of commits in total) 
-Number of commits: by different people |3| Sai Raj Thirumalai(sairajzero)-  Mahathi Kolishetty(mahathii)-  Anish Rao Toorpu(anish7-anish)-  Nitya Naga Sai Atluri(NityaNagaSai)- |
-Issues reports: there are many |3| https://github.com/csc510fall23g45/slash/issues -
+Workload is spread over the whole team (One team member is often X-times more productive than the others...) |3 | Sai Raj Thirumalai(sairajzero)-18  Mahathi Kolishetty(mahathii)-18  Anish Rao Toorpu(anish7-anish)-17  Nitya Naga Sai Atluri(NityaNagaSai)-18  Workload is spread equally |
+"but nevertheless, here is a track record that everyone is contributing a lot) "|3|  Everyone is contributing a lot as each person has more than 15 commits
+Number of commits |3|https://github.com/csc510fall23g45/slash/graphs/contributors  - 71
+Number of commits: by different people |3| Sai Raj Thirumalai(sairajzero)-18  Mahathi Kolishetty(mahathii)-18  Anish Rao Toorpu(anish7-anish)-17  Nitya Naga Sai Atluri(NityaNagaSai)- 18 |
+Issues reports: there are many |3| https://github.com/csc510fall23g45/slash/issues 
 Issues are being closed |3|https://github.com/csc510fall23g45/slash/issues?q=is%3Aissue+is%3Aclosed - Every issue is closed
-DOI badge exists |3|DOI Badge: (Link to be added)
+DOI badge exists |3|DOI Badge: https://zenodo.org/records/10020461
 "Docs: doco generated format not ugly "|3| Md files: https://github.com/csc510fall23g45/slash/tree/main/docs , https://github.com/csc510fall23g45/slash/blob/main/README.md |
-Docs: what: point descriptions of each class/function (in isolation) |3|Function_desc .md : https://github.com/csc510fall23g45/slash/blob/main/docs/function_description.md |
+Docs: what: point descriptions of each class/function (in isolation) |3| Function_desc .md : https://github.com/csc510fall23g45/slash/blob/main/docs/function_description.md |
 "Docs: how: for common use cases X,Y,Z mini-tutorials showing worked examples on how to do X,Y,Z" | 3 | Readme : https://github.com/csc510fall23g45/slash/blob/main/README.md - Clear explanation of every feature |
 "Docs: why: docs tell a story, motivate the whole thing, deliver a punchline that makes you want to rush out and use the thing "|3|Readme: https://github.com/csc510fall23g45/slash/blob/main/README.md |
-"Docs: short video, animated, hosted on your repo. That convinces people why they want to work on your code. "|3| (Link to be added)
+"Docs: short video, animated, hosted on your repo. That convinces people why they want to work on your code. "|3| https://github.com/csc510fall23g45/slash#user-interface-login
 Use of version control tools |3| https://github.com/csc510fall23g45/slash |
 Use of style checkers |3| https://github.com/csc510fall23g45/slash/blob/main/.github/workflows/style_checker.yml |
 Use of code formatters. |3| https://github.com/csc510fall23g45/slash/blob/main/.github/workflows/pylint.yml |
