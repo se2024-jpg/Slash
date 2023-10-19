@@ -1,6 +1,7 @@
-[CSC 510 - Project 3 - Repo Presentation](https://ncsu.zoom.us/rec/share/LX3fKUKuKso1_XNpdK2TvEdADZzpYdMughe_9e_f3-zdzuYhFoxz8k6mHf_vcJOj.QlqORp3KuCJi_boa?startTime=1638480222000)
+# SLASH
+Slash Your Spending, Not Your Style - Unleash the Best Deals!!
 
-<p align="center"><img width="500" src="./assets/slash.png"></p>
+<p align="center"><img width="500" src="./assets/Shop.gif"></p>
 
 [![GitHub license](https://img.shields.io/github/license/TommasU/slash)](https://github.com/TommasU/slash/blob/main/LICENSE)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5739350.svg)](https://doi.org/10.5281/zenodo.5739350)
@@ -20,13 +21,13 @@ Slash is a tool that scrapes the most popular e-commerce websites to get the bes
 Checkout our newest Features! Mini Version and Full version now showcasing new sets of improvements.
 
 
-# :rocket: Installation
+# :rocket: Quick Guide
 
 1. Access the Github repository from your computer. 
  - First, pre-install [git](https://git-scm.com/) on  your machine. 
- - Then, clone the following repo:
+ - Then, clone the repo using the following command:
  ```
- https://github.com/TommasU/slash.git
+ git clone https://github.com/csc510fall23g45/slash
  ```
  * Finally, ```cd``` into the local repository.
 ```
@@ -40,20 +41,30 @@ pip3 install -r requirements.txt
 ```
 3. Running the program
 
-- Use the python command to run the ```slash.py``` file.
-```
-python3 -m src.slash --search socks
+- Set the environmental variable using either of the following commands:
+- 
+ ```
+MAC
+export FLASK_APP=./src/modules/app
+flask run
+
+Windows Command Prompt
+set FLASK_APP=.\src\modules\app 
+flask run
+
+Windows Powershell
+$Env:FLASK_APP='.\src\modules\app'
 ```
 <p>
 
 
-# :dizzy: What's New in Phase 3
+# :dizzy: What's New ?
 
 
 ## :computer: User Friendly UI
 
 
-Now featuring a friendly user interface for the Mini Version of SLASH including the best of a search bar and easy to read results. Interface provides options to 
+Now featuring a friendly user interface for SLASH including the best of a search bar and easy to read results. Interface provides options to 
 - Sort results
 - Change currency displayed
 - Filter number of items displayed
