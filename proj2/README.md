@@ -1,9 +1,14 @@
+# Video
+
+[CSC 510 - Project 2 - Repo Presentation](https://youtu.be/bUPy9Fyh2bA)
+
+
 # Project 2 Rubric 
 
 
 Notes|Self-assement (Total-90/90) |Evidence|
 --------|------|-------|
-Video |3| (Link to be added) |
+Video |3| https://youtu.be/bUPy9Fyh2bA |
 Workload is spread over the whole team (One team member is often X-times more productive than the others...) |3 | Sai Raj Thirumalai(sairajzero)-18  Mahathi Kolishetty(mahathii)-18  Anish Rao Toorpu(anish7-anish)-17  Nitya Naga Sai Atluri(NityaNagaSai)-18  Workload is spread equally |
 "but nevertheless, here is a track record that everyone is contributing a lot) "|3|  Everyone is contributing a lot as each person has more than 15 commits
 Number of commits |3|https://github.com/csc510fall23g45/slash/graphs/contributors  - 71
