@@ -63,34 +63,36 @@ flask run
 <p> In previous version most of the feautures are in command line which we changed every feauture to User Interface. </p>
 <p align="center"><img width="700" src="./assets/login.gif"></p>
 
-### SORTING
+### Sorting
 <p> You can sort the products based on rating or price.  </p>
 <p align="center"><img width="700" src="./assets/sorting.gif"></p>
 
-### CURRENCY
+### Currency
 <p> View prices in the currency of your choice. </p>
 <p align="center"><img width="700" src="./assets/currency.gif"></p>
 
-### FILTERING
+### Filtering
 <p> Based on Min Price and Max Price you can filter your data.</p>
 <p align="center"><img width="700" src="./assets/price.gif"></p>
 
-### FILTERING
+### Filtering
 <p> Filter the data using Minimum Rating.</p>
 <p align="center"><img width="700" src="./assets/rating.gif"></p>
 
-### WISHLIST
+### Wishlist
 <p> You can add Your favorite product to Wishlist.</p>
 <p align="center"><img width="700" src="./assets/wishlist.gif"></p>
 
-### DELETE
+### Delete
 <p>Remove selected product from your wishlist.</p>
 <p align="center"><img width="700" src="./assets/wishlistdelete.gif"></p>
 
-### Product LINK
+### Product Link
 <p> Product Link which directs to the product page.</p>
 <p align="center"><img width="700" src="./assets/link.gif"></p>
 
+# Video
+[CSC 510 - Project 2 - Repo Presentation](https://youtu.be/bUPy9Fyh2bA)
 
 # :muscle: What's next for future development?
 
