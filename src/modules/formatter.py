@@ -159,30 +159,33 @@ def getCurrency(currency, price):
     """
 
     converted_cur = 0.0
-    if len(price) > 1:
-        if currency == "inr":
-            converted_cur = EXCHANGES["rates"]["INR"] * int(
-                price[(price.index("$") + 1) : price.index(".")].replace(",", "")
-            )
-        elif currency == "euro":
-            converted_cur = EXCHANGES["rates"]["EUR"] * int(
-                price[(price.index("$") + 1) : price.index(".")].replace(",", "")
-            )
-        elif currency == "aud":
-            converted_cur = EXCHANGES["rates"]["AUD"] * int(
-                price[(price.index("$") + 1) : price.index(".")].replace(",", "")
-            )
-        elif currency == "yuan":
-            converted_cur = EXCHANGES["rates"]["CNY"] * int(
-                price[(price.index("$") + 1) : price.index(".")].replace(",", "")
-            )
-        elif currency == "yen":
-            converted_cur = EXCHANGES["rates"]["JPY"] * int(
-                price[(price.index("$") + 1) : price.index(".")].replace(",", "")
-            )
-        elif currency == "pound":
-            converted_cur = EXCHANGES["rates"]["GBP"] * int(
-                price[(price.index("$") + 1) : price.index(".")].replace(",", "")
-            )
-        converted_cur = currency.upper() + " " + str(round(converted_cur, 2))
+    try:
+        if len(price) > 1:
+            if currency == "inr":
+                converted_cur = EXCHANGES["rates"]["INR"] * int(
+                    price[(price.index("$") + 1) : price.index(".")].replace(",", "")
+                )
+            elif currency == "euro":
+                converted_cur = EXCHANGES["rates"]["EUR"] * int(
+                    price[(price.index("$") + 1) : price.index(".")].replace(",", "")
+                )
+            elif currency == "aud":
+                converted_cur = EXCHANGES["rates"]["AUD"] * int(
+                    price[(price.index("$") + 1) : price.index(".")].replace(",", "")
+                )
+            elif currency == "yuan":
+                converted_cur = EXCHANGES["rates"]["CNY"] * int(
+                    price[(price.index("$") + 1) : price.index(".")].replace(",", "")
+                )
+            elif currency == "yen":
+                converted_cur = EXCHANGES["rates"]["JPY"] * int(
+                    price[(price.index("$") + 1) : price.index(".")].replace(",", "")
+                )
+            elif currency == "pound":
+                converted_cur = EXCHANGES["rates"]["GBP"] * int(
+                    price[(price.index("$") + 1) : price.index(".")].replace(",", "")
+                )
+            converted_cur = currency.upper() + " " + str(round(converted_cur, 2))
+    except Exception as e:
+        print(f'There is an error in converting currency. Error is :{e}')
     return converted_cur

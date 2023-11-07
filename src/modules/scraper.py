@@ -122,7 +122,21 @@ def searchWalmart(query, df_flag, currency):
     # print(products)
     return products
 
+def walmart_scraper(link):
+    try:
+        page = httpsGet(link)
 
+        res = page.select('span.inline-flex.flex-column span')[0].text
+        pattern = r'(\$\s?\d+\.\d{2})'
+        match = re.search(pattern, res)
+        if match:
+            return match.group(1)
+        else:
+            return None
+    except Exception as e:
+        print(f'There was an error in scraping {link}, Error is {e}')
+        return None
+ 
 def searchEtsy(query, df_flag, currency):
     """
     The searchEtsy function scrapes Etsy.com

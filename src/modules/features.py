@@ -2,8 +2,10 @@ import json
 import os
 import pandas as pd
 import numpy as np
-from pathlib import Path
 import re
+from pathlib import Path
+
+from . import scraper
 
 # path for user profiles and their wish lists
 users_main_dir = Path(__file__).parent.parent / "users"
@@ -56,8 +58,9 @@ def read_wishlist(username, wishlist_name):
     if os.path.exists(wishlist_path):
         try:
             csv = pd.read_csv(wishlist_path)
-            for _,obj in csv.iterrows():
-                update_link(obj['link'],obj['website'],obj['price'])
+            for _,obj in csv.iterrows():  
+                new_price = update_price(obj['link'],obj['website'],obj['price'])
+                obj['price'] = new_price
             return csv
         except Exception:
             return pd.DataFrame()
@@ -74,10 +77,10 @@ def wishlist_remove_list(username, wishlist_name, indx):
 def find_currency(price):
     currency = re.match(r'^[a-zA-Z]{3,5}', price)
     return currency.group() if currency else currency
-    pass
 
-def update_link(link,website,price):
+def update_price(link,website,price):
     currency = find_currency(price)
+    updated_price = price
     if website == "amazon":
         pass
     if website == "Google":
@@ -87,4 +90,8 @@ def update_link(link,website,price):
     if website == "Etsy":
         pass
     if website == "walmart":
-        pass
+        scraped_price = scraper.walmart_scraper(link)
+        if scraped_price:
+            updated_price = scraper.getCurrency(currency,scraped_price) if currency is not None else scraped_price
+
+    return updated_price
