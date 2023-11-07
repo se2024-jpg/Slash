@@ -54,10 +54,14 @@ def read_wishlist(username, wishlist_name):
     wishlist_path = usr_dir(username) / (wishlist_name + ".csv")
     if os.path.exists(wishlist_path):
         try:
-            return pd.read_csv(wishlist_path)
+            csv = pd.read_csv(wishlist_path)
+            for _,obj in csv.iterrows():
+                update_link(obj['link'],obj['website'])
+            return csv
         except Exception:
             return pd.DataFrame()
     else:
+        print("Doesnt exist")
         return None # wishlist not found
 
 def wishlist_remove_list(username, wishlist_name, indx):
@@ -65,3 +69,16 @@ def wishlist_remove_list(username, wishlist_name, indx):
     old_data = read_wishlist(username, wishlist_name)
     old_data = old_data.drop(index=indx)
     old_data.to_csv(wishlist_path, index=False, header=old_data.columns)
+
+
+def update_link(link,website):
+    if website == "amazon":
+        pass
+    if website == "Google":
+        pass
+    if website == "BJS":
+        pass
+    if website == "Etsy":
+        pass
+    if website == "walmart":
+        pass
