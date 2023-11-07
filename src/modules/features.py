@@ -3,6 +3,7 @@ import os
 import pandas as pd
 import numpy as np
 from pathlib import Path
+import re
 
 # path for user profiles and their wish lists
 users_main_dir = Path(__file__).parent.parent / "users"
@@ -56,7 +57,7 @@ def read_wishlist(username, wishlist_name):
         try:
             csv = pd.read_csv(wishlist_path)
             for _,obj in csv.iterrows():
-                update_link(obj['link'],obj['website'])
+                update_link(obj['link'],obj['website'],obj['price'])
             return csv
         except Exception:
             return pd.DataFrame()
@@ -70,8 +71,13 @@ def wishlist_remove_list(username, wishlist_name, indx):
     old_data = old_data.drop(index=indx)
     old_data.to_csv(wishlist_path, index=False, header=old_data.columns)
 
+def find_currency(price):
+    currency = re.match(r'^[a-zA-Z]{3,5}', price)
+    return currency.group() if currency else currency
+    pass
 
-def update_link(link,website):
+def update_link(link,website,price):
+    currency = find_currency(price)
     if website == "amazon":
         pass
     if website == "Google":
