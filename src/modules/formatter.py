@@ -95,7 +95,7 @@ def formatResult(
         "timestamp": datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
         "title": title,
         "price": price,
-        "link": f"www.{website}.com{link}",
+        "link": f"{link}" if link.startswith('http') or link.startswith('https') else f"www.{website}.com{link}",
         "website": website,
         "rating": rating,
         "no_of_ratings": num_rating,
