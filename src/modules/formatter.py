@@ -44,19 +44,25 @@ def formatResult(
             price = "$" + price
             if(website == 'walmart' and '.' not in price):
                 price = price[:-2] + "." + price[-2:]
-        #if "$" not in price:
-        #    price = "$" + price
+        
         if links:
             link = links[0]["href"]
+        
         if ratings:
-            #print(float(ratings[0].get_text().strip().split()[0]))
-            if(type(ratings)!=str):
+            if website == "bestbuy":
+                rating_text = ratings[0].get_text().strip()
+                match = re.search(r"Rating (\d+\.\d+) out of 5 stars", rating_text)
+                rating = float(match.group(1))
+
+            elif(type(ratings)!=str):
                 rating = float(ratings[0].get_text().strip().split()[0])
+                
             else:
                 rating=float(ratings)
             
         if trending:
             trending_stmt = trending.get_text().strip()
+        
         if num_ratings:
             if isinstance(num_ratings, int):
                 num_rating = num_ratings

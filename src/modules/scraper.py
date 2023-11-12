@@ -307,6 +307,47 @@ def searchEbay(query, df_flag, currency):
 
     return products
 
+def searchBestbuy(query, df_flag, currency):
+    """
+    The searchBestbuy function scrapes bestbuy.com
+    Parameters: query- search query for the product, df_flag- flag variable, currency- currency type entered by the user
+    Returns a list of items available on bestbuy.com that match the product entered by the user
+    """
+    query = formatSearchQuery(query)
+    URL = f"https://www.bestbuy.com/site/searchpage.jsp?st={query}"
+    page = httpsGet(URL)
+    results = page.findAll("li", {'class': 'sku-item'})
+
+    products = []
+
+    pattern = re.compile(r"out of 5 stars with")
+
+    for res in results:
+        titles, prices, links = (
+            res.select("h4.sku-title a"),
+            res.select("div.priceView-customer-price span"),
+            res.select("a"),
+        )
+        ratings = res.find("div", class_="c-ratings-reviews").findAll("p", text=pattern)
+        num_ratings = res.select("span.c-reviews")
+        trending = None
+    
+        product = formatResult(
+            "bestbuy",
+            titles,
+            prices,
+            links,
+            ratings,
+            num_ratings,
+            trending,
+            df_flag,
+            currency,
+        )
+        products.append(product)
+
+    return products
+
+
 def condense_helper(result_condensed, list, num):
     """This is a helper function to limit number of entries in the result"""
     for p in list:
@@ -350,10 +391,11 @@ def driver(
     products_4 = searchGoogleShopping(product, df_flag, currency)
     products_5 = searchBJs(product, df_flag, currency)
     products_6 = searchEbay(product,df_flag,currency)
+    products_7 = searchBestbuy(product,df_flag,currency)
 
     result_condensed = ""
     if not ui:
-        results = products_1 + products_2 + products_3 + products_4 + products_5 + products_6
+        results = products_1 + products_2 + products_3 + products_4 + products_5 + products_6 + products_7
         result_condensed = (
             products_1[:num]
             + products_2[:num]
@@ -361,6 +403,7 @@ def driver(
             + products_4[:num]
             + products_5[:num]
             + products_6[:num]
+            + products_7[:num]
         )
         result_condensed = pd.DataFrame.from_dict(result_condensed, orient="columns")
         results = pd.DataFrame.from_dict(results, orient="columns")
@@ -382,6 +425,7 @@ def driver(
         condense_helper(result_condensed, products_4, num)
         condense_helper(result_condensed, products_5, num)
         condense_helper(result_condensed, products_6, num)
+        condense_helper(result_condensed, products_7, num)
 
         if currency != None:
             for p in result_condensed:
