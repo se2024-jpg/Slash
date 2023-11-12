@@ -18,7 +18,7 @@ import csv
 import pandas as pd
 import os
 from datetime import datetime
-
+from ebaysdk.finding import Connection
 
 def httpsGet(URL):
     """
@@ -186,7 +186,7 @@ def searchGoogleShopping(query, df_flag, currency):
     """
     The searchGoogleShopping function scrapes https://shopping.google.com/
     Parameters: query- search query for the product, df_flag- flag variable, currency- currency type entered by the user
-    Returns a list of items available on walmart.com that match the product entered by the user
+    Returns a list of items available on shopping.google.com that match the product entered by the user
     """
     query = formatSearchQuery(query)
     URL = f"https://www.google.com/search?tbm=shop&q={query}"
@@ -233,7 +233,7 @@ def searchBJs(query, df_flag, currency):
     """
     The searchBJs function scrapes https://www.bjs.com/
     Parameters: query- search query for the product, df_flag- flag variable, currency- currency type entered by the user
-    Returns a list of items available on walmart.com that match the product entered by the user
+    Returns a list of items available on bjs.com that match the product entered by the user
     """
     query = formatSearchQuery(query)
     URL = f"https://www.bjs.com/search/{query}"
@@ -265,6 +265,47 @@ def searchBJs(query, df_flag, currency):
     # print(products)
     return products
 
+def searchEbay(query, df_flag, currency):
+    """
+    The searchEbay function scrapes https://www.ebay.com/
+    Parameters: query- search query for the product, df_flag- flag variable, currency- currency type entered by the user
+    Returns a list of items available on ebay.com that match the product entered by the user
+    """
+    EBAY_APP = 'BradleyE-slash-PRD-2ddd2999f-2ae39cfa'
+
+    try:
+        api = Connection(appid=EBAY_APP, config_file=None, siteid='EBAY-US')
+        response = api.execute('findItemsByKeywords', {'keywords': query})
+    except ConnectionError as e:
+        print(e)
+        return []
+
+    data = response.dict()
+
+    products = []
+    for p in data['searchResult']['item']:
+        
+        titles = p['title']
+        prices = '$' + p['sellingStatus']['currentPrice']['value']
+        links = p['viewItemURL']
+        ratings = None
+        num_ratings = None
+        trending = None
+        
+        product = formatResult(
+            "ebay",
+            titles,
+            prices,
+            links,
+            ratings,
+            num_ratings,
+            trending,
+            df_flag,
+            currency,
+        )
+        products.append(product)
+
+    return products
 
 def condense_helper(result_condensed, list, num):
     """This is a helper function to limit number of entries in the result"""
@@ -308,15 +349,18 @@ def driver(
     products_3 = searchEtsy(product, df_flag, currency)
     products_4 = searchGoogleShopping(product, df_flag, currency)
     products_5 = searchBJs(product, df_flag, currency)
+    products_6 = searchEbay(product,df_flag,currency)
+
     result_condensed = ""
     if not ui:
-        results = products_1 + products_2 + products_3 + products_4 + products_5
+        results = products_1 + products_2 + products_3 + products_4 + products_5 + products_6
         result_condensed = (
             products_1[:num]
             + products_2[:num]
             + products_3[:num]
             + products_4[:num]
             + products_5[:num]
+            + products_6[:num]
         )
         result_condensed = pd.DataFrame.from_dict(result_condensed, orient="columns")
         results = pd.DataFrame.from_dict(results, orient="columns")
@@ -337,6 +381,7 @@ def driver(
         condense_helper(result_condensed, products_3, num)
         condense_helper(result_condensed, products_4, num)
         condense_helper(result_condensed, products_5, num)
+        condense_helper(result_condensed, products_6, num)
 
         if currency != None:
             for p in result_condensed:
