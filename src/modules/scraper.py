@@ -434,27 +434,27 @@ def driver(
     """Returns csv is the user enters the --csv arg,
     else will display the result table in the terminal based on the args entered by the user"""
 
-    # products_1 = searchAmazon(product, df_flag, currency)
-    # products_2 = searchWalmart(product, df_flag, currency)
-    # products_3 = searchEtsy(product, df_flag, currency)
-    # products_4 = searchGoogleShopping(product, df_flag, currency)
-    products_1 = searchBJs(product, df_flag, currency)
-    # products_6 = searchEbay(product,df_flag,currency)
-    # products_7 = searchBestbuy(product,df_flag,currency)
-    # products_8 = searchTarget(product,df_flag,currency)
+    products_1 = searchAmazon(product, df_flag, currency)
+    products_2 = searchWalmart(product, df_flag, currency)
+    products_3 = searchEtsy(product, df_flag, currency)
+    products_4 = searchGoogleShopping(product, df_flag, currency)
+    products_5 = searchBJs(product, df_flag, currency)
+    products_6 = searchEbay(product,df_flag,currency)
+    products_7 = searchBestbuy(product,df_flag,currency)
+    products_8 = searchTarget(product,df_flag,currency)
 
     result_condensed = ""
     if not ui:
-        results = products_1 #+ products_2 + products_3 + products_4 + products_5 + products_6 + products_7 + products_8
+        results = products_1 + products_2 + products_3 + products_4 + products_5 + products_6 + products_7 + products_8
         result_condensed = (
             products_1[:num]
-            # + products_2[:num]
-            # + products_3[:num]
-            # + products_4[:num]
-            # + products_5[:num]
-            # + products_6[:num]
-            # + products_7[:num]
-            # + products_8[:num]
+            + products_2[:num]
+            + products_3[:num]
+            + products_4[:num]
+            + products_5[:num]
+            + products_6[:num]
+            + products_7[:num]
+            + products_8[:num]
         )
         result_condensed = pd.DataFrame.from_dict(result_condensed, orient="columns")
         results = pd.DataFrame.from_dict(results, orient="columns")
@@ -471,13 +471,13 @@ def driver(
     else:
         result_condensed = []
         condense_helper(result_condensed, products_1, num)
-        # condense_helper(result_condensed, products_2, num)
-        # condense_helper(result_condensed, products_3, num)
-        # condense_helper(result_condensed, products_4, num)
-        # condense_helper(result_condensed, products_5, num)
-        # condense_helper(result_condensed, products_6, num)
-        # condense_helper(result_condensed, products_7, num)
-        # condense_helper(result_condensed, products_8, num)
+        condense_helper(result_condensed, products_2, num)
+        condense_helper(result_condensed, products_3, num)
+        condense_helper(result_condensed, products_4, num)
+        condense_helper(result_condensed, products_5, num)
+        condense_helper(result_condensed, products_6, num)
+        condense_helper(result_condensed, products_7, num)
+        condense_helper(result_condensed, products_8, num)
 
         if currency != None:
             for p in result_condensed:
