@@ -33,9 +33,22 @@ def formatResult(
     ratings-scraped ratings of the product
     Returns: A dictionary of all the parameters stated above for the product
     """
-    if website!='ebay':
+    
+    title, price, link, rating, num_rating, converted_cur, trending_stmt = (
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+    )
+    if website!='ebay' and website!='target':
         if titles:
-            title = titles[0].get_text().strip()
+            if website =="bjs":
+                title = titles.get_text().strip()
+            else:
+                title = titles[0].get_text().strip()
         if prices:
             price = prices[0].get_text().strip()
             price = re.sub('\s', '', price) # remove all spaces
@@ -50,9 +63,12 @@ def formatResult(
         
         if ratings:
             if website == "bestbuy":
-                rating_text = ratings[0].get_text().strip()
-                match = re.search(r"Rating (\d+\.\d+) out of 5 stars", rating_text)
-                rating = float(match.group(1))
+                try:
+                    rating_text = ratings[0].get_text().strip()
+                    match = re.search(r"Rating (\d+\.\d+) out of 5 stars", rating_text)
+                    rating = float(match.group(1))
+                except:
+                    rating = None
 
             elif(type(ratings)!=str):
                 rating = float(ratings[0].get_text().strip().split()[0])
