@@ -3,9 +3,13 @@ import os
 import pandas as pd
 import numpy as np
 import re
+import ssl
+import smtplib
 from pathlib import Path
 
 from . import scraper
+from email.message import EmailMessage
+
 
 # path for user profiles and their wish lists
 users_main_dir = Path(__file__).parent.parent / "users"
@@ -65,7 +69,38 @@ def read_wishlist(username, wishlist_name):
         except Exception:
             return pd.DataFrame()
     else:
-        print("Doesnt exist")
+        return None # wishlist not found
+
+def share_wishlist(username, wishlist_name, email_receiver):
+    wishlist_path = usr_dir(username) / (wishlist_name + ".csv")
+    if os.path.exists(wishlist_path):
+        try:
+            email_sender = 'slash.se23@gmail.com'
+            email_password = 'amkx fedi ilnm qahn'
+
+            subject = ' slash wishlist of ' + username
+
+            df = pd.read_csv(wishlist_path)
+            body = df['link'].astype(str).str.cat(sep=' ')
+            # body = df['link'].to_string(index=False)
+            # body = df.to_string(index=False)
+
+            em = EmailMessage()
+            em['from'] = email_sender
+            em['to'] = email_receiver
+            em['subject'] = subject
+            em.set_content(body)
+            
+
+            context = ssl.create_default_context()
+
+            with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
+                smtp.login(email_sender, email_password)
+                smtp.sendmail(email_sender, email_receiver, em.as_string())
+
+        except Exception:
+            return 'failed to send email'
+    else:
         return None # wishlist not found
 
 def wishlist_remove_list(username, wishlist_name, indx):
