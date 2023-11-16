@@ -82,7 +82,9 @@ def update_price(link,website,price):
     currency = find_currency(price)
     updated_price = price
     if website == "amazon":
-        pass
+        scraped_price = scraper.amazon_scraper(link).strip()
+        if scraped_price:
+            updated_price = scraper.getCurrency(currency,scraped_price) if currency is not None else scraped_price
     if website == "google":
         scraped_price = scraper.google_scraper(link).strip()
         if scraped_price:

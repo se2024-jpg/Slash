@@ -122,6 +122,23 @@ def searchWalmart(query, df_flag, currency):
     # print(products)
     return products
 
+def amazon_scraper(link):
+    try:
+        page = httpsGet(link)
+
+        whole_price = page.select('span.a-price-whole')[0].text.strip()
+        numeric_value = re.search(r'\b\d+\b',whole_price)
+        if numeric_value:
+            numeric_value = numeric_value.group()
+            res = page.select('span.a-price-symbol')[0].text.strip() + numeric_value + '.' + page.select('span.a-price-fraction')[0].text.strip()
+            return res
+        else:
+            return None
+    
+    except Exception as e:
+        print(f'There was an error in scraping {link}, Error is {e}')
+        return None
+    
 def google_scraper(link):
     try:
         page = httpsGet(link)
