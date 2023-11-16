@@ -122,6 +122,16 @@ def searchWalmart(query, df_flag, currency):
     # print(products)
     return products
 
+def google_scraper(link):
+    try:
+        page = httpsGet(link)
+
+        res = page.select('span.g9WBQb')[0].text
+        return res
+    except Exception as e:
+        print(f'There was an error in scraping {link}, Error is {e}')
+        return None
+    
 def walmart_scraper(link):
     try:
         page = httpsGet(link)

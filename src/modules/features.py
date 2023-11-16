@@ -58,7 +58,7 @@ def read_wishlist(username, wishlist_name):
     if os.path.exists(wishlist_path):
         try:
             csv = pd.read_csv(wishlist_path)
-            for _,obj in csv.iterrows():  
+            for _,obj in csv.iterrows():
                 new_price = update_price(obj['link'],obj['website'],obj['price'])
                 obj['price'] = new_price
             return csv
@@ -83,14 +83,16 @@ def update_price(link,website,price):
     updated_price = price
     if website == "amazon":
         pass
-    if website == "Google":
-        pass
+    if website == "google":
+        scraped_price = scraper.google_scraper(link).strip()
+        if scraped_price:
+            updated_price = scraper.getCurrency(currency,scraped_price) if currency is not None else scraped_price
     if website == "BJS":
         pass
     if website == "Etsy":
         pass
     if website == "walmart":
-        scraped_price = scraper.walmart_scraper(link)
+        scraped_price = scraper.walmart_scraper(link).strip()
         if scraped_price:
             updated_price = scraper.getCurrency(currency,scraped_price) if currency is not None else scraped_price
 
