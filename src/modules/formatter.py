@@ -33,7 +33,7 @@ def formatResult(
     ratings-scraped ratings of the product
     Returns: A dictionary of all the parameters stated above for the product
     """
-
+    
     title, price, link, rating, num_rating, converted_cur, trending_stmt = (
         "",
         "",
@@ -43,55 +43,65 @@ def formatResult(
         "",
         "",
     )
-    if titles:
-        title = titles[0].get_text().strip()
-    if prices:
-        price = prices[0].get_text().strip()
-        price = re.sub('\s', '', price) # remove all spaces
-        price = re.sub(',', '', price) # remove all , in numbers
-        price = re.search("[0-9\.]+", price).group() # search and match the price value (numbers)
-        price = "$" + price
-        if(website == 'walmart' and '.' not in price):
-            price = price[:-2] + "." + price[-2:]
-    #if "$" not in price:
-    #    price = "$" + price
-    if links:
-        link = links[0]["href"]
-    if ratings:
-        #print(float(ratings[0].get_text().strip().split()[0]))
-        if(type(ratings)!=str):
-            rating = float(ratings[0].get_text().strip().split()[0])
-        else:
-            rating=float(ratings)
+    if website!='ebay' and website!='target':
+        if titles:
+            if website =="bjs":
+                title = titles.get_text().strip()
+            else:
+                title = titles[0].get_text().strip()
+        if prices:
+            price = prices[0].get_text().strip()
+            price = re.sub('\s', '', price) # remove all spaces
+            price = re.sub(',', '', price) # remove all , in numbers
+            price = re.search("[0-9\.]+", price).group() # search and match the price value (numbers)
+            price = "$" + price
+            if(website == 'walmart' and '.' not in price):
+                price = price[:-2] + "." + price[-2:]
         
-    if trending:
-        trending_stmt = trending.get_text().strip()
-    if num_ratings:
-        if isinstance(num_ratings, int):
-            num_rating = num_ratings
-        elif isinstance(num_ratings, str):
-            num_ratings = (
-                    num_ratings
+        if links:
+            link = links[0]["href"]
+        
+        if ratings:
+            if website == "bestbuy":
+                try:
+                    rating_text = ratings[0].get_text().strip()
+                    match = re.search(r"Rating (\d+\.\d+) out of 5 stars", rating_text)
+                    rating = float(match.group(1))
+                except:
+                    rating = None
+
+            elif(type(ratings)!=str):
+                rating = float(ratings[0].get_text().strip().split()[0])
+                
+            else:
+                rating=float(ratings)
+            
+        if trending:
+            trending_stmt = trending.get_text().strip()
+        
+        if num_ratings:
+            if isinstance(num_ratings, int):
+                num_rating = num_ratings
+            elif isinstance(num_ratings, str):
+                num_ratings = (
+                        num_ratings
+                        .replace(")", "")
+                        .replace("(", "")
+                        .replace(",", "")
+                    )
+                num_rating = num_ratings.strip()
+            else:
+                num_ratings = (
+                    num_ratings[0]
+                    .get_text()
                     .replace(")", "")
                     .replace("(", "")
                     .replace(",", "")
                 )
-            num_rating = num_ratings.strip()
-        else:
-            num_ratings = (
-                num_ratings[0]
-                .get_text()
-                .replace(")", "")
-                .replace("(", "")
-                .replace(",", "")
-            )
-            num_rating = num_ratings.strip()
-    #print(num_rating)
-    # if df_flag==0: title=formatTitle(title)
-    # if df_flag==0: link=formatTitle(link)
-    if currency:
-        converted_cur = getCurrency(currency, price)
-    product = {
+                num_rating = num_ratings.strip()
+        if currency:
+            converted_cur = getCurrency(currency, price)
+        product = {
         "timestamp": datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
         "title": title,
         "price": price,
@@ -101,8 +111,22 @@ def formatResult(
         "no_of_ratings": num_rating,
         "trending": trending_stmt,
         "converted_price": converted_cur,
-    }
-    #print(product," Printed")
+        }
+    else:
+        if currency:
+            converted_cur = getCurrency(currency, price)
+        product = {
+            "timestamp": datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
+            "title": titles,
+            "price": prices,
+            "link": links,
+            "website": website,
+            "rating": ratings,
+            "no_of_ratings": num_ratings,
+            "trending": trending,
+            "converted_price": converted_cur,
+        }
+        
     return product
 
 

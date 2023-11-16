@@ -18,22 +18,23 @@ import csv
 import pandas as pd
 import os
 from datetime import datetime
-
+from ebaysdk.finding import Connection
 
 def httpsGet(URL):
     """
     The httpsGet function makes HTTP called to the requested URL with custom headers
     """
-
     headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36",
-        "Accept-Encoding": "gzip, deflate",
-        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-        "DNT": "1",
-        "Connection": "close",
-        "Upgrade-Insecure-Requests": "1",
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',  # noqa: E501
+        'Accept-Encoding': 'gzip, deflate',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+        'DNT': '1',
+        'Connection': 'keep-alive',
+        'Upgrade-Insecure-Requests': '1',
+        'Cache-Control': 'no-cache'
     }
-    page = requests.get(URL, headers=headers)
+    s = requests.Session()
+    page = s.get(URL, headers=headers)
     soup1 = BeautifulSoup(page.content, "html.parser")
     return BeautifulSoup(soup1.prettify(), "html.parser")
 
@@ -74,8 +75,6 @@ def searchAmazon(query, df_flag, currency):
             currency,
         )
         products.append(product)
-    # print("Amazon")
-    # print(products)
     return products
 
 
@@ -90,7 +89,6 @@ def searchWalmart(query, df_flag, currency):
     URL = f"https://www.walmart.com/search?q={query}"
     page = httpsGet(URL)
     results = page.findAll("div", {"data-item-id": True})
-    # print(results)
     products = []
     pattern = re.compile(r"out of 5 Stars")
     for res in results:
@@ -118,8 +116,6 @@ def searchWalmart(query, df_flag, currency):
             currency,
         )
         products.append(product)
-    # print("wallmart")
-    # print(products)
     return products
 
 def amazon_scraper(link):
@@ -178,7 +174,7 @@ def searchEtsy(query, df_flag, currency):
     }
     response = requests.get(url, headers=headers)
     soup = BeautifulSoup(response.content, "lxml")
-    for item in soup.select(".wt-grid__item-xs-6"):
+    for item in soup.findAll(".wt-grid__item-xs-6"):
         str = item.select("a")
         if str == []:
             continue
@@ -190,17 +186,10 @@ def searchEtsy(query, df_flag, currency):
        
         titles, prices = (item.select("h3")), (item.select(".currency-value"))
         ratings_text = item.find("div",class_='wt-align-items-center wt-max-height-full wt-display-flex-xs flex-direction-row-xs wt-text-title-small wt-no-wrap')
+        
         if ratings_text:
             ratings = ratings_text.get_text().split()[0]
             num_ratings = ratings_text.get_text().split()[1]
-        # Check if any elements were found
-
-        # ratings = item.select("span.wt-screen-reader-only")
-        # num_ratings = item.select("h2.wt-mr-xs-2
-        #                         wt-text-heading-small)
-        # Find all h2 elements with the specified class attribute
-    
-
         
         trending = item.select("span.wt-badge")
         if len(trending) > 0:
@@ -227,7 +216,7 @@ def searchGoogleShopping(query, df_flag, currency):
     """
     The searchGoogleShopping function scrapes https://shopping.google.com/
     Parameters: query- search query for the product, df_flag- flag variable, currency- currency type entered by the user
-    Returns a list of items available on walmart.com that match the product entered by the user
+    Returns a list of items available on shopping.google.com that match the product entered by the user
     """
     query = formatSearchQuery(query)
     URL = f"https://www.google.com/search?tbm=shop&q={query}"
@@ -265,8 +254,6 @@ def searchGoogleShopping(query, df_flag, currency):
             currency,
         )
         products.append(product)
-    # print("Google")
-    # print(products)
     return products
 
 
@@ -274,23 +261,22 @@ def searchBJs(query, df_flag, currency):
     """
     The searchBJs function scrapes https://www.bjs.com/
     Parameters: query- search query for the product, df_flag- flag variable, currency- currency type entered by the user
-    Returns a list of items available on walmart.com that match the product entered by the user
+    Returns a list of items available on bjs.com that match the product entered by the user
     """
     query = formatSearchQuery(query)
     URL = f"https://www.bjs.com/search/{query}"
     page = httpsGet(URL)
+    print("page", URL)
     results = page.findAll("div", {"class": "product"})
-    # print(results)
     products = []
     for res in results:
         titles, prices, links = (
-            res.select("h2"),
+            res.find("p", {"class": "no-select d-none auto-height"}),
             res.select("span.price"),
             res.select("a"),
         )
         ratings = res.findAll("span", {"class": "on"})
         num_ratings = res.select("span.prod-comments-count")
-        print(num_ratings)
         trending = res.select("p.instantSavings")
         if len(trending) > 0:
             trending = trending[0]
@@ -302,8 +288,153 @@ def searchBJs(query, df_flag, currency):
         if len(ratings) != 0:
             product["rating"] = len(ratings)
         products.append(product)
-    # print("BJS")
-    # print(products)
+    return products
+
+def searchEbay(query, df_flag, currency):
+    """
+    The searchEbay function scrapes https://www.ebay.com/
+    Parameters: query- search query for the product, df_flag- flag variable, currency- currency type entered by the user
+    Returns a list of items available on ebay.com that match the product entered by the user
+    """
+    EBAY_APP = 'BradleyE-slash-PRD-2ddd2999f-2ae39cfa'
+
+    try:
+        api = Connection(appid=EBAY_APP, config_file=None, siteid='EBAY-US')
+        response = api.execute('findItemsByKeywords', {'keywords': query})
+    except ConnectionError as e:
+        print(e)
+        return []
+
+    data = response.dict()
+
+    products = []
+    for p in data['searchResult']['item']:
+        
+        titles = p['title']
+        prices = '$' + p['sellingStatus']['currentPrice']['value']
+        links = p['viewItemURL']
+        ratings = None
+        num_ratings = None
+        trending = None
+        
+        product = formatResult(
+            "ebay",
+            titles,
+            prices,
+            links,
+            ratings,
+            num_ratings,
+            trending,
+            df_flag,
+            currency,
+        )
+        products.append(product)
+
+    return products
+
+def searchTarget(query, df_flag, currency):
+    """
+    The searchEbay function scrapes https://www.target.com/
+    Parameters: query- search query for the product, df_flag- flag variable, currency- currency type entered by the user
+    Returns a list of items available on target.com that match the product entered by the user
+    """
+
+    api_url = 'https://redsky.target.com/redsky_aggregations/v1/web/plp_search_v1'
+
+    page = '/s/' + query
+    params = {
+        'key': 'ff457966e64d5e877fdbad070f276d18ecec4a01',
+        'channel': 'WEB',
+        'count': '24',
+        'default_purchasability_filter': 'false',
+        'include_sponsored': 'true',
+        'keyword': query,
+        'offset': '0',
+        'page': page,
+        'platform': 'desktop',
+        'pricing_store_id': '3991',
+        'useragent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0',
+        'visitor_id': 'AAA',
+    }
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',  # noqa: E501
+        'Accept-Encoding': 'gzip, deflate',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+        'DNT': '1',
+        'Connection': 'keep-alive',
+        'Upgrade-Insecure-Requests': '1',
+        'Cache-Control': 'no-cache'
+    }
+    data = requests.get(api_url, headers=headers, params=params).json()
+    products = []
+
+    for p in data['data']['search']['products']:
+        titles = p['item']['product_description']['title']
+        prices = '$' + str(p['price']['reg_retail'])
+        links = p['item']['enrichment']['buy_url']
+        try:
+            ratings = p['ratings_and_reviews']['statistics']['rating']['average']
+        except KeyError:
+            ratings = None
+        try:
+            num_ratings = p['ratings_and_reviews']['statistics']['rating']['count']
+        except KeyError:
+            num_ratings = None
+        trending = None
+    
+        product = formatResult(
+            "target",
+            titles,
+            prices,
+            links,
+            ratings,
+            num_ratings,
+            trending,
+            df_flag,
+            currency,
+        )
+        products.append(product)
+
+    return products
+
+def searchBestbuy(query, df_flag, currency):
+    """
+    The searchBestbuy function scrapes bestbuy.com
+    Parameters: query- search query for the product, df_flag- flag variable, currency- currency type entered by the user
+    Returns a list of items available on bestbuy.com that match the product entered by the user
+    """
+    query = formatSearchQuery(query)
+    URL = f"https://www.bestbuy.com/site/searchpage.jsp?st={query}"
+    page = httpsGet(URL)
+    results = page.findAll("li", {'class': 'sku-item'})
+
+    products = []
+
+    pattern = re.compile(r"out of 5 stars with")
+
+    for res in results:
+        titles, prices, links = (
+            res.select("h4.sku-title a"),
+            res.select("div.priceView-customer-price span"),
+            res.select("a"),
+        )
+        ratings = res.find("div", class_="c-ratings-reviews").findAll("p", text=pattern)
+        num_ratings = res.select("span.c-reviews")
+        trending = None
+    
+        product = formatResult(
+            "bestbuy",
+            titles,
+            prices,
+            links,
+            ratings,
+            num_ratings,
+            trending,
+            df_flag,
+            currency,
+        )
+        products.append(product)
+
     return products
 
 
@@ -349,15 +480,22 @@ def driver(
     products_3 = searchEtsy(product, df_flag, currency)
     products_4 = searchGoogleShopping(product, df_flag, currency)
     products_5 = searchBJs(product, df_flag, currency)
+    products_6 = searchEbay(product,df_flag,currency)
+    products_7 = searchBestbuy(product,df_flag,currency)
+    products_8 = searchTarget(product,df_flag,currency)
+
     result_condensed = ""
     if not ui:
-        results = products_1 + products_2 + products_3 + products_4 + products_5
+        results = products_1 + products_2 + products_3 + products_4 + products_5 + products_6 + products_7 + products_8
         result_condensed = (
             products_1[:num]
             + products_2[:num]
             + products_3[:num]
             + products_4[:num]
             + products_5[:num]
+            + products_6[:num]
+            + products_7[:num]
+            + products_8[:num]
         )
         result_condensed = pd.DataFrame.from_dict(result_condensed, orient="columns")
         results = pd.DataFrame.from_dict(results, orient="columns")
@@ -378,13 +516,15 @@ def driver(
         condense_helper(result_condensed, products_3, num)
         condense_helper(result_condensed, products_4, num)
         condense_helper(result_condensed, products_5, num)
+        condense_helper(result_condensed, products_6, num)
+        condense_helper(result_condensed, products_7, num)
+        condense_helper(result_condensed, products_8, num)
 
         if currency != None:
             for p in result_condensed:
                 p["price"] = getCurrency(currency, p["price"])
 
         # Fix URLs so that they contain http before www
-        # TODO Fix issue with Etsy links -> For some reason they have www.Etsy.com prepended to the begining of the link
         for p in result_condensed:
             link = p["link"]
             if p["website"] == "Etsy":
