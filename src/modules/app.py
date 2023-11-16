@@ -2,7 +2,7 @@ from flask import Flask, session, render_template, request, redirect, url_for
 from .scraper import driver, filter
 from .formatter import formatResult
 import json
-from .features import create_user, wishlist_add_item, read_wishlist, wishlist_remove_list
+from .features import create_user, wishlist_add_item, read_wishlist, wishlist_remove_list, share_wishlist
 
 app = Flask(__name__, template_folder=".")
 
@@ -32,6 +32,14 @@ def wishlist():
     wishlist_name = "default"
     items = read_wishlist(username, wishlist_name).to_dict('records')
     return render_template('./static/wishlist.html', data=items)
+
+@app.route('/share', methods=['POST'])
+def share():
+    username = session['username']
+    wishlist_name = "default"
+    email_receiver = request.form['email']
+    share_wishlist(username, wishlist_name, email_receiver)
+    return redirect(url_for('wishlist'))
 
 
 @app.route('/logout')
