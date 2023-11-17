@@ -189,6 +189,16 @@ def bestbuy_scraper(link):
     except Exception as e:
         print(f'There was an error in scraping {link}, Error is {e}')
         return None
+
+def target_scraper(link):
+    try:
+        page = httpsGet(link)
+
+        res = page.select('span.styles__CurrentPriceFontSize-sc-1mh0sjm-1.bksmYC')[0].text
+        return res
+    except Exception as e:
+        print(f'There was an error in scraping {link}, Error is {e}')
+        return None
     
 def searchEtsy(query, df_flag, currency):
     """
