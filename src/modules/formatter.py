@@ -108,7 +108,7 @@ def formatResult(
         "timestamp": datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
         "title": title,
         "price": price,
-        "img_link":img_link if img_link else "https://avatars.githubusercontent.com/u/56881419",
+        "img_link":img_link if img_link else "https://odoo-community.org/web/image/product.product/19823/image_1024/Default%20Product%20Images?unique=638e17b",
         "link": f"{link}" if link.startswith('http') or link.startswith('https') else f"www.{website}.com{link}",
         "website": website,
         "rating": rating,
