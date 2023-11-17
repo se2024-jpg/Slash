@@ -616,11 +616,11 @@
     };
   </script>
   <script>
-    function addToCart(heartLink) {
-      if (!heartLink.classList.contains("clicked-heart")) {
-        heartLink.classList.add("clicked-heart");
-        product_data = heartLink.parentNode.parentNode.dataset;
+    function addToCart(heartLink, product_data) {
+      if (!heartLink.firstElementChild.classList.contains("clicked-heart")) {
+        heartLink.firstElementChild.classList.add("clicked-heart");
         let post_data = new URLSearchParams();
+        product_data = JSON.parse(product_data)
         for (k in product_data)
           post_data.append(k, product_data[k])
         fetch("/add-wishlist-item", {
@@ -628,7 +628,7 @@
           body: post_data,
         }).then(result => console.log(result)).catch(error => console.error(error))
       } else {
-        heartLink.classList.remove("clicked-heart");
+        heartLink.firstElementChild.classList.remove("clicked-heart");
       }
     }
   </script>
