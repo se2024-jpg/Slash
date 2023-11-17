@@ -6,6 +6,7 @@ import re
 import ssl
 import smtplib
 from pathlib import Path
+from .config import Config
 
 from . import scraper
 from email.message import EmailMessage
@@ -76,14 +77,13 @@ def share_wishlist(username, wishlist_name, email_receiver):
     if os.path.exists(wishlist_path):
         try:
             email_sender = 'slash.se23@gmail.com'
-            email_password = 'amkx fedi ilnm qahn'
+            email_password = Config.EMAIL_PASS
 
             subject = ' slash wishlist of ' + username
 
             df = pd.read_csv(wishlist_path)
-            body = df['link'].astype(str).str.cat(sep=' ')
-            # body = df['link'].to_string(index=False)
-            # body = df.to_string(index=False)
+            links_list = df['link'].astype(str).str.cat(sep=' ')
+            body = "\n".join([f"{i}. {link}" for i, link in enumerate(links_list.split(), start=1)])
 
             em = EmailMessage()
             em['from'] = email_sender
