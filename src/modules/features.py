@@ -2,7 +2,14 @@ import json
 import os
 import pandas as pd
 import numpy as np
+import re
+import ssl
+import smtplib
 from pathlib import Path
+
+from . import scraper
+from email.message import EmailMessage
+
 
 # path for user profiles and their wish lists
 users_main_dir = Path(__file__).parent.parent / "users"
@@ -54,9 +61,45 @@ def read_wishlist(username, wishlist_name):
     wishlist_path = usr_dir(username) / (wishlist_name + ".csv")
     if os.path.exists(wishlist_path):
         try:
-            return pd.read_csv(wishlist_path)
+            csv = pd.read_csv(wishlist_path)
+            for _,obj in csv.iterrows():
+                new_price = update_price(obj['link'],obj['website'],obj['price'])
+                obj['price'] = new_price
+            return csv
         except Exception:
             return pd.DataFrame()
+    else:
+        return None # wishlist not found
+
+def share_wishlist(username, wishlist_name, email_receiver):
+    wishlist_path = usr_dir(username) / (wishlist_name + ".csv")
+    if os.path.exists(wishlist_path):
+        try:
+            email_sender = 'slash.se23@gmail.com'
+            email_password = 'amkx fedi ilnm qahn'
+
+            subject = ' slash wishlist of ' + username
+
+            df = pd.read_csv(wishlist_path)
+            body = df['link'].astype(str).str.cat(sep=' ')
+            # body = df['link'].to_string(index=False)
+            # body = df.to_string(index=False)
+
+            em = EmailMessage()
+            em['from'] = email_sender
+            em['to'] = email_receiver
+            em['subject'] = subject
+            em.set_content(body)
+            
+
+            context = ssl.create_default_context()
+
+            with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
+                smtp.login(email_sender, email_password)
+                smtp.sendmail(email_sender, email_receiver, em.as_string())
+
+        except Exception:
+            return 'failed to send email'
     else:
         return None # wishlist not found
 
@@ -65,3 +108,29 @@ def wishlist_remove_list(username, wishlist_name, indx):
     old_data = read_wishlist(username, wishlist_name)
     old_data = old_data.drop(index=indx)
     old_data.to_csv(wishlist_path, index=False, header=old_data.columns)
+
+def find_currency(price):
+    currency = re.match(r'^[a-zA-Z]{3,5}', price)
+    return currency.group() if currency else currency
+
+def update_price(link,website,price):
+    currency = find_currency(price)
+    updated_price = price
+    if website == "amazon":
+        scraped_price = scraper.amazon_scraper(link).strip()
+        if scraped_price:
+            updated_price = scraper.getCurrency(currency,scraped_price) if currency is not None else scraped_price
+    if website == "google":
+        scraped_price = scraper.google_scraper(link).strip()
+        if scraped_price:
+            updated_price = scraper.getCurrency(currency,scraped_price) if currency is not None else scraped_price
+    if website == "BJS":
+        pass
+    if website == "Etsy":
+        pass
+    if website == "walmart":
+        scraped_price = scraper.walmart_scraper(link).strip()
+        if scraped_price:
+            updated_price = scraper.getCurrency(currency,scraped_price) if currency is not None else scraped_price
+
+    return updated_price
