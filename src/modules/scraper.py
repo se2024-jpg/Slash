@@ -59,6 +59,8 @@ def searchAmazon(query, df_flag, currency):
         ratings = res.select("span.a-icon-alt")
         num_ratings = res.select("span.a-size-base")
         trending = res.select("span.a-badge-text")
+        img_links = res.select("img.s-image")
+
         if len(trending) > 0:
             trending = trending[0]
         else:
@@ -73,6 +75,7 @@ def searchAmazon(query, df_flag, currency):
             trending,
             df_flag,
             currency,
+            img_links
         )
         products.append(product)
     return products
@@ -100,6 +103,7 @@ def searchWalmart(query, df_flag, currency):
         ratings = res.findAll("span", {"class": "w_iUH7"}, text=pattern)
         num_ratings = res.findAll("span", {"class": "sans-serif gray f7"})
         trending = res.select("span.w_Cs")
+        img_links = res.select("div.relative.overflow-hidden img")
         if len(trending) > 0:
             trending = trending[0]
         else:
@@ -114,6 +118,7 @@ def searchWalmart(query, df_flag, currency):
             trending,
             df_flag,
             currency,
+            img_links
         )
         products.append(product)
     return products
@@ -222,9 +227,10 @@ def searchGoogleShopping(query, df_flag, currency):
     URL = f"https://www.google.com/search?tbm=shop&q={query}"
     page = httpsGet(URL)
     results = page.findAll("div", {"class": "sh-dgr__grid-result"})
+    results1 = page.find_all()
     products = []
     pattern = re.compile(r"[0-9]+ product reviews")
-    for res in results:
+    for i,res in enumerate(results):
         titles, prices, links = (
             res.select("h3"),
             res.select("span.a8Pemb"),
@@ -238,6 +244,7 @@ def searchGoogleShopping(query, df_flag, currency):
             if match:
                 num_ratings = match.group(1)
         trending = res.select("span.Ib8pOd")
+        img_links = results1[i].select("div.SirUVb.sh-img__image img")
         if len(trending) > 0:
             trending = trending[0]
         else:
@@ -252,6 +259,7 @@ def searchGoogleShopping(query, df_flag, currency):
             trending,
             df_flag,
             currency,
+            img_links
         )
         products.append(product)
     return products
@@ -313,6 +321,7 @@ def searchEbay(query, df_flag, currency):
         titles = p['title']
         prices = '$' + p['sellingStatus']['currentPrice']['value']
         links = p['viewItemURL']
+        img_link = p['galleryURL']
         ratings = None
         num_ratings = None
         trending = None
@@ -327,6 +336,7 @@ def searchEbay(query, df_flag, currency):
             trending,
             df_flag,
             currency,
+            img_link
         )
         products.append(product)
 
@@ -372,6 +382,7 @@ def searchTarget(query, df_flag, currency):
         titles = p['item']['product_description']['title']
         prices = '$' + str(p['price']['reg_retail'])
         links = p['item']['enrichment']['buy_url']
+        img_link = p['item']['enrichment']['images']['primary_image_url']
         try:
             ratings = p['ratings_and_reviews']['statistics']['rating']['average']
         except KeyError:
@@ -392,6 +403,7 @@ def searchTarget(query, df_flag, currency):
             trending,
             df_flag,
             currency,
+            img_link
         )
         products.append(product)
 
@@ -421,7 +433,7 @@ def searchBestbuy(query, df_flag, currency):
         ratings = res.find("div", class_="c-ratings-reviews").findAll("p", text=pattern)
         num_ratings = res.select("span.c-reviews")
         trending = None
-    
+        img_link = res.select("img.product-image")
         product = formatResult(
             "bestbuy",
             titles,
@@ -432,6 +444,7 @@ def searchBestbuy(query, df_flag, currency):
             trending,
             df_flag,
             currency,
+            img_link
         )
         products.append(product)
 

@@ -22,7 +22,7 @@ EXCHANGES = literal_eval(requests.get(CURRENCY_URL).text)
 
 
 def formatResult(
-    website, titles, prices, links, ratings, num_ratings, trending, df_flag, currency
+    website, titles, prices, links, ratings, num_ratings, trending, df_flag, currency, img_link = None, 
 ):
     """
     The formatResult function takes the scraped HTML as input, and extracts the
@@ -101,11 +101,14 @@ def formatResult(
                 num_rating = num_ratings.strip()
         if currency:
             converted_cur = getCurrency(currency, price)
+
+        if type(img_link) is not str and img_link:
+            img_link = img_link[0].get('src')
         product = {
         "timestamp": datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
         "title": title,
         "price": price,
-        "img_link":"https://avatars.githubusercontent.com/u/56881419",
+        "img_link":img_link if img_link else "https://avatars.githubusercontent.com/u/56881419",
         "link": f"{link}" if link.startswith('http') or link.startswith('https') else f"www.{website}.com{link}",
         "website": website,
         "rating": rating,
@@ -121,7 +124,7 @@ def formatResult(
             "title": titles,
             "price": prices,
             "link": links,
-            "img_link":"https://avatars.githubusercontent.com/u/56881419",
+            "img_link":img_link if img_link else "https://avatars.githubusercontent.com/u/56881419",
             "website": website,
             "rating": ratings,
             "no_of_ratings": num_ratings,
