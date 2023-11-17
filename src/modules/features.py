@@ -136,4 +136,9 @@ def update_price(link,website,price):
         scraped_price = scraper.ebay_scraper(link).strip()
         if scraped_price:
             updated_price = scraper.getCurrency(currency,scraped_price) if currency is not None else scraped_price
+    if website == "bestbuy":
+        scraped_price = scraper.bestbuy_scraper(link).strip()
+        if scraped_price:
+            updated_price = scraper.getCurrency(currency,scraped_price) if currency is not None else scraped_price       
+
     return updated_price
