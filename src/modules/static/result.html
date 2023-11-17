@@ -324,7 +324,7 @@
       color: white;
     }
 
-    .clicked-heart .heart-icon::before {
+    .clicked-heart{
       color: red;
     }
 
@@ -345,6 +345,100 @@
     .form-group select {
       margin-top: auto;
     }
+    .grid {
+    margin: 50px auto;
+    padding-bottom: 10px;
+    ;
+    display: flex;
+    flex-wrap: wrap;
+    width: 1200px;
+    height: auto;
+}
+
+.card-wrapper{
+    max-width: 380px;
+    position: relative;
+    box-shadow: 0 2px 5px #333;
+    margin: 0 auto;
+    background: #222831;
+    width: 400px;
+    margin: 10px;
+    padding: 10px;
+    word-wrap: break-word;
+}
+    
+.card-img-holder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+}
+
+.card-img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.card-content {
+    padding: 30px;
+}
+
+.card-website {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #9DAAF2;
+    margin-bottom: 18px;
+}
+
+.card-content h4{
+    font-weight: 500;
+    display: block;
+    margin-bottom: 18px;
+    color: #5BE0D8;
+    text-decoration: none;
+}
+
+
+.card-content p {
+    font-size: 15px;
+    line-height: 22px;
+    margin-bottom: 18px;
+    color: #EEEEEE;
+}
+
+.card-bottom {
+    overflow: hidden;
+    border-top: 1px solid #99DDFF;
+    padding-top: 20px;
+}
+
+.card-bottom div {
+    float: left;
+    width: 50%;
+}
+
+.card-rating {
+    font-size: 18px;
+    color: #F52544;
+    font-weight: 600;
+}
+
+.card-buttons {
+    text-align: right;
+}
+
+.card-buttons a {
+    display: inline-block;
+    margin-left: 5px;
+    color: #5CE0D8;
+    font-size: 17px;
+}
+
+.card-buttons a:hover {
+    color: #F52544;
+}
   </style>
   <title>Searching</title>
 </head>
@@ -450,44 +544,32 @@
     <hr>
   </div>
   <br>
-  <div class="results">
-    <div class="col-md-4"></div>
-    <div class="col-md-4">
-      <table border='1' class="item-list">
-        <thead>
-          <tr>
-            <th colspan="6">Products</th>
-          </tr>
-          <tr>
-            <td>S.No</td>
-            <td>Title</td>
-            <td>Price</td>
-            <td>Website</td>
-            <td>Rating</td>
-            <td>Wishlist</td>
-          </tr>
-        </thead>
-        <tbody>
+  <div class="grid">
+    {% for product in data %}
+          <script>
+             var jsonData = '{{ product | tojson | safe }}';
+          </script>
+          <div class="card-wrapper">
+            <div class="card-img-holder">
+                <img class="card-img" src="{{product.img_link}}">
+            </div>
+            <div class="card-content">
+                <span class="card-website">{{product.website}}</span>
+                <h4>{{product.price}}</h4>
+                <p>{{product.title}}</p>
+                <div class="card-bottom">
+                    <div class="card-rating">Rating: {{product.rating}}</div>
+                    <div class="card-buttons">
+                        <a href="{{product.link}}"><i class="fa fa-link"></i></a>
+                        <a href="#" id="heart-link" onclick="addToCart(this, jsonData)"><i class="fa fa-heart"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-          {% for product in data %}
-          <tr data-price="{{product.price}}" data-website="{{product.website}}" data-title="{{product.title}}"
-            data-link="{{product.link}}" data-rating="{{product.rating}}" data-timestamp="{{product.timestamp}}"
-            data-no_of_ratings="{{product.no_of_ratings}}">
-            <td>{{ loop.index }}</td>
-            <td><a href={{product.link}} target="_blank">{{product.title}}</a></td>
-            <td>{{product.price}}</td>
-            <td>{{product.website}}</td>
-            <td>{{product.rating}}</td>
-            <td> <a href="#" id="heart-link" class="heart-link" onclick="addToCart(this)"><span
-                  class="heart-icon"></span></a>
-            </td>
-          </tr>
-
-          {% endfor %}
-
-        </tbody>
-      </table>
-    </div>
+    {% endfor %}
+    
+  </div>
     <div class="col-md-4"></div>
   </div>
 
