@@ -366,6 +366,18 @@
     padding: 10px;
     word-wrap: break-word;
 }
+
+.card-cheap-wrapper{
+    max-width: 380px;
+    position: relative;
+    box-shadow: 0 2px 5px #333;
+    margin: 0 auto;
+    background: #FFFFFF;
+    width: 400px;
+    margin: 10px;
+    padding: 10px;
+    word-wrap: break-word;
+}
     
 .card-img-holder {
     display: flex;
@@ -406,6 +418,13 @@
     line-height: 22px;
     margin-bottom: 18px;
     color: #EEEEEE;
+}
+
+.card-cheap-content p {
+    font-size: 15px;
+    line-height: 22px;
+    margin-bottom: 18px;
+    color: #000000;
 }
 
 .card-bottom {
@@ -545,6 +564,31 @@
   </div>
   <br>
   <div class="grid">
+      {% for product in data | sort(attribute='price') %}
+          <script>
+             var jsonData = '{{ product | tojson | safe }}';
+          </script>
+          {% if loop.first %}
+          <div class="card-cheap-wrapper">
+            <div class="card-img-holder">
+                <img class="card-img" src="{{product.img_link}}">
+            </div>
+            <div class="card-content card-cheap-content">
+                <span class="card-website">{{product.website}}</span>
+                <h4>{{product.price}}</h4>
+                <p>{{product.title}}</p>
+                <div class="card-bottom">
+                    <div class="card-rating">Rating: {{product.rating}}</div>
+                    <div class="card-buttons">
+                        <a href="{{product.link}}"><i class="fa fa-link"></i></a>
+                        <a href="#" id="heart-link" onclick="addToCart(this, jsonData)"><i class="fa fa-heart"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+    {% endfor %}
     {% for product in data %}
           <script>
              var jsonData = '{{ product | tojson | safe }}';
