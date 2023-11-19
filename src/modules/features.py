@@ -63,9 +63,9 @@ def read_wishlist(username, wishlist_name):
     if os.path.exists(wishlist_path):
         try:
             csv = pd.read_csv(wishlist_path)
-            for _,obj in csv.iterrows():
+            for index,obj in csv.iterrows():
                 new_price = update_price(obj['link'],obj['website'],obj['price'])
-                obj['price'] = new_price
+                csv.at[index, 'price'] = new_price
             return csv
         except Exception:
             return pd.DataFrame()
