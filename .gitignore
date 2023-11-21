@@ -130,7 +130,7 @@ dmypy.json
 .pyre/
 
 # config files
-src/modules/config.py
+# src/modules/config.py
 
 *.csv
 user_data.json
