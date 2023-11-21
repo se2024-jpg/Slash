@@ -11,9 +11,9 @@ def test_filter():
 
 def test_driver():
     scraper.driver("socks", "inr")
-    #scraper.driver("socks", None, csv=True, cd='.')
-    #scraper.driver("socks", None, ui=True, csv=True)
-    scraper.driver("socks", None, ui=True, sort="rades")
+    scraper.driver("socks", None, csv=True, cd=".")
+    scraper.driver("socks", None, ui=True, csv=True, cd = ".")
+    scraper.driver("socks", "USD", ui=True, sort="rades")
     scraper.driver("socks", None, ui=True, sort="raasc")
     scraper.driver("socks", None, ui=True, sort="pasc")
     scraper.driver("socks", None, ui=True, sort="asc")
