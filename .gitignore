@@ -129,6 +129,8 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# config files
+src/modules/config.py
 
 *.csv
 user_data.json
