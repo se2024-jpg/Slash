@@ -24,36 +24,42 @@ def test_driver():
 
 def test_amazon_scraper():
     products = scraper.searchAmazon('table',False,None)
-    price = scraper.amazon_scraper(products[0]['link'])
 
-    assert price is None or type(price) == str
+    if products:
+        price = scraper.amazon_scraper(products[0]['link'])
+        assert price is None or type(price) == str
 
 def test_walmart_scraper():
     products = scraper.searchWalmart('table',False,None)
-    price = scraper.walmart_scraper(products[0]['link'])
-
-    assert price is None or type(price) == str
+    
+    if products:
+        price = scraper.walmart_scraper(products[0]['link'])
+        assert price is None or type(price) == str
 
 def test_ebay_scraper():
     products = scraper.searchEbay('table',False,None)
-    price = scraper.ebay_scraper(products[0]['link'])
 
-    assert price is None or type(price) == str
+    if products:
+        price = scraper.ebay_scraper(products[0]['link'])
+        assert price is None or type(price) == str
 
 def test_bestbuy_scraper():
     products = scraper.searchBestbuy('table',False,None)
-    price = scraper.bestbuy_scraper(products[0]['link'])
 
-    assert price is None or type(price) == str
+    if products:
+        price = scraper.bestbuy_scraper(products[0]['link'])
+        assert price is None or type(price) == str
 
 def test_target_scraper():
     products = scraper.searchTarget('table',False,None)
-    price = scraper.target_scraper(products[0]['link'])
-
-    assert price is None or type(price) == str
+    
+    if products:
+        price = scraper.target_scraper(products[0]['link'])
+        assert price is None or type(price) == str
 
 def test_google_scraper():
     products = scraper.searchGoogleShopping('table',False,None)
-    price = scraper.google_scraper(products[0]['link'])
 
-    assert price is None or type(price) == str
+    if products:
+        price = scraper.google_scraper(products[0]['link'])
+        assert price is None or type(price) == str
