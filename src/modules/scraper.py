@@ -595,9 +595,13 @@ def driver(
             result_condensed = result_condensed.to_dict(orient="records")
 
         if csv:
-            file_name = product + "_" + datetime.now() + ".csv"
+            file_name = os.path.join(
+                cd, (product + datetime.now().strftime("%y%m%d_%H%M") + ".csv")
+            )
+            result_condensed = pd.DataFrame(result_condensed)
+            
             result_condensed = result_condensed.to_csv(
-                file_name, index=False, header=results.columns
+                file_name, index=False, header=result_condensed.columns
             )
             print(result_condensed)
     return result_condensed

@@ -1,3 +1,9 @@
+import sys
+import os
+current_dir = os.path.dirname(os.path.realpath(__file__))
+root_dir = os.path.abspath(os.path.join(current_dir, ".."))
+
+sys.path.insert(1, root_dir)
 from src.modules import full_version
 from src.modules import csv_writer
 from src.modules import features

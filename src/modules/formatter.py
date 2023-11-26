@@ -148,7 +148,7 @@ def sortList(arr, sortBy, reverse):
         )
     # Fix Rating sort
     elif sortBy == "ra":
-        arr["rating"] = arr["rating"].apply(lambda x: None if x == "" else float(x))
+        arr["rating"] = arr["rating"].apply(lambda x: None if x == "" else float(x) if x is not None else None)
         return arr.sort_values(by=["rating"], ascending=False)
     return arr
 
