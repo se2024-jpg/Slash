@@ -1,3 +1,10 @@
+<!--
+Copyright (C) 2023 SE23-Team44
+
+Licensed under the MIT License.
+See the LICENSE file in the project root for the full license information.
+-->
+
 <!doctype html>
 <html lang="en">
 
@@ -8,333 +15,7 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css?family=Acme|Open+Sans:400,700|Source+Sans+Pro:400,600,700" rel="stylesheet');
-
-        html {
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            box-sizing: border-box;
-        }
-
-        *,
-        *:before,
-        *:after {
-            box-sizing: inherit;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            background: #101010;
-            font-family: 'Open Sans', sans-serif;
-        }
-
-        nav.bg-transparent {
-            background: transparent;
-            transition: all .3s ease;
-        }
-
-        nav.navbar.navbar-expand-md.bg-dark.navbar-dark.fixed-top:hover {
-            background: #171719a3 !important;
-        }
-
-        nav ul {
-            transition: all .6s ease;
-        }
-
-        nav ul li.nav-item a {
-            color: #f1f1f1 !important;
-            font-family: 'Open Sans', sans-serif;
-            transition: all .3s ease;
-        }
-
-        nav ul li.nav-item a:hover {
-            color: #3498DB !important;
-        }
-
-        @media only screen and (min-width: 992px) {
-            .nav-scroll {
-                margin: 0 35px;
-                transition: all .6s ease;
-            }
-
-            .logo {
-                display: block !important;
-                transition: all .9s ease;
-            }
-        }
-
-        @media only screen and (max-width: 992px) {
-            img#logo {
-                display: none !important;
-            }
-        }
-
-
-        .bg-menu {
-            background: #171719a3 !important;
-        }
-
-        img#logo {
-            margin-top: 30px;
-            padding: 0 10px;
-            position: absolute;
-            display: none;
-            transition: all .9s ease;
-
-        }
-
-        .conten-title {
-            position: absolute;
-            left: 0;
-            right: 0;
-            top: 10%;
-        }
-
-
-        h2 {
-            font-family: 'Acme', sans-serif;
-            font-size: 2.4em;
-            text-align: center;
-            text-transform: uppercase;
-            color: #f2f2f2;
-        }
-
-        h2 img {
-            margin-right: 20px;
-        }
-
-        .slogan {
-            text-align: center;
-            color: #f2f2f2;
-            font-size: 15px;
-            margin-top: 5px;
-        }
-
-        main {
-            position: relative;
-        }
-
-        main .centen-des {
-            margin-top: 10px;
-            padding: 16px 10px;
-            border-top: 4px solid #3498DB;
-            background: #fff;
-        }
-
-        footer {
-            background: #121213de;
-            padding: 10px;
-            text-align: center;
-            color: #f2f2f2;
-            font-size: 13px;
-        }
-
-        footer a {
-            color: #f2f2f2;
-            text-decoration: none;
-        }
-
-        @import url(https://fonts.googleapis.com/css?family=Cabin:400);
-
-        .webdesigntuts-workshop {
-            height: 100%;
-            text-align: center;
-            width: 100%;
-        }
-
-        .webdesigntuts-workshop form {
-            display: inline-block;
-            font-size: 0px;
-            padding: 20px;
-            position: static;
-            z-index: 1;
-        }
-
-        .webdesigntuts-workshop input {
-            background: #222;
-            background: linear-gradient(#333, #222);
-            border: 1px solid #444;
-            border-radius: 5px 0 0 5px;
-            box-shadow: 0 2px 0 #000;
-            color: #888;
-            display: block;
-            float: left;
-            font-family: 'Cabin', helvetica, arial, sans-serif;
-            font-size: 13px;
-            font-weight: 400;
-            height: 40px;
-            margin: 0;
-            padding: 0 10px;
-            text-shadow: 0 -1px 0 #000;
-            width: 200px;
-        }
-
-        .ie .webdesigntuts-workshop input {
-            line-height: 40px;
-        }
-
-        .webdesigntuts-workshop input::-webkit-input-placeholder {
-            color: #888;
-        }
-
-        .webdesigntuts-workshop input:-moz-placeholder {
-            color: #888;
-        }
-
-        .webdesigntuts-workshop input:focus {
-            animation: glow 800ms ease-out infinite alternate;
-            background: #222922;
-            background: linear-gradient(#333933, #222922);
-            border-color: #393;
-            box-shadow: 0 0 5px rgba(0, 255, 0, .2), inset 0 0 5px rgba(0, 255, 0, .1), 0 2px 0 #000;
-            color: #efe;
-            outline: none;
-        }
-
-        .webdesigntuts-workshop input:focus::-webkit-input-placeholder {
-            color: #efe;
-        }
-
-        .webdesigntuts-workshop input:focus:-moz-placeholder {
-            color: #efe;
-        }
-
-        .webdesigntuts-workshop button {
-            background: #222;
-            background: linear-gradient(#333, #222);
-            box-sizing: border-box;
-            border: 1px solid #444;
-            border-left-color: #000;
-            border-radius: 0 5px 5px 0;
-            box-shadow: 0 2px 0 #000;
-            color: #fff;
-            display: block;
-            float: left;
-            font-family: 'Cabin', helvetica, arial, sans-serif;
-            font-size: 13px;
-            font-weight: 400;
-            height: 40px;
-            line-height: 40px;
-            margin: 0;
-            padding: 0;
-            position: relative;
-            text-shadow: 0 -1px 0 #000;
-            width: 80px;
-        }
-
-        .webdesigntuts-workshop button:hover,
-        .webdesigntuts-workshop button:focus {
-            background: #292929;
-            background: linear-gradient(#393939, #292929);
-            color: white;
-            outline: none;
-        }
-
-        .webdesigntuts-workshop button:active {
-            background: #292929;
-            background: linear-gradient(#393939, #292929);
-            box-shadow: 0 1px 0 #000, inset 1px 0 1px #222;
-            top: 1px;
-        }
-
-        @keyframes glow {
-            0% {
-                border-color: white;
-                box-shadow: 0 0 5px rgba(0, 255, 0, .2), inset 0 0 5px rgba(0, 255, 0, .1), 0 2px 0 #000;
-            }
-
-            100% {
-                border-color: white;
-                box-shadow: 0 0 20px rgba(244, 245, 244, 0.6), inset 0 0 10px rgba(240, 244, 240, 0.4), 0 2px 0 #000;
-            }
-        }
-
-        .item-list {
-            text-align: center;
-            width: 100%;
-            margin-top: 20px;
-            padding: 5px 5px 5px 5px;
-        }
-
-        .td,
-        th {
-            border: 1px solid;
-            padding: 7px;
-        }
-
-        .item-list tr:nth-child(odd) {
-            background-color: rgb(23, 22, 23);
-            color: whitesmoke;
-
-        }
-
-        .item-list tr:nth-child(even) {
-            background-color: rgb(23, 22, 23);
-            color: whitesmoke;
-
-        }
-
-        .col-sm {
-            padding-top: 25px;
-
-        }
-
-        .results {
-            padding-left: 60px;
-            width: 3500px;
-
-        }
-
-        .button {
-            border: none;
-            color: rgb(12, 11, 11);
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            transition-duration: 0.4s;
-            cursor: pointer;
-        }
-
-        .button1 {
-            background-color: rgb(11, 11, 11);
-            color: rgb(250, 247, 247);
-            border: 2px solid #4a4d4a;
-
-        }
-
-        #choice1 {
-            width: 160px;
-
-        }
-
-        .button1:hover {
-            background-color: rgb(14, 14, 14);
-            color: rgb(243, 236, 236);
-        }
-
-
-        /* Style for the delete button */
-        .delete-button {
-            background-color: #e74c3c;
-            color: white;
-            padding: 5px 10px;
-            border: none;
-            cursor: pointer;
-        }
-
-        .delete-icon {
-            color: #e74c3c;
-            font-size: 20px;
-            cursor: pointer;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/wishlist.css') }}">
     <title>Searching</title>
 </head>
 
@@ -399,7 +80,8 @@
                         <td>{{product.price}}</td>
                         <td>{{product.website}}</td>
                         <td>{{product.rating}}</td>
-                        <td> <span class="delete-icon" data-index="{{ loop.index }}" onclick="deleteItem(this)">&#x1F5D1;</span>
+                        <td> <span class="delete-icon" data-index="{{ loop.index }}"
+                                onclick="deleteItem(this)">&#x1F5D1;</span>
                         </td>
                     </tr>
 
@@ -415,31 +97,28 @@
     </div>
 
     <p class="w3-center"><a onclick="document.getElementById('id01').style.display='block'"
-    class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">
-    Share</a></p>
+            class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">
+            Share</a></p>
 
     <div id="id01" class="w3-modal" style="display: none;">
-        <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px" >
+        <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
 
             <div class="w3-center"><br>
-            <span onclick="document.getElementById('id01').style.display='none'"
-                        class=" w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span>
+                <span onclick="document.getElementById('id01').style.display='none'"
+                    class=" w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span>
             </div>
 
             <form class="w3-container" method="POST" action="/share">
-            <div class="w3-section">
-                <label><b>Email</b></label>
-                <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter email" name="email"
-                required>
-                <button class="w3-button w3-block w3-black w3-section w3-padding" type="submit">Share</button>
-            </div>
+                <div class="w3-section">
+                    <label><b>Email</b></label>
+                    <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter email"
+                        name="email" required>
+                    <button class="w3-button w3-block w3-black w3-section w3-padding" type="submit">Share</button>
+                </div>
         </div>
     </div>
 
     </header>
-
-
-
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

@@ -1,3 +1,10 @@
+<!--
+Copyright (C) 2023 SE23-Team44
+
+Licensed under the MIT License.
+See the LICENSE file in the project root for the full license information.
+-->
+
 <!DOCTYPE html>
 <html>
 
@@ -8,34 +15,7 @@
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <style>
-    body,
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      font-family: "Raleway", sans-serif
-    }
-
-    body,
-    html {
-      height: 100%;
-      line-height: 1.8;
-    }
-
-    .bgimg-1 {
-
-      background-size: cover;
-      background-image: url("https://shots.codepen.io/username/pen/NLLXrv-800.jpg?version=1537117490");
-      min-height: 135%;
-    }
-
-    .w3-bar .w3-button {
-      padding: 16px;
-    }
-  </style>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/landing.css') }}">
 </head>
 
 <body>
@@ -58,7 +38,7 @@
 
       <div class="w3-center"><br>
         <span onclick="document.getElementById('id01').style.display='none'"
-                    class=" w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span>
+          class=" w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span>
         <img
           src="https://www.pngitem.com/pimgs/m/137-1370168_professional-clipart-female-avatar-circle-hd-png-download.png"
           alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
