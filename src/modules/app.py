@@ -1,13 +1,20 @@
+"""
+Copyright (C) 2023 SE23-Team44
+ 
+Licensed under the MIT License.
+See the LICENSE file in the project root for the full license information.
+"""
+
 from flask import Flask, session, render_template, request, redirect, url_for
 from .scraper import driver, filter
 from .formatter import formatResult
 import json
 from .features import create_user, wishlist_add_item, read_wishlist, wishlist_remove_list, share_wishlist
+from .config import Config
 
 app = Flask(__name__, template_folder=".")
 
-app.secret_key = 'asdsdfsdfs13sdf_df%&'
-
+app.secret_key = Config.SECRET_KEY
 
 @app.route('/')
 def landingpage():
@@ -41,12 +48,10 @@ def share():
     share_wishlist(username, wishlist_name, email_receiver)
     return redirect(url_for('wishlist'))
 
-
 @app.route('/logout')
 def logout():
     session.pop('username', None)
     return render_template('./static/landing.html')
-
 
 @app.route("/search", methods=["POST", "GET"])
 def product_search(new_product="", sort=None, currency=None, num=None, min_price = None, max_price = None, min_rating = None):
@@ -60,7 +65,6 @@ def product_search(new_product="", sort=None, currency=None, num=None, min_price
         data = filter(data, min_price, max_price, min_rating)
 
     return render_template("./static/result.html", data=data, prod=product)
-
 
 @app.route("/filter", methods=["POST", "GET"])
 def product_search_filtered():

@@ -309,7 +309,7 @@ def searchBJs(query, df_flag, currency):
     query = formatSearchQuery(query)
     URL = f"https://www.bjs.com/search/{query}"
     page = httpsGet(URL)
-    print("page", URL)
+    # print("page", URL)
     results = page.findAll("div", {"class": "product"})
     products = []
     for res in results:

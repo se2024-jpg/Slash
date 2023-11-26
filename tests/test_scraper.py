@@ -1,3 +1,10 @@
+"""
+Copyright (C) 2023 SE23-Team44
+ 
+Licensed under the MIT License.
+See the LICENSE file in the project root for the full license information.
+"""
+
 from src.modules import scraper
 import sys
 import os
