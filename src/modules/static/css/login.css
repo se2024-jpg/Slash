@@ -261,15 +261,15 @@ footer a {
     display: inline-block;
     width: 60px;
     height: 34px;
-  }
-  
-  .switch input { 
+}
+
+.switch input {
     opacity: 0;
     width: 0;
     height: 0;
-  }
-  
-  .slider {
+}
+
+.slider {
     position: absolute;
     cursor: pointer;
     top: 0;
@@ -277,49 +277,55 @@ footer a {
     right: 0;
     bottom: 0;
     background-color: #ccc;
-    -webkit-transition: .4s;
     transition: .4s;
-  }
-  
-  .slider:before {
-    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.slider .icon {
+    font-size: 20px;
+    color: #fff;
+    padding: 4px;
+}
+
+.slider:before {
     content: "";
+    position: absolute;
     height: 26px;
     width: 26px;
     left: 4px;
     bottom: 4px;
     background-color: white;
-    -webkit-transition: .4s;
     transition: .4s;
-  }
-  
-  input:checked + .slider {
+}
+
+input:checked+.slider {
     background-color: #2196F3;
-  }
-  
-  input:focus + .slider {
+}
+
+input:focus+.slider {
     box-shadow: 0 0 1px #2196F3;
-  }
-  
-  input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
+}
+
+input:checked+.slider:before {
     transform: translateX(26px);
-  }
-  
-  .slider.round {
+}
+
+.slider.round {
     border-radius: 34px;
-  }
-  
-  .slider.round:before {
+}
+
+.slider.round:before {
     border-radius: 50%;
-  }
+}
 
-  .dark-node{
+
+.dark-node {
     background-color: #e4e5f1;
-  }
+}
 
-  .hero-dark {
+.hero-dark {
     background: url(https://img.freepik.com/free-photo/colorful-shopping-bags_23-2147652050.jpg?w=2000&t=st=1701104634~exp=1701105234~hmac=a6e313d6b6dbbc26650971ed693ddfde3c5275e583a7c29d0a2ea009aac366ab);
     background-position: center center;
     background-repeat: no-repeat;
@@ -328,7 +334,7 @@ footer a {
     background-attachment: fixed;
 }
 
-  .dark-mode nav ul li.nav-item a {
+.dark-mode nav ul li.nav-item a {
     color: black !important;
     font-family: 'Open Sans', sans-serif;
     transition: all .3s ease;

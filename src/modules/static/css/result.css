@@ -73,7 +73,7 @@ nav ul li.nav-item a:hover {
     background: black !important;
 }
 
-.bg-menu-light{
+.bg-menu-light {
     background: white !important;
 }
 
@@ -446,15 +446,15 @@ th {
     display: inline-block;
     width: 60px;
     height: 34px;
-  }
-  
-  .switch input { 
+}
+
+.switch input {
     opacity: 0;
     width: 0;
     height: 0;
-  }
-  
-  .slider {
+}
+
+.slider {
     position: absolute;
     cursor: pointer;
     top: 0;
@@ -462,106 +462,120 @@ th {
     right: 0;
     bottom: 0;
     background-color: #ccc;
-    -webkit-transition: .4s;
     transition: .4s;
-  }
-  
-  .slider:before {
-    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.slider .icon {
+    font-size: 20px;
+    color: #fff;
+    padding: 4px;
+}
+
+.slider:before {
     content: "";
+    position: absolute;
     height: 26px;
     width: 26px;
     left: 4px;
     bottom: 4px;
     background-color: white;
-    -webkit-transition: .4s;
     transition: .4s;
-  }
-  
-  input:checked + .slider {
-    background-color: #2196F3;
-  }
-  
-  input:focus + .slider {
-    box-shadow: 0 0 1px #2196F3;
-  }
-  
-  input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
-  }
-  
-  .slider.round {
-    border-radius: 34px;
-  }
-  
-  .slider.round:before {
-    border-radius: 50%;
-  }
+}
 
-  .pagination {
+input:checked+.slider {
+    background-color: #2196F3;
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked+.slider:before {
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.pagination {
     float: right;
     display: flex;
     list-style: none;
     padding: 0;
-    background-color: #101010; /* Black background */
-    border-radius: 15px; /* Adjust the radius as needed for rounded corners */
-    overflow: hidden; /* Ensure rounded corners are visible */
-  }
-    
-    .pagination li {
+    background-color: #101010;
+    /* Black background */
+    border-radius: 15px;
+    /* Adjust the radius as needed for rounded corners */
+    overflow: hidden;
+    /* Ensure rounded corners are visible */
+}
+
+.pagination li {
     margin-right: 5px;
-  }
-    
-    .pagination a {
+}
+
+.pagination a {
     text-decoration: none;
     padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 10px; /* Adjust the radius for rounded corners */
-    color: #fff; /* White text color */
+    border-radius: 10px;
+    /* Adjust the radius for rounded corners */
+    color: #fff;
+    /* White text color */
     background-color: transparent;
-    transition: background-color 0.3s ease; /* Smooth transition for background color */
-  }
-    
-    .pagination a:hover {
-    background-color: #333; /* Darker background color on hover */
-  }
-    
-    .pagination .current {
-    background-color: #007bff; /* Highlight color for the current page */
-    color: #fff; /* Text color for the current page */
-  }
+    transition: background-color 0.3s ease;
+    /* Smooth transition for background color */
+}
 
-  .dark-mode {
+.pagination a:hover {
+    background-color: #333;
+    /* Darker background color on hover */
+}
+
+.pagination .current {
+    background-color: #007bff;
+    /* Highlight color for the current page */
+    color: #fff;
+    /* Text color for the current page */
+}
+
+.dark-mode {
     background-color: #e4e5f1;
-  }
+}
 
-  .dark-mode .card-wrapper{
+.dark-mode .card-wrapper {
     background: #d2d3db;
-  }
+}
 
-  .dark-mode .card-website {
+.dark-mode .card-website {
     color: #484b6a;
-  }
+}
 
-  .dark-mode .card-price {
+.dark-mode .card-price {
     color: #484b6a;
-  }
+}
 
-  .dark-mode .card-rating {
+.dark-mode .card-rating {
     color: #484b6a;
-  }
+}
 
-  .dark-mode .card-buttons a{
+.dark-mode .card-buttons a {
     color: #484b6a;
-  }
+}
 
-  .dark-mode .card-title {
+.dark-mode .card-title {
     color: #9394a5;
-  }
+}
 
-  .dark-mode nav ul li.nav-item a {
+.dark-mode nav ul li.nav-item a {
     color: black !important;
     font-family: 'Open Sans', sans-serif;
     transition: all .3s ease;
