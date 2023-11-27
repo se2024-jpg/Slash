@@ -40,7 +40,7 @@ def test_set_player_name(monkeypatch):
 
 def test_change_user(monkeypatch, capfd):
     fv = full_version.full_version()
-    features.create_user('test')
+    features.create_user('test','pass')
     fv.name = 'test'
     answers = iter(["user1"])
     monkeypatch.setattr('builtins.input', lambda name: next(answers))
@@ -50,7 +50,7 @@ def test_change_user(monkeypatch, capfd):
 
 def test_extract_list(monkeypatch, capfd):
     fv = full_version.full_version()
-    features.create_user('test')
+    features.create_user('test','pass')
     fv.name = 'test'
     wishlist_index = 0
     # Create a new wishlist
