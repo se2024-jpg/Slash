@@ -32,9 +32,9 @@ nav.bg-transparent {
     transition: all .3s ease;
 }
 
-nav.navbar.navbar-expand-md.bg-dark.navbar-dark.fixed-top:hover {
+/* nav.navbar.navbar-expand-md.bg-dark.navbar-dark.fixed-top:hover {
     background: #171719a3 !important;
-}
+} */
 
 nav ul {
     transition: all .6s ease;
@@ -81,7 +81,7 @@ img#logo {
 
 }
 
-header.hero {
+.hero {
     background: url(https://img.freepik.com/premium-photo/black-friday-sale-banner-concept-design-shopping-bag-black-background-with-copy-space-3d-render_46250-3239.jpg);
     background-position: center center;
     background-repeat: no-repeat;
@@ -254,4 +254,82 @@ footer a {
         border-color: white;
         box-shadow: 0 0 20px rgba(244, 245, 244, 0.6), inset 0 0 10px rgba(240, 244, 240, 0.4), 0 2px 0 #000;
     }
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  
+  .switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #2196F3;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+
+  .dark-node{
+    background-color: #e4e5f1;
+  }
+
+  .hero-dark {
+    background: url(https://img.freepik.com/free-photo/colorful-shopping-bags_23-2147652050.jpg?w=2000&t=st=1701104634~exp=1701105234~hmac=a6e313d6b6dbbc26650971ed693ddfde3c5275e583a7c29d0a2ea009aac366ab);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    background-attachment: fixed;
+}
+
+  .dark-mode nav ul li.nav-item a {
+    color: black !important;
+    font-family: 'Open Sans', sans-serif;
+    transition: all .3s ease;
 }

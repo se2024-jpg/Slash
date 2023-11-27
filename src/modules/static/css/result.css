@@ -32,9 +32,9 @@ nav.bg-transparent {
     transition: all .3s ease;
 }
 
-nav.navbar.navbar-expand-md.bg-dark.navbar-dark.fixed-top:hover {
+/* nav.navbar.navbar-expand-md.bg-dark.navbar-dark.fixed-top:hover {
     background: #171719a3 !important;
-}
+} */
 
 nav ul {
     transition: all .6s ease;
@@ -70,7 +70,11 @@ nav ul li.nav-item a:hover {
 
 
 .bg-menu {
-    background: #171719a3 !important;
+    background: black !important;
+}
+
+.bg-menu-light{
+    background: white !important;
 }
 
 img#logo {
@@ -528,3 +532,37 @@ th {
     background-color: #007bff; /* Highlight color for the current page */
     color: #fff; /* Text color for the current page */
   }
+
+  .dark-mode {
+    background-color: #e4e5f1;
+  }
+
+  .dark-mode .card-wrapper{
+    background: #d2d3db;
+  }
+
+  .dark-mode .card-website {
+    color: #484b6a;
+  }
+
+  .dark-mode .card-price {
+    color: #484b6a;
+  }
+
+  .dark-mode .card-rating {
+    color: #484b6a;
+  }
+
+  .dark-mode .card-buttons a{
+    color: #484b6a;
+  }
+
+  .dark-mode .card-title {
+    color: #9394a5;
+  }
+
+  .dark-mode nav ul li.nav-item a {
+    color: black !important;
+    font-family: 'Open Sans', sans-serif;
+    transition: all .3s ease;
+}
