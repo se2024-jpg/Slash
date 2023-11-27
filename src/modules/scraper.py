@@ -379,7 +379,7 @@ def searchEbay(query, df_flag, currency):
 
 def searchTarget(query, df_flag, currency):
     """
-    The searchEbay function scrapes https://www.target.com/
+    The searchTarget function scrapes https://www.target.com/
     Parameters: query- search query for the product, df_flag- flag variable, currency- currency type entered by the user
     Returns a list of items available on target.com that match the product entered by the user
     """
