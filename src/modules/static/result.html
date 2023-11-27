@@ -141,6 +141,10 @@ See the LICENSE file in the project root for the full license information.
   {% endfor %}
   <div class="grid">
   </div>
+
+  <div class="pagination-container">
+  </div>
+  
   <script>
     function getTemplate() {
       return tempelate = `
@@ -160,6 +164,22 @@ See the LICENSE file in the project root for the full license information.
        </div>
    </div>`;
     }
+
+    let currentPage = "{{page}}"
+    function getPaginationBar(){
+      var totalPages = "{{total_pages}}"
+      var data = '<ul class="pagination">'
+      for (var i = 0; i < totalPages; i++) {
+        if(i == currentPage){
+        data += '<li class = "current"><a href="/search?product_name={{prod}}&page=' + i + '">' + (i+1) + '</a></li>';
+        }else{
+        data += '<li><a href="/search?product_name={{prod}}&page=' + i + '">' + (i+1) + '</a></li>';}
+      }
+      data += '</ul>';
+
+      return data
+    }
+
     var grid = document.querySelector(".grid")
     for (i = 0; i < a.length; i++) {
       let tempelate = getTemplate();
@@ -178,10 +198,15 @@ See the LICENSE file in the project root for the full license information.
       })
       grid.append(wrapper)
     }
+    
+    let pagination_number = document.createElement('div')
+    pagination_number.innerHTML = getPaginationBar()
+    var pagination = document.querySelector(".pagination-container")
 
+    pagination.append(pagination_number)
 
-  </script>
-  <div class="col-md-4"></div>
+    </script>
+    <div class="col-md-4"></div>
   </div>
 
   </header>

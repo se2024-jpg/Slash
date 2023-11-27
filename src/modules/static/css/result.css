@@ -494,3 +494,36 @@ th {
   .slider.round:before {
     border-radius: 50%;
   }
+
+  .pagination {
+    float: right;
+    display: flex;
+    list-style: none;
+    padding: 0;
+    background-color: #101010; /* Black background */
+    border-radius: 15px; /* Adjust the radius as needed for rounded corners */
+    overflow: hidden; /* Ensure rounded corners are visible */
+  }
+    
+    .pagination li {
+    margin-right: 5px;
+  }
+    
+    .pagination a {
+    text-decoration: none;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px; /* Adjust the radius for rounded corners */
+    color: #fff; /* White text color */
+    background-color: transparent;
+    transition: background-color 0.3s ease; /* Smooth transition for background color */
+  }
+    
+    .pagination a:hover {
+    background-color: #333; /* Darker background color on hover */
+  }
+    
+    .pagination .current {
+    background-color: #007bff; /* Highlight color for the current page */
+    color: #fff; /* Text color for the current page */
+  }

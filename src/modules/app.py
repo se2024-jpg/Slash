@@ -68,6 +68,7 @@ def logout():
 @app.route("/search", methods=["POST", "GET"])
 def product_search(new_product="", sort=None, currency=None, num=None, min_price = None, max_price = None, min_rating = None):
     product = request.args.get("product_name")
+    page_number  = request.args.get("page") if request.args.get("page") else 0
     if product == None:
         product = new_product
 
@@ -76,7 +77,7 @@ def product_search(new_product="", sort=None, currency=None, num=None, min_price
     if min_price is not None or max_price is not None or min_rating is not None:
         data = filter(data, min_price, max_price, min_rating)
 
-    return render_template("./static/result.html", data=data, prod=product)
+    return render_template("./static/result.html", data=data[int(page_number)*10:(int(page_number)+1)*10], prod=product, page= page_number , total_pages= len(data)/10)
 
 @app.route("/filter", methods=["POST", "GET"])
 def product_search_filtered():
