@@ -31,6 +31,9 @@ See the LICENSE file in the project root for the full license information.
         <li class="nav-item">
           <a class="nav-link" href="wishlist">Wishlist</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">About</a>
+        </li>
       </ul>
 
       <img
@@ -39,12 +42,12 @@ See the LICENSE file in the project root for the full license information.
 
       <ul id="ultwu" class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link">Welcome {{ session['username'] }}</a>
+          <a class="nav-link" href="#">Welcome {{ session['username'] }}</a>
         </li>
         <li class="nav-item">
         </li>
         <li class="nav-item">
-          <a class="nav-link" href={{url_for('logout')}}>Logout</a>
+          <a class="nav-link" href={{ url_for('logout') }}>Logout</a>
         </li>
       </ul>
     </div>
@@ -230,7 +233,7 @@ See the LICENSE file in the project root for the full license information.
   <script>
     window.onload = function () {
       if (window.localStorage) {
-        var isDark = localStorage.getItem("dark");
+        var isDark = window.localStorage.getItem("dark");
         if (isDark == 'true') {
           document.body.classList.add("dark-mode");
           document.getElementById("toggle-button").firstElementChild.checked = true;
@@ -251,7 +254,6 @@ See the LICENSE file in the project root for the full license information.
       var darkModeButton = document.getElementById("toggle-button").firstElementChild;
 
       if (scroll > 50) {
-        console.log(darkModeButton)
         if (darkModeButton.checked) {
           Scroll.classList.add("bg-menu-light")
         } else {
@@ -291,12 +293,14 @@ See the LICENSE file in the project root for the full license information.
       var Scroll = document.querySelector("#efec-scroll");
       if (darkModeButton.firstElementChild.checked) {
         document.body.classList.add("dark-mode");
+        window.localStorage.setItem("dark", true);
         if (scroll > 50) {
           Scroll.classList.remove("bg-menu");
           Scroll.classList.add("bg-menu-light");
         }
       } else {
         document.body.classList.remove("dark-mode");
+        window.localStorage.setItem("dark", false);
         if (scroll > 50) {
           Scroll.classList.add("bg-menu");
           Scroll.classList.remove("bg-menu-light");
