@@ -21,6 +21,7 @@ from src.modules.features import users_main_dir, create_user, list_users, create
 class full_version:
     def __init__(self):
         self.name = "default"
+        self.password = "pass"
         self.default_user_file = users_main_dir / "default_user.json"
         self.df = pd.DataFrame()
         self.currency = ""
@@ -40,7 +41,7 @@ class full_version:
             with open(self.default_user_file, "w") as outfile:
                 json.dump(user_data, outfile)
             self.name = name
-            create_user(self.name)
+            create_user(self.name, self.password)
 
         else:
             with open(self.default_user_file) as json_file:
@@ -163,7 +164,8 @@ class full_version:
     def change_user(self):
         self.view_users()
         username = input("Enter username (username will be created if not exist):")
-        create_user(username)
+        password = input("Enter password (username will be created if not exist):")
+        create_user(username, password)
         self.name = username
         user_data = {"name": username}
         with open(self.default_user_file, "w") as outfile:
