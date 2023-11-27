@@ -9,7 +9,7 @@ from flask import Flask, session, render_template, request, redirect, url_for
 from .scraper import driver, filter
 from .formatter import formatResult
 import json
-from .features import create_user, wishlist_add_item, read_wishlist, wishlist_remove_list, share_wishlist
+from .features import create_user, check_user, wishlist_add_item, read_wishlist, wishlist_remove_list, share_wishlist
 from .config import Config
 
 app = Flask(__name__, template_folder=".")
@@ -28,8 +28,20 @@ def landingpage():
 def login():
     if request.method == 'POST':
         session['username'] = request.form['username']
-        create_user(request.form['username'])
-        return redirect(url_for('login'))
+        if check_user(request.form['username'], request.form['password']):
+            return redirect(url_for('login'))
+        else:
+            return render_template("./static/landing.html", login=False)
+    return render_template('./static/login.html')
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        session['username'] = request.form['username']
+        if create_user(request.form['username'], request.form['password']):
+            return redirect(url_for('login'))
+        else:
+            return render_template("./static/landing.html", login=False)
     return render_template('./static/login.html')
 
 

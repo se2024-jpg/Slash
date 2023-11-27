@@ -26,14 +26,28 @@ users_main_dir.mkdir(parents=True, exist_ok=True)
 def usr_dir(username):
     return users_main_dir / username
 
-def create_user(username):
+def create_user(username, password):
     user_dir = usr_dir(username)
     if os.path.exists(user_dir): # user already exist
-        return False
+        if password == get_credentials(username):
+            return True
+        else:
+            return False
     else: # create new user
         user_dir.mkdir(parents=True, exist_ok=True)
+        create_credentials(username, password)
         create_wishlist(username, 'default')
         return True
+    
+def check_user(username, password):
+    user_dir = usr_dir(username)
+    if os.path.exists(user_dir): # user already exist
+        if password == get_credentials(username):
+            return True
+        else:
+            return False
+    else: # create new user
+        return False
 
 def list_users():
     ls = os.listdir(users_main_dir)
@@ -43,6 +57,28 @@ def list_users():
 def create_wishlist(username, wishlist_name):
     wishlist_path = usr_dir(username) / (wishlist_name + ".csv")
     open(wishlist_path, "a").close()
+
+def create_credentials(username, password):
+    cred_path = usr_dir(username) / ("cred.csv")
+    open(cred_path, "a").close()
+    item_data = {
+        "username": username,
+        "password": password,
+    }
+    item_data = pd.DataFrame([item_data])
+    item_data.to_csv(cred_path, index=False, header=item_data.columns)
+
+def get_credentials(username):
+    cred_path = usr_dir(username) / ("cred.csv")
+    if os.path.exists(cred_path):
+        try:
+            csv = pd.read_csv(cred_path)
+            row = csv.iloc[0]
+            return str(row['password'])
+        except Exception:
+            return ''
+    else:
+        return '' 
 
 def list_wishlists(username):
     user_dir = usr_dir(username)
