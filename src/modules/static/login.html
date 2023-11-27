@@ -47,6 +47,12 @@ See the LICENSE file in the project root for the full license information.
                 <li class="nav-item">
                     <a class="nav-link" href={{ url_for('logout') }}>Logout</a>
                 </li>
+                <li>
+                    <label class="switch" id = "toggle-button">
+                      <input type="checkbox">
+                      <span class="slider round"></span>
+                    </label>
+                </li>
             </ul>
         </div>
     </nav>
@@ -105,6 +111,21 @@ See the LICENSE file in the project root for the full license information.
                 logo.classList.remove("logo");
             }
         };
+        var darkModeButton = document.getElementById("toggle-button");
+        var header = document.querySelector("header");
+        darkModeButton.addEventListener("click", function() {
+        if(darkModeButton.firstElementChild.checked) {
+            if(window.localStorage) {
+                localStorage.setItem("dark", true);
+            }
+            document.body.classList.add("dark-mode");
+            header.classList.add("hero-dark");
+        } else {
+            document.body.classList.remove("dark-mode");
+            header.classList.remove("hero-dark");
+            localStorage.setItem("dark", false);
+        }
+        })
     </script>
 
 </body>
