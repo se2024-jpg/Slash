@@ -428,3 +428,15 @@ input:checked+.slider:before {
     font-family: 'Open Sans', sans-serif;
     transition: all .3s ease;
 }
+
+.dark-mode .item-list tr:nth-child(odd) {
+    background-color: whitesmoke;
+    color: rgb(23, 22, 23);
+
+}
+
+.dark-mode .item-list tr:nth-child(even) {
+    background-color: whitesmoke;
+    color: rgb(23, 22, 23);
+
+}
