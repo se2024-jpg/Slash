@@ -3,6 +3,27 @@
 Provides help for every argument
 
 ## **scaper.py**
+### *def searchTarget(query, df_flag, currency)*:
+The searchTarget function scrapes target.com using the API\
+**Parameters**:\
+query- search query for the product\
+df_flag- flag variable\
+currency- currency type entered by the user
+
+### *def searchBestbuy(query, df_flag, currency)*:
+The searchBestbuy function scrapes bestbuy.com using the scraping\
+**Parameters**:\
+query- search query for the product\
+df_flag- flag variable\
+currency- currency type entered by the user
+
+### *def searchEbay(query, df_flag, currency)*:
+The searchEbay function scrapes ebay.com using the API\
+**Parameters**:\
+query- search query for the product\
+df_flag- flag variable\
+currency- currency type entered by the user
+
 ### *def httpsGet(URL)*: 
 The httpsGet function makes HTTP called to the requested URL with custom headers
 
@@ -26,12 +47,55 @@ Returns a list of items available on walmart.com that match the product entered 
 
 ### *def searchEtsy(query, df_flag, currency)*:
  The searchEtsy function scrapes Etsy.com\
- **Parameters**:\
+**Parameters**:\
 query- search query for the product\
 df_flag- flag variable\
 currency- currency type entered by the user
 
 Returns a list of items available on Etsy.com that match the product entered by the user
+
+### *def amazon_scraper(link)*: 
+The amazon scraper function scrapes amazon.com.
+**Parameters**:\
+link- link of the product for which price has to be fetched
+
+Returns Updated Price from the Link
+
+Return
+### *def google_scraper(link)*: 
+The google scraper function scrapes google.com.
+**Parameters**:\
+link- link of the product for which price has to be fetched
+
+Returns Updated Price from the Link
+
+### *def walmart_scraper(link)*: 
+The walmart scraper function scrapes walmart.com.
+**Parameters**:\
+link- link of the product for which price has to be fetched
+
+Returns Updated Price from the Link
+
+### *def ebay_scraper(link)*: 
+The ebay scraper function scrapes ebay.com.
+**Parameters**:\
+link- link of the product for which price has to be fetched
+
+Returns Updated Price from the Link
+
+### *def bestbuy_scraper(link)*: 
+The ebay scraper function scrapes bestbuy.com.
+**Parameters**:\
+link- link of the product for which price has to be fetched
+
+Returns Updated Price from the Link
+
+### *def target_scraper(link)*: 
+The target scraper function scrapes target.com.
+**Parameters**:\
+link- link of the product for which price has to be fetched
+
+Returns Updated Price from the Link
 
 ### *def driver(product, currency, num=None, df_flag=0,csv=False,cd=None)*:
 Returns csv if the user enters the --csv arg, else will display the result table in the terminal based on the args entered by the user.
@@ -71,8 +135,8 @@ Currently it supports INR, EURO, AUD, YUAN, YEN, POUND.
 ## full_version.py 
 
 ### *def login(self)*:
-Used for User Login\
-Returns the username and email
+Used for User Login with password\
+Returns the username.
 
 ### *def scrape(self,prod)*:
 calls the scraper function from scraper.py
