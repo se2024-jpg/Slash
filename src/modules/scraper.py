@@ -34,8 +34,7 @@ def httpsGet(URL):
         'Cache-Control': 'no-cache'
     }
     s = requests.Session()
-    s.max_redirects = 30
-    page = s.get(URL, headers=headers)
+    page = s.get(URL, headers=headers, allow_redirects=False)
     soup1 = BeautifulSoup(page.content, "html.parser")
     return BeautifulSoup(soup1.prettify(), "html.parser")
 
