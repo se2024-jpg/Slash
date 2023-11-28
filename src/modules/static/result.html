@@ -177,7 +177,54 @@ See the LICENSE file in the project root for the full license information.
     var totalPages = Math.ceil(a.length / itemsPerPage);
     var currentPage = 1;
     var grid = document.querySelector(".grid")
+    // Function to find the cheapest product in the data array
+    function findCheapestProduct() {
+      if (a.length === 0) {
+        return null;
+      }
 
+      let cheapestProduct = a[0];
+      for (let i = 1; i < a.length; i++) {
+        const currentPrice = parseFloat(a[i].price.replace('$', '').replace(',', ''));
+        const cheapestPrice = parseFloat(cheapestProduct.price.replace('$', '').replace(',', ''));
+
+        if (currentPrice < cheapestPrice) {
+          cheapestProduct = a[i];
+        }
+      }
+
+      return cheapestProduct;
+    }
+
+    // Function to display the cheapest product in a separate div
+    function displayCheapestProduct() {
+      let cheapestProduct = findCheapestProduct();
+
+      if (cheapestProduct) {
+        let template = getTemplate();
+        let wrapper = document.createElement("div");
+        wrapper.setAttribute("class", "card-wrapper cheapest-product");
+
+        // Populate template with data for the cheapest product
+        template = template.replace('<img class="card-img" src="">', `<img class="card-img" src="${cheapestProduct.img_link}">`);
+        template = template.replace('<span class="card-website"></span>', `<span class="card-website">Cheapest Product:${cheapestProduct.website}</span>`);
+        template = template.replace('<h4 class="card-price"></h4>', `<h4 class="card-price">${cheapestProduct.price}</h4>`);
+        template = template.replace('<p class="card-title"></p>', `<p class="card-title">${cheapestProduct.title}</p>`);
+        template = template.replace('Rating:</div>', `Rating: ${cheapestProduct.rating}</div>`);
+        template = template.replace('<a href="" target="_blank"><i class="fa fa-link"></i></a>', `<a href="${cheapestProduct.link}" target="_blank"><i class="fa fa-link"></i></a>`);
+
+        wrapper.innerHTML = template;
+
+        // Create a new div for the cheapest product and append the card to it
+        let cheapestProductDiv = document.createElement("div");
+        cheapestProductDiv.setAttribute("class", "cheapest-product-container");
+        cheapestProductDiv.style.backgroundColor = "green";
+        cheapestProductDiv.appendChild(wrapper);
+
+        // Insert the new div with the cheapest product at the top of the grid
+        grid.insertBefore(cheapestProductDiv, grid.firstChild);
+      }
+    }
 
     function showPage(page) {
       var startIndex = (page - 1) * itemsPerPage;
@@ -186,6 +233,8 @@ See the LICENSE file in the project root for the full license information.
 
       // Clear existing content
       grid.innerHTML = "";
+
+      displayCheapestProduct();
 
       // Your existing code to display the products...
       for (i = 0; i < currentPageData.length; i++) {
@@ -225,6 +274,7 @@ See the LICENSE file in the project root for the full license information.
         showPage(currentPage);
       });
     });
+
   </script>
   <div class="col-md-4"></div>
   </div>
@@ -289,17 +339,17 @@ See the LICENSE file in the project root for the full license information.
   </script>
   <script>
     function addToCart(heartLink, product_data, e) {
-      if(e.target && e.target.classList && !e.target.classList.contains("clicked-heart")) {
+      if (e.target && e.target.classList && !e.target.classList.contains("clicked-heart")) {
         e.target.classList.add("clicked-heart");
       }
       let post_data = new URLSearchParams();
-        // product_data = JSON.parse(product_data)
-        for (k in product_data)
-          post_data.append(k, product_data[k])
-        fetch("/add-wishlist-item", {
-          method: 'post',
-          body: post_data,
-        }).then(result => console.log(result)).catch(error => console.error(error))
+      // product_data = JSON.parse(product_data)
+      for (k in product_data)
+        post_data.append(k, product_data[k])
+      fetch("/add-wishlist-item", {
+        method: 'post',
+        body: post_data,
+      }).then(result => console.log(result)).catch(error => console.error(error))
     }
     var darkModeButton = document.getElementById("toggle-button");
     darkModeButton.addEventListener("click", function () {
