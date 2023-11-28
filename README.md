@@ -67,28 +67,38 @@ Note: To get the share by email functionality. Please email slash.se23@gmail.com
 
 <p>
  
-# :dizzy: What's New ?
+# :dizzy: What's New? (Project 3 Updates)
 
 ### Enhanced UI
-<p> ....  </p>
-<p align="center"><img width="700" src="./assets/sorting.gif"></p>
 
-### Updated Wishlist
-<p> .... </p>
-<p align="center"><img width="700" src="./assets/currency.gif"></p>
+New grid UI with product images for a smoother shopping experience.  
 
-### Wishlist share
-<p> ....</p>
-<p align="center"><img width="700" src="./assets/price.gif"></p>
+<p align="center"><img width="700" src="./assets/Result.png"></p>  
 
-### User login with password
-<p> ...</p>
-<p align="center"><img width="700" src="./assets/rating.gif"></p>
+Choose between Dark and Light themes to suit your needs!  
 
-### Dockerization
-<p> ... </p>
-<p align="center"><img width="700" src="./assets/wishlist.gif"></p>
+<p align="center"><img width="700" src="./assets/Team44_dark_light_theme.gif"></p>  
 
+View products page by page.  
+
+<p align="center"><img width="700" src="./assets/Team44_pagination.gif"></p>  
+
+### Share your wishlist through email!  
+
+<p align="center"><img width="700" src="./assets/Team44_wishlist_share.gif"></p>
+
+### User login with password    
+Login securely with a password  
+<p align="center"><img width="700" src="./assets/Team44_register.gif"></p>
+
+### View the cheapest product with ease  
+<p align="center"><img width="700" src="./assets/Team44_cheapest_product.png"></p>  
+
+### Other Enhancements:
+* User Wishlist dynamically updates the price.
+* More websites added for scrapping -Ebay, Target, Bestbuy
+* New workflows added to the repository.
+* Extended test coverage of the repository.
 
 :movie_camera: Checkout our demo video
 ---
