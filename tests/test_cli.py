@@ -23,11 +23,8 @@ import pytest
 def test_set_player_name(monkeypatch):
     fv = full_version.full_version()
     if not os.path.exists(fv.default_user_file):
-        name = "".join(random.choices(string.ascii_lowercase, k=5))
-        #email = "".join(random.choices(string.ascii_lowercase, k=3)) + "@mail.com"
-        
+        name = "".join(random.choices(string.ascii_lowercase, k=5)) 
         answers = iter([name])
-
         monkeypatch.setattr('builtins.input', lambda name: next(answers))
 
         assert fv.login() == name
@@ -35,7 +32,6 @@ def test_set_player_name(monkeypatch):
         with open(fv.default_user_file) as json_file:
             data = json.load(json_file)
             name = data["name"]
-            # email = data["email"]
         assert fv.login() == name
 
 def test_change_user(monkeypatch, capfd):

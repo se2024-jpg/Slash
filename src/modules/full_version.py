@@ -164,8 +164,7 @@ class full_version:
     def change_user(self):
         self.view_users()
         username = input("Enter username (username will be created if not exist):")
-        password = input("Enter password (username will be created if not exist):")
-        create_user(username, password)
+        create_user(username, self.password)
         self.name = username
         user_data = {"name": username}
         with open(self.default_user_file, "w") as outfile:
