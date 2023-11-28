@@ -583,10 +583,10 @@ input:checked+.slider:before {
     display: inline-block;
     padding: 8px 12px;
     margin: 4px;
-    border: 1px solid #ccc;
+    border: 1px solid black;
     border-radius: 4px;
     text-decoration: none;
-    color: #333;
+    color: white;
     transition: background-color 0.3s;
 }
 
@@ -597,4 +597,15 @@ input:checked+.slider:before {
 .pagination-link.active {
     background-color: #007bff;
     color: #fff;
+}
+
+.dark-mode .pagination-link {
+    display: inline-block;
+    padding: 8px 12px;
+    margin: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #333;
+    transition: background-color 0.3s;
 }
