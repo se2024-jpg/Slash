@@ -212,8 +212,15 @@ See the LICENSE file in the project root for the full license information.
         template = template.replace('<p class="card-title"></p>', `<p class="card-title">${cheapestProduct.title}</p>`);
         template = template.replace('Rating:</div>', `Rating: ${cheapestProduct.rating}</div>`);
         template = template.replace('<a href="" target="_blank"><i class="fa fa-link"></i></a>', `<a href="${cheapestProduct.link}" target="_blank"><i class="fa fa-link"></i></a>`);
+        // template = template.replace('<a href="#/" id="heart-link"><i class="fa fa-heart"></i></a>', '');
+
 
         wrapper.innerHTML = template;
+
+        wrapper.querySelector("#heart-link").addEventListener("click", function (e) {
+          e.preventDefault();
+          addToCart(wrapper, cheapestProduct, e);
+        })
 
         // Create a new div for the cheapest product and append the card to it
         let cheapestProductDiv = document.createElement("div");
