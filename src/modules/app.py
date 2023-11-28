@@ -31,7 +31,7 @@ def login():
         if check_user(request.form['username'], request.form['password']):
             return redirect(url_for('login'))
         else:
-            return render_template("./static/landing.html", login=False)
+            return render_template("./static/landing.html", login=False, invalid=True)
     return render_template('./static/login.html')
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -41,7 +41,7 @@ def register():
         if create_user(request.form['username'], request.form['password']):
             return redirect(url_for('login'))
         else:
-            return render_template("./static/landing.html", login=False)
+            return render_template("./static/landing.html", login=False, invalid=True)
     return render_template('./static/login.html')
 
 
