@@ -22,7 +22,7 @@ Slash Your Spending, Not Your Style - Unleash the Best Deals!!
 ![Discord](https://img.shields.io/discord/1162231656980168876)
 
 Slash is a tool that scrapes the most popular e-commerce websites to get the best deals on searched items across these websites. 
-Currently supported websites include [Walmart](https://www.walmart.com/), [Target](https://www.target.com/), [BestBuy](https://www.bestbuy.com/),  [Amazon](https://www.amazon.com/), [Google Shopping](https://shopping.google.com/),  [BJs](https://www.bjs.com/),and [EBay](https://www.ebay.com/).
+Currently supported websites include [Walmart](https://www.walmart.com/), [Target](https://www.target.com/), [BestBuy](https://www.bestbuy.com/),  [Amazon](https://www.amazon.com/), [Google Shopping](https://shopping.google.com/),  [BJs](https://www.bjs.com/),  [Etsy](https://www.etsy.com/), and [EBay](https://www.ebay.com/).
 - **Fast**: With slash, you can save over 50% of your time by comparing deals across websites within seconds
 - **Easy**: Slash uses very easy commands to filter, sort and search your items
 - **Powerful**: Quickly alter the commands to get desired results
@@ -104,7 +104,8 @@ Login securely with a password
 :movie_camera: Checkout our demo video
 ---
 
-[![Video](https://img.youtube.com/vi/aGQisQmQt-o/0.jpg)](https://youtu.be/5iCc2LJa_bI)
+[![Video](https://img.youtube.com/vi/5iCc2LJa_bI/0.jpg)](https://youtu.be/5iCc2LJa_bI)
+
 
 # :muscle: What's next for future development?
 
