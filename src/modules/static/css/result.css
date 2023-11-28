@@ -225,6 +225,17 @@ footer a {
     width: 80px;
 }
 
+.link-button {
+    background: none;
+    border: none;
+    text-decoration: underline;
+    cursor: pointer;
+    display: inline-block;
+    margin-left: 5px;
+    color: #5CE0D8;
+    font-size: 17px;
+}
+
 .webdesigntuts-workshop button:hover,
 .webdesigntuts-workshop button:focus {
     background: #292929;
@@ -540,6 +551,17 @@ input:checked+.slider:before {
 
 .dark-mode .card-buttons a {
     color: #484b6a;
+}
+
+.dark-mode .link-button {
+    background: none;
+    border: none;
+    text-decoration: underline;
+    cursor: pointer;
+    display: inline-block;
+    margin-left: 5px;
+    color: #484b6a;
+    font-size: 17px;
 }
 
 .dark-mode .card-title {

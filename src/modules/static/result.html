@@ -287,10 +287,12 @@ See the LICENSE file in the project root for the full license information.
     };
   </script>
   <script>
-    function addToCart(heartLink, product_data) {
-      if (!heartLink.firstElementChild.classList.contains("clicked-heart")) {
-        heartLink.firstElementChild.classList.add("clicked-heart");
-        let post_data = new URLSearchParams();
+    function addToCart(heartLink, product_data, e) {
+      console.log(e.target);
+      if(!e.target.classList.contains("clicked-heart")) {
+        e.target.classList.add("clicked-heart");
+      }
+      let post_data = new URLSearchParams();
         // product_data = JSON.parse(product_data)
         for (k in product_data)
           post_data.append(k, product_data[k])
@@ -298,9 +300,6 @@ See the LICENSE file in the project root for the full license information.
           method: 'post',
           body: post_data,
         }).then(result => console.log(result)).catch(error => console.error(error))
-      } else {
-        heartLink.firstElementChild.classList.remove("clicked-heart");
-      }
     }
     var darkModeButton = document.getElementById("toggle-button");
     darkModeButton.addEventListener("click", function () {
