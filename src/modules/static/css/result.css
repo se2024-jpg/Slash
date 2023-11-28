@@ -518,35 +518,6 @@ input:checked+.slider:before {
     /* Ensure rounded corners are visible */
 }
 
-.pagination li {
-    margin-right: 5px;
-}
-
-.pagination a {
-    text-decoration: none;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    /* Adjust the radius for rounded corners */
-    color: #fff;
-    /* White text color */
-    background-color: transparent;
-    transition: background-color 0.3s ease;
-    /* Smooth transition for background color */
-}
-
-.pagination a:hover {
-    background-color: #333;
-    /* Darker background color on hover */
-}
-
-.pagination .current {
-    background-color: #007bff;
-    /* Highlight color for the current page */
-    color: #fff;
-    /* Text color for the current page */
-}
-
 .dark-mode {
     background-color: #e4e5f1;
 }
@@ -579,4 +550,29 @@ input:checked+.slider:before {
     color: black !important;
     font-family: 'Open Sans', sans-serif;
     transition: all .3s ease;
+}
+
+.pagination-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.pagination-link {
+    display: inline-block;
+    padding: 8px 12px;
+    margin: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #333;
+    transition: background-color 0.3s;
+}
+
+.pagination-link:hover {
+    background-color: #ddd;
+}
+
+.pagination-link.active {
+    background-color: #007bff;
+    color: #fff;
 }

@@ -145,70 +145,85 @@ See the LICENSE file in the project root for the full license information.
   <div class="grid">
   </div>
 
+  <!-- pagination links section-->
   <div class="pagination-container">
+    {% for page_num in range(1, total_pages + 1) %}
+    <a href="#" class="pagination-link" data-page="{{ page_num }}">{{ page_num }}</a>
+    {% endfor %}
   </div>
 
   <script>
     function getTemplate() {
       return tempelate = `
-   <div class="card-img-holder">
-       <img class="card-img" src="">
-   </div>
-   <div class="card-content">
-       <span class="card-website"></span>
-       <h4 class="card-price"></h4>
-       <p class="card-title"></p>
-       <div class="card-bottom">
-           <div class="card-rating">Rating:</div>
-           <div class="card-buttons">
-               <a href="" target="_blank"><i class="fa fa-link"></i></a>
-               <a href="#" id="heart-link"><i class="fa fa-heart"></i></a>
-           </div>
-       </div>
-   </div>`;
+     <div class="card-img-holder">
+         <img class="card-img" src="">
+     </div>
+     <div class="card-content">
+         <span class="card-website"></span>
+         <h4 class="card-price"></h4>
+         <p class="card-title"></p>
+         <div class="card-bottom">
+             <div class="card-rating">Rating:</div>
+             <div class="card-buttons">
+                 <a href="" target="_blank"><i class="fa fa-link"></i></a>
+                 <a href="#" id="heart-link"><i class="fa fa-heart"></i></a>
+             </div>
+         </div>
+     </div>`;
     }
 
-    let currentPage = "{{page}}"
-    function getPaginationBar() {
-      var totalPages = "{{total_pages}}"
-      var data = '<ul class="pagination">'
-      for (var i = 0; i < totalPages; i++) {
-        if (i == currentPage) {
-          data += '<li class = "current"><a href="/search?product_name={{prod}}&page=' + i + '">' + (i + 1) + '</a></li>';
-        } else {
-          data += '<li><a href="/search?product_name={{prod}}&page=' + i + '">' + (i + 1) + '</a></li>';
-        }
-      }
-      data += '</ul>';
-
-      return data
-    }
-
+    // Pagination logic
+    var itemsPerPage = 21;
+    var totalPages = Math.ceil(a.length / itemsPerPage);
+    var currentPage = 1;
     var grid = document.querySelector(".grid")
-    for (i = 0; i < a.length; i++) {
-      let tempelate = getTemplate();
-      let wrapper = document.createElement("div")
-      let data = a[i]
-      wrapper.setAttribute("class", "card-wrapper")
-      wrapper.innerHTML = tempelate;
-      wrapper.querySelector(".card-img").setAttribute("src", a[i].img_link)
-      wrapper.querySelector(".card-website").innerHTML = a[i].website
-      wrapper.querySelector(".card-rating").innerHTML = "Rating: " + a[i].rating
-      wrapper.querySelector(".card-buttons").firstElementChild.setAttribute("href", a[i].link)
-      wrapper.querySelector(".card-title").innerHTML = a[i].title
-      wrapper.querySelector(".card-price").innerHTML = a[i].price
-      wrapper.querySelector("#heart-link").addEventListener("click", function () {
-        addToCart(wrapper, data)
-      })
-      grid.append(wrapper)
+
+
+    function showPage(page) {
+      var startIndex = (page - 1) * itemsPerPage;
+      var endIndex = startIndex + itemsPerPage;
+      var currentPageData = a.slice(startIndex, endIndex);
+
+      // Clear existing content
+      grid.innerHTML = "";
+
+      // Your existing code to display the products...
+      for (i = 0; i < currentPageData.length; i++) {
+        let tempelate = getTemplate();
+        let wrapper = document.createElement("div");
+        let data = currentPageData[i];
+        wrapper.setAttribute("class", "card-wrapper");
+        wrapper.innerHTML = tempelate;
+        wrapper.querySelector(".card-img").setAttribute("src", currentPageData[i].img_link);
+        wrapper.querySelector(".card-website").innerHTML = currentPageData[i].website;
+        wrapper.querySelector(".card-rating").innerHTML = "Rating: " + currentPageData[i].rating;
+        wrapper.querySelector(".card-buttons").firstElementChild.setAttribute("href", currentPageData[i].link);
+        wrapper.querySelector(".card-title").innerHTML = currentPageData[i].title;
+        wrapper.querySelector(".card-price").innerHTML = currentPageData[i].price;
+        wrapper.querySelector("#heart-link").addEventListener("click", function () {
+          addToCart(wrapper, data);
+        });
+        grid.append(wrapper);
+      }
+
+      // Update pagination links styling
+      document.querySelectorAll(".pagination-link").forEach(function (link) {
+        link.classList.remove("active");
+      });
+      document.querySelector(`.pagination-link[data-page="${page}"]`).classList.add("active");
     }
 
-    let pagination_number = document.createElement('div')
-    pagination_number.innerHTML = getPaginationBar()
-    var pagination = document.querySelector(".pagination-container")
+    // Show the first page on initial load
+    showPage(currentPage);
 
-    pagination.append(pagination_number)
-
+    // Handle pagination link clicks
+    document.querySelectorAll(".pagination-link").forEach(function (link) {
+      link.addEventListener("click", function (event) {
+        event.preventDefault();
+        currentPage = parseInt(this.getAttribute("data-page"), 10);
+        showPage(currentPage);
+      });
+    });
   </script>
   <div class="col-md-4"></div>
   </div>
