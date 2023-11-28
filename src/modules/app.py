@@ -76,7 +76,7 @@ def product_search(new_product="", sort=None, currency=None, num=None, min_price
     if min_price is not None or max_price is not None or min_rating is not None:
         data = filter(data, min_price, max_price, min_rating)
 
-    return render_template("./static/result.html", data=data, prod=product, total_pages= len(data)//21)
+    return render_template("./static/result.html", data=data, prod=product, total_pages= len(data)//20)
 
 
 @app.route("/filter", methods=["POST", "GET"])
