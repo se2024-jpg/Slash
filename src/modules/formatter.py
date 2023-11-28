@@ -144,12 +144,11 @@ def sortList(arr, sortBy, reverse):
         return arr.sort_values(
             key=lambda x: x.apply(lambda y: getNumbers(y)),
             by=["price"],
-            ascending=False,
+            ascending=reverse,
         )
-    # Fix Rating sort
     elif sortBy == "ra":
         arr["rating"] = arr["rating"].apply(lambda x: None if x == "" else float(x) if x is not None else None)
-        return arr.sort_values(by=["rating"], ascending=False)
+        return arr.sort_values(by=["rating"], ascending=reverse)
     return arr
 
 
