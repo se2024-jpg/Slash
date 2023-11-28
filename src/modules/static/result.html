@@ -200,8 +200,8 @@ See the LICENSE file in the project root for the full license information.
         wrapper.querySelector(".card-buttons").firstElementChild.setAttribute("href", currentPageData[i].link);
         wrapper.querySelector(".card-title").innerHTML = currentPageData[i].title;
         wrapper.querySelector(".card-price").innerHTML = currentPageData[i].price;
-        wrapper.querySelector("#heart-link").addEventListener("click", function () {
-          addToCart(wrapper, data);
+        wrapper.querySelector("#heart-link").addEventListener("click", function (e) {
+          addToCart(wrapper, data, e);
         });
         grid.append(wrapper);
       }
@@ -288,8 +288,7 @@ See the LICENSE file in the project root for the full license information.
   </script>
   <script>
     function addToCart(heartLink, product_data, e) {
-      console.log(e.target);
-      if(!e.target.classList.contains("clicked-heart")) {
+      if(e.target && e.target.classList && !e.target.classList.contains("clicked-heart")) {
         e.target.classList.add("clicked-heart");
       }
       let post_data = new URLSearchParams();
