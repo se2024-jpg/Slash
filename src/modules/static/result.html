@@ -166,7 +166,7 @@ See the LICENSE file in the project root for the full license information.
              <div class="card-rating">Rating:</div>
              <div class="card-buttons">
                  <a href="" target="_blank"><i class="fa fa-link"></i></a>
-                 <a href="#" id="heart-link"><i class="fa fa-heart"></i></a>
+                 <a href="#/" id="heart-link"><i class="fa fa-heart"></i></a>
              </div>
          </div>
      </div>`;
@@ -201,6 +201,7 @@ See the LICENSE file in the project root for the full license information.
         wrapper.querySelector(".card-title").innerHTML = currentPageData[i].title;
         wrapper.querySelector(".card-price").innerHTML = currentPageData[i].price;
         wrapper.querySelector("#heart-link").addEventListener("click", function (e) {
+          e.preventDefault();
           addToCart(wrapper, data, e);
         });
         grid.append(wrapper);
