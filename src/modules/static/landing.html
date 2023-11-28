@@ -33,6 +33,17 @@ See the LICENSE file in the project root for the full license information.
           Register</a></p>  
     </div>
 
+    {% if invalid %}
+
+      <div id="errorPopup" class="popup">
+        <div class="popup-content">
+          <span onclick="document.getElementById('errorPopup').style.display='none'" class="close" id="closeError">&times;</span>
+          <p>Invalid Username or Password.</p>
+        </div>
+      </div>
+
+    {% endif %}
+
   </header>
 
   <div id="id01" class="w3-modal">
