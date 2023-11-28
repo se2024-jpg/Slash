@@ -3,14 +3,14 @@ Slash Your Spending, Not Your Style - Unleash the Best Deals!!
 
 <p align="center"><img width="500" src="./assets/Shop.gif"></p>
 
-[![GitHub license](https://img.shields.io/github/license/csc510fall23g45/slash)](https://github.com/csc510fall23g45/slash/blob/main/LICENSE)
+[![GitHub license](https://img.shields.io/github/license/SE23-Team44/slash)](https://github.com/SE23-Team44/slash/blob/main/LICENSE)
 [![DOI](https://zenodo.org/badge/701493501.svg)](https://zenodo.org/doi/10.5281/zenodo.10020460)
 ![Github](https://img.shields.io/badge/language-python-red.svg)
-[![GitHub issues](https://img.shields.io/github/issues/csc510fall23g45/slash)](https://github.com/csc510fall23g45/slash/issues)
-[![Github closes issues](https://img.shields.io/github/issues-closed-raw/csc510fall23g45/slash)](https://github.com/csc510fall23g45/slash/issues?q=is%3Aissue+is%3Aclosed)
-[![Github closed pull requests](https://img.shields.io/github/issues-pr-closed/csc510fall23g45/slash)](https://github.com/csc510fall23g45/slash/pulls?q=is%3Apr+is%3Aclosed)
-[![codecov](https://codecov.io/gh/csc510fall23g45/slash/graph/badge.svg?token=ZE1S4ZLJYZ)](https://codecov.io/gh/csc510fall23g45/slash)
-[![Python Style Checker](https://github.com/csc510fall23g45/slash/actions/workflows/style_checker.yml/badge.svg)](https://github.com/csc510fall23g45/slash/actions/workflows/style_checker.yml)
+[![GitHub issues](https://img.shields.io/github/issues/SE23-Team44/slash)](https://github.com/SE23-Team44/slash/issues)
+[![Github closes issues](https://img.shields.io/github/issues-closed-raw/SE23-Team44/slash)](https://github.com/SE23-Team44/slash/issues?q=is%3Aissue+is%3Aclosed)
+[![Github closed pull requests](https://img.shields.io/github/issues-pr-closed/SE23-Team44/slash)](https://github.com/SE23-Team44/slash/pulls?q=is%3Apr+is%3Aclosed)
+[![codecov](https://codecov.io/gh/SE23-Team44/slash/graph/badge.svg?token=ZE1S4ZLJYZ)](https://codecov.io/gh/SE23-Team44/slash)
+[![Python Style Checker](https://github.com/SE23-Team44/slash/actions/workflows/style_checker.yml/badge.svg)](https://github.com/SE23-Team44/slash/actions/workflows/style_checker.yml)
 
 Slash is a tool that scrapes the most popular e-commerce websites to get the best deals on searched items across these websites. 
 - **Fast**: With slash, you can save over 50% of your time by comparing deals across websites within seconds
