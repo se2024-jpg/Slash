@@ -378,72 +378,72 @@ def searchEbay(query, df_flag, currency):
 
     return products
 
-def searchTarget(query, df_flag, currency):
-    """
-    The searchTarget function scrapes https://www.target.com/
-    Parameters: query- search query for the product, df_flag- flag variable, currency- currency type entered by the user
-    Returns a list of items available on target.com that match the product entered by the user
-    """
+# def searchTarget(query, df_flag, currency):
+#     """
+#     The searchTarget function scrapes https://www.target.com/
+#     Parameters: query- search query for the product, df_flag- flag variable, currency- currency type entered by the user
+#     Returns a list of items available on target.com that match the product entered by the user
+#     """
 
-    api_url = 'https://redsky.target.com/redsky_aggregations/v1/web/plp_search_v1'
+#     api_url = 'https://redsky.target.com/redsky_aggregations/v1/web/plp_search_v1'
 
-    page = '/s/' + query
-    params = {
-        'key': 'ff457966e64d5e877fdbad070f276d18ecec4a01',
-        'channel': 'WEB',
-        'count': '24',
-        'default_purchasability_filter': 'false',
-        'include_sponsored': 'true',
-        'keyword': query,
-        'offset': '0',
-        'page': page,
-        'platform': 'desktop',
-        'pricing_store_id': '3991',
-        'useragent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0',
-        'visitor_id': 'AAA',
-    }
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',  # noqa: E501
-        'Accept-Encoding': 'gzip, deflate',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-        'DNT': '1',
-        'Connection': 'keep-alive',
-        'Upgrade-Insecure-Requests': '1',
-        'Cache-Control': 'no-cache'
-    }
-    data = requests.get(api_url, headers=headers, params=params).json()
-    products = []
+#     page = '/s/' + query
+#     params = {
+#         'key': 'ff457966e64d5e877fdbad070f276d18ecec4a01',
+#         'channel': 'WEB',
+#         'count': '24',
+#         'default_purchasability_filter': 'false',
+#         'include_sponsored': 'true',
+#         'keyword': query,
+#         'offset': '0',
+#         'page': page,
+#         'platform': 'desktop',
+#         'pricing_store_id': '3991',
+#         'useragent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0',
+#         'visitor_id': 'AAA',
+#     }
+#     headers = {
+#         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',  # noqa: E501
+#         'Accept-Encoding': 'gzip, deflate',
+#         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+#         'DNT': '1',
+#         'Connection': 'keep-alive',
+#         'Upgrade-Insecure-Requests': '1',
+#         'Cache-Control': 'no-cache'
+#     }
+#     data = requests.get(api_url, headers=headers, params=params).json()
+#     products = []
 
-    for p in data['data']['search']['products']:
-        titles = p['item']['product_description']['title']
-        prices = '$' + str(p['price']['reg_retail'])
-        links = p['item']['enrichment']['buy_url']
-        img_link = p['item']['enrichment']['images']['primary_image_url']
-        try:
-            ratings = p['ratings_and_reviews']['statistics']['rating']['average']
-        except KeyError:
-            ratings = None
-        try:
-            num_ratings = p['ratings_and_reviews']['statistics']['rating']['count']
-        except KeyError:
-            num_ratings = None
-        trending = None
+#     for p in data['data']['search']['products']:
+#         titles = p['item']['product_description']['title']
+#         prices = '$' + str(p['price']['reg_retail'])
+#         links = p['item']['enrichment']['buy_url']
+#         img_link = p['item']['enrichment']['images']['primary_image_url']
+#         try:
+#             ratings = p['ratings_and_reviews']['statistics']['rating']['average']
+#         except KeyError:
+#             ratings = None
+#         try:
+#             num_ratings = p['ratings_and_reviews']['statistics']['rating']['count']
+#         except KeyError:
+#             num_ratings = None
+#         trending = None
     
-        product = formatResult(
-            "target",
-            titles,
-            prices,
-            links,
-            ratings,
-            num_ratings,
-            trending,
-            df_flag,
-            currency,
-            img_link
-        )
-        products.append(product)
+#         product = formatResult(
+#             "target",
+#             titles,
+#             prices,
+#             links,
+#             ratings,
+#             num_ratings,
+#             trending,
+#             df_flag,
+#             currency,
+#             img_link
+#         )
+#         products.append(product)
 
-    return products
+#     return products
 
 def searchBestbuy(query, df_flag, currency):
     """
@@ -533,11 +533,11 @@ def driver(
     products_5 = searchBJs(product, df_flag, currency)
     products_6 = searchEbay(product,df_flag,currency)
     products_7 = searchBestbuy(product,df_flag,currency)
-    #products_8 = searchTarget(product,df_flag,currency)
+    
 
     result_condensed = ""
     if not ui:
-        results = products_1 + products_2 + products_3 + products_4 + products_5 + products_6 + products_7 #+ products_8
+        results = products_1 + products_2 + products_3 + products_4 + products_5 + products_6 + products_7
         result_condensed = (
             products_1[:num]
             + products_2[:num]
@@ -546,7 +546,7 @@ def driver(
             + products_5[:num]
             + products_6[:num]
             + products_7[:num]
-            #+ products_8[:num]
+            
         )
         result_condensed = pd.DataFrame.from_dict(result_condensed, orient="columns")
         results = pd.DataFrame.from_dict(results, orient="columns")
