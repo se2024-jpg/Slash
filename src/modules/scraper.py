@@ -530,11 +530,11 @@ def driver(
     products_5 = searchBJs(product, df_flag, currency)
     products_6 = searchEbay(product,df_flag,currency)
     products_7 = searchBestbuy(product,df_flag,currency)
-    products_8 = searchTarget(product,df_flag,currency)
+    #products_8 = searchTarget(product,df_flag,currency)
 
     result_condensed = ""
     if not ui:
-        results = products_1 + products_2 + products_3 + products_4 + products_5 + products_6 + products_7 + products_8
+        results = products_1 + products_2 + products_3 + products_4 + products_5 + products_6 + products_7 #+ products_8
         result_condensed = (
             products_1[:num]
             + products_2[:num]
@@ -543,7 +543,7 @@ def driver(
             + products_5[:num]
             + products_6[:num]
             + products_7[:num]
-            + products_8[:num]
+            #+ products_8[:num]
         )
         result_condensed = pd.DataFrame.from_dict(result_condensed, orient="columns")
         results = pd.DataFrame.from_dict(results, orient="columns")
@@ -566,7 +566,7 @@ def driver(
         condense_helper(result_condensed, products_5, num)
         condense_helper(result_condensed, products_6, num)
         condense_helper(result_condensed, products_7, num)
-        condense_helper(result_condensed, products_8, num)
+        #condense_helper(result_condensed, products_8, num)
 
         if currency != None:
             for p in result_condensed:
