@@ -19,6 +19,7 @@ import pandas as pd
 import os
 from datetime import datetime
 from ebaysdk.finding import Connection
+import requests
 
 def httpsGet(URL):
     """
@@ -517,12 +518,14 @@ def filter(data, price_min = None, price_max = None, rating_min = None):
             filtered_result.append(row)
     return filtered_result
 
+
+
 def driver(
     product, currency, num=None, df_flag=0, csv=False, cd=None, ui=False, sort=None
 ):
     """Returns csv is the user enters the --csv arg,
     else will display the result table in the terminal based on the args entered by the user"""
-
+    
     products_1 = searchAmazon(product, df_flag, currency)
     products_2 = searchWalmart(product, df_flag, currency)
     products_3 = searchEtsy(product, df_flag, currency)
@@ -566,11 +569,12 @@ def driver(
         condense_helper(result_condensed, products_5, num)
         condense_helper(result_condensed, products_6, num)
         condense_helper(result_condensed, products_7, num)
-        #condense_helper(result_condensed, products_8, num)
 
-        if currency != None:
-            for p in result_condensed:
-                p["price"] = getCurrency(currency, p["price"])
+        if currency and currency != "USD":
+            for item in result_condensed:
+                if item['price']:
+                    item['original_price'] = item['price']
+                    item['price'] = convert_currency(item['price'], 'USD', currency)
 
         # Fix URLs so that they contain http before www
         for p in result_condensed:
@@ -605,3 +609,17 @@ def driver(
             )
             print(result_condensed)
     return result_condensed
+
+
+
+def convert_currency(amount, from_currency, to_currency):
+    api_key = "f3ac7c18adc2a995e895d289"
+    url = f"https://api.exchangerate-api.com/v4/latest/{from_currency}"
+    response = requests.get(url)
+    data = response.json()
+    rate = data['rates'][to_currency]
+        # Remove currency symbol and convert to float
+    amount = float(amount.replace('$', '').replace(',', ''))
+    
+    converted_amount = amount * rate
+    return f"{to_currency} {converted_amount:.2f}"

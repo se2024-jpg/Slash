@@ -91,13 +91,13 @@ See the LICENSE file in the project root for the full license information.
           </div>
           <div class="form-group">
             <label class="control-label" for="company"></label>
-            <select id="choice1" name="currency" class="form-control">
-              <option value="usd">USD</option>
-              <option value="inr">INR</option>
-              <option value="euro">EURO</option>
-              <option value="yuan">YUAN</option>
-              <option value="aud">AUD</option>
-              <option value="pound">POUND</option>
+            <select id="choice1" name="currency" class="form-control" onchange="changeCurrency()">
+              <option id="USD" value="USD">USD</option>
+              <option id="INR" value="INR">INR</option>
+              <option id="EUR" value="EUR">EUR</option>
+              <option id="CNY" value="CNY">CNY</option>
+              <option id="AUD" value="AUD">AUD</option>
+              <option id="GBP" value="GBP">GBP</option>
             </select>
           </div>
           <div class="form-group">
@@ -117,7 +117,7 @@ See the LICENSE file in the project root for the full license information.
           </div>
           <div class="form-group">
             <label class="control-label" for="company"></label>
-            <input type="submit" style="border-radius: 7px; height: 34px;" class="button button1" value="Search" />
+            <input type="submit" style="border-radius: 7px; height: 34px;" class="button button1" value="Go" />
           </div>
         </form>
       </div>
@@ -376,6 +376,37 @@ See the LICENSE file in the project root for the full license information.
       }
     })
   </script>
+  <script>
+function changeCurrency() {
+    const selectedCurrency = document.getElementById('choice1').value;
+    
+    // Send an AJAX request to update the currency
+    fetch('/update_currency', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ currency: selectedCurrency }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Update the displayed prices
+        updatePrices(data.products);
+    });
+}
+
+function updatePrices(products) {
+    // Update the prices in the DOM
+    // This will depend on how you're displaying the products
+    // For example:
+    products.forEach(product => {
+        const priceElement = document.getElementById(`price-${product.id}`);
+        if (priceElement) {
+            priceElement.textContent = product.price;
+        }
+    });
+}
+</script>
 </body>
 
 </html>
