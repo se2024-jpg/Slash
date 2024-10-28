@@ -64,7 +64,7 @@ def register():
 @app.route('/login/google')
 def google_login():
     # Redirect the user to Google's OAuth page
-    redirect_uri = redirect_uri='http://localhost:5000/google/callback'
+    redirect_uri = 'http://localhost:5000/google/callback'
     nonce = secrets.token_urlsafe(16)
     session['nonce'] = nonce
     return google.authorize_redirect(redirect_uri,  nonce=nonce)
