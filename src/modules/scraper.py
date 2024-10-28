@@ -153,8 +153,9 @@ def google_scraper(link):
 def walmart_scraper(link):
     try:
         page = httpsGet(link)
-
+        print("ERROR AFTER THIS")
         res = page.select('span.inline-flex.flex-column span')[0].text
+        print("NOT AFTE THIS")
         pattern = r'(\$\s?\d+\.\d{2})'
         match = re.search(pattern, res)
         if match:
@@ -162,6 +163,7 @@ def walmart_scraper(link):
         else:
             return None
     except Exception as e:
+        print("I THREW ")
         print(f'There was an error in scraping {link}, Error is {e}')
         return None
 
