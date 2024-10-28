@@ -133,7 +133,7 @@ Login securely with a password
 
 # Chat Channel
 
-<code><a href="https://discord.gg/duCqfCS6EA" target="_blank"><img height="100" width="250" src="https://user-images.githubusercontent.com/42767118/135394825-26dee6db-7a64-4e3f-902a-1e35abd4cf0c.png"></a></code>
+<code><a href="https://discord.gg/KFtvmngMMD" target="_blank"><img height="100" width="250" src="https://user-images.githubusercontent.com/42767118/135394825-26dee6db-7a64-4e3f-902a-1e35abd4cf0c.png"></a></code>
 
 
 :sparkles: Contributors
