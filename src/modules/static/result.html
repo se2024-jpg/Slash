@@ -102,6 +102,15 @@ See the LICENSE file in the project root for the full license information.
           </div>
           <div class="form-group">
             <label class="control-label" for="company"></label>
+            <select id="website-choice" name="website" class="form-control">
+              <option value="all">all</option>
+              <option value="walmart">walmart</option>
+              <option value="bestbuy">bestbuy</option>
+              <option value="ebay">ebay</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="company"></label>
             <input type="number" step="0.1" min="0" id="amount_min" name="min_rating" placeholder="Min Rating"
               class="form-control" style="border-radius: 7px; height: 44px;">
           </div>
@@ -285,9 +294,7 @@ See the LICENSE file in the project root for the full license information.
 
   </header>
 
-
-
-  <script type="text/javascript" src="{{ url_for('static', filename='grid.js') }}"></script>
+  <!-- <script type="text/javascript" src="{{ url_for('static', filename='grid.js') }}"></script> -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
