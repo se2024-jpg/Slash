@@ -79,13 +79,13 @@ def product_search(new_product="", sort=None, currency=None, num=None, min_price
     return render_template("./static/result.html", data=data, prod=product, total_pages= len(data)//20)"""
 
 @app.route("/search", methods=["POST", "GET"])
-def product_search(new_product="", sort=None, currency=None, num=None, min_price=None, max_price=None, min_rating=None):
+def product_search(new_product="", sort=None, currency=None, num=None, min_price=None, max_price=None, min_rating=None, website=None):
     try:
         product = request.args.get("product_name")
         if product is None:
             product = new_product
 
-        data = driver(product, currency, num, 0, False, None, True, sort)
+        data = driver(product, currency, num, 0, False, None, True, sort, website)
 
         if min_price is not None or max_price is not None or min_rating is not None:
             data = filter(data, min_price, max_price, min_rating)
@@ -102,6 +102,7 @@ def product_search_filtered():
         product = request.args.get("product_name")
         sort = request.form["sort"]
         currency = request.form["currency"]
+        website = request.form.get("website", "all")
 
         min_price = request.form["min_price"]
         max_price = request.form["max_price"]
@@ -127,7 +128,7 @@ def product_search_filtered():
         if currency == "usd":
             currency = None
 
-        return product_search(product, sort, currency, None, min_price, max_price, min_rating)
+        return product_search(product, sort, currency, None, min_price, max_price, min_rating, website)
     except Exception as e:
         app.logger.error(f"Error during filtered product search: {e}")
         return render_template("error.html", error=str(e)), 500

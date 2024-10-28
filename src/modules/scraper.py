@@ -148,7 +148,7 @@ def searchWalmart(query, df_flag, currency):
             res.select("div.lh-copy"),
             res.select("a"),
         )
-        ratings = res.findAll("span", {"class": "w_iUH7"}, text=pattern)
+        ratings = res.findAll("span", {"class": "w_iUH7"}, string=pattern)
         num_ratings = res.findAll("span", {"class": "sans-serif gray f7"})
         trending = res.select("span.w_Cs")
         img_links = res.select("div.relative.overflow-hidden img")
@@ -425,73 +425,6 @@ def searchEbay(query, df_flag, currency):
 
     return products
 
-def searchTarget(query, df_flag, currency):
-    """
-    The searchTarget function scrapes https://www.target.com/
-    Parameters: query- search query for the product, df_flag- flag variable, currency- currency type entered by the user
-    Returns a list of items available on target.com that match the product entered by the user
-    """
-
-    api_url = 'https://redsky.target.com/redsky_aggregations/v1/web/plp_search_v1'
-
-    page = '/s/' + query
-    params = {
-        'key': 'ff457966e64d5e877fdbad070f276d18ecec4a01',
-        'channel': 'WEB',
-        'count': '24',
-        'default_purchasability_filter': 'false',
-        'include_sponsored': 'true',
-        'keyword': query,
-        'offset': '0',
-        'page': page,
-        'platform': 'desktop',
-        'pricing_store_id': '3991',
-        'useragent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0',
-        'visitor_id': 'AAA',
-    }
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',  # noqa: E501
-        'Accept-Encoding': 'gzip, deflate',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-        'DNT': '1',
-        'Connection': 'keep-alive',
-        'Upgrade-Insecure-Requests': '1',
-        'Cache-Control': 'no-cache'
-    }
-    data = requests.get(api_url, headers=headers, params=params).json()
-    products = []
-
-    for p in data['data']['search']['products']:
-        titles = p['item']['product_description']['title']
-        prices = '$' + str(p['price']['reg_retail'])
-        links = p['item']['enrichment']['buy_url']
-        img_link = p['item']['enrichment']['images']['primary_image_url']
-        try:
-            ratings = p['ratings_and_reviews']['statistics']['rating']['average']
-        except KeyError:
-            ratings = None
-        try:
-            num_ratings = p['ratings_and_reviews']['statistics']['rating']['count']
-        except KeyError:
-            num_ratings = None
-        trending = None
-    
-        product = formatResult(
-            "target",
-            titles,
-            prices,
-            links,
-            ratings,
-            num_ratings,
-            trending,
-            df_flag,
-            currency,
-            img_link
-        )
-        products.append(product)
-
-    return products
-
 def searchBestbuy(query, df_flag, currency):
     """
     The searchBestbuy function scrapes bestbuy.com
@@ -513,7 +446,7 @@ def searchBestbuy(query, df_flag, currency):
             res.select("div.priceView-customer-price span"),
             res.select("a"),
         )
-        ratings = res.find("div", class_="c-ratings-reviews").findAll("p", text=pattern)
+        ratings = res.find("div", class_="c-ratings-reviews").findAll("p", string=pattern)
         num_ratings = res.select("span.c-reviews")
         trending = None
         img_link = res.select("img.product-image")
@@ -532,70 +465,6 @@ def searchBestbuy(query, df_flag, currency):
         products.append(product)
 
     return products
-
-def searchTemu(query, df_flag, currency):
-    """
-    The searchTemu function scrapes temu.com
-    Parameters: query- search query for the product, df_flag- flag variable, currency- currency type entered by the user
-    Returns a list of items available on temu.com that match the product entered by the user
-    """
-    query = formatSearchQuery(query)
-    URL = f"https://www.temu.com/search?q={query}"
-    try:
-        response = requests.get(URL)
-        response.raise_for_status()  # Raise an HTTPError for bad responses (4xx and 5xx)
-        page = BeautifulSoup(response.text, 'html.parser')
-    except requests.exceptions.HTTPError as http_err:
-        logging.error(f"HTTP error occurred: {http_err}")
-        return []
-    except requests.exceptions.RequestException as req_err:
-        logging.error(f"Request error occurred: {req_err}")
-        return []
-    except Exception as e:
-        logging.error(f"An error occurred: {e}")
-        return []
-    
-    # Log the response content for debugging
-    logging.debug(f"Response content: {response.text}")
-
-    results = page.findAll("div", {"class": "product-card"})
-    logging.debug(f"Found {len(results)} product cards")
-
-    results = page.findAll("div", {"class": "product-card"})
-    products = []
-    for res in results:
-        titles, prices, links = (
-            res.select("div.product-title"),
-            res.select("div.product-price"),
-            res.select("a.product-link"),
-        )
-        ratings = res.select("div.product-rating")
-        num_ratings = res.select("div.product-num-ratings")
-        trending = res.select("div.product-trending")
-        img_links = res.select("img.product-image")
-
-        if len(trending) > 0:
-            trending = trending[0]
-        else:
-            trending = None
-        product = formatResult(
-            "temu",
-            titles,
-            prices,
-            links,
-            ratings,
-            num_ratings,
-            trending,
-            df_flag,
-            currency,
-            img_links
-        )
-        products.append(product)
-    
-    logging.debug(f"Returning {len(products)} products")
-
-    return products
-
 
 def condense_helper(result_condensed, list, num):
     """This is a helper function to limit number of entries in the result"""
@@ -629,7 +498,7 @@ def filter(data, price_min = None, price_max = None, rating_min = None):
     return filtered_result
 
 def driver(
-    product, currency, num=None, df_flag=0, csv=False, cd=None, ui=False, sort=None):
+    product, currency, num=None, df_flag=0, csv=False, cd=None, ui=False, sort=None, website=None):
     """Returns CSV if the user enters the --csv arg,
     else displays the result table in the terminal based on the args entered by the user"""
 
@@ -638,7 +507,6 @@ def driver(
     products_6 = searchEbay(product, df_flag, currency)
     products_7 = searchBestbuy(product, df_flag, currency)
 
-    website = request.form.get("website", "all")
     print(f"Selected website: {website}")  # Debugging statement
     
     # Combine results based on the website filter
@@ -651,6 +519,10 @@ def driver(
             results = products_6
         elif website == 'bestbuy':
             results = products_7
+        else:
+            results = []
+            
+    print(f"Results structure: {results}")
 
     # Limit the number of results if specified
     results = results[:num] if num else results
