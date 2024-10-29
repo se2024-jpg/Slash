@@ -121,8 +121,8 @@ Follow these steps to configure and enable Google OAuth login:
 
 1. Add your **Google Client ID** and **Client Secret** to the config file:
    ```python
-   GOOGLE_CLIENT_ID = "your-client-id.apps.googleusercontent.com"
-   GOOGLE_CLIENT_SECRET = "your-client-secret"
+    client_id='', # Place your OAuth Client ID here
+    client_secret='', # Place your OAuth Client secret here
    ```
 
 ### Other Enhancements:
