@@ -1,4 +1,5 @@
 # SLASH
+
 Slash Your Spending, Not Your Style - Unleash the Best Deals!!
 
 <p align="center"><img width="500" src="./assets/Shop.gif"></p>
@@ -21,40 +22,50 @@ Slash Your Spending, Not Your Style - Unleash the Best Deals!!
 <a href="https://github.com/SE23-Team44/slasg/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/SE23-Team44/slash"></a>
 ![Discord](https://img.shields.io/discord/1162231656980168876)
 
-Slash is a tool that scrapes the most popular e-commerce websites to get the best deals on searched items across these websites. 
-Currently supported websites include [Walmart](https://www.walmart.com/), [Target](https://www.target.com/), [BestBuy](https://www.bestbuy.com/),  [Amazon](https://www.amazon.com/), [Google Shopping](https://shopping.google.com/),  [BJs](https://www.bjs.com/),  [Etsy](https://www.etsy.com/), and [EBay](https://www.ebay.com/).
+Slash is a tool that scrapes the most popular e-commerce websites to get the best deals on searched items across these websites.
+Currently supported websites include [Walmart](https://www.walmart.com/), [Target](https://www.target.com/), [BestBuy](https://www.bestbuy.com/), [Amazon](https://www.amazon.com/), [Google Shopping](https://shopping.google.com/), [BJs](https://www.bjs.com/), [Etsy](https://www.etsy.com/), and [EBay](https://www.ebay.com/).
+
 - **Fast**: With slash, you can save over 50% of your time by comparing deals across websites within seconds
 - **Easy**: Slash uses very easy commands to filter, sort and search your items
 - **Powerful**: Quickly alter the commands to get desired results
 
 # :rocket: Quick Guide
 
-1. Access the Github repository from your computer. 
- - First, pre-install [git](https://git-scm.com/) on  your machine. 
- - Then, clone the repo using the following command:
- ```
- git clone https://github.com/csc510fall23g45/slash
- ```
- * Finally, ```cd``` into the local repository.
+1. Access the Github repository from your computer.
+
+- First, pre-install [git](https://git-scm.com/) on your machine.
+- Then, clone the repo using the following command:
+
+```
+git clone https://github.com/csc510fall23g45/slash
+```
+
+- Finally, `cd` into the local repository.
+
 ```
 cd slash
 ```
-2. Install the ```requirements.txt```. 
+
+2. Install the `requirements.txt`.
+
 - This project uses Python 3, so make sure that [Python](https://www.python.org/downloads/) and [Pip](https://pip.pypa.io/en/stable/installation/) are preinstalled.
-- Install the ```requirements.txt``` file using pip.
+- Install the `requirements.txt` file using pip.
+
 ```
 pip3 install -r requirements.txt
 ```
+
 3. Running the program
 
 - Set the environmental variable using either of the following commands:
- ```
+
+```
 MAC
 export FLASK_APP=./src/modules/app
 flask run
 
 Windows Command Prompt
-set FLASK_APP=.\src\modules\app 
+set FLASK_APP=.\src\modules\app
 flask run
 
 Windows Powershell
@@ -62,50 +73,68 @@ $Env:FLASK_APP='.\src\modules\app'
 flask run
 ```
 
-4. Once flask is running, open your internet browser and type ```http://127.0.0.1:5000/``` into the search bar.
+4. Once flask is running, open your internet browser and type `http://127.0.0.1:5000/` into the search bar.
 
 Note: To get the share by email functionality. Please email slash.se23@gmail.com to get the config file.
 
 <p>
  
-# :dizzy: What's New? (Project 3 Updates)
+# :dizzy: What's New? (Project 2 Updates)
 
-### Enhanced UI
+### Added Google OAuth login feature
 
-New grid UI with product images for a smoother shopping experience.  
+## 🔑 **Setting up Google OAuth Login**
 
-<p align="center"><img width="700" src="./assets/Result.png"></p>  
+Follow these steps to configure and enable Google OAuth login:
 
-Choose between Dark and Light themes to suit your needs!  
+### 1️⃣ **Create a Google OAuth App**
 
-<p align="center"><img width="700" src="./assets/Team44_dark_light_theme.gif"></p>  
+1. Visit the [Google Cloud Console](https://console.cloud.google.com/).
+2. Create a new project or select an existing one.
+3. Enable the necessary APIs:
 
-View products page by page.  
+   - Go to **APIs & Services > Library**.
+   - Search for **Google Identity API** and enable it.
 
-<p align="center"><img width="700" src="./assets/Team44_pagination.gif"></p>  
+4. **Set up the OAuth Consent Screen**:
 
-### Share your wishlist through email!  
+   - Navigate to **APIs & Services > OAuth consent screen**.
+   - Choose **External** as the User Type.
+   - Provide essential details like **App Name**, **Support Email**, and **Developer Contact Info**.
+   - Add OAuth scopes:
+     - `email`
+     - `profile`
+     - `openid`
+   - Save and **Publish** the consent screen.
 
-<p align="center"><img width="700" src="./assets/Team44_wishlist_share.gif"></p>
+5. **Create OAuth Credentials**:
+   - Go to **APIs & Services > Credentials**.
+   - Click **Create Credentials > OAuth Client ID**.
+   - Choose **Web Application** as the Application Type.
+   - Add an **Authorized Redirect URI**:  
+     `http://localhost:5000/google/callback`
+   - Save the **Client ID** and **Client Secret** for use in your application.
 
-### User login with password    
-Login securely with a password  
-<p align="center"><img width="700" src="./assets/Team44_register.gif"></p>
-
-### View the cheapest product with ease  
-<p align="center"><img width="700" src="./assets/Team44_cheapest_product.png"></p>  
-
-### Other Enhancements:
-* __More websites added for scrapping -Ebay, Target, Bestbuy__
-* User Wishlist dynamically updates the price.
-* New workflows added to the repository.
-* Extended test coverage of the repository.
-
-:movie_camera: Checkout our demo video
 ---
 
-[![Video](https://img.youtube.com/vi/5iCc2LJa_bI/0.jpg)](https://youtu.be/5iCc2LJa_bI)
+### 2️⃣ **Configure OAuth in Your Code**
 
+1. Add your **Google Client ID** and **Client Secret** to the config file:
+   ```python
+   GOOGLE_CLIENT_ID = "your-client-id.apps.googleusercontent.com"
+   GOOGLE_CLIENT_SECRET = "your-client-secret"
+   ```
+
+### Other Enhancements:
+
+- **More websites added for scrapping -Ebay, Target, Bestbuy**
+- User Wishlist dynamically updates the price.
+- New workflows added to the repository.
+- Extended test coverage of the repository.
+
+## :movie_camera: Checkout our demo video
+
+[![Video](https://img.youtube.com/vi/5iCc2LJa_bI/0.jpg)](https://youtu.be/5iCc2LJa_bI)
 
 # :muscle: What's next for future development?
 
@@ -122,22 +151,21 @@ Login securely with a password
 - UI Enhancement: Continue to enhance the user interface to provide an even better user experience. Consider improving aesthetics, user-friendliness, and overall design.
 - Containerization: Implement Dockerization of the project to enhance its scalability, portability, and overall deployment efficiency.
 
+## :thought_balloon: Use Case
 
-:thought_balloon: Use Case
----
-* ***Students***: Students coming to university are generally on a budget and time constraint and generally spend hours wasting time to search for products on Websites. Slash is the perfect tool for these students that slashes all the unnecessary details on a website and helps them get prices for a product across multiple websites.Make the most of this tool in the upcoming Black Friday Sale.
-* ***Data Analysts***: Finding data for any project is one of the most tedious job for a data analyst, and the datasets found might not be the most recent one. Using slash, they can create their own dataset in real time and format it as per their needs so that they can focus on what is actually inportant.
-  
+- **_Students_**: Students coming to university are generally on a budget and time constraint and generally spend hours wasting time to search for products on Websites. Slash is the perfect tool for these students that slashes all the unnecessary details on a website and helps them get prices for a product across multiple websites.Make the most of this tool in the upcoming Black Friday Sale.
+- **_Data Analysts_**: Finding data for any project is one of the most tedious job for a data analyst, and the datasets found might not be the most recent one. Using slash, they can create their own dataset in real time and format it as per their needs so that they can focus on what is actually inportant.
+
 # Additional Information
- For Additional Information direct to this [page](https://github.com/SE23-Team44/slash/tree/main/docs)  and check all the markdown files 
+
+For Additional Information direct to this [page](https://github.com/SE23-Team44/slash/tree/main/docs) and check all the markdown files
 
 # Chat Channel
 
 <code><a href="https://discord.gg/KFtvmngMMD" target="_blank"><img height="100" width="250" src="https://user-images.githubusercontent.com/42767118/135394825-26dee6db-7a64-4e3f-902a-1e35abd4cf0c.png"></a></code>
 
+## :sparkles: Contributors
 
-:sparkles: Contributors
----
 <table>
   <tr>
     <td align="center"><a href="https://github.com/DarthAsh"><img src="https://avatars.githubusercontent.com/u/54763573?v=4" width="75px;" alt=""/><br /><sub><b>Ashwin Satpute</b></sub></a><br /></td>
@@ -146,6 +174,6 @@ Login securely with a password
 </tr>
 </table>
 
-:email: Support
----
+## :email: Support
+
 For any queries and help, please reach out to us at th3rockk511@gmail.com.
