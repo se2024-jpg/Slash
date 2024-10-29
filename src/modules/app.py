@@ -6,7 +6,7 @@ See the LICENSE file in the project root for the full license information.
 """
 
 from flask import Flask, session, render_template, request, redirect, url_for, make_response
-from .scraper import driver, filter
+from .scraper import driver, filter, get_currency_rate, convert_currency
 from .features import create_user, check_user, wishlist_add_item, read_wishlist, wishlist_remove_list, share_wishlist
 from .config import Config
 from io import StringIO
@@ -137,19 +137,25 @@ def export_csv():
     min_rating = request.args.get('min_rating')
 
     # Call the driver function to get the data
-    results = driver(product_name, currency, None, 0, False, None, True, sort)
+    results = driver(product_name, 'USD', None, 0, False, None, True, sort)
     results = filter(results, 0, 100000, 0)
     
     product_df = pd.DataFrame(columns=['Sr No.', 'Title', 'Link', 'Rating', 'Price'])
 
     # Write the data
+    rate = None
+    if currency != 'USD':
+        rate = get_currency_rate('USD', currency)
     for index, product in enumerate(results, start=1):
+        price = product.get('price', '')
+        if rate and price != '':
+            price = convert_currency(price, currency, rate)
         row = [
             index,
             product.get('title', ''),
             product.get('link', ''),
             product.get('rating', 'N/A'),
-            product.get('price', '')
+            price
         ]
         product_df.loc[len(product_df)] = row
     
