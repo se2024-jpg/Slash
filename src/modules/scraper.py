@@ -154,7 +154,6 @@ def google_scraper(link):
 def walmart_scraper(link):
     try:
         page = httpsGet(link)
-
         res = page.select('span.inline-flex.flex-column span')[0].text
         pattern = r'(\$\s?\d+\.\d{2})'
         match = re.search(pattern, res)

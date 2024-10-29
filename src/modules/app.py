@@ -5,16 +5,33 @@ Licensed under the MIT License.
 See the LICENSE file in the project root for the full license information.
 """
 
+from authlib.integrations.flask_client import OAuth
 from flask import Flask, session, render_template, request, redirect, url_for, make_response
+
 from .scraper import driver, filter
 from .features import create_user, check_user, wishlist_add_item, read_wishlist, wishlist_remove_list, share_wishlist
 from .config import Config
+import secrets
+
 from io import StringIO
 import pandas as pd
 
 app = Flask(__name__, template_folder=".")
 
 app.secret_key = Config.SECRET_KEY
+
+# OAuth Setup
+oauth = OAuth(app)
+google = oauth.register(
+    name='google',
+    client_id='', # Place your OAuth Client ID here
+    client_secret='', # Place your OAuth Client secret here
+    authorize_url='https://accounts.google.com/o/oauth2/auth',
+    access_token_url='https://accounts.google.com/o/oauth2/token',
+    redirect_uri='http://localhost:5000/google/callback',
+    jwks_uri='https://www.googleapis.com/oauth2/v3/certs',
+    client_kwargs={'scope': 'openid profile email'}
+)
 
 @app.route('/')
 def landingpage():
@@ -32,6 +49,9 @@ def login():
             return redirect(url_for('login'))
         else:
             return render_template("./static/landing.html", login=False, invalid=True)
+    elif session.get('oauth'):
+        # If user is logged in with OAuth
+        return redirect(url_for('login'))
     return render_template('./static/login.html')
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -44,12 +64,35 @@ def register():
             return render_template("./static/landing.html", login=False, invalid=True)
     return render_template('./static/login.html')
 
+@app.route('/login/google')
+def google_login():
+    # Redirect the user to Google's OAuth page
+    redirect_uri = 'http://localhost:5000/google/callback'
+    nonce = secrets.token_urlsafe(16)
+    session['nonce'] = nonce
+    return google.authorize_redirect(redirect_uri,  nonce=nonce)
+
+
+@app.route('/google/callback')
+def google_callback():
+    try:
+        token = google.authorize_access_token()
+        # Get the nonce from the session
+        nonce = session.pop('nonce', None)  # Remove the nonce from the session
+        user_info = google.parse_id_token(token, nonce=nonce)  # Pass the nonce here
+        session['username'] = user_info['email']
+        create_user(session["username"], "")
+        return redirect(url_for('login'))
+    except Exception as e:
+        return f"Error: {e}"
+
 
 @app.route('/wishlist')
 def wishlist():
     username = session['username']
     wishlist_name = "default"
     items = read_wishlist(username, wishlist_name).to_dict('records')
+    print(items)
     return render_template('./static/wishlist.html', data=items)
 
 @app.route('/share', methods=['POST'])
