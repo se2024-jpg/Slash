@@ -19,6 +19,7 @@ import pandas as pd
 import os
 from datetime import datetime
 from ebaysdk.finding import Connection
+import requests
 
 def httpsGet(URL):
     """
@@ -350,98 +351,99 @@ def searchEbay(query, df_flag, currency):
     data = response.dict()
 
     products = []
-    for p in data['searchResult']['item']:
-        
-        titles = p['title']
-        prices = '$' + p['sellingStatus']['currentPrice']['value']
-        links = p['viewItemURL']
-        img_link = p['galleryURL']
-        ratings = None
-        num_ratings = None
-        trending = None
-        
-        product = formatResult(
-            "ebay",
-            titles,
-            prices,
-            links,
-            ratings,
-            num_ratings,
-            trending,
-            df_flag,
-            currency,
-            img_link
-        )
-        products.append(product)
-
-    return products
-
-def searchTarget(query, df_flag, currency):
-    """
-    The searchTarget function scrapes https://www.target.com/
-    Parameters: query- search query for the product, df_flag- flag variable, currency- currency type entered by the user
-    Returns a list of items available on target.com that match the product entered by the user
-    """
-
-    api_url = 'https://redsky.target.com/redsky_aggregations/v1/web/plp_search_v1'
-
-    page = '/s/' + query
-    params = {
-        'key': 'ff457966e64d5e877fdbad070f276d18ecec4a01',
-        'channel': 'WEB',
-        'count': '24',
-        'default_purchasability_filter': 'false',
-        'include_sponsored': 'true',
-        'keyword': query,
-        'offset': '0',
-        'page': page,
-        'platform': 'desktop',
-        'pricing_store_id': '3991',
-        'useragent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0',
-        'visitor_id': 'AAA',
-    }
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',  # noqa: E501
-        'Accept-Encoding': 'gzip, deflate',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-        'DNT': '1',
-        'Connection': 'keep-alive',
-        'Upgrade-Insecure-Requests': '1',
-        'Cache-Control': 'no-cache'
-    }
-    data = requests.get(api_url, headers=headers, params=params).json()
-    products = []
-
-    for p in data['data']['search']['products']:
-        titles = p['item']['product_description']['title']
-        prices = '$' + str(p['price']['reg_retail'])
-        links = p['item']['enrichment']['buy_url']
-        img_link = p['item']['enrichment']['images']['primary_image_url']
-        try:
-            ratings = p['ratings_and_reviews']['statistics']['rating']['average']
-        except KeyError:
+    if 'searchResult' in data:
+        for p in data['searchResult']['item']:
+            
+            titles = p['title']
+            prices = '$' + p['sellingStatus']['currentPrice']['value']
+            links = p['viewItemURL']
+            img_link = p['galleryURL']
             ratings = None
-        try:
-            num_ratings = p['ratings_and_reviews']['statistics']['rating']['count']
-        except KeyError:
             num_ratings = None
-        trending = None
-    
-        product = formatResult(
-            "target",
-            titles,
-            prices,
-            links,
-            ratings,
-            num_ratings,
-            trending,
-            df_flag,
-            currency,
-            img_link
-        )
-        products.append(product)
+            trending = None
+            
+            product = formatResult(
+                "ebay",
+                titles,
+                prices,
+                links,
+                ratings,
+                num_ratings,
+                trending,
+                df_flag,
+                currency,
+                img_link
+            )
+            products.append(product)
 
     return products
+
+# def searchTarget(query, df_flag, currency):
+#     """
+#     The searchTarget function scrapes https://www.target.com/
+#     Parameters: query- search query for the product, df_flag- flag variable, currency- currency type entered by the user
+#     Returns a list of items available on target.com that match the product entered by the user
+#     """
+
+#     api_url = 'https://redsky.target.com/redsky_aggregations/v1/web/plp_search_v1'
+
+#     page = '/s/' + query
+#     params = {
+#         'key': 'ff457966e64d5e877fdbad070f276d18ecec4a01',
+#         'channel': 'WEB',
+#         'count': '24',
+#         'default_purchasability_filter': 'false',
+#         'include_sponsored': 'true',
+#         'keyword': query,
+#         'offset': '0',
+#         'page': page,
+#         'platform': 'desktop',
+#         'pricing_store_id': '3991',
+#         'useragent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0',
+#         'visitor_id': 'AAA',
+#     }
+#     headers = {
+#         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',  # noqa: E501
+#         'Accept-Encoding': 'gzip, deflate',
+#         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+#         'DNT': '1',
+#         'Connection': 'keep-alive',
+#         'Upgrade-Insecure-Requests': '1',
+#         'Cache-Control': 'no-cache'
+#     }
+#     data = requests.get(api_url, headers=headers, params=params).json()
+#     products = []
+
+#     for p in data['data']['search']['products']:
+#         titles = p['item']['product_description']['title']
+#         prices = '$' + str(p['price']['reg_retail'])
+#         links = p['item']['enrichment']['buy_url']
+#         img_link = p['item']['enrichment']['images']['primary_image_url']
+#         try:
+#             ratings = p['ratings_and_reviews']['statistics']['rating']['average']
+#         except KeyError:
+#             ratings = None
+#         try:
+#             num_ratings = p['ratings_and_reviews']['statistics']['rating']['count']
+#         except KeyError:
+#             num_ratings = None
+#         trending = None
+    
+#         product = formatResult(
+#             "target",
+#             titles,
+#             prices,
+#             links,
+#             ratings,
+#             num_ratings,
+#             trending,
+#             df_flag,
+#             currency,
+#             img_link
+#         )
+#         products.append(product)
+
+#     return products
 
 def searchBestbuy(query, df_flag, currency):
     """
@@ -494,7 +496,7 @@ def condense_helper(result_condensed, list, num):
             if p["title"] != None and p["title"] != "":
                 result_condensed.append(p)
 
-def filter(data, price_min = None, price_max = None, rating_min = None):
+def filter(data, price_min = 1, price_max = 100000, rating_min = 1):
     filtered_result = []
     for row in data:
         try:
@@ -506,7 +508,7 @@ def filter(data, price_min = None, price_max = None, rating_min = None):
         except:
             rating = None
         
-        if price_min is not None and (price is None or price < price_min):
+        if price_min is not None and (price is None or price < float(price_min)):
             continue
         elif price_max is not None and (price is None or price > price_max):
             continue
@@ -516,12 +518,14 @@ def filter(data, price_min = None, price_max = None, rating_min = None):
             filtered_result.append(row)
     return filtered_result
 
+
+
 def driver(
     product, currency, num=None, df_flag=0, csv=False, cd=None, ui=False, sort=None
 ):
     """Returns csv is the user enters the --csv arg,
     else will display the result table in the terminal based on the args entered by the user"""
-
+    
     products_1 = searchAmazon(product, df_flag, currency)
     products_2 = searchWalmart(product, df_flag, currency)
     products_3 = searchEtsy(product, df_flag, currency)
@@ -529,11 +533,11 @@ def driver(
     products_5 = searchBJs(product, df_flag, currency)
     products_6 = searchEbay(product,df_flag,currency)
     products_7 = searchBestbuy(product,df_flag,currency)
-    #products_8 = searchTarget(product,df_flag,currency)
+    
 
     result_condensed = ""
     if not ui:
-        results = products_1 + products_2 + products_3 + products_4 + products_5 + products_6 + products_7 #+ products_8
+        results = products_1 + products_2 + products_3 + products_4 + products_5 + products_6 + products_7
         result_condensed = (
             products_1[:num]
             + products_2[:num]
@@ -542,7 +546,7 @@ def driver(
             + products_5[:num]
             + products_6[:num]
             + products_7[:num]
-            #+ products_8[:num]
+            
         )
         result_condensed = pd.DataFrame.from_dict(result_condensed, orient="columns")
         results = pd.DataFrame.from_dict(results, orient="columns")
@@ -565,11 +569,13 @@ def driver(
         condense_helper(result_condensed, products_5, num)
         condense_helper(result_condensed, products_6, num)
         condense_helper(result_condensed, products_7, num)
-        #condense_helper(result_condensed, products_8, num)
 
-        if currency != None:
-            for p in result_condensed:
-                p["price"] = getCurrency(currency, p["price"])
+        if currency and currency != "USD":
+            rate = get_currency_rate('USD', currency)
+            for item in result_condensed:
+                if item['price']:
+                    item['original_price'] = item['price']
+                    item['price'] = convert_currency(item['price'], currency, rate)
 
         # Fix URLs so that they contain http before www
         for p in result_condensed:
@@ -604,3 +610,18 @@ def driver(
             )
             print(result_condensed)
     return result_condensed
+
+def get_currency_rate(from_currency="USD", to_currency="USD"):
+    api_key = "f3ac7c18adc2a995e895d289"
+    url = f"https://api.exchangerate-api.com/v4/latest/{from_currency}"
+    response = requests.get(url)
+    data = response.json()
+    rate = data['rates'][to_currency]
+    return rate
+
+def convert_currency(amount, to_currency, rate):
+    
+            # Remove currency symbol and convert to float
+    amount = float(amount.replace('$', '').replace(',', ''))
+    converted_amount = amount * rate
+    return f"{to_currency} {converted_amount:.2f}"

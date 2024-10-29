@@ -4,14 +4,17 @@ Copyright (C) 2023 SE23-Team44
 Licensed under the MIT License.
 See the LICENSE file in the project root for the full license information.
 """
+
 from authlib.integrations.flask_client import OAuth
-from flask import Flask, session, render_template, request, redirect, url_for
+from flask import Flask, session, render_template, request, redirect, url_for, make_response
+
 from .scraper import driver, filter
-from .formatter import formatResult
-import json
 from .features import create_user, check_user, wishlist_add_item, read_wishlist, wishlist_remove_list, share_wishlist
 from .config import Config
 import secrets
+
+from io import StringIO
+import pandas as pd
 
 app = Flask(__name__, template_folder=".")
 
@@ -115,7 +118,6 @@ def product_search(new_product="", sort=None, currency=None, num=None, min_price
 
     if min_price is not None or max_price is not None or min_rating is not None:
         data = filter(data, min_price, max_price, min_rating)
-
     return render_template("./static/result.html", data=data, prod=product, total_pages= len(data)//20)
 
 
@@ -167,6 +169,46 @@ def remove_wishlist_item():
     wishlist_name = 'default'
     wishlist_remove_list(username, wishlist_name, index)
     return redirect(url_for('wishlist'))
+
+@app.route('/export_csv')
+def export_csv():
+    product_name = request.args.get('product_name')
+    sort = request.args.get('sort')
+    currency = request.args.get('currency')
+    min_price = request.args.get('min_price')
+    max_price = request.args.get('max_price')
+    min_rating = request.args.get('min_rating')
+
+    # Call the driver function to get the data
+    results = driver(product_name, currency, None, 0, False, None, True, sort)
+    results = filter(results, 0, 100000, 0)
+    
+    product_df = pd.DataFrame(columns=['Sr No.', 'Title', 'Link', 'Rating', 'Price'])
+
+    # Write the data
+    for index, product in enumerate(results, start=1):
+        row = [
+            index,
+            product.get('title', ''),
+            product.get('link', ''),
+            product.get('rating', 'N/A'),
+            product.get('price', '')
+        ]
+        product_df.loc[len(product_df)] = row
+    
+    # Create a string buffer
+    buffer = StringIO()
+    
+    # Write the DataFrame to the buffer
+    product_df.to_csv(buffer, index=False)
+    # Create the HTTP response with CSV data
+    output = make_response(buffer.getvalue())
+    output.headers["Content-Disposition"] = f"attachment; filename={product_name}.csv"
+    output.headers["Content-type"] = "text/csv"
+    
+    return output
+    
+    
 
 if __name__ == '__main__':
     app.run(debug=True)
