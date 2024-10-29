@@ -100,6 +100,23 @@ Returns Updated Price from the Link
 ### *def driver(product, currency, num=None, df_flag=0,csv=False,cd=None)*:
 Returns csv if the user enters the --csv arg, else will display the result table in the terminal based on the args entered by the user.
 
+### *def get_currency_rate(from_currency="USD", to_currency="USD")*:
+Fetches the exchange rate from the specified from_currency to to_currency using an external API
+**Parameters**:\
+from_currency: The currency code to convert from (default is "USD").
+to_currency: The currency code to convert to (default is "USD").
+Returns-
+    rate: The exchange rate from from_currency to to_currency as a float.
+
+### *def convert_currency(amount, to_currency, rate):*
+Converts a given amount from one currency to another using the provided exchange rate
+**Parameters**:\
+amount: The amount to be converted, as a string with optional currency symbol (e.g., "$100.00").
+to_currency: The target currency code for conversion.
+rate: The exchange rate to apply for the conversion.
+Returns-
+    A formatted string showing the converted amount in the target currency, rounded to two decimal places.
+
 ## **formatter.py**
 ### *def formatResult(website, titles, prices, links,ratings,df_flag, currency)*:
 The formatResult function takes the scraped HTML as input, and extracts the necessary values from the HTML code. Ex. extracting a price '$19.99' from a paragraph tag.\
