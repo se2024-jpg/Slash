@@ -25,9 +25,6 @@ See the LICENSE file in the project root for the full license information.
       <span class="w3-jumbo w3-hide-small">SLASH</span><br>
       <span class="w3-xxlarge w3-hide-large w3-hide-medium">Start something that matters</span><br>
       <span class="w3-large">"Elevating Your Shopping Experience, All you need is One Comparison."</span>
-      <!--<p><a onclick="document.getElementById('id01').style.display='block'"
-          class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">
-          Log In</a></p>-->
       <form method="POST" action="/login">
         <p><input type="text" name="username" placeholder="Username" class="w3-input w3-border w3-margin-top" required></p>
         <p class="password-container">
@@ -37,9 +34,6 @@ See the LICENSE file in the project root for the full license information.
         <p><button type="submit" class="w3-input w3-border w3-margin-top">Log in</button></p>
       </form>
       <p>Don't have an account? <a onclick="document.getElementById('id02').style.display='block'" style="cursor: pointer; font-weight: bold;" class="w3-text-blue w3-hover-text-blue" >Sign up</a></p>
-      <!--<p><a onclick="document.getElementById('id02').style.display='block'"
-          class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">
-          Register</a></p> --> 
     </div>
 
     {% if invalid %}
@@ -54,29 +48,6 @@ See the LICENSE file in the project root for the full license information.
     {% endif %}
 
   </header>
-
-  <div id="id01" class="w3-modal">
-    <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
-      <div class="w3-center"><br>
-        <span onclick="document.getElementById('id01').style.display='none'"
-          class=" w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span>
-        <img
-          src="https://www.pngitem.com/pimgs/m/137-1370168_professional-clipart-female-avatar-circle-hd-png-download.png"
-          alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
-      </div>
-      <form class="w3-container" method="POST" action="/login">
-        <div class="w3-section">
-          <label><b>Username</b></label>
-          <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Username" name="username"
-            required>
-          <label><b>Password</b></label>
-          <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Password" name="password"
-            required>
-          <button class="w3-button w3-block w3-black w3-section w3-padding" type="submit">Login</button>
-        </div>
-      </form>
-    </div>
-  </div>
 
   <div id="id02" class="w3-modal">
     <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">

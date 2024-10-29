@@ -34,6 +34,7 @@ def login():
             return render_template("./static/landing.html", login=False, invalid=True)
     return render_template('./static/login.html')
 
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
@@ -64,19 +65,6 @@ def share():
 def logout():
     session.pop('username', None)
     return render_template('./static/landing.html')
-
-"""@app.route("/search", methods=["POST", "GET"])
-def product_search(new_product="", sort=None, currency=None, num=None, min_price = None, max_price = None, min_rating = None):
-    product = request.args.get("product_name")
-    if product == None:
-        product = new_product
-
-    data = driver(product, currency, num, 0, False, None, True, sort)
-
-    if min_price is not None or max_price is not None or min_rating is not None:
-        data = filter(data, min_price, max_price, min_rating)
-
-    return render_template("./static/result.html", data=data, prod=product, total_pages= len(data)//20)"""
 
 @app.route("/search", methods=["POST", "GET"])
 def product_search(new_product="", sort=None, currency=None, num=None, min_price=None, max_price=None, min_rating=None, website=None):
@@ -132,39 +120,6 @@ def product_search_filtered():
     except Exception as e:
         app.logger.error(f"Error during filtered product search: {e}")
         return render_template("error.html", error=str(e)), 500
-
-"""@app.route("/filter", methods=["POST", "GET"])
-def product_search_filtered():
-    
-    product = request.args.get("product_name")
-    sort = request.form["sort"]
-    currency = request.form["currency"]
-    
-    min_price = request.form["min_price"]
-    max_price = request.form["max_price"]
-    min_rating = request.form["min_rating"]
-
-    try:
-        min_price = float(min_price)
-    except:
-        min_price = None
-
-    try:
-        max_price = float(max_price)
-    except:
-        max_price = None
-
-    try:
-        min_rating = float(min_rating)
-    except:
-        min_rating = None
-
-    if sort == "default":
-        sort = None
-    if currency == "usd":
-        currency = None
-
-    return product_search(product, sort, currency, None, min_price, max_price, min_rating)"""
 
 @app.route("/add-wishlist-item", methods=["POST"])
 def add_wishlist_item():

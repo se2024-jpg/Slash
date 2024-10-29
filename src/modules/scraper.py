@@ -87,49 +87,6 @@ def searchAmazon(query, df_flag, currency):
     logging.debug(f"Returning {len(products)} products")
     return products
 
-"""def searchAmazon(query, df_flag, currency):
-    
-    The searchAmazon function scrapes amazon.com
-    Parameters: query- search query for the product, df_flag- flag variable, currency- currency type entered by the user
-    Returns a list of items available on Amazon.com that match the product entered by the user.
-
-    query = formatSearchQuery(query)
-    URL = f"https://www.amazon.com/s?k={query}"
-    page = httpsGet(URL)
-    results = page.findAll("div", {"data-component-type": "s-search-result"})
-    products = []
-    for res in results:
-        titles, prices, links = (
-            res.select("h2 a span"),
-            res.select("span.a-price span"),
-            res.select("h2 a.a-link-normal"),
-        )
-        ratings = res.select("span.a-icon-alt")
-        num_ratings = res.select("span.a-size-base")
-        trending = res.select("span.a-badge-text")
-        img_links = res.select("img.s-image")
-
-        if len(trending) > 0:
-            trending = trending[0]
-        else:
-            trending = None
-        product = formatResult(
-            "amazon",
-            titles,
-            prices,
-            links,
-            ratings,
-            num_ratings,
-            trending,
-            df_flag,
-            currency,
-            img_links
-        )
-        products.append(product)
-    return products"""
-
-
-
 def searchWalmart(query, df_flag, currency):
     """
     The searchWalmart function scrapes walmart.com
@@ -522,7 +479,7 @@ def driver(
         else:
             results = []
             
-    print(f"Results structure: {results}")
+    #print(f"Results structure: {results}")
 
     # Limit the number of results if specified
     results = results[:num] if num else results
@@ -586,106 +543,3 @@ def driver(
             print("File Name:", file_name)
 
     return result_condensed if ui else results_df
-
-
-"""def driver(
-    product, currency, num=None, df_flag=0, csv=False, cd=None, ui=False, sort=None, website=None
-):
-    Returns csv is the user enters the --csv arg,
-    else will display the result table in the terminal based on the args entered by the user
-
-    #products_1 = searchAmazon(product, df_flag, currency)
-    products_2 = searchWalmart(product, df_flag, currency)
-    #products_3 = searchEtsy(product, df_flag, currency)
-    #products_4 = searchGoogleShopping(product, df_flag, currency)
-    #products_5 = searchBJs(product, df_flag, currency)
-    products_6 = searchEbay(product,df_flag,currency)
-    products_7 = searchBestbuy(product,df_flag,currency)
-    #products_8 = searchTemu(product, df_flag, currency)
-    #products_8 = searchTarget(product,df_flag,currency)
-
-    result_condensed = ""
-    if not ui:
-        if website == "walmart":
-            results = products_2
-        elif website == "ebay":
-            results = products_6
-        elif website == "bestbuy":
-            results = products_7
-        else:  # "all" or None
-            results = products_2 + products_6 + products_7
-        
-        #results = products_2 + products_6 + products_7
-        #result_condensed = (
-            #products_2[:num]
-            #products_2[:num]
-            #+ products_3[:num]
-            #+ products_4[:num]
-            #+ products_5[:num]
-            #+ products_6[:num]
-            #+ products_7[:num]
-            #+ products_8[:num]
-            #+ products_8[:num]
-        #)
-        result_condensed = results[:num]
-        result_condensed = pd.DataFrame.from_dict(result_condensed, orient="columns")
-        results = pd.DataFrame.from_dict(results, orient="columns")
-        if currency == "" or currency == None:
-            results = results.drop(columns="converted_price")
-            result_condensed = result_condensed.drop(columns="converted_price")
-        if csv == True:
-            file_name = os.path.join(
-                cd, (product + datetime.now().strftime("%y%m%d_%H%M") + ".csv")
-            )
-            print("CSV Saved at: ", cd)
-            print("File Name:", file_name)
-            results.to_csv(file_name, index=False, header=results.columns)
-    else:
-        result_condensed = []
-        #condense_helper(result_condensed, products_1, num)
-        condense_helper(result_condensed, products_2, num)
-        #condense_helper(result_condensed, products_3, num)
-        #condense_helper(result_condensed, products_4, num)
-        #condense_helper(result_condensed, products_5, num)
-        condense_helper(result_condensed, products_6, num)
-        condense_helper(result_condensed, products_7, num)
-        #condense_helper(result_condensed, products_8, num)
-        #condense_helper(result_condensed, products_8, num)
-
-        if currency != None:
-            for p in result_condensed:
-                p["price"] = getCurrency(currency, p["price"])
-
-        # Fix URLs so that they contain http before www
-        for p in result_condensed:
-            link = p["link"]
-            if p["website"] == "Etsy":
-                link = link[12:]
-                p["link"] = link
-            elif "http" not in link:
-                link = "http://" + link
-                p["link"] = link
-
-        if sort != None:
-            result_condensed = pd.DataFrame(result_condensed)
-            if sort == "rades":
-                result_condensed = sortList(result_condensed, "ra", False)
-            elif sort == "raasc":
-                result_condensed = sortList(result_condensed, "ra", True)
-            elif sort == "pasc":
-                result_condensed = sortList(result_condensed, "pr", False)
-            else:
-                result_condensed = sortList(result_condensed, "pr", True)
-            result_condensed = result_condensed.to_dict(orient="records")
-
-        if csv:
-            file_name = os.path.join(
-                cd, (product + datetime.now().strftime("%y%m%d_%H%M") + ".csv")
-            )
-            result_condensed = pd.DataFrame(result_condensed)
-            
-            result_condensed = result_condensed.to_csv(
-                file_name, index=False, header=result_condensed.columns
-            )
-            print(result_condensed)
-    return result_condensed"""
