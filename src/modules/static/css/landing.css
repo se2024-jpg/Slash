@@ -17,6 +17,7 @@ body,
 html {
     height: 100%;
     line-height: 1.8;
+    background-color: black;
 }
 
 .bgimg-1 {
@@ -57,4 +58,62 @@ html {
 .close:hover,
 .close:focus {
     color: #000;
+}
+
+.centered-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+    flex-direction: column;
+    text-align: center;
+}
+
+.centered-container span,
+.centered-container p {
+    margin: 10px 0;
+    color: white;
+}
+
+.centered-container input,
+.centered-container button {
+    width: 100%; 
+    max-width: 300px; 
+    padding: 10px; 
+    margin: 10px 0; 
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
+    box-sizing: border-box; 
+}
+
+.centered-container button {
+    background-color: rgba(0, 149, 246, 1); 
+    color: white;
+    cursor: pointer; 
+}
+
+.centered-container button:hover {
+    background-color: darkblue; 
+}
+
+.password-container {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-width: 300px;
+}
+
+.password-container input {
+    width: 100%;
+    padding-right: 50px; /* Add space for the toggle button */
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-weight: bold;
+    color: black !important; /* Set the color of the toggle text */
 }
