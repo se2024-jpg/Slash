@@ -21,6 +21,7 @@ import pandas as pd
 import os
 from datetime import datetime
 from ebaysdk.finding import Connection
+import requests
 
 def httpsGet(URL):
     """
@@ -158,7 +159,6 @@ def google_scraper(link):
 def walmart_scraper(link):
     try:
         page = httpsGet(link)
-
         res = page.select('span.inline-flex.flex-column span')[0].text
         pattern = r'(\$\s?\d+\.\d{2})'
         match = re.search(pattern, res)
@@ -356,29 +356,30 @@ def searchEbay(query, df_flag, currency):
     data = response.dict()
 
     products = []
-    for p in data['searchResult']['item']:
-        
-        titles = p['title']
-        prices = '$' + p['sellingStatus']['currentPrice']['value']
-        links = p['viewItemURL']
-        img_link = p['galleryURL']
-        ratings = None
-        num_ratings = None
-        trending = None
-        
-        product = formatResult(
-            "ebay",
-            titles,
-            prices,
-            links,
-            ratings,
-            num_ratings,
-            trending,
-            df_flag,
-            currency,
-            img_link
-        )
-        products.append(product)
+    if 'searchResult' in data:
+        for p in data['searchResult']['item']:
+            
+            titles = p['title']
+            prices = '$' + p['sellingStatus']['currentPrice']['value']
+            links = p['viewItemURL']
+            img_link = p['galleryURL']
+            ratings = None
+            num_ratings = None
+            trending = None
+            
+            product = formatResult(
+                "ebay",
+                titles,
+                prices,
+                links,
+                ratings,
+                num_ratings,
+                trending,
+                df_flag,
+                currency,
+                img_link
+            )
+            products.append(product)
 
     return products
 
@@ -432,7 +433,7 @@ def condense_helper(result_condensed, list, num):
             if p["title"] != None and p["title"] != "":
                 result_condensed.append(p)
 
-def filter(data, price_min = None, price_max = None, rating_min = None):
+def filter(data, price_min = 1, price_max = 100000, rating_min = 1):
     filtered_result = []
     for row in data:
         try:
@@ -444,7 +445,7 @@ def filter(data, price_min = None, price_max = None, rating_min = None):
         except:
             rating = None
         
-        if price_min is not None and (price is None or price < price_min):
+        if price_min is not None and (price is None or price < float(price_min)):
             continue
         elif price_max is not None and (price is None or price > price_max):
             continue
@@ -453,6 +454,8 @@ def filter(data, price_min = None, price_max = None, rating_min = None):
         else:
             filtered_result.append(row)
     return filtered_result
+
+
 
 def driver(
     product, currency, num=None, df_flag=0, csv=False, cd=None, ui=False, sort=None, website=None):
@@ -517,9 +520,12 @@ def driver(
                 condense_helper(result_condensed, products_7, num)
 
         # Apply currency conversion if specified
-        if currency:
-            for p in result_condensed:
-                p["price"] = getCurrency(currency, p["price"])
+        if currency and currency != "USD":
+            rate = get_currency_rate('USD', currency)
+            for item in result_condensed:
+                if item['price']:
+                    item['original_price'] = item['price']
+                    item['price'] = convert_currency(item['price'], currency, rate)
 
         # Fix URLs
         for p in result_condensed:
@@ -543,3 +549,18 @@ def driver(
             print("File Name:", file_name)
 
     return result_condensed if ui else results_df
+
+def get_currency_rate(from_currency="USD", to_currency="USD"):
+    api_key = "f3ac7c18adc2a995e895d289"
+    url = f"https://api.exchangerate-api.com/v4/latest/{from_currency}"
+    response = requests.get(url)
+    data = response.json()
+    rate = data['rates'][to_currency]
+    return rate
+
+def convert_currency(amount, to_currency, rate):
+    
+            # Remove currency symbol and convert to float
+    amount = float(amount.replace('$', '').replace(',', ''))
+    converted_amount = amount * rate
+    return f"{to_currency} {converted_amount:.2f}"
