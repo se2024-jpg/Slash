@@ -15,14 +15,9 @@ h6 {
 
 body,
 html {
-<<<<<<< HEAD
     height: 100%;
     line-height: 1.8;
     background-color: black;
-=======
-  height: 100%;
-  line-height: 1.8;
->>>>>>> main
 }
 
 .bgimg-1 {
@@ -61,7 +56,6 @@ html {
 
 .close:hover,
 .close:focus {
-<<<<<<< HEAD
     color: #000;
 }
 
@@ -122,9 +116,7 @@ html {
     font-weight: bold;
     color: black !important; /* Set the color of the toggle text */
 }
-=======
-  color: #000;
-}
+
 .google-login-button {
   background-color: #4285f4; /* Google Blue */
   color: white; /* Text color */
@@ -139,4 +131,3 @@ html {
 .google-login-button:hover {
   background-color: #357ae8; /* Darker blue on hover */
 }
->>>>>>> main
