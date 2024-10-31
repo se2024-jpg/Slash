@@ -22,9 +22,8 @@ Slash Your Spending, Not Your Style - Unleash the Best Deals!!
 
 [![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/CSC510-SE-Fall2024/Team-82_Project-2)](https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/pulls?q=is%3Apr+is%3Aclosed)
 
-<a href="https://github.com/SE23-Team44/slash/network"><img alt="GitHub forks" src="https://img.shields.io/github/forks/SE23-Team44/slash"></a>
-<a href="https://github.com/SE23-Team44/slasg/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/SE23-Team44/slash"></a>
-![Discord](https://img.shields.io/discord/1162231656980168876)
+<a href="https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/network"><img alt="GitHub forks" src="https://img.shields.io/github/forks/CSC510-SE-Fall2024/Team-82_Project-2"></a>
+<a href="https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/CSC510-SE-Fall2024/Team-82_Project-2"></a>
 
 Slash is a tool that scrapes the most popular e-commerce websites to get the best deals on searched items across these websites.
 Currently supported websites include [Walmart](https://www.walmart.com/), [Target](https://www.target.com/), [BestBuy](https://www.bestbuy.com/), [Amazon](https://www.amazon.com/), [Google Shopping](https://shopping.google.com/), [BJs](https://www.bjs.com/), [Etsy](https://www.etsy.com/), and [EBay](https://www.ebay.com/).
