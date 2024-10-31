@@ -8,7 +8,7 @@ Slash Your Spending, Not Your Style - Unleash the Best Deals!!
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14018764.svg)](https://doi.org/10.5281/zenodo.14018764)
 ![Github](https://img.shields.io/badge/language-python-red.svg)
 [![Discord](https://img.shields.io/discord/1300195209472114780?color=blueviolet&label=Discord%20Discussion%20Chat&cacheBuster=1)](https://discord.gg/UF5Hr2dW)
-[![Run Tests On Push](https://github.com/SE23-Team44/slash/actions/workflows/unit_test.yml/badge.svg)](https://github.com/SE23-Team44/slash/actions/workflows/unit_test.yml)
+[![Run Tests On Push](https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/actions/workflows/unit_test.yml/badge.svg)](https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/actions/workflows/unit_test.yml)
 [![codecov](https://codecov.io/gh/SE23-Team44/slash/branch/main/graph/badge.svg?token=9YO9QKQZPJ)](https://codecov.io/gh/SE23-Team44/slash)
 [![Lint Python](https://github.com/SE23-Team44/slash/actions/workflows/pylint.yml/badge.svg)](https://github.com/SE23-Team44/slash/actions/workflows/pylint.yml)
 [![Close as a feature](https://github.com/SE23-Team44/slash/actions/workflows/close_as_a_feature.yml/badge.svg)](https://github.com/SE23-Team44/slash/actions/workflows/close_as_a_feature.yml)
@@ -22,8 +22,8 @@ Slash Your Spending, Not Your Style - Unleash the Best Deals!!
 
 [![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/CSC510-SE-Fall2024/Team-82_Project-2)](https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/pulls?q=is%3Apr+is%3Aclosed)
 
-<a href="https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/network"><img alt="GitHub forks" src="https://img.shields.io/github/forks/CSC510-SE-Fall2024/Team-82_Project-2"></a>
-<a href="https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/CSC510-SE-Fall2024/Team-82_Project-2"></a>
+<a href="https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/network"><img alt="GitHub forks" src="https://img.shields.io/github/forks/CSC510-SE-Fall2024/Team-82_Project-2?cacheBuster=1"></a>
+<a href="https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/CSC510-SE-Fall2024/Team-82_Project-2?cacheBuster=1"></a>
 
 Slash is a tool that scrapes the most popular e-commerce websites to get the best deals on searched items across these websites.
 Currently supported websites include [Walmart](https://www.walmart.com/), [Target](https://www.target.com/), [BestBuy](https://www.bestbuy.com/), [Amazon](https://www.amazon.com/), [Google Shopping](https://shopping.google.com/), [BJs](https://www.bjs.com/), [Etsy](https://www.etsy.com/), and [EBay](https://www.ebay.com/).
