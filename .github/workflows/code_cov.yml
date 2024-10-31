@@ -41,9 +41,7 @@ jobs:
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          flags: unittests  # Optional: label for specific types of tests
           files: ./tests/coverage.xml  # Path to the coverage report if specified
-          fail_ci_if_error: true       # Ensures CI fails if Codecov upload fails
 
 # This workflow will install Python dependencies, run tests and create a Code Coverage Report
 
