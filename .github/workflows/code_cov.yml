@@ -20,24 +20,31 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+
       - name: Install Python 3.10.13
         uses: actions/setup-python@v1
         with:
           python-version: 3.10.13
+
       - name: Install dependencies
         run: |
-          pip install coverage
-          pip install pytest-cov
+          pip install coverage pytest-cov
           pip install -r requirements.txt
-          echo requirements installed
+          echo "Requirements installed"
+
       - name: Run the tests
         run: |
           cd tests
           pytest --cov=./ --cov-report=xml
+
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v1
+        uses: codecov/codecov-action@v3
         with:
-          token: ${{ secrets.CODECOV_TOKEN}}
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: unittests  # Optional: label for specific types of tests
+          files: ./tests/coverage.xml  # Path to the coverage report if specified
+          fail_ci_if_error: true       # Ensures CI fails if Codecov upload fails
+
 # This workflow will install Python dependencies, run tests and create a Code Coverage Report
 
 # name: Code Coverage
