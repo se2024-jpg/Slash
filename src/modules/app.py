@@ -204,7 +204,7 @@ def export_csv():
 
     # Write the data
     rate = None
-    if currency != 'USD':
+    if currency:
         rate = get_currency_rate('USD', currency)
     for index, product in enumerate(results, start=1):
         price = product.get('price', '')
