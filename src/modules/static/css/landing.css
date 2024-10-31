@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 SE23-Team44
+/* Copyright (C) Team-82_Project-2
 
 Licensed under the MIT License.
 See the LICENSE file in the project root for the full license information. */
@@ -15,8 +15,14 @@ h6 {
 
 body,
 html {
+<<<<<<< HEAD
+    height: 100%;
+    line-height: 1.8;
+    background-color: black;
+=======
   height: 100%;
   line-height: 1.8;
+>>>>>>> main
 }
 
 .bgimg-1 {
@@ -55,6 +61,68 @@ html {
 
 .close:hover,
 .close:focus {
+<<<<<<< HEAD
+    color: #000;
+}
+
+.centered-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+    flex-direction: column;
+    text-align: center;
+}
+
+.centered-container span,
+.centered-container p {
+    margin: 10px 0;
+    color: white;
+}
+
+.centered-container input,
+.centered-container button {
+    width: 100%; 
+    max-width: 300px; 
+    padding: 10px; 
+    margin: 10px 0; 
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
+    box-sizing: border-box; 
+}
+
+.centered-container button {
+    background-color: rgba(0, 149, 246, 1); 
+    color: white;
+    cursor: pointer; 
+}
+
+.centered-container button:hover {
+    background-color: darkblue; 
+}
+
+.password-container {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-width: 300px;
+}
+
+.password-container input {
+    width: 100%;
+    padding-right: 50px; /* Add space for the toggle button */
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-weight: bold;
+    color: black !important; /* Set the color of the toggle text */
+}
+=======
   color: #000;
 }
 .google-login-button {
@@ -71,3 +139,4 @@ html {
 .google-login-button:hover {
   background-color: #357ae8; /* Darker blue on hover */
 }
+>>>>>>> main

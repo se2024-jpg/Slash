@@ -10,6 +10,8 @@ this file. If not, please write to: secheaper@gmail.com
 The scraper module holds functions that actually scrape the e-commerce websites
 """
 
+import logging
+from flask import request
 import requests
 from .formatter import formatSearchQuery,formatResult,getCurrency,sortList
 from bs4 import BeautifulSoup
@@ -39,7 +41,6 @@ def httpsGet(URL):
     soup1 = BeautifulSoup(page.content, "html.parser")
     return BeautifulSoup(soup1.prettify(), "html.parser")
 
-
 def searchAmazon(query, df_flag, currency):
     """
     The searchAmazon function scrapes amazon.com
@@ -49,39 +50,43 @@ def searchAmazon(query, df_flag, currency):
     query = formatSearchQuery(query)
     URL = f"https://www.amazon.com/s?k={query}"
     page = httpsGet(URL)
+    
+    # Log the response content for debugging
+    logging.debug(f"Response content: {page.prettify()}")
+    
     results = page.findAll("div", {"data-component-type": "s-search-result"})
+    logging.debug(f"Found {len(results)} search results")
+
     products = []
     for res in results:
-        titles, prices, links = (
-            res.select("h2 a span"),
-            res.select("span.a-price span"),
-            res.select("h2 a.a-link-normal"),
-        )
-        ratings = res.select("span.a-icon-alt")
-        num_ratings = res.select("span.a-size-base")
-        trending = res.select("span.a-badge-text")
-        img_links = res.select("img.s-image")
+        try:
+            titles = res.select("span.a-text-normal")[0].text.strip() if res.select("span.a-text-normal") else None
+            prices = res.select("span.a-price-whole")[0].text.strip() if res.select("span.a-price-whole") else None
+            links = res.select("a.a-link-normal")[0]['href'] if res.select("a.a-link-normal") else None
+            img_links = res.select("img.s-image")[0]['src'] if res.select("img.s-image") else None
+            ratings = res.select("span.a-icon-alt")[0].text.strip() if res.select("span.a-icon-alt") else None
+            num_ratings = res.select("span.a-size-base")[0].text.strip() if res.select("span.a-size-base") else None
+            trending = res.select("span.a-badge-text")[0].text.strip() if res.select("span.a-badge-text") else None
 
-        if len(trending) > 0:
-            trending = trending[0]
-        else:
-            trending = None
-        product = formatResult(
-            "amazon",
-            titles,
-            prices,
-            links,
-            ratings,
-            num_ratings,
-            trending,
-            df_flag,
-            currency,
-            img_links
-        )
-        products.append(product)
+            product = formatResult(
+                "amazon",
+                titles,
+                prices,
+                links,
+                ratings,
+                num_ratings,
+                trending,
+                df_flag,
+                currency,
+                img_links
+            )
+            products.append(product)
+        except Exception as e:
+            logging.error(f"Error processing product: {e}")
+            continue
+
+    logging.debug(f"Returning {len(products)} products")
     return products
-
-
 
 def searchWalmart(query, df_flag, currency):
     """
@@ -101,7 +106,7 @@ def searchWalmart(query, df_flag, currency):
             res.select("div.lh-copy"),
             res.select("a"),
         )
-        ratings = res.findAll("span", {"class": "w_iUH7"}, text=pattern)
+        ratings = res.findAll("span", {"class": "w_iUH7"}, string=pattern)
         num_ratings = res.findAll("span", {"class": "sans-serif gray f7"})
         trending = res.select("span.w_Cs")
         img_links = res.select("div.relative.overflow-hidden img")
@@ -378,73 +383,6 @@ def searchEbay(query, df_flag, currency):
 
     return products
 
-# def searchTarget(query, df_flag, currency):
-#     """
-#     The searchTarget function scrapes https://www.target.com/
-#     Parameters: query- search query for the product, df_flag- flag variable, currency- currency type entered by the user
-#     Returns a list of items available on target.com that match the product entered by the user
-#     """
-
-#     api_url = 'https://redsky.target.com/redsky_aggregations/v1/web/plp_search_v1'
-
-#     page = '/s/' + query
-#     params = {
-#         'key': 'ff457966e64d5e877fdbad070f276d18ecec4a01',
-#         'channel': 'WEB',
-#         'count': '24',
-#         'default_purchasability_filter': 'false',
-#         'include_sponsored': 'true',
-#         'keyword': query,
-#         'offset': '0',
-#         'page': page,
-#         'platform': 'desktop',
-#         'pricing_store_id': '3991',
-#         'useragent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0',
-#         'visitor_id': 'AAA',
-#     }
-#     headers = {
-#         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',  # noqa: E501
-#         'Accept-Encoding': 'gzip, deflate',
-#         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-#         'DNT': '1',
-#         'Connection': 'keep-alive',
-#         'Upgrade-Insecure-Requests': '1',
-#         'Cache-Control': 'no-cache'
-#     }
-#     data = requests.get(api_url, headers=headers, params=params).json()
-#     products = []
-
-#     for p in data['data']['search']['products']:
-#         titles = p['item']['product_description']['title']
-#         prices = '$' + str(p['price']['reg_retail'])
-#         links = p['item']['enrichment']['buy_url']
-#         img_link = p['item']['enrichment']['images']['primary_image_url']
-#         try:
-#             ratings = p['ratings_and_reviews']['statistics']['rating']['average']
-#         except KeyError:
-#             ratings = None
-#         try:
-#             num_ratings = p['ratings_and_reviews']['statistics']['rating']['count']
-#         except KeyError:
-#             num_ratings = None
-#         trending = None
-    
-#         product = formatResult(
-#             "target",
-#             titles,
-#             prices,
-#             links,
-#             ratings,
-#             num_ratings,
-#             trending,
-#             df_flag,
-#             currency,
-#             img_link
-#         )
-#         products.append(product)
-
-#     return products
-
 def searchBestbuy(query, df_flag, currency):
     """
     The searchBestbuy function scrapes bestbuy.com
@@ -466,7 +404,7 @@ def searchBestbuy(query, df_flag, currency):
             res.select("div.priceView-customer-price span"),
             res.select("a"),
         )
-        ratings = res.find("div", class_="c-ratings-reviews").findAll("p", text=pattern)
+        ratings = res.find("div", class_="c-ratings-reviews").findAll("p", string=pattern)
         num_ratings = res.select("span.c-reviews")
         trending = None
         img_link = res.select("img.product-image")
@@ -485,7 +423,6 @@ def searchBestbuy(query, df_flag, currency):
         products.append(product)
 
     return products
-
 
 def condense_helper(result_condensed, list, num):
     """This is a helper function to limit number of entries in the result"""
@@ -521,55 +458,68 @@ def filter(data, price_min = 1, price_max = 100000, rating_min = 1):
 
 
 def driver(
-    product, currency, num=None, df_flag=0, csv=False, cd=None, ui=False, sort=None
-):
-    """Returns csv is the user enters the --csv arg,
-    else will display the result table in the terminal based on the args entered by the user"""
-    
-    products_1 = searchAmazon(product, df_flag, currency)
+    product, currency, num=None, df_flag=0, csv=False, cd=None, ui=False, sort=None, website=None):
+    """Returns CSV if the user enters the --csv arg,
+    else displays the result table in the terminal based on the args entered by the user"""
+
+    # Fetch products from selected sources
     products_2 = searchWalmart(product, df_flag, currency)
-    products_3 = searchEtsy(product, df_flag, currency)
-    products_4 = searchGoogleShopping(product, df_flag, currency)
-    products_5 = searchBJs(product, df_flag, currency)
-    products_6 = searchEbay(product,df_flag,currency)
-    products_7 = searchBestbuy(product,df_flag,currency)
+    products_6 = searchEbay(product, df_flag, currency)
+    products_7 = searchBestbuy(product, df_flag, currency)
+
+    print(f"Selected website: {website}")  # Debugging statement
     
-
-    result_condensed = ""
-    if not ui:
-        results = products_1 + products_2 + products_3 + products_4 + products_5 + products_6 + products_7
-        result_condensed = (
-            products_1[:num]
-            + products_2[:num]
-            + products_3[:num]
-            + products_4[:num]
-            + products_5[:num]
-            + products_6[:num]
-            + products_7[:num]
-            
-        )
-        result_condensed = pd.DataFrame.from_dict(result_condensed, orient="columns")
-        results = pd.DataFrame.from_dict(results, orient="columns")
-        if currency == "" or currency == None:
-            results = results.drop(columns="converted_price")
-            result_condensed = result_condensed.drop(columns="converted_price")
-        if csv == True:
-            file_name = os.path.join(
-                cd, (product + datetime.now().strftime("%y%m%d_%H%M") + ".csv")
-            )
-            print("CSV Saved at: ", cd)
-            print("File Name:", file_name)
-            results.to_csv(file_name, index=False, header=results.columns)
+    # Combine results based on the website filter
+    if website == 'all' or website is None:
+        results = products_2 + products_6 + products_7
     else:
-        result_condensed = []
-        condense_helper(result_condensed, products_1, num)
-        condense_helper(result_condensed, products_2, num)
-        condense_helper(result_condensed, products_3, num)
-        condense_helper(result_condensed, products_4, num)
-        condense_helper(result_condensed, products_5, num)
-        condense_helper(result_condensed, products_6, num)
-        condense_helper(result_condensed, products_7, num)
+        if website == 'walmart':
+            results = products_2
+        elif website == 'ebay':
+            results = products_6
+        elif website == 'bestbuy':
+            results = products_7
+        else:
+            results = []
+            
+    #print(f"Results structure: {results}")
 
+    # Limit the number of results if specified
+    results = results[:num] if num else results
+
+    # Convert to DataFrame for processing
+    results_df = pd.DataFrame(results)
+
+    # Drop converted_price if currency is not specified
+    if not currency:
+        results_df = results_df.drop(columns="converted_price", errors='ignore')
+
+    # Handle CSV output
+    if csv:
+        file_name = os.path.join(
+            cd, f"{product}_{datetime.now():%y%m%d_%H%M}.csv"
+        )
+        results_df.to_csv(file_name, index=False, header=True)
+        print("CSV Saved at:", cd)
+        print("File Name:", file_name)
+        return results_df  # Return DataFrame directly if CSV is generated
+
+    # UI Processing
+    if ui:
+        result_condensed = []
+        if website == 'all' or website is None:
+            condense_helper(result_condensed, products_2, num)
+            condense_helper(result_condensed, products_6, num)
+            condense_helper(result_condensed, products_7, num)
+        else:
+            if website == 'walmart':
+                condense_helper(result_condensed, products_2, num)
+            elif website == 'ebay':
+                condense_helper(result_condensed, products_6, num)
+            elif website == 'bestbuy':
+                condense_helper(result_condensed, products_7, num)
+
+        # Apply currency conversion if specified
         if currency and currency != "USD":
             rate = get_currency_rate('USD', currency)
             for item in result_condensed:
@@ -577,39 +527,28 @@ def driver(
                     item['original_price'] = item['price']
                     item['price'] = convert_currency(item['price'], currency, rate)
 
-        # Fix URLs so that they contain http before www
+        # Fix URLs
         for p in result_condensed:
-            link = p["link"]
-            if p["website"] == "Etsy":
-                link = link[12:]
-                p["link"] = link
-            elif "http" not in link:
-                link = "http://" + link
-                p["link"] = link
+            if "link" in p and "http" not in p["link"]:
+                p["link"] = "http://" + p["link"]
 
-        if sort != None:
-            result_condensed = pd.DataFrame(result_condensed)
-            if sort == "rades":
-                result_condensed = sortList(result_condensed, "ra", False)
-            elif sort == "raasc":
-                result_condensed = sortList(result_condensed, "ra", True)
-            elif sort == "pasc":
-                result_condensed = sortList(result_condensed, "pr", False)
-            else:
-                result_condensed = sortList(result_condensed, "pr", True)
-            result_condensed = result_condensed.to_dict(orient="records")
+        # Sort results if specified
+        if sort:
+            result_condensed_df = pd.DataFrame(result_condensed)
+            result_condensed_df = sortList(result_condensed_df, "ra" if "ra" in sort else "pr", sort.endswith("asc"))
+            result_condensed = result_condensed_df.to_dict(orient="records")
 
+        # Output sorted/condensed results to CSV if requested
         if csv:
+            result_condensed_df = pd.DataFrame(result_condensed)
             file_name = os.path.join(
-                cd, (product + datetime.now().strftime("%y%m%d_%H%M") + ".csv")
+                cd, f"{product}_{datetime.now():%y%m%d_%H%M}.csv"
             )
-            result_condensed = pd.DataFrame(result_condensed)
-            
-            result_condensed = result_condensed.to_csv(
-                file_name, index=False, header=result_condensed.columns
-            )
-            print(result_condensed)
-    return result_condensed
+            result_condensed_df.to_csv(file_name, index=False, header=True)
+            print("CSV Saved at:", cd)
+            print("File Name:", file_name)
+
+    return result_condensed if ui else results_df
 
 def get_currency_rate(from_currency="USD", to_currency="USD"):
     api_key = "f3ac7c18adc2a995e895d289"

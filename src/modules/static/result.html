@@ -1,5 +1,5 @@
 <!--
-Copyright (C) 2023 SE23-Team44
+Copyright (C) Team-82_Project-2
 
 Licensed under the MIT License.
 See the LICENSE file in the project root for the full license information.
@@ -108,6 +108,15 @@ See the LICENSE file in the project root for the full license information.
               <option id="CNY" value="CNY">CNY</option>
               <option id="AUD" value="AUD">AUD</option>
               <option id="GBP" value="GBP">GBP</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="company"></label>
+            <select id="website-choice" name="website" class="form-control">
+              <option value="all">all</option>
+              <option value="walmart">walmart</option>
+              <option value="bestbuy">bestbuy</option>
+              <option value="ebay">ebay</option>
             </select>
           </div>
           <div class="form-group">
@@ -295,9 +304,7 @@ See the LICENSE file in the project root for the full license information.
 
   </header>
 
-
-
-  <script type="text/javascript" src="{{ url_for('static', filename='grid.js') }}"></script>
+  <!-- <script type="text/javascript" src="{{ url_for('static', filename='grid.js') }}"></script> -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>

@@ -1,5 +1,5 @@
 """
-Copyright (C) 2023 SE23-Team44
+Copyright (C) Team-82_Project-2
  
 Licensed under the MIT License.
 See the LICENSE file in the project root for the full license information.
@@ -14,6 +14,7 @@ import ssl
 import smtplib
 from pathlib import Path
 from .config import Config
+import bcrypt
 
 from . import scraper
 from email.message import EmailMessage
@@ -42,10 +43,8 @@ def create_user(username, password):
 def check_user(username, password):
     user_dir = usr_dir(username)
     if os.path.exists(user_dir): # user already exist
-        if password == get_credentials(username):
-            return True
-        else:
-            return False
+        stored_password = get_credentials(username)
+        return bcrypt.checkpw(password.encode('utf-8'), stored_password.encode('utf-8'))
     else: # create new user
         return False
 
@@ -59,11 +58,13 @@ def create_wishlist(username, wishlist_name):
     open(wishlist_path, "a").close()
 
 def create_credentials(username, password):
+    hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+
     cred_path = usr_dir(username) / ("cred.csv")
     open(cred_path, "a").close()
     item_data = {
         "username": username,
-        "password": password,
+        "password": hashed_password.decode('utf-8'),
     }
     item_data = pd.DataFrame([item_data])
     item_data.to_csv(cred_path, index=False, header=item_data.columns)
