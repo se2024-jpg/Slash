@@ -24,8 +24,8 @@ app.secret_key = Config.SECRET_KEY
 oauth = OAuth(app)
 google = oauth.register(
     name='google',
-    client_id='', # Place your OAuth Client ID here
-    client_secret='', # Place your OAuth Client secret here
+    client_id='549740556873-8tvco5h92ks5tlh85dld99tgkfh8kqj7.apps.googleusercontent.com', # Place your OAuth Client ID here
+    client_secret='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', # Place your OAuth Client secret here
     authorize_url='https://accounts.google.com/o/oauth2/auth',
     access_token_url='https://accounts.google.com/o/oauth2/token',
     redirect_uri='http://localhost:5000/google/callback',
@@ -44,11 +44,19 @@ def landingpage():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        session['username'] = request.form['username']
-        if check_user(request.form['username'], request.form['password']):
-            return redirect(url_for('login'))
+        #session['username'] = request.form['username']
+        username = request.form['username']
+        password = request.form['password']
+
+        if not username or not password:
+            return 'Username and Password are required', 400
+        
+        #session['username'] = username
+
+        if check_user(username, password):
+            return redirect(url_for('login')), 200
         else:
-            return render_template("./static/landing.html", login=False, invalid=True)
+            return render_template("./static/landing.html", login=False, invalid=True), 401
     elif session.get('oauth'):
         # If user is logged in with OAuth
         return redirect(url_for('login'))

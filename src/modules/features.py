@@ -49,7 +49,7 @@ def check_user(username, password):
         stored_password = get_credentials(username)
         if stored_password:
             return bcrypt.checkpw(password.encode('utf-8'), stored_password.encode('utf-8'))
-    else: # create new user
+    else: 
         return False
 
 def list_users():
