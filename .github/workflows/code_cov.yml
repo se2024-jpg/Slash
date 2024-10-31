@@ -20,35 +20,24 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
       - name: Install Python 3.10.15
         uses: actions/setup-python@v4
         with:
           python-version: 3.10.15
-
       - name: Install dependencies
         run: |
-          pip install pytest pytest-cov
+          pip install coverage
+          pip install pytest-cov
           pip install -r requirements.txt
-          echo "Requirements installed"
-
+          echo requirements installed
       - name: Run the tests
         run: |
           cd tests
           pytest --cov=./ --cov-report=xml
-
-      - name: Check coverage report
-        run: |
-          ls -l coverage.xml 
-
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          file: coverage.xml
-          flags: unittests
-          name: codecov-umbrella
-          fail_ci_if_error: true
+          token: ${{ secrets.CODECOV_TOKEN}}
 
 # This workflow will install Python dependencies, run tests and create a Code Coverage Report
 
