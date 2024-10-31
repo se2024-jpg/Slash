@@ -76,12 +76,61 @@ def test_bestbuy_scraper():
         price = scraper.bestbuy_scraper(products[0]['link'])
         assert price is None or type(price) == str
 
+
+# def test_target_scraper(): No longer used
+#     products = scraper.searchTarget('table',False,None)
+    
+#     if products:
+#         price = scraper.target_scraper(products[0]['link'])
+#         assert price is None or type(price) == str
+
+
 def test_google_scraper():
     products = scraper.searchGoogleShopping('table',False,None)
 
     if products:
         price = scraper.google_scraper(products[0]['link'])
         assert price is None or type(price) == str
+
+
+def test_convert_currency_with_rate():
+    # Simulate getting an exchange rate for USD to EUR
+    rate_eur = 0.85  # For example, this might return 0.85
+    rate_gbp = 0.75
+    rate_usd = 1
+    rate_inr = 84.09
+    rate_yn = 7.12
+    # Test with a valid amount and the retrieved rate
+    amount = "$100.00"
+    converted = scraper.convert_currency(amount, "EUR", rate_eur)
+    assert converted == "EUR 85.00", f"Expected 'EUR 85.00', but got '{converted}'"
+
+    # Test with another amount and a different rate
+    amount = "$250.50"
+    converted = scraper.convert_currency(amount, "GBP", rate_gbp)
+    assert converted == "GBP 187.88", f"Expected 'GBP 187.88', but got '{converted}'"
+
+    # Test with another amount and a different rate
+    amount = "$250.50"
+    converted = scraper.convert_currency(amount, "USD", rate_usd)
+    assert converted == "USD 250.50", f"Expected 'USD 250.50', but got '{converted}'"
+
+    # Test with another amount and a different rate
+    amount = "$250.50"
+    converted = scraper.convert_currency(amount, "INR", rate_inr)
+    assert converted == "INR 21064.55", f"Expected 'INR 21064.55', but got '{converted}'"
+
+    # Test with an amount without a currency symbol
+    amount = "50"
+    converted = scraper.convert_currency(amount, "CNY", rate_yn)
+    assert converted == "CNY 356.00", f"Expected 'CNY 356.00', but got '{converted}'"
+
+    # Test with a malformed amount (should raise ValueError)
+    try:
+        scraper.convert_currency("$abc", "EUR", rate_eur)
+        assert False, "Expected Exception was not raised"
+    except Exception:
+        pass  # The ValueError is expected
 
 
 # Mock data
@@ -126,3 +175,4 @@ def test_driver_bestbuy(mock_bestbuy, mock_ebay, mock_walmart):
 def test_driver_invalid(mock_bestbuy, mock_ebay, mock_walmart):
     result = scraper.driver('test_product', 'USD', website='invalid')
     assert len(result) == 0  # Should return no products for invalid website
+
