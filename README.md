@@ -23,7 +23,7 @@ Slash Your Spending, Not Your Style - Unleash the Best Deals!!
 <a href="https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/CSC510-SE-Fall2024/Team-82_Project-2?cacheBuster=1"></a>
 
 Slash is a tool that scrapes the most popular e-commerce websites to get the best deals on searched items across these websites.
-Currently supported websites include [Walmart](https://www.walmart.com/), [Target](https://www.target.com/), [BestBuy](https://www.bestbuy.com/), [Amazon](https://www.amazon.com/), [Google Shopping](https://shopping.google.com/), [BJs](https://www.bjs.com/), [Etsy](https://www.etsy.com/), and [EBay](https://www.ebay.com/).
+Currently supported websites include [Walmart](https://www.walmart.com/), [Target](https://www.target.com/), [BestBuy](https://www.bestbuy.com/), [Amazon](https://www.amazon.com/), [Google Shopping](https://shopping.google.com/), [Etsy](https://www.etsy.com/), and [EBay](https://www.ebay.com/).
 
 - **Fast**: With slash, you can save over 50% of your time by comparing deals across websites within seconds
 - **Easy**: Slash uses very easy commands to filter, sort and search your items
