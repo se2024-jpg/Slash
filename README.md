@@ -9,7 +9,7 @@ Slash Your Spending, Not Your Style - Unleash the Best Deals!!
 ![Github](https://img.shields.io/badge/language-python-red.svg)
 [![Discord](https://img.shields.io/discord/1300195209472114780?color=blueviolet&label=Discord%20Discussion%20Chat&cacheBuster=1)](https://discord.gg/UF5Hr2dW)
 [![Run Tests On Push](https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/actions/workflows/unit_test.yml/badge.svg)](https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/actions/workflows/unit_test.yml)
-[![codecov](https://codecov.io/gh/SE23-Team44/slash/branch/main/graph/badge.svg?token=9YO9QKQZPJ)](https://codecov.io/gh/SE23-Team44/slash)
+[![codecov](https://codecov.io/gh/CSC510-SE-Fall2024/Team-82_Project-2/branch/main/graph/badge.svg?token=20a750d4-c013-4006-8a38-24bddf824450)](https://codecov.io/gh/CSC510-SE-Fall2024/Team-82_Project-2)
 [![Lint Python](https://github.com/SE23-Team44/slash/actions/workflows/pylint.yml/badge.svg)](https://github.com/SE23-Team44/slash/actions/workflows/pylint.yml)
 [![Close as a feature](https://github.com/SE23-Team44/slash/actions/workflows/close_as_a_feature.yml/badge.svg)](https://github.com/SE23-Team44/slash/actions/workflows/close_as_a_feature.yml)
 [![Python Application](https://github.com/SE23-Team44/slash/actions/workflows/python-package.yml/badge.svg)](https://github.com/SE23-Team44/slash/actions/workflows/python-package.yml)
