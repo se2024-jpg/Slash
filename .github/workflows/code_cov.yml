@@ -38,10 +38,9 @@ jobs:
           pytest --cov=./ --cov-report=xml
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./tests/coverage.xml  # Path to the coverage report if specified
 
 # This workflow will install Python dependencies, run tests and create a Code Coverage Report
 
