@@ -34,11 +34,14 @@ jobs:
         run: |
           cd tests
           pytest --cov=./ --cov-report=xml
-          continue-on-error: true
+        continue-on-error: true
+        
       - name: Upload coverage to Codecov
+        if: always()
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN}}
+          file: coverage.xml
 
 # This workflow will install Python dependencies, run tests and create a Code Coverage Report
 
