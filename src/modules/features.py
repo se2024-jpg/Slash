@@ -80,7 +80,7 @@ def get_credentials(username):
             csv = pd.read_csv(cred_path)
             row = csv.iloc[0]
             return str(row['password'])
-        except Exception:
+        except Exception as e:
             print(f"Error reading credentials: {e}")
             return ''
     else:
