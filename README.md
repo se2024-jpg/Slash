@@ -4,22 +4,19 @@ Slash Your Spending, Not Your Style - Unleash the Best Deals!!
 
 <p align="center"><img width="500" src="./assets/Shop.gif"></p>
 
-[![GitHub license](https://img.shields.io/github/license/SE23-Team44/slash)](https://github.com/SE23-Team44/slash/blob/main/LICENSE)
+[![GitHub license](https://img.shields.io/github/license/CSC510-SE-Fall2024/Team-82_Project-2)](https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/blob/main/LICENSE)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14018764.svg)](https://doi.org/10.5281/zenodo.14018764)
 ![Github](https://img.shields.io/badge/language-python-red.svg)
 [![Discord](https://img.shields.io/discord/1300195209472114780?color=blueviolet&label=Discord%20Discussion%20Chat&cacheBuster=1)](https://discord.gg/UF5Hr2dW)
 [![Run Tests On Push](https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/actions/workflows/unit_test.yml/badge.svg)](https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/actions/workflows/unit_test.yml)
 [![codecov](https://codecov.io/gh/CSC510-SE-Fall2024/Team-82_Project-2/branch/main/graph/badge.svg?token=20a750d4-c013-4006-8a38-24bddf824450)](https://codecov.io/gh/CSC510-SE-Fall2024/Team-82_Project-2)
-[![Lint Python](https://github.com/SE23-Team44/slash/actions/workflows/pylint.yml/badge.svg)](https://github.com/SE23-Team44/slash/actions/workflows/pylint.yml)
-[![Close as a feature](https://github.com/SE23-Team44/slash/actions/workflows/close_as_a_feature.yml/badge.svg)](https://github.com/SE23-Team44/slash/actions/workflows/close_as_a_feature.yml)
-[![Python Application](https://github.com/SE23-Team44/slash/actions/workflows/python-package.yml/badge.svg)](https://github.com/SE23-Team44/slash/actions/workflows/python-package.yml)
-[![Python Style Checker](https://github.com/SE23-Team44/slash/actions/workflows/style_checker.yml/badge.svg)](https://github.com/SE23-Team44/slash/actions/workflows/style_checker.yml)
-[![Running Code Coverage](https://github.com/SE23-Team44/slash/actions/workflows/code_cov.yml/badge.svg)](https://github.com/SE23-Team44/slash/actions/workflows/code_cov.yml)
-
+[![Lint Python](https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/actions/workflows/pylint.yml/badge.svg)](https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/actions/workflows/pylint.yml)
+[![Close as a feature](https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/actions/workflows/close_as_a_feature.yml/badge.svg)](https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/actions/workflows/close_as_a_feature.yml)
+[![Python Application](https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/actions/workflows/python-package.yml/badge.svg)](https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/actions/workflows/python-package.yml)
+[![Python Style Checker](https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/actions/workflows/style_checker.yml/badge.svg)](https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/actions/workflows/style_checker.yml)
+[![Running Code Coverage](https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/actions/workflows/code_cov.yml/badge.svg)](https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/actions/workflows/code_cov.yml)
 [![GitHub issues](https://img.shields.io/github/issues/CSC510-SE-Fall2024/Team-82_Project-2)](https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/issues)
-
 [![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/CSC510-SE-Fall2024/Team-82_Project-2)](https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/issues?q=is%3Aissue+is%3Aclosed)
-
 [![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/CSC510-SE-Fall2024/Team-82_Project-2)](https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/pulls?q=is%3Apr+is%3Aclosed)
 
 <a href="https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/network"><img alt="GitHub forks" src="https://img.shields.io/github/forks/CSC510-SE-Fall2024/Team-82_Project-2?cacheBuster=1"></a>
