@@ -15,9 +15,12 @@ Slash Your Spending, Not Your Style - Unleash the Best Deals!!
 [![Python Style Checker](https://github.com/SE23-Team44/slash/actions/workflows/style_checker.yml/badge.svg)](https://github.com/SE23-Team44/slash/actions/workflows/style_checker.yml)
 [![Running Code Coverage](https://github.com/SE23-Team44/slash/actions/workflows/code_cov.yml/badge.svg)](https://github.com/SE23-Team44/slash/actions/workflows/code_cov.yml)
 
-[![GitHub issues](https://img.shields.io/github/issues/SE23-Team44/slash)](https://github.com/SE23-Team44/slash/issues)
-[![Github closes issues](https://img.shields.io/github/issues-closed-raw/SE23-Team44/slash)](https://github.com/SE23-Team44/slash/issues?q=is%3Aissue+is%3Aclosed)
-[![Github closed pull requests](https://img.shields.io/github/issues-pr-closed/SE23-Team44/slash)](https://github.com/SE23-Team44/slash/pulls?q=is%3Apr+is%3Aclosed)
+[![GitHub issues](https://img.shields.io/github/issues/CSC510-SE-Fall2024/Team-82_Project-2)](https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/issues)
+
+[![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/CSC510-SE-Fall2024/Team-82_Project-2)](https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/issues?q=is%3Aissue+is%3Aclosed)
+
+[![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/CSC510-SE-Fall2024/Team-82_Project-2)](https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/pulls?q=is%3Apr+is%3Aclosed)
+
 <a href="https://github.com/SE23-Team44/slash/network"><img alt="GitHub forks" src="https://img.shields.io/github/forks/SE23-Team44/slash"></a>
 <a href="https://github.com/SE23-Team44/slasg/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/SE23-Team44/slash"></a>
 ![Discord](https://img.shields.io/discord/1162231656980168876)
