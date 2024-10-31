@@ -37,7 +37,7 @@ Currently supported websites include [Walmart](https://www.walmart.com/), [Targe
 - Then, clone the repo using the following command:
 
 ```
-git clone https://github.com/csc510fall23g45/slash
+git clone https://github.com/CSC510-SE-Fall2024/Team-82_Project-2.git
 ```
 
 - Finally, `cd` into the local repository.
