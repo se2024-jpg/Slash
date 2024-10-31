@@ -561,6 +561,10 @@ def get_currency_rate(from_currency="USD", to_currency="USD"):
 def convert_currency(amount, to_currency, rate):
     
             # Remove currency symbol and convert to float
-    amount = float(amount.replace('$', '').replace(',', ''))
-    converted_amount = amount * rate
-    return f"{to_currency} {converted_amount:.2f}"
+    try:
+        amount = float(amount.replace('$', '').replace(',', ''))
+        converted_amount = amount * rate
+        return f"{to_currency} {converted_amount:.2f}"
+    except Exception as e:
+        return e
+
