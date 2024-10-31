@@ -7,6 +7,7 @@ Slash Your Spending, Not Your Style - Unleash the Best Deals!!
 [![GitHub license](https://img.shields.io/github/license/SE23-Team44/slash)](https://github.com/SE23-Team44/slash/blob/main/LICENSE)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14018764.svg)](https://doi.org/10.5281/zenodo.14018764)
 ![Github](https://img.shields.io/badge/language-python-red.svg)
+[![Discord](https://img.shields.io/discord/1300195209472114780?color=blueviolet&label=Discord%20Discussion%20Chat&cacheBuster=1)](https://discord.gg/UF5Hr2dW)
 [![Run Tests On Push](https://github.com/SE23-Team44/slash/actions/workflows/unit_test.yml/badge.svg)](https://github.com/SE23-Team44/slash/actions/workflows/unit_test.yml)
 [![codecov](https://codecov.io/gh/SE23-Team44/slash/branch/main/graph/badge.svg?token=9YO9QKQZPJ)](https://codecov.io/gh/SE23-Team44/slash)
 [![Lint Python](https://github.com/SE23-Team44/slash/actions/workflows/pylint.yml/badge.svg)](https://github.com/SE23-Team44/slash/actions/workflows/pylint.yml)
