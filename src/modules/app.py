@@ -131,7 +131,7 @@ def product_search(new_product="", sort=None, currency=None, num=None, min_price
         return render_template("./static/result.html", data=data, prod=product, total_pages=len(data)//20)
     except Exception as e:
         app.logger.error(f"Error during product search: {e}")
-        return render_template("./templates/error.html", error=str(e)), 500
+        return render_template("error.html", error=str(e)), 500
 
 
 @app.route("/filter", methods=["POST", "GET"])
@@ -169,7 +169,7 @@ def product_search_filtered():
         return product_search(product, sort, currency, None, min_price, max_price, min_rating, website)
     except Exception as e:
         app.logger.error(f"Error during filtered product search: {e}")
-        return render_template("error.html", error=str(e)), 500
+        return render_template("./templates/error.html", error=str(e)), 500
 
 @app.route("/add-wishlist-item", methods=["POST"])
 def add_wishlist_item():
