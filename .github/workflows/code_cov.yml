@@ -28,7 +28,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install coverage pytest-cov
+          pip install pytest pytest-cov
           pip install -r requirements.txt
           echo "Requirements installed"
 
@@ -36,6 +36,10 @@ jobs:
         run: |
           cd tests
           pytest --cov=./ --cov-report=xml
+
+      - name: Check coverage report
+        run: |
+          ls -l ./tests/coverage.xml 
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
