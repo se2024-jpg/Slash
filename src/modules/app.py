@@ -123,7 +123,7 @@ def product_search(new_product="", sort=None, currency=None, num=None, min_price
         return render_template("./static/result.html", data=data, prod=product, total_pages=len(data)//20)
     except Exception as e:
         app.logger.error(f"Error during product search: {e}")
-        return render_template("error.html", error=str(e)), 500
+        return render_template("./templates/error.html", error=str(e)), 500
 
 
 @app.route("/filter", methods=["POST", "GET"])

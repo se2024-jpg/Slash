@@ -53,10 +53,14 @@ def formatResult(
             price = prices[0].get_text().strip()
             price = re.sub('\s', '', price) # remove all spaces
             price = re.sub(',', '', price) # remove all , in numbers
-            price = re.search("[0-9\.]+", price).group() # search and match the price value (numbers)
-            price = "$" + price
-            if(website == 'walmart' and '.' not in price):
-                price = price[:-2] + "." + price[-2:]
+            price_match = re.search("[0-9\.]+", price) # search and match the price value (numbers)
+            if price_match:
+                price = price_match.group()
+                price = "$" + price
+                if(website == 'walmart' and '.' not in price):
+                    price = price[:-2] + "." + price[-2:]
+            else:
+                price = "N/A"
         
         if links:
             link = links[0]["href"]

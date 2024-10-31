@@ -30,8 +30,11 @@ def usr_dir(username):
 def create_user(username, password):
     user_dir = usr_dir(username)
     if os.path.exists(user_dir): # user already exist
-        if password == get_credentials(username):
+        stored_password = get_credentials(username)
+        if bcrypt.checkpw(password.encode('utf-8'), stored_password.encode('utf-8')):
             return True
+        #if password == get_credentials(username):
+            #return True
         else:
             return False
     else: # create new user
@@ -44,7 +47,8 @@ def check_user(username, password):
     user_dir = usr_dir(username)
     if os.path.exists(user_dir): # user already exist
         stored_password = get_credentials(username)
-        return bcrypt.checkpw(password.encode('utf-8'), stored_password.encode('utf-8'))
+        if stored_password:
+            return bcrypt.checkpw(password.encode('utf-8'), stored_password.encode('utf-8'))
     else: # create new user
         return False
 
@@ -77,6 +81,7 @@ def get_credentials(username):
             row = csv.iloc[0]
             return str(row['password'])
         except Exception:
+            print(f"Error reading credentials: {e}")
             return ''
     else:
         return '' 
