@@ -566,5 +566,5 @@ def convert_currency(amount, to_currency, rate):
         converted_amount = amount * rate
         return f"{to_currency} {converted_amount:.2f}"
     except Exception as e:
-        return e
+        return "N/A" 
 

@@ -125,12 +125,11 @@ def test_convert_currency_with_rate():
     converted = scraper.convert_currency(amount, "CNY", rate_yn)
     assert converted == "CNY 356.00", f"Expected 'CNY 356.00', but got '{converted}'"
 
-    # Test with a malformed amount (should raise ValueError)
-    try:
-        scraper.convert_currency("$abc", "EUR", rate_eur)
-        assert False, "Expected Exception was not raised"
-    except Exception:
-        pass  # The ValueError is expected
+    # Test with a malformed amount (should return N/A)
+    amount = "$abc"    
+    converted = scraper.convert_currency(amount, "EUR", rate_eur)
+    assert converted == "N/A", f"Expected a valid value, but got '{converted}'" 
+    
 
 
 # Mock data
