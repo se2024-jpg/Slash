@@ -165,10 +165,10 @@ Follow these steps to configure and enable Google OAuth login:
 | --- | --- | --- |
 | Video | 3 | Link Updated (https://www.youtube.com/watch?v=HFh_ms9q0As) |
 | Workload | 3 | Distributed |
-| Number of commits | 3 | 20+ |
-| Number of commits: by different people | 3 | https://github.com/NidhayPancholi/slashbot/graphs/contributors |
-| Issues report: There are many | 2 | https://github.com/NidhayPancholi/slashbot/pulse |
-| Issues are being closed | 2 | https://github.com/NidhayPancholi/slashbot/pulse |
+| Number of commits | 3 | 50+ |
+| Number of commits: by different people | 3 | https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/graphs/contributors?from=28%2F09%2F2024 |
+| Issues report: There are many | 2 | https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/pulse |
+| Issues are being closed | 2 | https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/pulse |
 | DOI badge | 3 |  |
 | Docs: format | 3 |  |
 | Docs: description  | 3 |  |
