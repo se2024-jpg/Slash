@@ -3,12 +3,6 @@
 Provides help for every argument
 
 ## **scaper.py**
-### *def searchTarget(query, df_flag, currency)*:
-The searchTarget function scrapes target.com using the API\
-**Parameters**:\
-query- search query for the product\
-df_flag- flag variable\
-currency- currency type entered by the user
 
 ### *def searchBestbuy(query, df_flag, currency)*:
 The searchBestbuy function scrapes bestbuy.com using the scraping\
@@ -44,15 +38,6 @@ df_flag- flag variable\
 currency- currency type entered by the user
 
 Returns a list of items available on walmart.com that match the product entered by the user.
-
-### *def searchEtsy(query, df_flag, currency)*:
- The searchEtsy function scrapes Etsy.com\
-**Parameters**:\
-query- search query for the product\
-df_flag- flag variable\
-currency- currency type entered by the user
-
-Returns a list of items available on Etsy.com that match the product entered by the user
 
 ### *def amazon_scraper(link)*: 
 The amazon scraper function scrapes amazon.com.
@@ -97,7 +82,7 @@ link- link of the product for which price has to be fetched
 
 Returns Updated Price from the Link
 
-### *def driver(product, currency, num=None, df_flag=0,csv=False,cd=None)*:
+### *def driver(product, currency, num=None, df_flag=0,csv=False,cd=None, website=None)*:
 Returns csv if the user enters the --csv arg, else will display the result table in the terminal based on the args entered by the user.
 
 ### *def get_currency_rate(from_currency="USD", to_currency="USD")*:
@@ -117,7 +102,23 @@ rate: The exchange rate to apply for the conversion.
 Returns-
     A formatted string showing the converted amount in the target currency, rounded to two decimal places.
 
+### *def condense_helper(result_condensed, list, num):*
+The condense_helper function is a helper function designed to limit the number of entries in a result list.
+**Parameters**:\
+result_condensed: A list that will store the condensed results. This list is populated with entries from the list parameter until the specified limit (num) is reached.
+list: A list of entries (dictionaries) that are being processed. Each entry is expected to have a "title" key.
+num: An optional parameter that specifies the maximum number of entries to include in the result_condensed list. If num is None, there is no limit on the number of entries.
+
+### *def filter(data, price_min = 1, price_max = 100000, rating_min = 1):*
+The filter function is designed to filter a list of product entries based on specified criteria for price and rating.
+**Parameters**:\
+data: A list of dictionaries, where each dictionary represents a product entry. Each dictionary is expected to have keys for 'price' and 'rating'.
+price_min: An optional parameter that specifies the minimum price for the products to be included in the filtered results. The default value is 1.
+price_max: An optional parameter that specifies the maximum price for the products to be included in the filtered results. The default value is 100000.
+rating_min: An optional parameter that specifies the minimum rating for the products to be included in the filtered results. The default value is 1.
+
 ## **formatter.py**
+
 ### *def formatResult(website, titles, prices, links,ratings,df_flag, currency)*:
 The formatResult function takes the scraped HTML as input, and extracts the necessary values from the HTML code. Ex. extracting a price '$19.99' from a paragraph tag.\
 **Parameters**: \
@@ -159,6 +160,7 @@ Returns the username.
 calls the scraper function from scraper.py
 
 ## csv_writer.py
+
 ### *def write_csv(arr,product,file_path)*:
 Returns the CSV file with the naming nomenclature as 'ProductDate_Time'\
 **Parameters**-\
@@ -167,7 +169,7 @@ file_path: path where the csv needs to be stored\
 **Returns**-\
 file_name: CSV file
 
-## full_version.py
+## features.py
 
 ### *def usr_dir(username)*:
 Returns path for user profiles 
