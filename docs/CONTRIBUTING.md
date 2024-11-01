@@ -2,11 +2,11 @@
 
 ## Thanks for being here and taking your time to contribute. <br>
 
-The following is a set of guidelines for contributing to "Slash" and its packages, which are hosted in the [Slash](https://github.com/SE23-Team44/slash/) on GitHub. These are mostly guidelines, not rules. Use your best judgment, and feel free to propose changes to this document in a pull request. <br>
+The following is a set of guidelines for contributing to "Slash" and its packages, which are hosted in the [Slash](https://github.com/CSC510-SE-Fall2024/Team-82_Project-2) on GitHub. These are mostly guidelines, not rules. Use your best judgment, and feel free to propose changes to this document in a pull request. <br>
 
 ## Table of Contents
 
-[Code of Conduct](https://github.com/SE23-Team44/slash/blob/main/docs/CODE-OF-CONDUCT.md) <br>
+[Code of Conduct](https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/blob/main/docs/CODE-OF-CONDUCT.md) <br>
 [How can I Contribute](https://github.com/SE23-Team44/slash/blob/main/docs/CONTRIBUTING.md#how-can-i-contribute) <br>
 [Suggesting Enhancements](https://github.com/SE23-Team44/slash/blob/main/docs/CONTRIBUTING.md#suggesting-enhancements) <br>
 [Style Guide](https://github.com/SE23-Team44/slash/blob/main/docs/CONTRIBUTING.md#styleguides) <br>
@@ -14,7 +14,7 @@ The following is a set of guidelines for contributing to "Slash" and its package
 
 ## Code of Conduct
 
-This project and everyone participating in it is governed by the [Code of Conduct](https://github.com/SE23-Team44/slash/blob/main/docs/CODE-OF-CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to Slash.se23@gmail.com.
+This project and everyone participating in it is governed by the [Code of Conduct](https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/blob/main/docs/CODE-OF-CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to Slash.se23@gmail.com.
 
 ## How can I Contribute
 
