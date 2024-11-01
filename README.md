@@ -75,7 +75,7 @@ flask run
 
 4. Once flask is running, open your internet browser and type `http://127.0.0.1:5000/` into the search bar.
 
-Note: To get the share by email functionality. Please email slash.se23@gmail.com to get the config file.
+Note: To get the share by email functionality. Please email slash.se24@gmail.com to get the config file.
 
 <p>
  
