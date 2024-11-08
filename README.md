@@ -226,12 +226,14 @@ For Additional Information direct to this [page](https://github.com/SE23-Team44/
 
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/DarthAsh"><img src="https://avatars.githubusercontent.com/u/54763573?v=4" width="75px;" alt=""/><br /><sub><b>Ashwin Satpute</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/Atharva7007"><img src="https://avatars.githubusercontent.com/u/61797592?v=4" width="75px;" alt=""/><br /><sub><b>Atharva Pansare</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/ThErOCk07"><img src="https://avatars.githubusercontent.com/u/83000050?s=400&v=4" width="75px;" alt=""/><br /><sub><b>Soham Patil</b></sub></a></td>
-</tr>
+    <td align="center"><a href="https://github.com/girish1430"><img src="https://avatars.githubusercontent.com/u/57136088?v=4" width="75px;" alt=""/><br /><sub><b>Girish G N</b></sub></a></td>
+    <td align="center"><a href="https://github.com/joeljogy"><img src="https://avatars.githubusercontent.com/u/28514673?v=4" width="75px;" alt=""/><br /><sub><b>Joel Jogy George</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/prav29"><img src="https://avatars.githubusercontent.com/u/38226613?v=4" width="75px;" alt=""/><br /><sub><b>Pravallika Vasireddy</b></sub></a><br /></td>
+  </tr>
 </table>
 
 ## :email: Support
 
-For any queries and help, please reach out to us at th3rockk511@gmail.com.
+For support and inquiries related to **WolfTrack 6.0**, please contact us at **csc510group77@gmail.com**. We are here to assist you and address any questions or issues you may have.
+
+We appreciate your interest and look forward to providing you with the best possible support and updates.
