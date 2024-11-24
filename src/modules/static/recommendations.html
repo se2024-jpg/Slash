@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Product Recommendations - Slash</title>
+    <style>
+        :root {
+            --category-color: #2196f3;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --nav-bg: rgba(33, 150, 243, 0.95);
+            --nav-text: #333333;
+        }
+
+        body {
+            padding-top: 70px;
+            transition: background-color 0.3s ease;
+        }
+
+        body.dark-mode {
+            --category-color: #64b5f6;
+            --card-bg: #2d3436;
+            --text-color: #ffffff;
+            --nav-bg: rgba(45, 52, 54, 0.95);
+            --nav-text: #ffffff;
+            background-color: #1a1a1a;
+            color: #ffffff;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            transition: all 0.3s ease;
+        }
+
+        .navbar.bg-transparent .nav-link {
+            color: #333333 !important; /* Dark text for transparent navbar in light mode */
+        }
+
+        .navbar.bg-menu .nav-link {
+            color: #ffffff !important; /* White text when navbar has background */
+        }
+
+        body.dark-mode .navbar.bg-transparent .nav-link {
+            color: #ffffff !important; /* White text for dark mode */
+        }
+
+        .bg-menu {
+            background-color: var(--nav-bg) !important;
+        }
+
+        .bg-menu .nav-link {
+            color: #ffffff !important;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            padding: 0.5rem 1rem !important;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            opacity: 0.8;
+        }
+
+        #logo {
+            width: 40px;
+            height: auto;
+            margin: 0 1.5rem;
+        }
+
+        /* Dark Mode Toggle */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+        }
+
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        .icon {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 16px;
+            z-index: 1;
+        }
+
+        #sun {
+            left: 8px;
+        }
+
+        #moon {
+            right: 8px;
+        }
+
+        /* Grid Layout */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Category Sections */
+        .category-section {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-title {
+            color: var(--category-color);
+            font-size: 1.5rem;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid var(--category-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Product Cards */
+        .card-wrapper {
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-wrapper:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-img-holder {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .card-wrapper:hover .card-img {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            padding: 1.25rem;
+        }
+
+        .card-website {
+            color: var(--category-color);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .card-price {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin: 0.5rem 0;
+            color: var(--text-color);
+        }
+
+        .card-title {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+            line-height: 1.4;
+            height: 2.8em;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+
+        .card-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 0.5rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .card-rating {
+            color: #ffc107;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .card-rating .fa-star {
+            margin-right: 4px;
+        }
+
+        .card-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .card-buttons a {
+            color: var(--category-color);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .card-buttons a:hover {
+            color: #1565c0;
+            transform: scale(1.1);
+        }
+
+        .clicked-heart {
+            color: #e91e63 !important;
+        }
+
+        /* Header */
+        .header-container {
+            text-align: center;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .header-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--text-color);
+            margin: 1rem 0;
+        }
+
+        .header-logo {
+            height: 40px;
+            margin-right: 1rem;
+            vertical-align: middle;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+
+            .header-title {
+                font-size: 2rem;
+            }
+
+            .category-title {
+                font-size: 1.25rem;
+            }
+
+            .card-wrapper {
+                margin-bottom: 1rem;
+            }
+        }
+
+        /* No Recommendations Message */
+        .no-recommendations {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 3rem;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body data-spy="scroll" data-target="#efec-scroll" data-offset="10">
+    <!-- Navigation -->
+    <nav id="efec-scroll" class="navbar navbar-expand-md fixed-top bg-transparent">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-center" id="collapsibleNavbar">
+            <ul id="ulone" class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="login">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="wishlist">Wishlist</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="product_comparison">Product Comparison</a>
+                </li>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="search-history">Search History</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="product-recommendations">Product Recommendations</a>
+                </li>
+            </ul>
+
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/France.tv_Slash.svg/1423px-France.tv_Slash.svg.png"
+                alt="Logo" id="logo">
+
+            <ul id="ultwu" class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link">Welcome {{ session['username'] }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href={{ url_for('logout') }}>Logout</a>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <label class="switch" id="toggle-button">
+                <input type="checkbox">
+                <span class="slider round">
+                    <span class="icon" id="moon">🌙</span>
+                    <span class="icon" id="sun">☀️</span>
+                </span>
+            </label>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <div class="header-container">
+        <h2 class="header-title">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/France.tv_Slash.svg/1423px-France.tv_Slash.svg.png"
+                alt="logo" class="header-logo">
+            Product Recommendations
+        </h2>
+    </div>
+
+    <!-- Recommendations Grid -->
+    <div class="grid">
+        {% if recommendations %}
+            {% for category, products in recommendations.items() %}
+                <div class="category-section">
+                    <h3 class="category-title">{{ category }}</h3>
+                    {% for product in products %}
+                        <div class="card-wrapper">
+                            <div class="card-img-holder">
+                                <img class="card-img" src="{{ product.img_link }}" alt="{{ product.title }}">
+                            </div>
+                            <div class="card-content">
+                                <span class="card-website">{{ product.website }}</span>
+                                <h4 class="card-price">{{ product.price }}</h4>
+                                <p class="card-title">{{ product.title }}</p>
+                                <div class="card-bottom">
+                                    <div class="card-rating">
+                                        <i class="fa fa-star"></i>
+                                        <span>{{ product.rating }}</span>
+                                    </div>
+                                    <div class="card-buttons">
+                                        <a href="{{ product.link }}" target="_blank"><i class="fa fa-link"></i></a>
+                                        <a href="#/" class="heart-link" data-product='{{ product|tojson }}'><i class="fa fa-heart"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="no-recommendations">
+                <p>{{ message }}</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script>
+        // Dark mode functionality
+        window.onload = function() {
+            if (window.localStorage) {
+                var isDark = window.localStorage.getItem("dark");
+                if (isDark == 'true') {
+                    document.body.classList.add("dark-mode");
+                    document.getElementById("toggle-button").firstElementChild.checked = true;
+                }
+            }
+        }
+
+        // Scroll functionality
+        window.onscroll = function(e) {
+            e.preventDefault();
+            let scroll = window.scrollY;
+            var Scroll = document.querySelector("#efec-scroll");
+            var darkModeButton = document.getElementById("toggle-button").firstElementChild;
+
+            if (scroll > 50) {
+                if (darkModeButton.checked) {
+                    Scroll.classList.add("bg-menu-light");
+                } else {
+                    Scroll.classList.add("bg-menu");
+                }
+            } else {
+                Scroll.classList.remove("bg-menu");
+                Scroll.classList.remove("bg-menu-light");
+            }
+        };
+
+        // Dark mode toggle
+        var darkModeButton = document.getElementById("toggle-button");
+        darkModeButton.addEventListener("click", function() {
+            let scroll = window.scrollY;
+            var Scroll = document.querySelector("#efec-scroll");
+            if (darkModeButton.firstElementChild.checked) {
+                document.body.classList.add("dark-mode");
+                window.localStorage.setItem("dark", true);
+                if (scroll > 50) {
+                    Scroll.classList.remove("bg-menu");
+                    Scroll.classList.add("bg-menu-light");
+                }
+            } else {
+                document.body.classList.remove("dark-mode");
+                window.localStorage.setItem("dark", false);
+                if (scroll > 50) {
+                    Scroll.classList.add("bg-menu");
+                    Scroll.classList.remove("bg-menu-light");
+                }
+            }
+        });
+
+                    
+        // Wishlist functionality
+        document.querySelectorAll('.heart-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (e.target && e.target.classList && !e.target.classList.contains("clicked-heart")) {
+            e.target.classList.add("clicked-heart");
+            }
+            const productData = JSON.parse(this.dataset.product);
+            let postData = new URLSearchParams();
+            for (let key in productData) {
+            postData.append(key, productData[key]);
+            }
+            fetch("/add-wishlist-item", {
+            method: 'post',
+            body: postData,
+            }).then(result => console.log(result)).catch(error => console.error(error));
+        });
+        });
+
+  </script>
+</body>
+</html>
