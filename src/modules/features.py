@@ -219,7 +219,10 @@ def share_wishlist(username, wishlist_name, email_receiver):
             print(f"Failed to send email: {e}")
             return False
     return False
-
+ 
+def delete_wishlist(username, wishlist_name):
+    wishlist_path = usr_dir(username) / (wishlist_name + ".csv")
+    wishlist_path.unlink(missing_ok=True)
 def find_currency(price):
     currency = re.match(r'^[a-zA-Z]{3,5}', price)
     return currency.group() if currency else currency
