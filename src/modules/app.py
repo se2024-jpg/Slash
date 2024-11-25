@@ -493,7 +493,7 @@ def product_recommendations():
 
     related_keywords = generate_product_recommendations(username)
     if not related_keywords:
-        return render_template('recommendations.html', message="No recommendations found based on your searches.")
+        return render_template('./static/recommendations.html', message="No recommendations found based on your searches.")
 
     recommendations = {}
     for keyword in related_keywords:
