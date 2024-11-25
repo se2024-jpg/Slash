@@ -199,8 +199,8 @@ def share_wishlist(username, wishlist_name, email_receiver):
     items = read_wishlist(username, wishlist_name)
     if items:
         try:
-            email_sender = current_app.config['MAIL_USERNAME']
-            email_password = current_app.config['MAIL_PASSWORD']
+            email_sender = os.getenv("SENDER_EMAIL")
+            email_password = os.getenv("SENDER_PASSWORD")
             subject = f"{username}'s Wishlist"
             body = "\n".join([f"{i+1}. {item['title']} - {item['link']}" for i, item in enumerate(items)])
 
@@ -223,6 +223,15 @@ def share_wishlist(username, wishlist_name, email_receiver):
 def delete_wishlist(username, wishlist_name):
     wishlist_path = usr_dir(username) / (wishlist_name + ".csv")
     wishlist_path.unlink(missing_ok=True)
+
+
+def wishlist_remove_list(username, wishlist_name, indx):
+    wishlist_path = usr_dir(username) / (wishlist_name + ".csv")
+    old_data = read_wishlist(username, wishlist_name)
+    old_data = old_data.drop(index=indx)
+    old_data.to_csv(wishlist_path, index=False, header=old_data.columns)
+
+
 def find_currency(price):
     currency = re.match(r'^[a-zA-Z]{3,5}', price)
     return currency.group() if currency else currency
