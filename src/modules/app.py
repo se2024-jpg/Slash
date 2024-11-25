@@ -16,9 +16,9 @@ from email.mime.multipart import MIMEMultipart
 from datetime import datetime, timedelta
 
 from .scraper import driver, filter, get_currency_rate, convert_currency
-from .features import create_user, check_user, db_check_user, db_create_user, wishlist_add_item, read_wishlist, remove_wishlist_item, share_wishlist, create_search_entry, get_user_searches_by_username, generate_product_recommendations
+from .features import create_user, check_user, db_check_user, db_create_user, wishlist_add_item, read_wishlist, remove_wishlist_item, share_wishlist, create_search_entry, get_user_searches_by_username, generate_product_recommendations, check_price_updates
 from .config import Config
-from .models import db #SearchEntry
+from .models import db,WishlistItem #SearchEntry
 import secrets
 import email, smtplib, ssl
 
@@ -287,8 +287,16 @@ def wishlist():
         return redirect(url_for('login'))
 
     username = session['username']
-    wishlist_items = read_wishlist(username, "default")  # Assume default wishlist for simplicity
-    return render_template('./static/wishlist.html', data=wishlist_items)
+    check_price_updates(username)
+    wishlist_items = read_wishlist(username, "default")  # Default wishlist for simplicity
+    total_pages = (len(wishlist_items) + 19) // 20  # Assuming 20 items per page
+    return render_template('./static/wishlist.html', 
+                         data=wishlist_items, 
+                         total_pages=total_pages,
+                         debug=True)
+
+
+
 
 @app.route('/share', methods=['POST'])
 def share():
@@ -465,6 +473,18 @@ def export_csv():
 def product_comparison():
     return render_template('./static/product_comparison.html')
 
+# @app.route('/product-recommendations')
+# def product_recommendations():
+#     username = session.get('username')
+#     if not username:
+#         return redirect(url_for('login'))
+
+#     recommendations = generate_product_recommendations(username)
+#     if not recommendations:
+#         return render_template('recommendations.html', message="No recommendations found based on your searches.")
+
+#     return render_template('recommendations.html', recommendations=recommendations)
+
 @app.route('/product-recommendations')
 def product_recommendations():
     username = session.get('username')
@@ -477,6 +497,7 @@ def product_recommendations():
 
     recommendations = {}
     for keyword in related_keywords:
+        # Use the product_search functionality to perform the search for each keyword
         recommendations[keyword] = perform_product_search(keyword, currency="USD", num=3)
 
     return render_template('./static/recommendations.html', recommendations=recommendations)
@@ -490,9 +511,24 @@ def perform_product_search(product, sort=None, currency=None, num=None, min_pric
         return data
     except Exception as e:
         app.logger.error(f"Error during product search: {e}")
-        return None 
+        return None  # Or handle the error as needed
 
+@app.cli.command("add-item")
+def add_fake_wishlist_item():
+    new_item = WishlistItem(
+        title="Apple - 10.9-Inch iPad - Latest Model - (10th Generation) with Wi-Fi - 64GB - Silver",
+        price=500.0,
+        link="http://www.bestbuy.com/site/apple-10-9-inch-ipad-latest-model-10th-generation-with-wi-fi-64gb-silver/5200800.p?skuId=5200800",
+        website="bestbuy",
+        rating="4.9",
+        wishlist_id=1,
+        previous_price = 0
+    )
 
+    db.session.add(new_item)
+    db.session.commit()
+
+# Call the function to execute the operation
 
 if __name__ == '__main__':
     app.run(debug=True)

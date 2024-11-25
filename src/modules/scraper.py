@@ -169,21 +169,21 @@ def walmart_scraper(link):
     except Exception as e:
         print(f'There was an error in scraping {link}, Error is {e}')
         return None
-
+    
 def ebay_scraper(link):
     try:
         page = httpsGet(link)
-
-        res = page.select('div.x-price-primary span')[0].text
+        price_elements = page.select('div.x-price-primary span')
+        if not price_elements:
+            return None
+        res = price_elements[0].text
         pattern = r'\$\d+(\.\d{1,2})?'
         match = re.search(pattern, res)
-        if match:
-            return match.group(1)
-        else:
-            return None
+        return match.group(0) if match else None
     except Exception as e:
         print(f'There was an error in scraping {link}, Error is {e}')
         return None
+
 
 def bestbuy_scraper(link):
     try:
@@ -568,3 +568,16 @@ def convert_currency(amount, to_currency, rate):
     except Exception as e:
         return "N/A" 
 
+def scrape_price(url, store):
+    if "amazon" in url:
+        return amazon_scraper(url)
+    elif "walmart" in url:
+        return walmart_scraper(url)
+    elif "ebay" in url:
+        return ebay_scraper(url)
+    elif "bestbuy" in url:
+        return bestbuy_scraper(url)
+    elif "target" in url:
+        return target_scraper(url)
+    else:
+        return None
