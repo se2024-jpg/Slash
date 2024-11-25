@@ -1,26 +1,27 @@
-# SLASH
+# SLASH 2.0
 
-Slash Your Spending, Not Your Style - Unleash the Best Deals!!
+Slash Your Spending, Not Your Style - Smarter Shopping, Personalized Just for You!
 
 <p align="center"><img width="500" src="./assets/Shop.gif"></p>
 
 [![GitHub license](https://img.shields.io/github/license/CSC510-SE-Fall2024/Team-82_Project-2)](https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/blob/main/LICENSE)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14018764.svg)](https://doi.org/10.5281/zenodo.14018764)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14214951.svg)](https://doi.org/10.5281/zenodo.14214951)
 ![Github](https://img.shields.io/badge/language-python-red.svg)
-[![Discord](https://img.shields.io/discord/1300195209472114780?color=blueviolet&label=Discord%20Discussion%20Chat&cacheBuster=1)](https://discord.gg/UF5Hr2dW)
-[![Run Tests On Push](https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/actions/workflows/unit_test.yml/badge.svg)](https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/actions/workflows/unit_test.yml)
-[![codecov](https://codecov.io/gh/CSC510-SE-Fall2024/Team-82_Project-2/branch/main/graph/badge.svg?token=20a750d4-c013-4006-8a38-24bddf824450)](https://codecov.io/gh/CSC510-SE-Fall2024/Team-82_Project-2)
-[![Lint Python](https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/actions/workflows/pylint.yml/badge.svg)](https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/actions/workflows/pylint.yml)
-[![Close as a feature](https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/actions/workflows/close_as_a_feature.yml/badge.svg)](https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/actions/workflows/close_as_a_feature.yml)
-[![Python Application](https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/actions/workflows/python-package.yml/badge.svg)](https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/actions/workflows/python-package.yml)
-[![Python Style Checker](https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/actions/workflows/style_checker.yml/badge.svg)](https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/actions/workflows/style_checker.yml)
-[![Running Code Coverage](https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/actions/workflows/code_cov.yml/badge.svg)](https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/actions/workflows/code_cov.yml)
-[![GitHub issues](https://img.shields.io/github/issues/CSC510-SE-Fall2024/Team-82_Project-2)](https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/issues)
-[![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/CSC510-SE-Fall2024/Team-82_Project-2)](https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/issues?q=is%3Aissue+is%3Aclosed)
-[![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/CSC510-SE-Fall2024/Team-82_Project-2)](https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/pulls?q=is%3Apr+is%3Aclosed)
+[![Run Tests On Push](https://github.com/se2024-jpg/Slash/actions/workflows/unit_test.yml/badge.svg)](https://github.com/se2024-jpg/Slash/actions/workflows/unit_test.yml)
+[![codecov](https://codecov.io/gh/se2024-jpg/Slash/graph/badge.svg?token=a189jglJHB)](https://codecov.io/gh/se2024-jpg/Slash)
+[![Lint Python](https://github.com/se2024-jpg/Slash/actions/workflows/pylint.yml/badge.svg)](https://github.com/se2024-jpg/Slash/actions/workflows/pylint.yml)
+[![Close as a feature](https://github.com/se2024-jpg/Slash/actions/workflows/close_as_a_feature.yml/badge.svg)](https://github.com/se2024-jpg/Slash/actions/workflows/close_as_a_feature.yml)
+[![Python Application](https://github.com/se2024-jpg/Slash/actions/workflows/python-package.yml/badge.svg)](https://github.com/se2024-jpg/Slash/actions/workflows/python-package.yml)
+[![Python Style Checker](https://github.com/se2024-jpg/Slash/actions/workflows/style_checker.yml/badge.svg)](https://github.com/se2024-jpg/Slash/actions/workflows/style_checker.yml)
+[![CodeQL](https://github.com/se2024-jpg/Slash/actions/workflows/codeql.yml/badge.svg)](https://github.com/se2024-jpg/Slash/actions/workflows/codeql.yml)
+[![Running Code Coverage](https://github.com/se2024-jpg/Slash/actions/workflows/code_cov.yml/badge.svg)](https://github.com/se2024-jpg/Slash/actions/workflows/code_cov.yml)
+[![GitHub issues](https://img.shields.io/github/issues/se2024-jpg/Slash)](https://github.com/se2024-jpg/Slash/issues)
+[![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/se2024-jpg/Slash)](https://github.com/se2024-jpg/Slash/issues?q=is%3Aissue+is%3Aclosed)
+[![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/se2024-jpg/Slash)](https://github.com/se2024-jpg/Slash/pulls?q=is%3Apr+is%3Aclosed)
+![Last Commit](https://img.shields.io/github/last-commit/se2024-jpg/Slash)
 
-<a href="https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/network"><img alt="GitHub forks" src="https://img.shields.io/github/forks/CSC510-SE-Fall2024/Team-82_Project-2?cacheBuster=1"></a>
-<a href="https://github.com/CSC510-SE-Fall2024/Team-82_Project-2/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/CSC510-SE-Fall2024/Team-82_Project-2?cacheBuster=1"></a>
+<a href="https://github.com/se2024-jpg/Slash/network"><img alt="GitHub forks" src="https://img.shields.io/github/forks/se2024-jpg/Slash?cacheBuster=1"></a>
+<a href="https://github.com/se2024-jpg/Slash/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/se2024-jpg/Slash?cacheBuster=1"></a>
 
 Slash is a tool that scrapes the most popular e-commerce websites to get the best deals on searched items across these websites.
 Currently supported websites include [Walmart](https://www.walmart.com/), [Target](https://www.target.com/), [BestBuy](https://www.bestbuy.com/), [Amazon](https://www.amazon.com/), [Google Shopping](https://shopping.google.com/), [Etsy](https://www.etsy.com/), and [EBay](https://www.ebay.com/).
@@ -37,7 +38,7 @@ Currently supported websites include [Walmart](https://www.walmart.com/), [Targe
 - Then, clone the repo using the following command:
 
 ```
-git clone https://github.com/CSC510-SE-Fall2024/Team-82_Project-2.git
+git clone https://github.com/se2024-jpg/Slash.git
 ```
 
 - Finally, `cd` into the local repository.
@@ -49,7 +50,7 @@ cd slash
 2. Run the installation script `install.py`:
 
 - Execute the `install.py` script to handle all setup requirements automatically. This includes installing dependencies, setting up environment variables, and ensuring the project is ready to run.
-- The script will prompt you for the following inputs: Google Client ID: Enter your OAuth 2.0 Client ID. Google Client Secret: Enter your OAuth 2.0 Client Secret. This input is handled securely.
+- The script will prompt you for the following inputs Google OAuth Client ID, Google OAuth Client Secret, Google Email ID, Google Email Password. These inputs are handled securely.
 
 ```
 python3 install.py
@@ -210,11 +211,11 @@ Follow these steps to configure and enable Google OAuth login:
 
 # Additional Information
 
-For Additional Information direct to this [page](https://github.com/SE23-Team44/slash/tree/main/docs) and check all the markdown files
+For Additional Information direct to this [page](https://github.com/se2024-jpg/Slash/tree/Features/docs) and check all the markdown files
 
 # Chat Channel
 
-<code><a href="https://discord.gg/KFtvmngMMD" target="_blank"><img height="100" width="250" src="https://user-images.githubusercontent.com/42767118/135394825-26dee6db-7a64-4e3f-902a-1e35abd4cf0c.png"></a></code>
+<code><a href="https://discord.gg/xztHmAnM" target="_blank"><img height="100" width="250" src="https://user-images.githubusercontent.com/42767118/135394825-26dee6db-7a64-4e3f-902a-1e35abd4cf0c.png"></a></code>
 
 ## :sparkles: Contributors
 
@@ -228,6 +229,6 @@ For Additional Information direct to this [page](https://github.com/SE23-Team44/
 
 ## :email: Support
 
-For support and inquiries related to **WolfTrack 6.0**, please contact us at **csc510group77@gmail.com**. We are here to assist you and address any questions or issues you may have.
+For support and inquiries related to **Slash 2.0**, please contact us at **csc510group77@gmail.com**. We are here to assist you and address any questions or issues you may have.
 
 We appreciate your interest and look forward to providing you with the best possible support and updates.
