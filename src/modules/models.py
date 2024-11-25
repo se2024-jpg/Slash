@@ -26,6 +26,7 @@ class WishlistItem(db.Model):
     website = db.Column(db.String(100))
     rating = db.Column(db.String(10))
     wishlist_id = db.Column(db.Integer, db.ForeignKey('wishlist.id'), nullable=False)
+    previous_price = db.Column(db.Float, nullable=True)
     
     __table_args__ = {'extend_existing': True}
 

@@ -18,6 +18,7 @@ import bcrypt
 from .models import db, WishlistItem, Wishlist, User, SearchEntry
 import requests
 from .scraper import driver, filter
+from .pricedropscraper import scrape_price
 
 from . import scraper
 from email.message import EmailMessage
@@ -181,6 +182,7 @@ def wishlist_add_item(username, wishlist_name, item_data):
         website=item_data.get('website'),
         rating=item_data.get('rating')
     )
+    print(f"The new item title is {item_data['title']}\nThe new item wishlist_id is {wishlist.id}\nThe new item price is {item_data['price']}\nThe new item link is {item_data.get('link')}\nThe new item website is {item_data.get('website')}\nThe new item rating is {item_data.get('rating')}\n")
     db.session.add(new_item)
     db.session.commit()
     return True
@@ -191,7 +193,7 @@ def read_wishlist(username, wishlist_name):
     user = User.query.filter_by(username=username).first()
     wishlist = Wishlist.query.filter_by(user_id=user.id, name=wishlist_name).first()
     if wishlist:
-        return [{'title': item.title, 'price': item.price, 'link': item.link, 'website': item.website, 'rating': item.rating} for item in wishlist.items]
+        return [{'title': item.title, 'price': item.price, 'link': item.link, 'website': item.website, 'rating': item.rating, 'previous_price': item.previous_price} for item in wishlist.items]
     return []
 
 def share_wishlist(username, wishlist_name, email_receiver):
@@ -199,8 +201,8 @@ def share_wishlist(username, wishlist_name, email_receiver):
     items = read_wishlist(username, wishlist_name)
     if items:
         try:
-            email_sender = os.getenv("SENDER_EMAIL")
-            email_password = os.getenv("SENDER_PASSWORD")
+            email_sender = current_app.config['MAIL_USERNAME']
+            email_password = current_app.config['MAIL_PASSWORD']
             subject = f"{username}'s Wishlist"
             body = "\n".join([f"{i+1}. {item['title']} - {item['link']}" for i, item in enumerate(items)])
 
@@ -219,18 +221,6 @@ def share_wishlist(username, wishlist_name, email_receiver):
             print(f"Failed to send email: {e}")
             return False
     return False
- 
-def delete_wishlist(username, wishlist_name):
-    wishlist_path = usr_dir(username) / (wishlist_name + ".csv")
-    wishlist_path.unlink(missing_ok=True)
-
-
-def wishlist_remove_list(username, wishlist_name, indx):
-    wishlist_path = usr_dir(username) / (wishlist_name + ".csv")
-    old_data = read_wishlist(username, wishlist_name)
-    old_data = old_data.drop(index=indx)
-    old_data.to_csv(wishlist_path, index=False, header=old_data.columns)
-
 
 def find_currency(price):
     currency = re.match(r'^[a-zA-Z]{3,5}', price)
@@ -284,12 +274,13 @@ def get_user_searches_by_username(username):
         return user.searches
     return []
 
+
 def get_related_products_from_chatgpt(search_term):
-    openai_api_key = os.getenv('OPENAI_API_KEY') 
+    openai_api_key = os.getenv('OPENAI_API_KEY')  # Ensure your API key is correctly configured
     api_url = "https://api.openai.com/v1/chat/completions"
     headers = {
-        "Content-Type": "application/json",
-        "Authorization": f"Bearer {openai_api_key}"
+        "Authorization": f"Bearer {openai_api_key}",
+        "Content-Type": "application/json"
     }
     prompt = f"List three related product titles for the search term '{search_term}', each on a new line. Limit the product titles to three-four words."
     payload = {
@@ -322,3 +313,18 @@ def search_products(query):
     currency = 'USD'  
     num = 3  
     return driver(query, currency, num, df_flag=0, ui=True)
+
+def check_price_updates(username):
+    user = User.query.filter_by(username=username).first()
+    if user:
+        for wishlist in user.wishlists:
+            for item in wishlist.items:
+                current_price = scrape_price(item.link, item.website)
+                print(f"The current price of {item.title} is {current_price} and old price is {item.price}")
+                if current_price != item.price:
+                    # If there is a price difference, update the item's price and set a flag for a price drop
+                    item.previous_price = item.price
+                    item.price = current_price
+                    db.session.commit()
+                    item.price_dropped = True  # This is a flag to trigger alerts on the front end
+    db.session.commit()
