@@ -182,6 +182,35 @@ def landingpage():
     return render_template("./static/landing.html", login=login)
 
 
+# @app.route('/login', methods=['GET', 'POST'])
+# def login():
+#     if request.method == 'POST':
+#         username = request.form['username']
+#         password = request.form['password']
+
+#         if not username or not password:
+#             return 'Username and Password are required', 400
+
+#         if db_check_user(username, password):
+
+#             # Generate and send OTP
+#             otp = generate_otp()
+#             session['login_otp'] = otp
+#             session['login_otp_time'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+#             session['pending_username'] = username
+#             session['username'] = username
+
+#             if send_otp_email(username, otp):
+#                 return render_template("./static/landing.html", show_otp=True)
+#             else:
+#                 return 'Error sending OTP email', 500
+#         else:
+#             return render_template("./static/landing.html", login=False, invalid=True), 401
+    
+#     elif session.get('oauth'):
+#         return redirect(url_for('login'))
+#     return render_template('./static/login.html')
+    
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -190,10 +219,8 @@ def login():
 
         if not username or not password:
             return 'Username and Password are required', 400
-
+        
         if db_check_user(username, password):
-
-            # Generate and send OTP
             otp = generate_otp()
             session['login_otp'] = otp
             session['login_otp_time'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -209,8 +236,19 @@ def login():
     
     elif session.get('oauth'):
         return redirect(url_for('login'))
-    return render_template('./static/login.html')
     
+    related_keywords = generate_product_recommendations(username=session['username'])
+    if not related_keywords:
+        return render_template('./static/login.html', message="No recommendations found based on your searches.")
+
+    recommendations = {}
+    for keyword in related_keywords:
+        recommendations[keyword] = perform_product_search(keyword, currency="USD", num=3)
+
+    return render_template('./static/login.html', recommendations=recommendations)
+
+    
+
 
 
 @app.route('/verify-otp', methods=['POST'])

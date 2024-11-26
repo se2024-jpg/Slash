@@ -231,37 +231,45 @@ def find_currency(price):
     currency = re.match(r'^[a-zA-Z]{3,5}', price)
     return currency.group() if currency else currency
 
-def update_price(link,website,price):
+def update_price(link, website, price):
+    """
+    Update price from website scraper with error handling
+    """
+    if not link or not website or not price:
+        return price
+
     currency = find_currency(price)
     updated_price = price
-    if website == "amazon":
-        scraped_price = scraper.amazon_scraper(link).strip()
-        if scraped_price:
-            updated_price = scraper.getCurrency(currency,scraped_price) if currency is not None else scraped_price
-    if website == "google":
-        scraped_price = scraper.google_scraper(link).strip()
-        if scraped_price:
-            updated_price = scraper.getCurrency(currency,scraped_price) if currency is not None else scraped_price
-    if website == "BJS":
-        pass
-    if website == "Etsy":
-        pass
-    if website == "walmart":
-        scraped_price = scraper.walmart_scraper(link).strip()
-        if scraped_price:
-            updated_price = scraper.getCurrency(currency,scraped_price) if currency is not None else scraped_price
-    if website == "ebay":
-        scraped_price = scraper.ebay_scraper(link).strip()
-        if scraped_price:
-            updated_price = scraper.getCurrency(currency,scraped_price) if currency is not None else scraped_price
-    if website == "bestbuy":
-        scraped_price = scraper.bestbuy_scraper(link).strip()
-        if scraped_price:
-            updated_price = scraper.getCurrency(currency,scraped_price) if currency is not None else scraped_price       
-    if website == "target":
-        scraped_price = scraper.target_scraper(link).strip()
-        if scraped_price:
-            updated_price = scraper.getCurrency(currency,scraped_price) if currency is not None else scraped_price      
+
+    try:
+        if website == "amazon":
+            scraped_price = scraper.amazon_scraper(link)
+            if scraped_price:
+                updated_price = scraper.getCurrency(currency, scraped_price.strip()) if currency else scraped_price.strip()
+        elif website == "google":
+            scraped_price = scraper.google_scraper(link)
+            if scraped_price:
+                updated_price = scraper.getCurrency(currency, scraped_price.strip()) if currency else scraped_price.strip()
+        elif website == "walmart":
+            scraped_price = scraper.walmart_scraper(link)
+            if scraped_price:
+                updated_price = scraper.getCurrency(currency, scraped_price.strip()) if currency else scraped_price.strip()
+        elif website == "ebay":
+            scraped_price = scraper.ebay_scraper(link)
+            if scraped_price:
+                updated_price = scraper.getCurrency(currency, scraped_price.strip()) if currency else scraped_price.strip()
+        elif website == "bestbuy":
+            scraped_price = scraper.bestbuy_scraper(link)
+            if scraped_price:
+                updated_price = scraper.getCurrency(currency, scraped_price.strip()) if currency else scraped_price.strip()
+        elif website == "target":
+            scraped_price = scraper.target_scraper(link)
+            if scraped_price:
+                updated_price = scraper.getCurrency(currency, scraped_price.strip()) if currency else scraped_price.strip()
+    except Exception as e:
+        print(f"Error updating price for {website}: {e}")
+        return price
+
     return updated_price
 
 def create_search_entry(username, search_term):
