@@ -86,7 +86,7 @@ See the LICENSE file in the project root for the full license information. -->
   <!-- Product Comparison Section -->
   <div class="container mt-5 pt-5">
     <h1>Compare products to get the best deal..</h1>
-    <form id="comparison-form">
+    <form action="/product_comparison" method="POST" id="comparison-form">
       <div class="search-container">
         <!-- Search bar and Website selection for Product 1 -->
         <div class="product-section">
@@ -129,7 +129,44 @@ See the LICENSE file in the project root for the full license information. -->
     <!-- Results Section (this will be populated dynamically) -->
     <div id="comparison-results" class="results-container mt-5">
       <h2>Comparison Results</h2>
-      <div id="results"></div>
+      <div id="results" class = "results-container mt-5">
+        <!-- Comparison Results Table -->
+        {% if product1_data and product2_data %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>Product 1 ({{ product1_data['website'] }})</th>
+                    <th>Product 2 ({{ product2_data['website'] }})</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Name</td>
+                    <td>{{ product1_data['name'] }}</td>
+                    <td>{{ product2_data['name'] }}</td>
+                </tr>
+                <tr>
+                    <td>Price</td>
+                    <td>{{ product1_data['price'] }}</td>
+                    <td>{{ product2_data['price'] }}</td>
+                </tr>
+                <tr>
+                    <td>Rating</td>
+                    <td>{{ product1_data['rating'] }}</td>
+                    <td>{{ product2_data['rating'] }}</td>
+                </tr>
+                <tr>
+                    <td>URL</td>
+                    <td><a href="{{ product1_data['url'] }}" target="_blank">View Product</a></td>
+                    <td><a href="{{ product2_data['url'] }}" target="_blank">View Product</a></td>
+                </tr>
+            </tbody>
+        </table>
+        {% else %}
+        <p>No comparison data available. Please perform a search.</p>
+        {% endif %}
+      </div>
     </div>
   </div>
 

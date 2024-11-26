@@ -15,6 +15,8 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from datetime import datetime, timedelta
 
+from .product_comparison import scrape_website
+
 from .scraper import driver, filter, get_currency_rate, convert_currency
 from .features import create_user, check_user, db_check_user, db_create_user, wishlist_add_item, read_wishlist, remove_wishlist_item, share_wishlist, create_search_entry, get_user_searches_by_username, generate_product_recommendations, check_price_updates
 from .config import Config
@@ -469,9 +471,38 @@ def export_csv():
     
     return output
 
-@app.route('/product_comparison')
+@app.route('/product_comparison', methods=["POST","GET"])
 def product_comparison():
-    return render_template('./static/product_comparison.html')
+
+    if request.method == 'POST':
+    # Retrieve data from the form
+        product1 = request.form.get('product1')
+        website1 = request.form.get('website1')
+        product2 = request.form.get('product2')
+        website2 = request.form.get('website2')
+        currency = request.form["currency"]
+    
+        if not (product1 and website1 and product2 and website2):
+            return jsonify({"error": "All fields are required!"}), 400
+
+        if currency != "" :
+            currency = "USD"
+        # Perform web scraping
+        try:
+            product1_data = scrape_website(website1, product1, currency)
+            product2_data = scrape_website(website2, product2, currency)
+        except Exception as e:
+            return jsonify({"error": f"Scraping failed: {str(e)}"}), 500
+
+
+        # Render results (or return JSON for dynamic front-end)
+        return render_template('./static/product_comparison.html',
+                               product1_data=product1_data,
+                               product2_data=product2_data)
+
+    return render_template('./static/product_comparison.html',
+                               product1_data=None,
+                               product2_data=None)
 
 # @app.route('/product-recommendations')
 # def product_recommendations():
