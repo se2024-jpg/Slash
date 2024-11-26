@@ -478,7 +478,7 @@ def delete_wishlist_item():
             return "Error removing item", 400
     except Exception as e:
         app.logger.error(f"Error removing item: {e}")
-        return jsonify(error=str(e)), 500
+        return jsonify(error="An internal error has occurred!"), 500
     
 @app.cli.command("init-db")
 def init_db():
