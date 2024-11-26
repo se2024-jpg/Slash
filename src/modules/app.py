@@ -1,9 +1,14 @@
-"""
-Copyright (C) Team-82_Project-2
- 
-Licensed under the MIT License.
-See the LICENSE file in the project root for the full license information.
-"""
+'''
+MIT License
+
+Copyright (c) 2024 Girish G N, Joel Jogy George, Pravallika Vasireddy
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+'''
 
 import os
 from authlib.integrations.flask_client import OAuth
@@ -29,6 +34,7 @@ from email.mime.text import MIMEText
 from io import StringIO
 import pandas as pd
 from flask_sqlalchemy import SQLAlchemy
+from collections import Counter
 
 # Load environment variables from .env file
 load_dotenv() 
@@ -317,16 +323,34 @@ def product_search(new_product="", sort=None, currency=None, num=None, min_price
         product = request.args.get("product_name")
         if product is None:
             product = new_product
-
         data = driver(product, currency, num, 0, False, None, True, sort, website)
-
         username = session.get('username')
         if username:  # Make sure the user is logged in
             create_search_entry(username, product)
-
+        
         if min_price is not None or max_price is not None or min_rating is not None:
             data = filter(data, min_price, max_price, min_rating)
-        return render_template("./static/result.html", data=data, prod=product, total_pages=len(data)//20)
+
+        brands = dict(Counter((' '.join(item['title'].split(' ')[:1]).title()) for item in data))
+        retailers = dict(Counter([item['website'].title() for item in data]))
+        ratings = dict(Counter([item['rating'] for item in data]))
+        
+
+        # Get the minimum and maximum prices from the data
+        min_price = min(float(item['price'].replace('$', '')) for item in data if '$' in item['price'])
+        max_price = max(float(item['price'].replace('$', '')) for item in data if '$' in item['price'])
+        
+        # Pass the necessary data to the template
+        return render_template("./static/result.html",
+                               data=data,
+                               prod=product,
+                               total_pages=len(data) // 20,
+                               brands=brands,
+                               retailers=retailers,
+                               ratings=ratings,
+                               min_price=min_price,
+                               max_price=max_price,
+                               currencies=["USD", "INR", "EUR", "CNY", "AUD", "GBP"])
     except Exception as e:
         app.logger.error(f"Error during product search: {e}")
         return render_template("error.html", error=str(e)), 500
