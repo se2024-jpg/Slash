@@ -29,7 +29,7 @@ jobs:
       - name: Run the tests
         run: |
           cd tests
-          pytest --cov=./tests/ --cov-report=xml
+          pytest --cov=./ --cov-report=xml
         continue-on-error: true
         
       - name: Upload coverage to Codecov
