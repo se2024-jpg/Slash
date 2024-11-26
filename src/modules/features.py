@@ -24,7 +24,7 @@ from .models import db, WishlistItem, Wishlist, User, SearchEntry
 import requests
 from .scraper import driver, filter
 from .pricedropscraper import scrape_price
-from Flask import current_app
+from .app import current_app
 
 from . import scraper
 from email.message import EmailMessage
