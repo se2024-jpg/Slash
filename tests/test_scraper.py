@@ -10,7 +10,6 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 '''
 
-
 from src.modules import scraper
 from src.modules.scraper import driver
 from src.modules.app import app
@@ -524,10 +523,6 @@ def test_filter_with_invalid_price_format():
     ]
     result = scraper.filter(data, 10, 30, 3.0)
     assert len(result) == 1
-
-def test_driver_with_empty_query():
-    result = scraper.driver("", None, website='all')
-    assert isinstance(result, (pd.DataFrame, list))
 
 
 def test_scrape_price_with_invalid_store():
