@@ -1,0 +1,39 @@
+name: Python application
+on:
+  push:
+  pull_request:
+env:
+  ENV: testing
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.10.12
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.10.12
+
+    - name: Install dependencies
+      run: |
+        python3 -m pip install --upgrade pip
+        python3 -m pip install -r requirements.txt
+
+    - name: Generate Report
+      run: |
+        python3 -m coverage run tests/test_app.py
+        python3 -m coverage run tests/test_currency_conversion.py
+        python3 -m coverage run tests/test_formatNumber.py
+        python3 -m coverage run tests/test_formatResults.py
+        python3 -m coverage run tests/test_formatText.py
+        python3 -m coverage run tests/test_login.py
+        python3 -m coverage run tests/test_scraper.py
+        python3 -m coverage report -i
+
+    - name: Upload Coverage to Codecov
+      uses: codecov/codecov-action@v1
+      with:
+        flags: unittests
+        fail_ci_if_error: true
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
