@@ -25,6 +25,8 @@ from src.modules.app import app, send_otp_email, generate_otp
 from unittest.mock import patch, MagicMock
 from src.modules.models import WishlistItem
 import json
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 @pytest.fixture
 def client():
