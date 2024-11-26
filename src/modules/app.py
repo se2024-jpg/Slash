@@ -14,7 +14,7 @@ import os
 from authlib.integrations.flask_client import OAuth
 from dotenv import load_dotenv
 
-from flask import Flask, session, render_template, request, redirect, url_for, make_response, jsonify
+from flask import Flask, session, render_template, request, redirect, url_for, make_response, jsonify, current_app
 import random
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
