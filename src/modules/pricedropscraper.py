@@ -68,6 +68,7 @@ def amazon_scraper(url, session):
             soup.select_one('.a-price-whole')
         )
         
+
         if price_element:
             return clean_price(price_element.text)
         return None
@@ -81,14 +82,13 @@ def walmart_scraper(url, session):
     try:
         response = session.get(url, timeout=10)
         soup = BeautifulSoup(response.content, 'html.parser')
-        
         # Try multiple price selectors
         price_element = (
+            soup.find('span', itemprop='price') or
             soup.select_one('[itemprop="price"]') or
             soup.select_one('.price-characteristic') or
             soup.select_one('.price .visuallyhidden')
         )
-        
         if price_element:
             return clean_price(price_element.text)
         return None

@@ -333,11 +333,14 @@ def check_price_updates(username):
         for wishlist in user.wishlists:
             for item in wishlist.items:
                 current_price = scrape_price(item.link, item.website)
-                print(f"The current price of {item.title} is {current_price} and old price is {item.price}")
-                if current_price != item.price:
-                    # If there is a price difference, update the item's price and set a flag for a price drop
-                    item.previous_price = item.price
-                    item.price = current_price
-                    db.session.commit()
-                    item.price_dropped = True  # This is a flag to trigger alerts on the front end
+                if current_price != None:
+                    print(f"The current price of {item.title} is {current_price} and old price is {item.price}")
+                    if current_price != item.price:
+                        # If there is a price difference, update the item's price and set a flag for a price drop
+                        item.previous_price = item.price
+                        item.price = current_price
+                        db.session.commit()
+                        item.price_dropped = True  # This is a flag to trigger alerts on the front end
+                else:
+                   current_price = item.price
     db.session.commit()

@@ -336,7 +336,7 @@
                         <tr>
                             <td>{{ loop.index }}</td>
                             <td><a href="{{ product.link }}" target="_blank">{{ product.title }}</a></td>
-                            <td class="{% if product.previous_price and product.previous_price > product.price %}price-drop{% endif %}">
+                            <td class="{% if product.previous_price is not none and product.previous_price > product.price %}price-drop{% endif %}">
                                 <div class="price-container">
                                     {% if product.previous_price and product.previous_price > product.price %}
                                         <span class="old-price">${{ "%.2f"|format(product.previous_price) }}</span>
