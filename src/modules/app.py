@@ -1,15 +1,20 @@
-"""
-Copyright (C) Team-82_Project-2
- 
-Licensed under the MIT License.
-See the LICENSE file in the project root for the full license information.
-"""
+'''
+MIT License
+
+Copyright (c) 2024 Girish G N, Joel Jogy George, Pravallika Vasireddy
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+'''
 
 import os
 from authlib.integrations.flask_client import OAuth
 from dotenv import load_dotenv
 
-from flask import Flask, session, render_template, request, redirect, url_for, make_response, jsonify
+from flask import Flask, session, render_template, request, redirect, url_for, make_response, jsonify, current_app
 import random
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -31,6 +36,7 @@ from email.mime.text import MIMEText
 from io import StringIO
 import pandas as pd
 from flask_sqlalchemy import SQLAlchemy
+from collections import Counter
 
 # Load environment variables from .env file
 load_dotenv() 
@@ -173,6 +179,35 @@ def landingpage():
     return render_template("./static/landing.html", login=login)
 
 
+# @app.route('/login', methods=['GET', 'POST'])
+# def login():
+#     if request.method == 'POST':
+#         username = request.form['username']
+#         password = request.form['password']
+
+#         if not username or not password:
+#             return 'Username and Password are required', 400
+
+#         if db_check_user(username, password):
+
+#             # Generate and send OTP
+#             otp = generate_otp()
+#             session['login_otp'] = otp
+#             session['login_otp_time'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+#             session['pending_username'] = username
+#             session['username'] = username
+
+#             if send_otp_email(username, otp):
+#                 return render_template("./static/landing.html", show_otp=True)
+#             else:
+#                 return 'Error sending OTP email', 500
+#         else:
+#             return render_template("./static/landing.html", login=False, invalid=True), 401
+    
+#     elif session.get('oauth'):
+#         return redirect(url_for('login'))
+#     return render_template('./static/login.html')
+    
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -181,10 +216,8 @@ def login():
 
         if not username or not password:
             return 'Username and Password are required', 400
-
+        
         if db_check_user(username, password):
-
-            # Generate and send OTP
             otp = generate_otp()
             session['login_otp'] = otp
             session['login_otp_time'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -200,8 +233,19 @@ def login():
     
     elif session.get('oauth'):
         return redirect(url_for('login'))
-    return render_template('./static/login.html')
     
+    related_keywords = generate_product_recommendations(username=session['username'])
+    if not related_keywords:
+        return render_template('./static/login.html', message="No recommendations found based on your searches.")
+
+    recommendations = {}
+    for keyword in related_keywords:
+        recommendations[keyword] = perform_product_search(keyword, currency="USD", num=3)
+
+    return render_template('./static/login.html', recommendations=recommendations)
+
+    
+
 
 
 @app.route('/verify-otp', methods=['POST'])
@@ -313,16 +357,34 @@ def product_search(new_product="", sort=None, currency=None, num=None, min_price
         product = request.args.get("product_name")
         if product is None:
             product = new_product
-
         data = driver(product, currency, num, 0, False, None, True, sort, website)
-
         username = session.get('username')
         if username:  # Make sure the user is logged in
             create_search_entry(username, product)
-
+        
         if min_price is not None or max_price is not None or min_rating is not None:
             data = filter(data, min_price, max_price, min_rating)
-        return render_template("./static/result.html", data=data, prod=product, total_pages=len(data)//20)
+
+        brands = dict(Counter((' '.join(item['title'].split(' ')[:1]).title()) for item in data))
+        retailers = dict(Counter([item['website'].title() for item in data]))
+        ratings = dict(Counter([item['rating'] for item in data]))
+        
+
+        # Get the minimum and maximum prices from the data
+        min_price = min(float(item['price'].replace('$', '')) for item in data if '$' in item['price'])
+        max_price = max(float(item['price'].replace('$', '')) for item in data if '$' in item['price'])
+        
+        # Pass the necessary data to the template
+        return render_template("./static/result.html",
+                               data=data,
+                               prod=product,
+                               total_pages=len(data) // 20,
+                               brands=brands,
+                               retailers=retailers,
+                               ratings=ratings,
+                               min_price=min_price,
+                               max_price=max_price,
+                               currencies=["USD", "INR", "EUR", "CNY", "AUD", "GBP"])
     except Exception as e:
         app.logger.error(f"Error during product search: {e}")
         return render_template("error.html", error=str(e)), 500
@@ -397,7 +459,7 @@ def add_wishlist_item():
             return "Error adding item", 400
     except Exception as e:
         app.logger.error(f"Error adding item: {e}")
-        return jsonify(error=str(e)), 500
+        return jsonify(error="An internal error has occurred!"), 500
 
 
 @app.route("/delete-wishlist-item", methods=["POST"])
@@ -412,7 +474,7 @@ def delete_wishlist_item():
             return "Error removing item", 400
     except Exception as e:
         app.logger.error(f"Error removing item: {e}")
-        return jsonify(error=str(e)), 500
+        return jsonify(error="An internal error has occurred!"), 500
     
 @app.cli.command("init-db")
 def init_db():

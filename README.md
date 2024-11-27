@@ -1,4 +1,4 @@
-# SLASH 2.0
+# Slash 2.0
 
 Slash Your Spending, Not Your Style - Smarter Shopping, Personalized Just for You!
 
@@ -29,6 +29,11 @@ Currently supported websites include [Walmart](https://www.walmart.com/), [Targe
 - **Fast**: With slash, you can save over 50% of your time by comparing deals across websites within seconds
 - **Easy**: Slash uses very easy commands to filter, sort and search your items
 - **Powerful**: Quickly alter the commands to get desired results
+
+# :thought_balloon: Use Case
+
+- **_Students_**: Students coming to university are generally on a budget and time constraint and generally spend hours wasting time to search for products on Websites. Slash is the perfect tool for these students that slashes all the unnecessary details on a website and helps them get prices for a product across multiple websites.Make the most of this tool in the upcoming Black Friday Sale.
+- **_Data Analysts_**: Finding data for any project is one of the most tedious job for a data analyst, and the datasets found might not be the most recent one. Using slash, they can create their own dataset in real time and format it as per their needs so that they can focus on what is actually inportant.
 
 # :rocket: Quick Guide
 
@@ -73,10 +78,7 @@ http://localhost:5000
 ```
 
 <p>
- 
-# :dizzy: What's New? (Project 2 Updates)
 
-### Added Google OAuth login feature
 
 ## 🔑 **Setting up Google OAuth Login**
 
@@ -108,24 +110,71 @@ Follow these steps to configure and enable Google OAuth login:
    - Choose **Web Application** as the Application Type.
    - Add an **Authorized Redirect URI**:  
      `http://localhost:5000/google/callback`
-   - Save the **Client ID** and **Client Secret** for use in your application.
+   - Save the **Client ID** and **Client Secret** for use in your application while running install.py file.
 
 ---
+ 
+# :dizzy: What's New? (Slash 2.0 Updates)
 
-### 2️⃣ **Configure OAuth in Your Code**
+Slash 2.0 introduces a variety of new features and improvements aimed at enhancing user experience, security, and overall functionality. Below is a detailed breakdown of the key updates:
 
-1. Add your **Google Client ID** and **Client Secret** to the config file:
-   ```python
-    client_id='', # Place your OAuth Client ID here
-    client_secret='', # Place your OAuth Client secret here
-   ```
+### **1. Enhanced Security: Two-Factor Authentication (2FA)**
+- **Two-Factor Authentication (2FA)**:
+  - Slash 2.0 now supports 2FA for a more secure login process.
+  - Users will receive an OTP (One-Time Password) via email, which must be entered to verify their identity.
+  - This additional layer of security ensures that only authorized users can access their accounts.
 
-### Other Enhancements:
+### **2. Data Security: Migration to a Secure Database**
+- **Database Migration**:
+  - All data, including user credentials and product details, has been migrated from `.csv` files to a secure, centralized database.
+  - This move ensures better performance, scalability, and more robust data protection.
 
-- **More websites added for scrapping -Ebay, Target, Bestbuy**
-- User Wishlist dynamically updates the price.
-- New workflows added to the repository.
-- Extended test coverage of the repository.
+### **3. User Interface: UI Overhaul**
+- **UI Refresh**:
+  - Slash 2.0 introduces a completely redesigned user interface.
+  - The new interface is more intuitive, modern, and user-friendly, improving overall navigation and accessibility.
+
+### **4. Voice Search: Hands-Free Product Search**
+- **Voice Search Functionality**:
+  - Slash 2.0 now supports voice search through speech-to-text technology.
+  - Users can perform searches hands-free, improving convenience and speeding up the search process.
+
+### **5. Product Tracking: Wishlist and Price Drop Alerts**
+- **Wishlist**:
+  - Users can now save products to a Wishlist for future reference.
+  - This allows users to easily track and revisit items they are interested in buying later.
+
+- **Price Drop Alerts**:
+  - Slash 2.0 now sends notifications when the price of a product drops.
+  - Users are alerted when items they are interested in become more affordable, helping them to grab the best deals.
+
+### **6. Product Comparison: Side-by-Side Product Analysis**
+- **Product Comparison**:
+  - Users can now compare specific products across various e-commerce websites.
+  - This feature allows side-by-side comparisons of product specifications, prices, and availability, helping users make more informed purchase decisions.
+
+### **7. Search Insights: Visualization Bar**
+- **Visualization Bar**:
+  - Slash 2.0 introduces a visualization bar that provides insights into the search results.
+  - The bar displays the number of products found across different platforms like Walmart, Amazon, eBay, etc., giving users an overview of the search breadth.
+
+### **8. AI-Powered Recommendations**
+- **Product Recommendations**:
+  - Slash 2.0 leverages artificial intelligence to recommend products based on previous searches.
+  - These personalized suggestions help users discover related products they may not have encountered otherwise, improving the shopping experience.
+
+### **9. Simplified Installation and Secure API Management**
+- **Simplified Installation**:
+  - Slash 2.0 features an easier and more organized installation procedure.
+  - The new setup process allows users to quickly install and configure the application with minimal steps.
+
+- **Secure API Management**:
+  - API keys and credentials are now managed in a more secure way during installation.
+  - This ensures sensitive data is protected, following best practices for handling API keys securely.
+
+
+
+
 
 ## :movie_camera: Checkout our demo video
 
@@ -133,23 +182,42 @@ Follow these steps to configure and enable Google OAuth login:
 
 # :muscle: What's next for future development?
 
-- Streamlined Customer Experience: Implement a seamless ordering and payment system directly on the website, allowing customers to effortlessly place orders with just a few clicks, thereby enhancing user satisfaction and convenience.
-- Enhanced Security Features: Strengthen the login module by integrating tokenization, adding an extra layer of security to user accounts. This advanced security measure ensures a secure and reliable user authentication process.
-- Database Integration: Add database to open gateway further enhancements to the project.
-- Advanced Inventory Insights: Provide parameters like in-store availability.
-- Additional Account Settings: Introduce additional account settings to give users more control over their profiles and preferences, enhancing their personalization and usability.
-- Predictive Model: Develop a predictive model that can determine the optimal timing for purchasing the least expensive product from the search results. This feature will provide valuable guidance to users, helping them make informed decisions.
-- Enhanced Search Capabilities: Improve the search functionality by introducing advanced search capabilities. This can include options for filtering search results based on ratings, price ranges, and other relevant criteria, giving users more refined search options.
-- Multi-Platform Integration: Expand the platform's capabilities by incorporating search results from various e-commerce platforms such as Dick's Sporting Goods, and more. This will provide users with optimized outcomes from a diverse selection of online vendors.
-- Social Media Login: Add support for different methods of login, such as Gmail, Facebook, or other social media accounts, to provide users with convenient and secure login options.
-- Price Chart Visualization: Introduce a visual representation of price trends for products. This feature can help users understand historical price changes and make more informed purchasing decisions.
-- UI Enhancement: Continue to enhance the user interface to provide an even better user experience. Consider improving aesthetics, user-friendliness, and overall design.
-- Containerization: Implement Dockerization of the project to enhance its scalability, portability, and overall deployment efficiency.
+### 1. Real-Time Notification System
+- **Real-Time Price Alerts**: Implement real-time notifications that alert users when a product on their wishlist or tracked products has its price drop or when a limited-time deal becomes available.
+- **Email and SMS Notifications**: Users can opt to receive notifications via email or SMS for important updates, such as a price drop, availability change, or when a product becomes eligible for a deal.
+- **Push Notifications for New Deals**: Enable push notifications within the app to notify users of new deals based on their search preferences or previously tracked products.
 
-## :thought_balloon: Use Case
+### 2. Predictive Pricing Algorithms
+- **Dynamic Price Prediction**: Develop a predictive pricing model that estimates whether the price of a product will increase or decrease over time based on historical price data and market trends.
+- **Price Drop Prediction**: Implement machine learning to predict potential future price drops, alerting users when they should buy based on the likelihood of price changes.
+- **Market Demand Predictions**: Analyze market demand and historical trends to forecast the best times to buy specific products, helping users make informed purchasing decisions.
 
-- **_Students_**: Students coming to university are generally on a budget and time constraint and generally spend hours wasting time to search for products on Websites. Slash is the perfect tool for these students that slashes all the unnecessary details on a website and helps them get prices for a product across multiple websites.Make the most of this tool in the upcoming Black Friday Sale.
-- **_Data Analysts_**: Finding data for any project is one of the most tedious job for a data analyst, and the datasets found might not be the most recent one. Using slash, they can create their own dataset in real time and format it as per their needs so that they can focus on what is actually inportant.
+### 3. Enhanced Data Storage and Management
+- **Distributed Data Storage**: Implement distributed data storage solutions like NoSQL databases (e.g., MongoDB, Cassandra) to efficiently handle the growing amount of user data, product listings, and price history.
+- **Data Archiving and Retrieval**: Use data archiving techniques to store old price data, ensuring fast access to historical information without compromising system performance.
+- **User Behavior Data Analytics**: Store and analyze user interaction data to generate insights into user preferences, helping tailor product recommendations and improve user experience.
+
+### 4. Cloud-Native Infrastructure
+- **Serverless Computing for Price Scraping**: Move to serverless architecture (e.g., AWS Lambda, Google Cloud Functions) to handle product scraping dynamically. This will allow Slash to scale without the need for dedicated server management, especially during peak traffic periods.
+- **Cloud Load Balancing**: Use load balancing services to distribute traffic across multiple servers, ensuring Slash remains highly available and can handle large numbers of concurrent users without slowdown.
+- **Cloud-based Caching**: Implement caching mechanisms (e.g., Redis or Memcached) in the cloud to store frequently accessed data like product prices, reducing latency and improving response time.
+
+### 5. Containerization and Kubernetes
+- **Containerization with Docker**: Containerize Slash using Docker to simplify development, testing, and deployment. This ensures consistent environments across all stages of development, making scaling easier.
+- **Orchestration with Kubernetes**: Use Kubernetes to manage containers in production, ensuring efficient scaling, self-healing (auto-scaling and restarting), and better resource allocation for handling traffic spikes.
+- **Microservices Architecture**: Break Slash into microservices (e.g., for user authentication, product tracking, price comparison) to allow independent scaling and development of different features.
+
+### 6. AI-Powered Deal Prediction
+- **Deal Prediction and Smart Alerts**: Using AI, predict when certain products might go on sale and send smart alerts to users, recommending the best time to purchase a product based on historical price data.
+
+### 7. Multi-Platform Integration
+- **Browser Extension**: Develop a browser extension that allows users to track product prices directly while shopping on e-commerce platforms like Amazon, Walmart, or eBay. Users can add products to their wishlist, set price alerts, and compare prices on the go.
+- **Mobile App Expansion**: Expand Slash’s functionality with native mobile applications for iOS and Android, enabling users to access price comparisons, track deals, and receive notifications directly on their phones.
+
+### 8. Smart Inventory and Product Availability Monitoring
+- **Real-Time Stock Monitoring**: Integrate with e-commerce platforms to track product availability in real-time, alerting users when items are back in stock or when new deals are available.
+- **Low Stock Alerts**: Notify users when a product they are interested in is low on stock or has limited availability, ensuring they don't miss out on deals.
+- **Automatic Reordering**: For users who consistently track certain products, offer automatic reorder options when a product price drops or becomes available.
 
 
 ## Score Card

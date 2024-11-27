@@ -1,9 +1,5 @@
-# Copyright (C) 2023 SE23-Team44
-
-# Licensed under the MIT License.
-# See the LICENSE file in the project root for the full license information.
-
 name: Run Tests On Push
+
 on:
   push:
   pull_request:
@@ -13,17 +9,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Install Python 3.10.15
+      - name: Set up Python 3.10.15
         uses: actions/setup-python@v1
         with:
           python-version: 3.10.15
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
-          echo requirements installed
+          echo "Requirements installed"
       - name: Run tests
         env:
-          SQLALCHEMY_DATABASE_URI: "sqlite:///:memory:"
+          SQLALCHEMY_DATABASE_URI: "sqlite:///slash.db"
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           cd tests
           pip install pytest

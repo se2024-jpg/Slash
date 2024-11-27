@@ -1,9 +1,14 @@
-"""
-Copyright (C) Team-82_Project-2
- 
-Licensed under the MIT License.
-See the LICENSE file in the project root for the full license information.
-"""
+'''
+MIT License
+
+Copyright (c) 2024 Girish G N, Joel Jogy George, Pravallika Vasireddy
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+'''
 
 import json
 import os
@@ -19,6 +24,7 @@ from .models import db, WishlistItem, Wishlist, User, SearchEntry
 import requests
 from .scraper import driver, filter
 from .pricedropscraper import scrape_price
+from .app import current_app
 
 from . import scraper
 from email.message import EmailMessage
@@ -226,37 +232,45 @@ def find_currency(price):
     currency = re.match(r'^[a-zA-Z]{3,5}', price)
     return currency.group() if currency else currency
 
-def update_price(link,website,price):
+def update_price(link, website, price):
+    """
+    Update price from website scraper with error handling
+    """
+    if not link or not website or not price:
+        return price
+
     currency = find_currency(price)
     updated_price = price
-    if website == "amazon":
-        scraped_price = scraper.amazon_scraper(link).strip()
-        if scraped_price:
-            updated_price = scraper.getCurrency(currency,scraped_price) if currency is not None else scraped_price
-    if website == "google":
-        scraped_price = scraper.google_scraper(link).strip()
-        if scraped_price:
-            updated_price = scraper.getCurrency(currency,scraped_price) if currency is not None else scraped_price
-    if website == "BJS":
-        pass
-    if website == "Etsy":
-        pass
-    if website == "walmart":
-        scraped_price = scraper.walmart_scraper(link).strip()
-        if scraped_price:
-            updated_price = scraper.getCurrency(currency,scraped_price) if currency is not None else scraped_price
-    if website == "ebay":
-        scraped_price = scraper.ebay_scraper(link).strip()
-        if scraped_price:
-            updated_price = scraper.getCurrency(currency,scraped_price) if currency is not None else scraped_price
-    if website == "bestbuy":
-        scraped_price = scraper.bestbuy_scraper(link).strip()
-        if scraped_price:
-            updated_price = scraper.getCurrency(currency,scraped_price) if currency is not None else scraped_price       
-    if website == "target":
-        scraped_price = scraper.target_scraper(link).strip()
-        if scraped_price:
-            updated_price = scraper.getCurrency(currency,scraped_price) if currency is not None else scraped_price      
+
+    try:
+        if website == "amazon":
+            scraped_price = scraper.amazon_scraper(link)
+            if scraped_price:
+                updated_price = scraper.getCurrency(currency, scraped_price.strip()) if currency else scraped_price.strip()
+        elif website == "google":
+            scraped_price = scraper.google_scraper(link)
+            if scraped_price:
+                updated_price = scraper.getCurrency(currency, scraped_price.strip()) if currency else scraped_price.strip()
+        elif website == "walmart":
+            scraped_price = scraper.walmart_scraper(link)
+            if scraped_price:
+                updated_price = scraper.getCurrency(currency, scraped_price.strip()) if currency else scraped_price.strip()
+        elif website == "ebay":
+            scraped_price = scraper.ebay_scraper(link)
+            if scraped_price:
+                updated_price = scraper.getCurrency(currency, scraped_price.strip()) if currency else scraped_price.strip()
+        elif website == "bestbuy":
+            scraped_price = scraper.bestbuy_scraper(link)
+            if scraped_price:
+                updated_price = scraper.getCurrency(currency, scraped_price.strip()) if currency else scraped_price.strip()
+        elif website == "target":
+            scraped_price = scraper.target_scraper(link)
+            if scraped_price:
+                updated_price = scraper.getCurrency(currency, scraped_price.strip()) if currency else scraped_price.strip()
+    except Exception as e:
+        print(f"Error updating price for {website}: {e}")
+        return price
+
     return updated_price
 
 def create_search_entry(username, search_term):
@@ -320,11 +334,14 @@ def check_price_updates(username):
         for wishlist in user.wishlists:
             for item in wishlist.items:
                 current_price = scrape_price(item.link, item.website)
-                print(f"The current price of {item.title} is {current_price} and old price is {item.price}")
-                if current_price != item.price:
-                    # If there is a price difference, update the item's price and set a flag for a price drop
-                    item.previous_price = item.price
-                    item.price = current_price
-                    db.session.commit()
-                    item.price_dropped = True  # This is a flag to trigger alerts on the front end
+                if current_price != None:
+                    print(f"The current price of {item.title} is {current_price} and old price is {item.price}")
+                    if current_price != item.price:
+                        # If there is a price difference, update the item's price and set a flag for a price drop
+                        item.previous_price = item.price
+                        item.price = current_price
+                        db.session.commit()
+                        item.price_dropped = True  # This is a flag to trigger alerts on the front end
+                else:
+                   current_price = item.price
     db.session.commit()

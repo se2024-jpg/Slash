@@ -59,7 +59,7 @@ def main():
     parser.add_argument(
         "--currency",
         type=str,
-        help="Display the amount in specified currency(inr, euro, aud, yuan, yen, pound)",
+        help="Display the amount in the currency(inr, euro, aud, yuan, yen, pound)",
     )
     args = parser.parse_args()
 
@@ -82,6 +82,7 @@ def main():
     print()
     print()
     print(results)
+    print()
     print()
     print()
 
