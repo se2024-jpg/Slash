@@ -3,268 +3,619 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/result.css') }}">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Slash - Product Search</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    
+    <!-- Ion Range Slider -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css" />
+    
+    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>
+    
     <style>
-        .card-wrapper {
-            width: 240px;
-            margin: 10px;
-            display: inline-block;
-            vertical-align: top;
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --dark-bg: #121212;
+            --dark-card: #1E1E2E;
+            --dark-text: #E0E0E0;
+            --dark-text-muted: #A0A0A0;
+            --light-bg: #f4f4f4;
         }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+            padding-top: 76px;
+            background-color: var(--light-bg);
+        }
+
+        body.dark-mode {
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+        }
+
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        body.dark-mode .navbar {
+            background-color: var(--dark-card);
+        }
+
+        body.dark-mode .nav-link {
+            color: var(--dark-text) !important;
+        }
+
+        .search-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .search-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        #searchInput {
+            border: none;
+            border-radius: 8px;
+            padding: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .btn-voice {
+            background: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.75rem 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-voice:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .card-wrapper {
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            overflow: hidden;
+            height: 100%;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            background: white;
+            margin-bottom: 20px;
+        }
+
+        body.dark-mode .card-wrapper {
+            background: var(--dark-card);
+        }
+
+        .card-wrapper:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+        }
+
         .card-img-holder {
             height: 200px;
             overflow: hidden;
+            background: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
         }
+
         .card-img {
-            width: 100%;
-            height: 100%;
+            max-height: 100%;
+            max-width: 100%;
             object-fit: contain;
         }
+
         .card-content {
-            padding: 10px;
+            padding: 1.5rem;
         }
+
         .card-website {
-            font-size: 12px;
-            color: #888;
+            font-size: 0.875rem;
+            color: var(--dark-text-muted);
+            margin-bottom: 0.5rem;
         }
+
         .card-price {
-            font-size: 16px;
+            font-size: 1.5rem;
             font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
         }
+
         .card-title {
-            font-size: 14px;
+            font-size: 1rem;
+            line-height: 1.4;
+            margin-bottom: 1rem;
             overflow: hidden;
             text-overflow: ellipsis;
-            white-space: nowrap;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
         }
+
         .card-bottom {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(0,0,0,0.1);
         }
+
+        body.dark-mode .card-bottom {
+            border-top-color: rgba(255,255,255,0.1);
+        }
+
         .card-rating {
-            font-size: 12px;
-            color: #888;
+            font-size: 0.875rem;
+            color: var(--dark-text-muted);
+            display: flex;
+            align-items: center;
         }
+
+        .card-rating i {
+            color: #ffc107;
+            margin-right: 0.25rem;
+        }
+
         .card-buttons a {
-            color: #888;
-            margin-left: 5px;
+            color: var(--dark-text-muted);
+            margin-left: 1rem;
+            font-size: 1.25rem;
+            transition: all 0.3s ease;
         }
-        .clicked-heart {
-          color: red; /* Change this to the desired highlight color */
+
+        .card-buttons a:hover {
+            color: var(--primary-color);
         }
+
+        .filter-section {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 90px;
+        }
+
+        body.dark-mode .filter-section {
+            background: var(--dark-card);
+        }
+
+        .filter-title {
+            font-weight: 600;
+            margin: 1.5rem 0 1rem;
+            color: var(--primary-color);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .filter-title:first-child {
+            margin-top: 0;
+        }
+
+        .filter-title::after {
+            content: '\f107';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            transition: transform 0.3s ease;
+        }
+
+        .filter-title.expanded::after {
+            transform: rotate(180deg);
+        }
+
+        .form-check {
+            margin-bottom: 0.5rem;
+            padding-left: 1.75rem;
+        }
+
+        .form-check-input {
+            cursor: pointer;
+            margin-left: -1.75rem;
+        }
+
+        .form-check-label {
+            cursor: pointer;
+            color: var(--dark-text-muted);
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .form-check-input:checked + .form-check-label {
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
         .pagination-container {
-            text-align: center;
-            margin-top: 20px;
+            margin: 2rem 0;
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
         }
+
         .pagination-link {
-            padding: 5px 10px;
-            margin: 0 5px;
-            background-color: #f1f1f1;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            background: var(--primary-color);
+            color: white;
             text-decoration: none;
-            color: #333;
+            transition: all 0.3s ease;
         }
+
+        .pagination-link:hover {
+            background: var(--secondary-color);
+            text-decoration: none;
+            color: white;
+        }
+
         .pagination-link.active {
-            background-color: #333;
-            color: #fff;
+            background: var(--secondary-color);
+        }
+
+        .clicked-heart {
+            color: #e91e63 !important;
+        }
+
+        .export-btn {
+            position: fixed;
+            right: 20px;
+            top: 90px;
+            z-index: 1000;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .export-btn:hover {
+            background-color: #27ae60;
+            transform: translateY(-2px);
+            color: white;
+            text-decoration: none;
+        }
+
+        #transcription {
+            text-align: center;
+            margin-top: 1rem;
+            color: white;
+            font-style: italic;
+        }
+
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1100;
+        }
+
+        .form-switch .form-check-input {
+            width: 3rem;
+            height: 1.5rem;
+            cursor: pointer;
+        }
+
+        .form-switch .form-check-input:checked {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        @media (max-width: 768px) {
+            .filter-section {
+                position: static;
+                margin-bottom: 2rem;
+            }
+
+            .export-btn {
+                position: static;
+                margin: 1rem auto;
+                width: fit-content;
+            }
         }
     </style>
 </head>
 <body>
-    <nav id="efec-scroll" class="navbar navbar-expand-md bg-dark navbar-dark fixed-top bg-transparent">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-center" id="collapsibleNavbar">
-        <ul id="ulone" class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="login">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="wishlist">Wishlist</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="product_comparison">Product Comparison</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="search-history">Search History</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="product-recommendations">Product Recommendations</a>
-          </li>
-        </ul>
-
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/France.tv_Slash.svg/1423px-France.tv_Slash.svg.png"
-          alt="" id="logo" class="" width="5%">
-
-        <ul id="ultwu" class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link">Welcome {{ session['username'] }}</a>
-          </li>
-          <li class="nav-item">
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href={{ url_for('logout') }}>Logout</a>
-          </li>
-        </ul>
-      </div>
-      <div>
-        <label class="switch" id="toggle-button">
-          <input type="checkbox">
-          <span class="slider round">
-            <span class="icon" id="moon">&#127770;</span>
-            <span class="icon" id="sun">&#9728;</span>
-          </span>
+    <!-- Dark Mode Toggle -->
+    <div class="form-check form-switch dark-mode-toggle">
+        <input class="form-check-input" type="checkbox" id="darkModeSwitch">
+        <label class="form-check-label" for="darkModeSwitch">
+            <i class="fas fa-moon"></i>
         </label>
-      </div>
-    </nav>
+    </div>
 
-    <div class="container">
-      <div class="conten-title">
-        <section class="webdesigntuts-workshop">
-          <form action="/search" method="GET">
-            <input id="searchInput" type="text" name="product_name" 
-              value="{{ request.args.get('product_name', '') }}"
-              placeholder="What are you looking for?"style="width: 450px; height: 50px;">
-            <button id="performSearchBtn" style="height: 50px;" type="submit">Search</button>
-            <button type="button" id="voiceSearchBtn" class="btn btn-secondary" style="height: 50px;">
-                              🎤
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/France.tv_Slash.svg/1423px-France.tv_Slash.svg.png" 
+                     alt="Slash Logo" width="50">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
             </button>
-          </form>
-          <p id="transcription" class="mt-4"></p>
-        </section>
-      </div>
-      <br><br><br><br> <br>
-    </div>
-    <div>
-        <a href="{{ url_for('export_csv', product_name=prod, sort=request.form.get('sort'),
-         currency=request.form.get('currency'), min_price=request.form.get('min_price'),
-          max_price=request.form.get('max_price'), min_rating=request.form.get('min_rating')) }}" 
-       style="position: fixed; right: 20px; top: 60px; z-index: 1000; background-color: #347e37;
-        border: none; color: white; padding: 15px 20px; text-align: center; text-decoration: none;
-         display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">
-       Export to CSV
-    </a>
-    </div>
-
-
-    </div>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-2 p-4">
-                <br><br><br><br><br><br>
-                <h5 class="filter-title">Price</h5>
-                <input type="text" id="price-slider" name="price-slider" />
-                <h5 class="filter-title">Brand</h5>
-                <div class="brand-filters">
-                    {% for brand, count in brands.items() %}
-                    <div class="form-check">
-                        <input class="form-check-input brand-filter" type="checkbox" value="{{ brand }}" id="brand-{{ brand }}">
-                        <label class="form-check-label" for="brand-{{ brand }}">
-                            {{ brand }} ({{ count }})
-                        </label>
-                    </div>
-                    {% endfor %}
-                </div>
-                <h5 class="filter-title">Retailer</h5>
-                <div class="retailer-filters">
-                    {% for retailer, count in retailers.items() %}
-                    <div class="form-check">
-                        <input class="form-check-input retailer-filter" type="checkbox" value="{{ retailer }}" id="retailer-{{ retailer }}">
-                        <label class="form-check-label" for="retailer-{{ retailer }}">
-                            {{ retailer }} ({{ count }})
-                        </label>
-                    </div>
-                    {% endfor %}
-                </div>
-                <h5 class="filter-title">Rating</h5>
-                <div class="rating-filters">
-                    {% for rating, count in ratings.items() %}
-                    <div class="form-check">
-                        <input class="form-check-input rating-filter" type="checkbox" value="{{ rating }}" id="rating-{{ rating }}">
-                        <label class="form-check-label" for="rating-{{ rating }}">
-                            {{ rating }} ({{ count }})
-                        </label>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-            <div class="col-9 p-4">
-                <div class="row gx-3 align-items-end">
-                    <div class="col-sm">
-                        <form action="/filter?product_name={{ prod }}" method="post" id="filter1" class="d-flex justify-content-between">
-                            {# Your existing filter form code here #}
-                        </form>
-                    </div>
-                </div>
-                <hr>
-                <div class="grid">
-                    {% for item in data %}
-                    <div class="card-wrapper">
-                        <div class="card-img-holder">
-                            <img class="card-img" src="{{ item.img_link }}">
-                        </div>
-                        <div class="card-content">
-                            <span class="card-website">{{ item.website }}</span>
-                            <h4 class="card-price">{{ item.price }}</h4>
-                            <p class="card-title">{{ item.title }}</p>
-                            <div class="card-bottom">
-                                <div class="card-rating">Rating: {{ item.rating }}</div>
-                                <div class="card-buttons">
-                                    <a href="{{ item.link }}" target="_blank"><i class="fa fa-link"></i></a>
-                                    <a href="#/" class="heart-link" 
-                                       data-product='{{ item | tojson | safe }}'>
-                                       <i class="fa fa-heart"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-                <div class="pagination-container">
-                    {% for page_num in range(1, total_pages + 1) %}
-                    <a href="#" class="pagination-link{% if loop.index == page %} active{% endif %}" data-page="{{ page_num }}">{{ page_num }}</a>
-                    {% endfor %}
-                </div>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="login">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="wishlist">Wishlist</a></li>
+                    <li class="nav-item"><a class="nav-link" href="product_comparison">Product Comparison</a></li>
+                    <li class="nav-item"><a class="nav-link" href="search-history">Search History</a></li>
+                    <li class="nav-item"><a class="nav-link" href="product-recommendations">Recommendations</a></li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item me-3">
+                        <span class="nav-link">Welcome {{ session['username'] }}</span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-danger" href="{{ url_for('logout') }}">Logout</a>
+                    </li>
+                </ul>
             </div>
         </div>
-    </div>
+    </nav>
 
-    <script>
-        // Initialize the price range slider
-        $("#price-slider").ionRangeSlider({
-            type: "double",
-            min: {{ min_price|default(7) }},
-            max: {{ max_price|default(55) }},
-            from: {{ min_price|default(7) }},
-            to: {{ max_price|default(55) }},
-            step: 1,
+    <!-- Search Section -->
+    <section class="search-section">
+        <div class="container search-container">
+            <form action="/search" method="GET" class="d-flex gap-2">
+                <input id="searchInput" type="text" name="product_name" 
+                       class="form-control form-control-lg flex-grow-1"
+                       value="{{ request.args.get('product_name', '') }}"
+                       placeholder="What are you looking for?">
+                <button id="performSearchBtn" type="submit" class="btn btn-light btn-lg px-4">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button id="voiceSearchBtn" type="button" class="btn-voice btn-lg">
+                    <i class="fas fa-microphone"></i>
+                </button>
+            </form>
+            <p id="transcription"></p>
+        </div>
+    </section>
+
+    <!-- Export Button -->
+    <a href="{{ url_for('export_csv', product_name=prod, sort=request.form.get('sort'),
+        currency=request.form.get('currency'), min_price=request.form.get('min_price'),
+        max_price=request.form.get('max_price'), min_rating=request.form.get('min_rating')) }}" 
+        class="export-btn">
+        <i class="fas fa-download"></i>
+        <span>Export to CSV</span>
+    </a>
+
+    <!-- Main Content -->
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Filters -->
+            <div class="col-lg-3 col-md-4 p-4">
+                <div class="filter-section">
+                    <h5 class="filter-title">Price Range</h5>
+                    <input type="text" id="price-slider" name="price-slider" />
+
+                    <h5 class="filter-title">Brand</h5>
+                    <div class="brand-filters">
+                        {% for brand, count in brands.items() %}
+                        <div class="form-check">
+                            <input class="form-check-input brand-filter" type="checkbox" value="{{ brand }}" id="brand-{{ brand }}">
+                            <label class="form-check-label" for="brand-{{ brand }}">
+                                {{ brand }}
+                                <span class="count">({{ count }})</span>
+                            </label>
+                        </div>
+                        {% endfor %}
+                      </div>
+
+                      <h5 class="filter-title">Retailer</h5>
+                      <div class="retailer-filters">
+                          {% for retailer, count in retailers.items() %}
+                          <div class="form-check">
+                              <input class="form-check-input retailer-filter" type="checkbox" value="{{ retailer }}" id="retailer-{{ retailer }}">
+                              <label class="form-check-label" for="retailer-{{ retailer }}">
+                                  {{ retailer }}
+                                  <span class="count">({{ count }})</span>
+                              </label>
+                          </div>
+                          {% endfor %}
+                      </div>
+  
+                      <h5 class="filter-title">Rating</h5>
+                      <div class="rating-filters">
+                          {% for rating, count in ratings.items() %}
+                          <div class="form-check">
+                              <input class="form-check-input rating-filter" type="checkbox" value="{{ rating }}" id="rating-{{ rating }}">
+                              <label class="form-check-label" for="rating-{{ rating }}">
+                                  {{ rating }}
+                                  <span class="count">({{ count }})</span>
+                              </label>
+                          </div>
+                          {% endfor %}
+                      </div>
+                  </div>
+              </div>
+  
+              <!-- Products Grid -->
+              <div class="col-lg-9 col-md-8 p-4">
+                  <div class="row g-4">
+                      {% for item in data %}
+                      <div class="col-lg-4 col-md-6">
+                          <div class="card-wrapper">
+                              <div class="card-img-holder">
+                                  <img class="card-img" src="{{ item.img_link }}" alt="{{ item.title }}">
+                              </div>
+                              <div class="card-content">
+                                  <div class="card-website">{{ item.website }}</div>
+                                  <div class="card-price">{{ item.price }}</div>
+                                  <div class="card-title">{{ item.title }}</div>
+                                  <div class="card-bottom">
+                                      <div class="card-rating">
+                                          <i class="fas fa-star"></i>
+                                          {{ item.rating }}
+                                      </div>
+                                      <div class="card-buttons">
+                                          <a href="{{ item.link }}" target="_blank" title="View Product">
+                                              <i class="fas fa-external-link-alt"></i>
+                                          </a>
+                                          <a href="#/" class="heart-link" data-product='{{ item | tojson | safe }}' title="Add to Wishlist">
+                                              <i class="fas fa-heart"></i>
+                                          </a>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      {% endfor %}
+                  </div>
+                  
+                  <!-- Pagination -->
+                  <div class="pagination-container">
+                      {% for page_num in range(1, total_pages + 1) %}
+                      <a href="#" class="pagination-link{% if loop.index == page %} active{% endif %}" data-page="{{ page_num }}">{{ page_num }}</a>
+                      {% endfor %}
+                  </div>
+              </div>
+          </div>
+      </div>
+  
+      <!-- Scripts -->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+      <script>
+          // Dark mode toggle
+          const darkModeSwitch = document.getElementById('darkModeSwitch');
+          
+          if (localStorage.getItem('darkMode') === 'enabled') {
+              document.body.classList.add('dark-mode');
+              darkModeSwitch.checked = true;
+          }
+  
+          darkModeSwitch.addEventListener('change', function() {
+              if (this.checked) {
+                  document.body.classList.add('dark-mode');
+                  localStorage.setItem('darkMode', 'enabled');
+              } else {
+                  document.body.classList.remove('dark-mode');
+                  localStorage.removeItem('darkMode');
+              }
+          });
+  
+          
+          $("#price-slider").ionRangeSlider({
+              type: "double",
+              min: {{ min_price|default(7) }},
+              max: {{ max_price|default(55) }},
+              from: {{ min_price|default(7) }},
+              to: {{ max_price|default(55) }},
+              step: 1,
+              prefix: "$",
+              prettify_separator: ",",
             onFinish: function (data) {
                 filterProducts();
-            }
-        });
+                }
+          });
+        
+        //   function filterProducts() {
+        //     var priceRange = $("#price-slider").data("ionRangeSlider").result;
+        //     var brands = $(".brand-filter:checked").map(function() {
+        //         return $(this).val().toLowerCase();
+        //     }).get();
+        //     var retailers = $(".retailer-filter:checked").map(function() {
+        //         return $(this).val().toLowerCase();
+        //     }).get();
+        //     var ratings = $(".rating-filter:checked").map(function() {
+        //         return $(this).val();
+        //     }).get();
 
+        //     var $container = $(".row.g-4");
+        //     var $items = $(".card-wrapper").parent().detach();
+
+        //     // Filter items
+        //     var $filteredItems = $items.filter(function() {
+        //         var $card = $(this).find('.card-wrapper');
+        //         var price = parseFloat($card.find(".card-price").text().replace(/[^0-9.-]+/g, ""));
+        //         var brand = $card.find(".card-title").text().toLowerCase();
+        //         var retailer = $card.find(".card-website").text().toLowerCase();
+        //         var rating = $card.find(".card-rating").text().replace("Rating: ", "").trim();
+
+
+
+
+        //     //     // Price filter
+        //     //     if (price < priceRange.from || price > priceRange.to) {
+        //     //         return false;
+        //     //     }
+
+        //     //     // Brand filter
+        //     //     if (brands.length > 0) {
+        //     //         var brandMatch = false;
+        //     //         for (var i = 0; i < brands.length; i++) {
+        //     //             if (brand.includes(brands[i])) {
+        //     //                 brandMatch = true;
+        //     //                 break;
+        //     //             }
+        //     //         }
+        //     //         if (!brandMatch) return false;
+        //     //     }
+
+        //     //     // Retailer filter
+        //     //     if (retailers.length > 0) {
+        //     //         var retailerMatch = false;
+        //     //         for (var i = 0; i < retailers.length; i++) {
+        //     //             if (retailer.includes(retailers[i])) {
+        //     //                 retailerMatch = true;
+        //     //                 break;
+        //     //             }
+        //     //         }
+        //     //         if (!retailerMatch) return false;
+        //     //     }
+
+        //     //     // Rating filter
+        //     //     if (ratings.length > 0 && !ratings.includes(rating)) {
+        //     //         return false;
+        //     //     }
+
+        //     //     return true;
+        //     // });
+
+        //     // // Clear the container and append filtered items
+        //     // $container.empty().append($filteredItems);
+
+        //     // Show message if no results
+        //     if ($filteredItems.length === 0) {
+        //         $container.append('<div class="col-12 text-center"><p>No products match your filters</p></div>');
+        //     }
+        // }
+  
         // Filter products based on selected filters
         function filterProducts() {
             var priceRange = $("#price-slider").data("ionRangeSlider").result;
             var brands = $(".brand-filter:checked").map(function () {
-                return $(this).val();
+                return $(this).val().toLowerCase();
             }).get();
             var retailers = $(".retailer-filter:checked").map(function () {
-                return $(this).val();
+                return $(this).val().toLowerCase();
             }).get();
             var ratings = $(".rating-filter:checked").map(function () {
                 return $(this).val();
@@ -276,7 +627,8 @@
                 var brand = $card.find(".card-title").text().split(" ").slice(0, 1).join(" ");
                 var retailer = $card.find(".card-website").text().split(" ")[0];
                 retailer = retailer.charAt(0).toUpperCase() + retailer.slice(1).toLowerCase();
-                var rating = $card.find(".card-rating").text().split(":")[1].trim();
+                var rating = $card.find(".card-rating").text().split(":")[1]?.trim() || '';
+
 
                 var shouldShow = true;
                 if (price < priceRange.from || price > priceRange.to) {
@@ -301,90 +653,95 @@
         // Attach event listeners to the filters
         $(".brand-filter, .retailer-filter, .rating-filter").on("change", filterProducts);
 
-        // Minimize/expand filter sections
-        $(".filter-title").click(function () {
-            $(this).toggleClass("expanded");
-            $(this).next().slideToggle();
-        });
-    </script>
-    <script>
 
-    document.addEventListener("DOMContentLoaded", () => {
-      const heartLinks = document.querySelectorAll(".heart-link");
 
-      heartLinks.forEach((heartLink) => {
-        heartLink.addEventListener("click", function (e) {
-          e.preventDefault();
-
-          // Parse the product data from the data-product attribute
-          const productData = JSON.parse(this.getAttribute("data-product"));
-
-          // Call addToCart with the product data
-          addToCart(this, productData, e);
-        });
-      });
-    });
-
-    function addToCart(heartLink, product_data, e) {
-      if (!heartLink.classList.contains("clicked-heart")) {
-        heartLink.classList.add("clicked-heart"); // Mark as clicked
-      }
-
-      const post_data = new URLSearchParams();
-      for (let key in product_data) {
-        post_data.append(key, product_data[key]);
-      }
-
-      fetch("/add-wishlist-item", {
-        method: "POST",
-        body: post_data,
-      })
-        .then((result) => {
-          if (result.ok) {
-            console.log("Item added to wishlist:", result);
-          } else {
-            console.error("Failed to add item to wishlist:", result);
+          // Filter section toggle
+          $(".filter-title").click(function() {
+              $(this).toggleClass("expanded");
+              $(this).next().slideToggle();
+          });
+  
+          // Wishlist functionality
+          document.addEventListener("DOMContentLoaded", () => {
+              const heartLinks = document.querySelectorAll(".heart-link");
+  
+              heartLinks.forEach((heartLink) => {
+                  heartLink.addEventListener("click", function(e) {
+                      e.preventDefault();
+                      const productData = JSON.parse(this.getAttribute("data-product"));
+                      addToWishlist(this, productData);
+                  });
+              });
+          });
+  
+          function addToWishlist(heartLink, product_data) {
+              if (!heartLink.classList.contains("clicked-heart")) {
+                  heartLink.classList.add("clicked-heart");
+              }
+  
+              const post_data = new URLSearchParams();
+              for (let key in product_data) {
+                  post_data.append(key, product_data[key]);
+              }
+  
+              fetch("/add-wishlist-item", {
+                  method: "POST",
+                  body: post_data,
+              })
+              .then((result) => {
+                  if (result.ok) {
+                      console.log("Item added to wishlist");
+                  } else {
+                      console.error("Failed to add item to wishlist");
+                  }
+              })
+              .catch((error) => {
+                  console.error("Error adding item to wishlist:", error);
+              });
           }
-        })
-        .catch((error) => {
-          console.error("Error adding item to wishlist:", error);
-        });
-    }
-    </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const voiceSearchBtn = document.getElementById('voiceSearchBtn');
-            const performSearchBtn = document.getElementById('performSearchBtn');
-            const transcription = document.getElementById('transcription');
-            const searchInput = document.getElementById('searchInput');
-
-            // Initialize Speech Recognition
-            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-            const recognition = new SpeechRecognition();
-
-            recognition.continuous = false; // Stop automatically after one command
-            recognition.interimResults = false; // Only process final results
-            recognition.lang = 'en-US'; // Set language to English
-
-            // Start voice recognition on button click
-            voiceSearchBtn.addEventListener('click', () => {
-                transcription.textContent = "Listening...";
-                recognition.start();
-            });
-
-            // Process recognition result
-            recognition.onresult = (event) => {
-                const speechResult = event.results[0][0].transcript;
-                transcription.textContent = `You said: "${speechResult}"`;
-                searchInput.value = speechResult; // Populate the search input with the recognized text
-                // Redirect to the search results page
-                window.location.href = `/search?product_name=${encodeURIComponent(speechResult)}`;
-            };
-
-            recognition.onerror = (event) => {
-                transcription.textContent = `Error: ${event.error}`;
-            };
-        });
-    </script>
-</body>
-</html>
+  
+          // Voice search functionality
+          const voiceSearchBtn = document.getElementById('voiceSearchBtn');
+          const searchInput = document.getElementById('searchInput');
+          const transcription = document.getElementById('transcription');
+  
+          if ('webkitSpeechRecognition' in window) {
+              const recognition = new webkitSpeechRecognition();
+              recognition.continuous = false;
+              recognition.interimResults = true;
+              recognition.lang = 'en-US';
+  
+              recognition.onstart = () => {
+                  transcription.textContent = 'Listening...';
+                  voiceSearchBtn.classList.add('btn-danger');
+              };
+  
+              recognition.onresult = (event) => {
+                  const transcript = Array.from(event.results)
+                      .map(result => result[0])
+                      .map(result => result.transcript)
+                      .join('');
+                  
+                  searchInput.value = transcript;
+                  transcription.textContent = `"${transcript}"`;
+              };
+  
+              recognition.onerror = (event) => {
+                  transcription.textContent = 'Error occurred: ' + event.error;
+                  voiceSearchBtn.classList.remove('btn-danger');
+              };
+  
+              recognition.onend = () => {
+                  voiceSearchBtn.classList.remove('btn-danger');
+              };
+  
+              voiceSearchBtn.addEventListener('click', () => {
+                  recognition.start();
+              });
+          } else {
+              voiceSearchBtn.style.display = 'none';
+              transcription.textContent = 'Voice search not supported';
+          }
+      </script>
+  </body>
+  </html>
