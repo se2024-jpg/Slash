@@ -9,29 +9,27 @@ this file. If not, please write to: secheaper@gmail.com
 """
 The scraper module holds functions that actually scrape the e-commerce websites
 """
-from .scraper import searchAmazon, searchEbay, searchWalmart
+from .scraper import searchAmazon, searchEbay, searchWalmart, searchBestbuy
 
 def scrape_website(website, product, currency):
-    """
-    Scrapes the specified website for the given product name.
-
-    Args:
-        website (str): The name of the website (e.g., 'Walmart', 'Amazon', etc.).
-        product_name (str): The name of the product to search for.
-
-    Returns:
-        dict: Scraped data for the product.
-    """
     # Normalize the website name for easier matching
     website = website.lower()
-
+    p = []
     # Call the appropriate scraper function based on the website
     if website == 'walmart':
-        return searchWalmart(product, 0, currency)[0] #Need to include df_flag
+        p = searchWalmart(product, 0, currency)[0] #Need to include df_flag
     elif website == 'amazon':
-        return searchAmazon(product, 0, currency)[0] #Need to include df_flag
+        p = searchAmazon(product, 0, currency)[0] #Need to include df_flag
     elif website == 'ebay':
-        return searchEbay(product, 0, currency)[0] #Need to include df_flag
+        p = searchEbay(product, 0, currency)[0] #Need to include df_flag
+    elif website == 'bestbuy':
+        p = searchBestbuy(product, 0, currency)[1] #Need to include df_flag
     # Add more elif clauses for other websites
     else:
         raise ValueError(f"Scraping for the website '{website}' is not supported.")
+    
+    # Fix URLs
+    if "link" in p and "http" not in p["link"]:
+        p["link"] = "http://" + p["link"]
+
+    return p

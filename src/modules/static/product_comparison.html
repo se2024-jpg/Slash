@@ -66,27 +66,11 @@ See the LICENSE file in the project root for the full license information. -->
     </div>
   </nav>
   
-  <div class="container">
-    <div class="conten-title">
-      <h2><img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/France.tv_Slash.svg/1423px-France.tv_Slash.svg.png"
-          alt="logo" width="3%">
-      </h2>
-      <section class="webdesigntuts-workshop">
-        <form action="/search" method="GET">
-          <input type="text" name="product_name" placeholder="What are you looking for?">
-          <button type="submit">Search</button>
-        </form>
-        <br>
-      </section>
-    </div>
-    <br><br><br><br> <br><br><br><br>
-  </div>
 
   <!-- Product Comparison Section -->
   <div class="container mt-5 pt-5">
-    <h1>Compare products to get the best deal..</h1>
-    <form action="/product_comparison" method="POST" id="comparison-form">
+    <h1 >Compare products to get the best deal..</h1>
+    <form action="/product_comparison" method="POST">
       <div class="search-container">
         <!-- Search bar and Website selection for Product 1 -->
         <div class="product-section">
@@ -94,12 +78,9 @@ See the LICENSE file in the project root for the full license information. -->
           <input type="text" id="product1" name="product1" placeholder="Enter Product 1 Name" class="form-control">
           <label for="website1">Select Website for Product 1:</label>
           <select id="website1" name="website1" class="form-control">
-            <option value="walmart">Walmart</option>
-            <option value="target">Target</option>
             <option value="bestbuy">BestBuy</option>
+            <option value="walmart">Walmart</option>
             <option value="amazon">Amazon</option>
-            <option value="google-shopping">Google Shopping</option>
-            <option value="etsy">Etsy</option>
             <option value="ebay">eBay</option>
           </select>
         </div>
@@ -108,13 +89,10 @@ See the LICENSE file in the project root for the full license information. -->
           <label for="product2">Product 2:</label>
           <input type="text" id="product2" name="product2" placeholder="Enter Product 2 Name" class="form-control">
           <label for="website2">Select Website for Product 2:</label>
-          <select id="website2" name="website2" class="form-control">
-            <option value="walmart">Walmart</option>
-            <option value="target">Target</option>
+          <select id="website2" name="website2" class="form-control" >
             <option value="bestbuy">BestBuy</option>
+            <option value="walmart">Walmart</option>
             <option value="amazon">Amazon</option>
-            <option value="google-shopping">Google Shopping</option>
-            <option value="etsy">Etsy</option>
             <option value="ebay">eBay</option>
           </select>
         </div>
@@ -143,8 +121,8 @@ See the LICENSE file in the project root for the full license information. -->
             <tbody>
                 <tr>
                     <td>Name</td>
-                    <td>{{ product1_data['name'] }}</td>
-                    <td>{{ product2_data['name'] }}</td>
+                    <td>{{ product1_data['title'] }}</td>
+                    <td>{{ product2_data['title'] }}</td>
                 </tr>
                 <tr>
                     <td>Price</td>
@@ -158,13 +136,11 @@ See the LICENSE file in the project root for the full license information. -->
                 </tr>
                 <tr>
                     <td>URL</td>
-                    <td><a href="{{ product1_data['url'] }}" target="_blank">View Product</a></td>
-                    <td><a href="{{ product2_data['url'] }}" target="_blank">View Product</a></td>
+                    <td><a href="{{ product1_data.link }}" target="_blank">View Product</a></td>
+                    <td><a href="{{ product2_data.link }}" target="_blank">View Product</a></td>
                 </tr>
             </tbody>
         </table>
-        {% else %}
-        <p>No comparison data available. Please perform a search.</p>
         {% endif %}
       </div>
     </div>

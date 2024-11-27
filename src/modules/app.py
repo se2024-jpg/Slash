@@ -39,6 +39,27 @@ app = Flask(__name__, template_folder=".")
 
 app.secret_key = Config.SECRET_KEY
 
+# OAuth Setup
+oauth = OAuth(app)
+google = oauth.register(
+    name='google',
+    client_id=os.getenv('GOOGLE_CLIENT_ID'), # Fetch client_id from .env
+    client_secret=os.getenv('GOOGLE_CLIENT_SECRET'),  # Fetch client_secret from .env
+    authorize_url='https://accounts.google.com/o/oauth2/auth',
+    access_token_url='https://accounts.google.com/o/oauth2/token',
+    redirect_uri='http://localhost:5000/google/callback',
+    jwks_uri='https://www.googleapis.com/oauth2/v3/certs',
+    client_kwargs={'scope': 'openid profile email'}
+)
+
+# Database configuration
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db.init_app(app)
+# Create the tables
+with app.app_context():
+    db.create_all()
+
 def generate_otp():
     return str(random.randint(100000, 999999))
 
@@ -143,33 +164,6 @@ def send_otp_email(email, otp):
     except Exception as e:
         print(f"Error sending email: {e}")
         return False
-
-
-
-
-
-
-
-# OAuth Setup
-oauth = OAuth(app)
-google = oauth.register(
-    name='google',
-    client_id=os.getenv('GOOGLE_CLIENT_ID'), # Fetch client_id from .env
-    client_secret=os.getenv('GOOGLE_CLIENT_SECRET'),  # Fetch client_secret from .env
-    authorize_url='https://accounts.google.com/o/oauth2/auth',
-    access_token_url='https://accounts.google.com/o/oauth2/token',
-    redirect_uri='http://localhost:5000/google/callback',
-    jwks_uri='https://www.googleapis.com/oauth2/v3/certs',
-    client_kwargs={'scope': 'openid profile email'}
-)
-
-# Database configuration
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db.init_app(app)
-# Create the tables
-with app.app_context():
-    db.create_all()
 
 @app.route('/')
 def landingpage():
@@ -480,12 +474,12 @@ def product_comparison():
         website1 = request.form.get('website1')
         product2 = request.form.get('product2')
         website2 = request.form.get('website2')
-        currency = request.form["currency"]
+        currency = request.form.get("currency")
     
         if not (product1 and website1 and product2 and website2):
             return jsonify({"error": "All fields are required!"}), 400
 
-        if currency != "" :
+        if not currency :
             currency = "USD"
         # Perform web scraping
         try:
@@ -498,7 +492,7 @@ def product_comparison():
         # Render results (or return JSON for dynamic front-end)
         return render_template('./static/product_comparison.html',
                                product1_data=product1_data,
-                               product2_data=product2_data)
+                               product2_data=product2_data, product1=product1, product2=product2, website1=website1, website2=website2)
 
     return render_template('./static/product_comparison.html',
                                product1_data=None,
