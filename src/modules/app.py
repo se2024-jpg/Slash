@@ -20,6 +20,8 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from datetime import datetime, timedelta
 
+from .product_comparison import scrape_website
+
 from .scraper import driver, filter, get_currency_rate, convert_currency
 from .features import create_user, check_user, db_check_user, db_create_user, wishlist_add_item, read_wishlist, remove_wishlist_item, share_wishlist, create_search_entry, get_user_searches_by_username, generate_product_recommendations, check_price_updates
 from .config import Config
@@ -42,6 +44,27 @@ load_dotenv()
 app = Flask(__name__, template_folder=".")
 
 app.secret_key = Config.SECRET_KEY
+
+# OAuth Setup
+oauth = OAuth(app)
+google = oauth.register(
+    name='google',
+    client_id=os.getenv('GOOGLE_CLIENT_ID'), # Fetch client_id from .env
+    client_secret=os.getenv('GOOGLE_CLIENT_SECRET'),  # Fetch client_secret from .env
+    authorize_url='https://accounts.google.com/o/oauth2/auth',
+    access_token_url='https://accounts.google.com/o/oauth2/token',
+    redirect_uri='http://localhost:5000/google/callback',
+    jwks_uri='https://www.googleapis.com/oauth2/v3/certs',
+    client_kwargs={'scope': 'openid profile email'}
+)
+
+# Database configuration
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db.init_app(app)
+# Create the tables
+with app.app_context():
+    db.create_all()
 
 def generate_otp():
     return str(random.randint(100000, 999999))
@@ -147,33 +170,6 @@ def send_otp_email(email, otp):
     except Exception as e:
         print(f"Error sending email: {e}")
         return False
-
-
-
-
-
-
-
-# OAuth Setup
-oauth = OAuth(app)
-google = oauth.register(
-    name='google',
-    client_id=os.getenv('GOOGLE_CLIENT_ID'), # Fetch client_id from .env
-    client_secret=os.getenv('GOOGLE_CLIENT_SECRET'),  # Fetch client_secret from .env
-    authorize_url='https://accounts.google.com/o/oauth2/auth',
-    access_token_url='https://accounts.google.com/o/oauth2/token',
-    redirect_uri='http://localhost:5000/google/callback',
-    jwks_uri='https://www.googleapis.com/oauth2/v3/certs',
-    client_kwargs={'scope': 'openid profile email'}
-)
-
-# Database configuration
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI', "sqlite:///database.db")
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db.init_app(app)
-# Create the tables
-with app.app_context():
-    db.create_all()
 
 @app.route('/')
 def landingpage():
@@ -531,9 +527,38 @@ def export_csv():
     
     return output
 
-@app.route('/product_comparison')
+@app.route('/product_comparison', methods=["POST","GET"])
 def product_comparison():
-    return render_template('./static/product_comparison.html')
+
+    if request.method == 'POST':
+    # Retrieve data from the form
+        product1 = request.form.get('product1')
+        website1 = request.form.get('website1')
+        product2 = request.form.get('product2')
+        website2 = request.form.get('website2')
+        currency = request.form.get("currency")
+    
+        if not (product1 and website1 and product2 and website2):
+            return jsonify({"error": "All fields are required!"}), 400
+
+        if not currency :
+            currency = "USD"
+        # Perform web scraping
+        try:
+            product1_data = scrape_website(website1, product1, currency)
+            product2_data = scrape_website(website2, product2, currency)
+        except Exception as e:
+            return jsonify({"error": f"Scraping failed: {str(e)}"}), 500
+
+
+        # Render results (or return JSON for dynamic front-end)
+        return render_template('./static/product_comparison.html',
+                               product1_data=product1_data,
+                               product2_data=product2_data, product1=product1, product2=product2, website1=website1, website2=website2)
+
+    return render_template('./static/product_comparison.html',
+                               product1_data=None,
+                               product2_data=None)
 
 # @app.route('/product-recommendations')
 # def product_recommendations():
