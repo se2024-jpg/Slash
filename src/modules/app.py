@@ -55,11 +55,11 @@ google = oauth.register(
     access_token_url='https://accounts.google.com/o/oauth2/token',
     redirect_uri='http://localhost:5000/google/callback',
     jwks_uri='https://www.googleapis.com/oauth2/v3/certs',
-    client_kwargs={'scope': 'openid profile email'}
+    client_kwargs={'scope': 'openid profile email'} 
 )
 
 # Database configuration
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI', "sqlite:///database.db")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 # Create the tables
